@@ -759,19 +759,17 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #clinicianSidebar .patient-input-card #allCategories>.field{margin:12px 0 0}
 #clinicianSidebar .patient-input-card #allCategories>.field+.field{margin-top:14px}
 #clinicianSidebar .clinical-overview{margin:0 0 16px;padding:0;border:0;border-top:1px solid var(--sep);border-bottom:1px solid var(--sep);background:transparent;box-shadow:none}
-#clinicianSidebar .clinical-overview>summary{position:relative;display:grid;gap:4px;min-height:68px;padding:12px 30px 12px 2px;list-style:none}
+#clinicianSidebar .clinical-overview>summary{position:relative;display:flex;align-items:center;min-height:52px;padding:10px 30px 10px 2px;list-style:none}
 #clinicianSidebar .clinical-overview>summary::-webkit-details-marker{display:none}
 #clinicianSidebar .clinical-overview>summary::after{position:absolute;right:4px;top:50%;margin-top:-.65rem}
 #clinicianSidebar .clinical-overview[open]{border:0}
 #clinicianSidebar .clinical-overview[open]>summary{border-bottom:0}
-#clinicianSidebar .clinical-overview[open]>summary{min-height:44px;padding-block:8px}
-#clinicianSidebar .clinical-overview[open] .auto-summary{display:none}
-.clinical-overview-title{color:var(--label-2);font-size:.8125rem;font-weight:650}
-#clinicianSidebar .clinical-overview .auto-summary{font-size:.875rem}
+.clinical-overview-title{color:var(--label);font-size:.875rem;font-weight:650}
 .clinical-overview-content{display:grid;gap:12px;padding:12px 2px 16px}
 #clinicianSidebar .clinical-overview .clinical-options{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-.clinical-reference-title{margin:0;color:var(--label);font-size:.8125rem;font-weight:650}
 #clinicianSidebar .clinical-overview .dx{margin:0;padding:0;background:transparent}
+#clinicalOptions[hidden]{display:none}
+.clinical-edit-button{justify-self:start;min-height:34px;margin-top:2px;padding:0 10px;border:1px solid var(--sep);border-radius:9px;background:var(--surface);color:var(--label-2);font:600 .75rem var(--font);cursor:pointer}
 .sidebar-pane .banner{margin:0 0 8px;padding:10px 12px}
 .sidebar-pane .banner strong{font-size:.9375rem}
 .sidebar-pane .banner p{font-size:.75rem}
@@ -1247,12 +1245,11 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     </div>
 
     <details class="clinical-overview compact-disclosure" id="clinicalOverview">
-      <summary>
-        <span class="clinical-overview-title">자동 판정 요약</span>
-        <span class="auto-summary" id="autoSummary"></span>
-      </summary>
+      <summary><span class="clinical-overview-title">질환 참고 정보</span></summary>
       <div class="clinical-overview-content">
-        <div class="clinical-options" id="clinicalOptions">
+        <div class="dx" id="dxStrip"></div>
+        <button type="button" class="clinical-edit-button" id="editClinicalButton" aria-controls="clinicalOptions" aria-expanded="false">수정하기</button>
+        <div class="clinical-options" id="clinicalOptions" hidden>
           <div class="field">
             <span class="lbl" id="ktasLbl">KTAS 등급</span>
             <div class="seg still" id="ktasSeg" role="radiogroup" aria-labelledby="ktasLbl"><span class="seg-thumb"></span></div>
@@ -1262,8 +1259,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
             <div class="select"><select id="dept"></select><span data-ic="updown" data-s="14"></span></div>
           </div>
         </div>
-        <h3 class="clinical-reference-title">질환 참고 정보</h3>
-        <div class="dx" id="dxStrip"></div>
       </div>
     </details>
 
@@ -2769,13 +2764,6 @@ function selectDisease(no){
   applyDisease(disease.no,true); $('dxSearch').value=''; $('dxSuggestions').hidden=true; $('dxSearch').setAttribute('aria-expanded','false');
   onDiseaseChanged();
 }
-function updatePatientSummary(){
-  const disease=DISEASES.find(d=>d.no===state.dxNo);
-  if(!disease) return;
-  const urgency=KTAS_NAME[state.ktas].split(' ')[0];
-  const golden=disease.gtm===null?'기준 없음':disease.gtm===0?'즉시':`${disease.gtm}분`;
-  $('autoSummary').textContent=`KTAS ${state.ktas} ${urgency} · ${state.dept} · 골든타임 ${golden}`;
-}
 function updateOriginSummary(){
   if(!state.origin){
     $('originSummary').textContent='위치 · 로딩 중';
@@ -2809,7 +2797,6 @@ function applyDisease(no, quiet){
   const d=DISEASES.find(x=>x.no===+no); if(!d) return;
   state.dxNo=d.no; state.ktas=d.ktas; state.dept=d.dept; state.severe=d.severe;
   setSeg(el.ktasSeg, d.ktas); el.dept.value=d.dept;
-  updatePatientSummary();
   if(!quiet){ flash(el.ktasSeg); flash(el.dept); }
 
   const gtMain = d.gtm===null ? '수치 기준 없음' : d.gtm===0 ? '즉시' : d.gtm>=60 ? `${(d.gtm/60).toFixed(d.gtm%60?1:0)}시간` : `${d.gtm}분`;
@@ -3328,6 +3315,12 @@ function onDiseaseChanged(){
 document.querySelector('[data-role="public"]').addEventListener('click',()=>selectRole('public'));
 document.querySelector('[data-role="clinician"]').addEventListener('click',()=>selectRole('clinician'));
 $('backToPatientBtn').addEventListener('click',()=>selectClinicianPanel('patient',{scroll:true}));
+$('editClinicalButton').addEventListener('click',()=>{
+  const options=$('clinicalOptions');
+  const open=options.hidden;
+  options.hidden=!open;
+  $('editClinicalButton').setAttribute('aria-expanded',String(open));
+});
 $('pickOriginOnMap').addEventListener('click',()=>{
   state.pickOriginMode=!state.pickOriginMode;
   $('pickOriginOnMap').setAttribute('aria-pressed',String(state.pickOriginMode));
@@ -3555,9 +3548,9 @@ el.catSeg.addEventListener('click', e => {
 el.ktasSeg.addEventListener('click', e => {
   const b=e.target.closest('button[data-v]'); if(!b) return;
   const v=+b.dataset.v; if(v===state.ktas) return;
-  state.ktas=v; setSeg(el.ktasSeg, v); updatePatientSummary(); softRerank('KTAS 등급 수동 변경');
+  state.ktas=v; setSeg(el.ktasSeg, v); softRerank('KTAS 등급 수동 변경');
 });
-el.dept.addEventListener('change', () => { state.dept=el.dept.value; updatePatientSummary(); softRerank('진료과 수동 변경'); });
+el.dept.addEventListener('change', () => { state.dept=el.dept.value; softRerank('진료과 수동 변경'); });
 segKeys(el.catSeg); segKeys(el.ktasSeg);
 el.searchBtn.addEventListener('click', runSearch);
 el.roadBtn.addEventListener('click', () => {
