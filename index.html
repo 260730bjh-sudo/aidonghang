@@ -413,7 +413,7 @@ b{font-weight:650}
 .public-field textarea{min-height:100px;resize:vertical}
 .public-field select{cursor:pointer}
 .public-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.public-primary,.public-secondary,.handover-btn,.vital-save{min-height:50px;padding:0 18px;border:0;border-radius:11px;font:700 16px var(--font);cursor:pointer}
+.public-primary,.public-secondary,.handover-btn{min-height:50px;padding:0 18px;border:0;border-radius:11px;font:700 16px var(--font);cursor:pointer}
 .public-primary{width:100%;background:var(--brand);color:#fff}
 .public-secondary{background:var(--fill);color:var(--brand)}
 .public-checks{display:grid;gap:9px;margin:10px 0 18px}
@@ -440,18 +440,11 @@ b{font-weight:650}
 .clinician-intro{margin:0;color:var(--label-2);font-size:13px}
 .clinician-panel{padding-bottom:18px}
 .clinical-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;padding:14px 20px 0}
-.vital-module{padding:12px 20px 18px;border-top:1px solid var(--sep)}
-.vital-module .clinical-grid{padding:14px 0 0}
-.vital-module .vital-history{padding:12px 0 0}
-.vital-heading{margin:0;color:var(--label-2);font-size:13px;font-weight:700}
 .clinical-field{display:grid;gap:6px;min-width:0}
 .clinical-field label{font-size:12px;color:var(--label-2);font-weight:650}
 .clinical-field input,.clinical-field select,.clinical-field textarea{width:100%;min-height:42px;padding:8px 10px;border:1px solid var(--sep);border-radius:9px;background:var(--surface-2);color:var(--label);font:14px var(--font)}
 .clinical-field textarea{min-height:74px;resize:vertical}
 .clinical-field.span2{grid-column:span 2}.clinical-field.span3{grid-column:span 3}.clinical-field.span6{grid-column:1/-1}
-.vital-save{min-height:42px;background:var(--blue);color:white;font-size:14px}
-.vital-history{display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px 0}
-.vital-chip{padding:8px 10px;border-radius:9px;background:var(--surface-2);font-size:12px;color:var(--label-2)}
 .handover-box{margin:16px 20px 0;padding:16px;border:1px solid #b8d3e8;border-radius:14px;background:#f0f7fc}
 .handover-box h3{margin:0 0 5px;font-size:17px;color:#193d63}
 .handover-meta{color:#526c7e;font-size:12px}
@@ -475,9 +468,7 @@ b{font-weight:650}
   .public-head{align-items:stretch;flex-direction:column}
  .sos-call{width:100%}
  .clinical-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding-inline:16px}
- .vital-module{padding-inline:16px}
- .vital-module .clinical-grid,.vital-module .vital-history{padding-inline:0}
- .clinical-field.span2,.clinical-field.span3{grid-column:span 1}
+  .clinical-field.span2,.clinical-field.span3{grid-column:span 1}
  .clinical-field.span6{grid-column:1/-1}
  .handover-box{margin-inline:12px}
 }
@@ -493,9 +484,7 @@ b{font-weight:650}
   #clinicianApp .form>.field{grid-column:1/-1}
   #clinicianApp .dx-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   #clinicianApp .clinical-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding-inline:16px}
-  #clinicianApp .vital-module{padding:12px 16px 18px}
-  #clinicianApp .vital-module .clinical-grid,#clinicianApp .vital-module .vital-history{padding-inline:0}
-  #clinicianApp .handover-box{margin-inline:12px}
+   #clinicianApp .handover-box{margin-inline:12px}
 }
 @media(max-width:980px){
   #clinicianApp .cols{display:contents}
@@ -627,10 +616,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .compact-disclosure#handoverBox .handover-meta,.compact-disclosure#handoverBox .handover-text,.compact-disclosure#handoverBox .handover-actions{margin:8px 12px}
 .compact-disclosure#handoverBox .handover-text{font-size:.8125rem;line-height:1.4}
 .compact-disclosure#handoverBox .handover-actions button{min-height:44px}
-.vitals-details-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px 10px}
-.vitals-details-grid .clinical-field label{font-size:.75rem}
-.vitals-details-grid .clinical-field input,.vitals-details-grid .clinical-field select{min-height:44px;padding:8px;font-size:.875rem}
-.vitals-details-grid .span-all{grid-column:1/-1}
 .sidebar-pane .panel-hd{padding:2px 2px 8px}
 .sidebar-pane .panel-hd p{margin:3px 0 0}
 .sidebar-pane .banner{margin:0 0 8px;padding:10px 12px}
@@ -747,10 +732,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .compact-disclosure#handoverBox .handover-meta,.compact-disclosure#handoverBox .handover-text,.compact-disclosure#handoverBox .handover-actions{margin:8px 12px}
 .compact-disclosure#handoverBox .handover-text{font-size:.8125rem;line-height:1.4}
 .compact-disclosure#handoverBox .handover-actions button{min-height:44px}
-.vitals-details-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px 10px}
-.vitals-details-grid .clinical-field label{font-size:.75rem}
-.vitals-details-grid .clinical-field input,.vitals-details-grid .clinical-field select{min-height:44px;padding:8px;font-size:.875rem}
-.vitals-details-grid .span-all{grid-column:1/-1}
 .sidebar-pane .banner{margin:0 0 8px;padding:10px 12px}
 .sidebar-pane .banner strong{font-size:.9375rem}
 .sidebar-pane .banner p{font-size:.75rem}
@@ -1271,22 +1252,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       <div class="dx" id="dxStrip"></div>
     </details>
 
-    <details class="compact-disclosure" id="vitalsDetails">
-      <summary>활력징후 기록 (선택)</summary>
-      <div class="vital-module">
-        <div class="clinical-grid vitals-details-grid">
-          <div class="clinical-field"><label for="vitalHr">심박수 · 회/분</label><input id="vitalHr" type="number" min="0" max="300" inputmode="numeric" placeholder="예: 90"></div>
-          <div class="clinical-field"><label for="vitalRr">호흡수 · 회/분</label><input id="vitalRr" type="number" min="0" max="100" inputmode="numeric" placeholder="예: 18"></div>
-          <div class="clinical-field"><label for="vitalSpo2">SpO₂ · %</label><input id="vitalSpo2" type="number" min="0" max="100" inputmode="numeric" placeholder="예: 98"></div>
-          <div class="clinical-field"><label for="vitalSbp">수축기 혈압 · mmHg</label><input id="vitalSbp" type="number" min="0" max="300" inputmode="numeric" placeholder="예: 120"></div>
-          <div class="clinical-field"><label for="vitalTemp">체온 · °C</label><input id="vitalTemp" type="number" min="25" max="45" step="0.1" inputmode="decimal" placeholder="예: 36.5"></div>
-        <div class="clinical-field"><label for="vitalMental">AVPU</label><select id="vitalMental"><option>선택 안 함</option><option>Alert</option><option>Voice</option><option>Pain</option><option>Unresponsive</option></select></div>
-        <div class="clinical-field"><label for="vitalGcs">GCS · 3–15</label><input id="vitalGcs" type="number" min="3" max="15" inputmode="numeric" placeholder="예: 15"></div>
-          <div class="clinical-field span6 span-all"><button class="vital-save" id="saveVitalBtn" type="button">현재 측정값 기록</button></div>
-        </div>
-        <div class="vital-history" id="vitalHistory" aria-live="polite"></div>
-      </div>
-    </details>
   </section>
 
   <div class="cols">
@@ -2309,7 +2274,7 @@ const state = {
   cat:'heart', dxNo:19, ktas:2, dept:'순환기내과', severe:'재관류중재술',
   activeHospitalId:null,
   traffic:'rush', showRoads:true,
-  ranked:[], excluded:[], confirmed:null, searching:false, animateCards:false, vitalRecords:[], routeRequestId:0,
+  ranked:[], excluded:[], confirmed:null, searching:false, animateCards:false, routeRequestId:0,
   scoreRequestId:0, routeScoreAvailable:false, routeScoreFailed:false, routeFailures:0,
   liveBedsReady:false, liveBedsStatus:'idle', liveBedsUpdatedAt:null, liveBedsFetchedAt:0, liveBedsMatched:0, liveBedsValues:0, liveBedsFacilityRevision:-1,liveBedsError:null,
   facilityStatus:'idle',facilityFetchedAt:0,facilityRevision:0,facilityError:null,
@@ -2700,25 +2665,8 @@ function currentClinicalReport(){
   try{ data=JSON.parse(sessionStorage.getItem(HANDOVER_KEY)||'null'); }catch{ data=null; }
   const patient=data?handoverText(data):'일반인 화면에서 전달된 환자 요약 없음';
   const dx=DISEASES.find(d=>d.no===state.dxNo);
-  const vitals=state.vitalRecords.length?state.vitalRecords.map(v=>v.text).join('\n'):'활력징후 기록 없음';
   const selected=state.confirmed?`\n데모에서 선택한 병원: ${HOSPITALS.find(h=>h.id===state.confirmed)?.name||''} (실제 수용 확정 아님)`:'';
-  return `${patient}\n\n의료진 보조 입력 (확정 진단 아님): ${dx?.name||'미선택'} · KTAS ${state.ktas} · ${state.dept}${selected}\n\n활력징후 기록\n${vitals}\n\n주의: 병상·수용 응답·이동 시간·경로는 시뮬레이션 예시이며 실제 의료기관 정보가 아닙니다. 119 상황실과 의료진의 판단을 우선하세요.`;
-}
-function recordVitals(){
-  const fields=['vitalHr','vitalRr','vitalSpo2','vitalSbp','vitalTemp','vitalGcs'].map(id=>$(id));
-  if(!fields.some(f=>f.value)){ toast('기록할 측정값을 하나 이상 입력해 주세요.','warn'); return; }
-  const invalid=fields.find(f=>f.value&&!f.checkValidity());
-  if(invalid){ invalid.reportValidity(); return; }
-  const labels=['심박수','호흡수','SpO₂','수축기 혈압','체온','GCS'];
-  const units=['회/분','회/분','%',' mmHg','°C','점'];
-  const values=fields.map((f,i)=>f.value?`${labels[i]} ${f.value}${units[i]}`:null).filter(Boolean);
-  const mental=$('vitalMental').value;
-  if(mental!=='선택 안 함') values.push(`의식 ${mental}`);
-  const time=new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  state.vitalRecords.unshift({time,text:`${time} · ${values.join(' · ')}`});
-  state.vitalRecords=state.vitalRecords.slice(0,5);
-  $('vitalHistory').innerHTML=state.vitalRecords.map(v=>`<span class="vital-chip">${escapeHTML(v.text)}</span>`).join('');
-  toast('활력징후를 이 탭에 기록했습니다.','ok');
+  return `${patient}\n\n의료진 보조 입력 (확정 진단 아님): ${dx?.name||'미선택'} · KTAS ${state.ktas} · ${state.dept}${selected}\n\n주의: 병상·수용 응답·이동 시간·경로는 시뮬레이션 예시이며 실제 의료기관 정보가 아닙니다. 119 상황실과 의료진의 판단을 우선하세요.`;
 }
 
 /* ── 세그먼트 컨트롤 ── */
@@ -3601,7 +3549,6 @@ $('locateAedBtn').addEventListener('click',()=>{
     $('aedLocationNote').textContent='위치 권한 없이도 지도에서 주소를 직접 검색할 수 있습니다.';
   },{enableHighAccuracy:false,timeout:8000,maximumAge:60000});
 });
-$('saveVitalBtn').addEventListener('click',recordVitals);
 $('copyClinicalReportBtn').addEventListener('click',()=>copyText(currentClinicalReport()));
 $('printClinicalReportBtn').addEventListener('click',()=>{
   $('reportPrint').innerHTML=`<h1>SAVIOR 응급환자 인계 보고서</h1><p>출력 시각: ${escapeHTML(new Date().toLocaleString('ko-KR'))}</p><pre>${escapeHTML(currentClinicalReport())}</pre>`;
@@ -3609,8 +3556,8 @@ $('printClinicalReportBtn').addEventListener('click',()=>{
 });
 addEventListener('afterprint',()=>$('reportPrint').hidden=true);
 $('clearHandoverBtn').addEventListener('click',()=>{
-  sessionStorage.removeItem(HANDOVER_KEY); state.vitalRecords=[];
-  $('vitalHistory').replaceChildren(); showHandover(); toast('이 탭의 전달 정보와 활력징후 기록을 지웠습니다.');
+  sessionStorage.removeItem(HANDOVER_KEY);
+  showHandover(); toast('이 탭의 전달 정보를 지웠습니다.');
 });
 el.dx.addEventListener('change', () => { $('dxSearch').value=''; applyDisease(el.dx.value); onDiseaseChanged(); });
 el.catSeg.addEventListener('click', e => {
