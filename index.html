@@ -728,7 +728,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #clinicianSidebar .location-hero .origin-summary-row{min-height:0;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
 .location-hero .origin-summary{font-size:.9375rem;font-weight:700}
 .location-hero .auto-summary-caption{margin-top:2px}
-.sidebar-back-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;min-height:44px;padding:0 12px;border:1px solid var(--sep);border-radius:12px;background:var(--surface);color:var(--label);font:600 .875rem var(--font);cursor:pointer}
+.sidebar-back-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;min-height:44px;margin-left:auto;padding:0 12px;border:1px solid var(--sep);border-radius:12px;background:var(--surface);color:var(--label);font:600 .875rem var(--font);cursor:pointer}
 .sidebar-back-button .ic{transform:rotate(180deg)}
 #clinicianSidebar #resultPanel .panel-hd{align-items:center;flex-wrap:nowrap;gap:10px;padding:2px 2px 12px}
 #clinicianSidebar #resultPanel .hd-txt{flex:1 1 auto}
@@ -1298,11 +1298,11 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 
     <section class="panel sidebar-pane" id="resultPanel" aria-labelledby="h-res" role="region" hidden>
       <div class="panel-hd">
-        <button type="button" class="sidebar-back-button" id="backToPatientBtn" aria-controls="patientPanel"><span data-ic="chevron" data-s="17" aria-hidden="true"></span>뒤로가기</button>
         <div class="hd-txt">
           <h2 id="h-res">응급실 병원 후보</h2>
           <p id="recommendationMeta" hidden>후보의 진료 조건을 확인한 뒤 실제 도로 경로를 계산합니다.</p>
         </div>
+        <button type="button" class="sidebar-back-button" id="backToPatientBtn" aria-controls="patientPanel"><span data-ic="chevron" data-s="17" aria-hidden="true"></span>뒤로가기</button>
       </div>
       <div class="search-range-status" id="searchRangeStatus" aria-live="polite">
         <span id="searchRangeText">위치를 지정한 뒤 병원을 찾으세요.</span>
@@ -3004,11 +3004,8 @@ function renderResults(){
   const active=state.ranked.find(h=>h.id===state.activeHospitalId)||state.ranked[0];
   if(active) state.activeHospitalId=active.id;
   const compact=state.ranked.filter(h=>h.id!==active?.id).slice(0,4);
-  const relatedDepartmentOnly=state.ranked.some(h=>h.liveDeptVerified===false);
-  const treatmentWarning=state.severe?`<strong>필요 처치 역량은 확인되지 않았습니다.</strong><span>${escapeHTML(state.severe)} 가능 병원으로 확인된 결과가 아닙니다. 진료과·가용 병상·경로 기준의 문의 후보이며, 이송 전 119와 병원에 치료 가능 여부와 수용 상황을 확인해 주세요.</span>`:'';
-  const departmentWarning=relatedDepartmentOnly?'<strong>일부 후보의 진료과는 넓은 분류만 확인됐습니다.</strong><span>예를 들어 NEDIS에 순환기내과 대신 내과로 등록된 기관은 관련 문의 후보로 표시합니다. 세부 진료과 진료 가능 여부는 병원에 확인해 주세요.</span>':'';
   el.list.innerHTML = active
-    ? `${treatmentWarning||departmentWarning?`<div class="treatment-warning" role="status">${treatmentWarning}${departmentWarning}</div>`:''}<div class="recommendation-primary">${cardHTML(active)}</div><div class="secondary-hospitals">${compact.map(hospitalRowHTML).join('')}</div>`
+    ? `<div class="recommendation-primary">${cardHTML(active)}</div><div class="secondary-hospitals">${compact.map(hospitalRowHTML).join('')}</div>`
     : `<div class="empty"><b>${state.routeScoreFailed?'실시간 경로를 확인하지 못했습니다.':'확인된 후보가 없습니다.'}</b><br>${noCandidateMessage()}</div>`;
   if(state.excluded.length){
     el.exBox.hidden=false;
