@@ -758,14 +758,8 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #clinicianSidebar .patient-input-card #allCategories>summary{min-height:44px;padding:0 2px}
 #clinicianSidebar .patient-input-card #allCategories>.field{margin:12px 0 0}
 #clinicianSidebar .patient-input-card #allCategories>.field+.field{margin-top:14px}
-#clinicianSidebar .clinical-overview{margin:0 0 16px;padding:0;border:0;border-top:1px solid var(--sep);border-bottom:1px solid var(--sep);background:transparent;box-shadow:none}
-#clinicianSidebar .clinical-overview>summary{position:relative;display:flex;align-items:center;min-height:52px;padding:10px 30px 10px 2px;list-style:none}
-#clinicianSidebar .clinical-overview>summary::-webkit-details-marker{display:none}
-#clinicianSidebar .clinical-overview>summary::after{position:absolute;right:4px;top:50%;margin-top:-.65rem}
-#clinicianSidebar .clinical-overview[open]{border:0}
-#clinicianSidebar .clinical-overview[open]>summary{border-bottom:0}
-.clinical-overview-title{color:var(--label);font-size:.875rem;font-weight:650}
-.clinical-overview-content{display:grid;gap:12px;padding:12px 2px 16px}
+#clinicianSidebar .clinical-overview{margin:0 0 16px;padding:0;border:0;background:transparent}
+.clinical-overview-content{display:grid;gap:10px;padding:0}
 #clinicianSidebar .clinical-overview .clinical-options{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 #clinicianSidebar .clinical-overview .dx{margin:0;padding:0;background:transparent}
 #clinicalOptions[hidden]{display:none}
@@ -1244,8 +1238,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       </details>
     </div>
 
-    <details class="clinical-overview compact-disclosure" id="clinicalOverview">
-      <summary><span class="clinical-overview-title">질환 참고 정보</span></summary>
+    <section class="clinical-overview" id="clinicalOverview" aria-label="선택한 질환 정보">
       <div class="clinical-overview-content">
         <div class="dx" id="dxStrip"></div>
         <button type="button" class="clinical-edit-button" id="editClinicalButton" aria-controls="clinicalOptions" aria-expanded="false">수정하기</button>
@@ -1260,7 +1253,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
           </div>
         </div>
       </div>
-    </details>
+    </section>
 
     <details class="compact-disclosure" id="handoverBox" hidden>
       <summary>일반인 화면에서 전달된 요약</summary>
