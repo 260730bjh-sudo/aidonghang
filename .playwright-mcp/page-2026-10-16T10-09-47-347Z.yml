@@ -1,0 +1,75 @@
+- generic [active] [ref=e1]:
+  - navigation "이용 모드" [ref=e34]:
+    - generic [ref=e35]: SAVIOR · 일반인용 안내
+    - button "홈 화면으로 돌아가기" [ref=e36] [cursor=pointer]
+  - main [ref=e37]:
+    - generic [ref=e38]:
+      - generic [ref=e40]:
+        - paragraph [ref=e41]: SAVIOR · 일반인용
+        - heading "응급상황인가요?" [level=1] [ref=e42]
+        - paragraph [ref=e43]: 위급하거나 판단이 어렵다면 먼저 119에 전화하세요.
+      - region "환자가 반응하나요?" [ref=e97]:
+        - generic [ref=e98]:
+          - button "처음" [ref=e99] [cursor=pointer]:
+            - img [ref=e101]
+            - text: 처음
+          - generic [ref=e103]: 요약
+        - region "119에 전달할 정보가 정리됐습니다" [ref=e155]:
+          - heading "119에 전달할 정보가 정리됐습니다" [level=2] [ref=e156]
+          - paragraph [ref=e157]: 119에 전화해 아래 내용을 전달해 주세요. 전화 버튼은 전화 앱만 열며, 앱이 자동 신고하거나 접수 여부를 확인하지 않습니다. 미입력 항목은 ‘미입력’으로 표시됩니다.
+          - list [ref=e158]:
+            - listitem [ref=e159]:
+              - strong [ref=e160]: 위치
+              - generic [ref=e161]: 미입력
+            - listitem [ref=e162]:
+              - strong [ref=e163]: 상황
+              - generic [ref=e164]: 심정지 의심 (선택)
+            - listitem [ref=e165]:
+              - strong [ref=e166]: 반응
+              - generic [ref=e167]: 반응 없음
+            - listitem [ref=e168]:
+              - strong [ref=e169]: 호흡
+              - generic [ref=e170]: 미입력
+            - listitem [ref=e171]:
+              - strong [ref=e172]: 심한 출혈
+              - generic [ref=e173]: 미입력
+            - listitem [ref=e174]:
+              - strong [ref=e175]: 시작 시각
+              - generic [ref=e176]: 미입력
+            - listitem [ref=e177]:
+              - strong [ref=e178]: 추가 정보
+              - generic [ref=e179]: 미입력
+            - listitem [ref=e180]:
+              - strong [ref=e181]: 응급처치
+              - generic [ref=e182]: 미입력
+          - generic [ref=e183]:
+            - button "입력 수정" [ref=e184] [cursor=pointer]
+            - button "요약 복사" [ref=e185] [cursor=pointer]
+            - button "의료진 화면에서 열기" [ref=e186] [cursor=pointer]
+          - paragraph [ref=e187]: 이 기능은 같은 브라우저 안에서 요약을 여는 기능이며, 실제 의료진·병원으로 전송하지 않습니다.
+          - generic [ref=e188]:
+            - heading "119 통화 후 구급대가 올 때까지" [level=3] [ref=e189]
+            - list [ref=e190]:
+              - listitem [ref=e191]:
+                - strong [ref=e192]: 119 상담원의 지시를 따르세요
+                - generic [ref=e193]: 위치, 환자 수, 반응·호흡 상태와 시행한 조치를 전달합니다. 신고자 연락처도 말해 주세요.
+              - listitem [ref=e194]:
+                - strong [ref=e195]: 반응과 호흡을 계속 살피세요
+                - generic [ref=e196]: 반응이 없고 정상 호흡이 아니면 119 상담원에게 알리고 안내를 따릅니다.
+              - listitem [ref=e197]:
+                - strong [ref=e198]: 성인 심정지가 의심되고 CPR을 할 수 있다면
+                - generic [ref=e199]: 첨부 매뉴얼은 가슴압박 30회와 인공호흡 2회를 반복하고, 분당 100~120회·깊이 약 5~6cm로 압박하도록 안내합니다. 인공호흡을 할 수 없거나 원치 않으면 가슴압박만 계속하며 119 지시를 우선합니다.
+              - listitem [ref=e200]:
+                - strong [ref=e201]: AED가 도착하면 음성 안내를 따르세요
+                - generic [ref=e202]: 분석·충격 중에는 모두 환자에게서 떨어지고, 안내에 따라 CPR을 다시 시작합니다.
+            - paragraph [ref=e203]: 소아·영아 등 상황별 처치는 119 상담원의 안내를 따르세요.
+            - paragraph [ref=e204]: "참고: 첨부 응급처치 매뉴얼 3, 33~38쪽"
+            - link "대한심폐소생협회" [ref=e206] [cursor=pointer]:
+              - /url: https://www.kacpr.org/
+    - generic [ref=e90]:
+      - link "119 전화하기" [ref=e91] [cursor=pointer]:
+        - /url: tel:119
+        - img [ref=e93]
+        - generic [ref=e95]: 119 전화하기
+      - generic [ref=e96]: 버튼을 누르면 전화 앱이 열립니다. 입력 내용은 자동 전달되지 않습니다.
+  - text: › › › ›

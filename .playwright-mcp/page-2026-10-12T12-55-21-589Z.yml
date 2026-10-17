@@ -1,0 +1,291 @@
+- main [ref=e36]:
+  - complementary "의료진 정보 패널" [ref=e37]:
+    - button "홈으로" [ref=e39] [cursor=pointer]
+    - navigation "사이드 패널 선택" [ref=e40]:
+      - button "환자 입력" [pressed] [ref=e41] [cursor=pointer]
+      - button "추천 병원" [ref=e42] [cursor=pointer]
+    - region "환자 상태 입력" [ref=e43]:
+      - generic [ref=e45]:
+        - heading "환자 상태 입력" [level=2] [ref=e46]
+        - paragraph [ref=e47]: 의료진 판단 보조용 데모 · 실제 환자 식별정보는 입력하지 마세요
+      - generic [ref=e48]:
+        - heading "일반인 화면에서 전달된 환자 요약" [level=3] [ref=e49]
+        - generic [ref=e50]: 일반인 화면 작성 · 2026. 10. 12. 오전 10:53:58 · 이 탭의 세션에만 보관
+        - paragraph [ref=e51]: "SAVIOR 환자 상태 전달 요약 기록 시각: 2026. 10. 12. 오전 10:53:58 증상 시작: 미상 반응: 반응 없음 호흡: 확인 어려움 증상·상황: 넘어져서 어지럽다고 함 시행한 응급처치: 기록된 응급처치 없음 주의: 환자/보호자 입력 정보이며 진단 결과가 아닙니다. 실제 평가와 인계는 의료진이 확인해야 합니다."
+        - generic [ref=e52]:
+          - button "인계 보고서 복사" [ref=e53] [cursor=pointer]
+          - button "인계 보고서 인쇄" [ref=e54] [cursor=pointer]
+          - button "전달 정보 지우기" [ref=e55] [cursor=pointer]
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - text: 부위 · 대분류
+            - emphasis [ref=e59]: KTAS 자료 132건
+          - radiogroup "부위 · 대분류 KTAS 자료 132건" [ref=e60]:
+            - radio "심장·혈관 10건" [checked] [ref=e62] [cursor=pointer]:
+              - generic [ref=e63]: 심장·혈관
+              - generic [ref=e64]: 10건
+            - radio "호흡기 11건" [ref=e65] [cursor=pointer]:
+              - generic [ref=e66]: 호흡기
+              - generic [ref=e67]: 11건
+            - radio "뇌·신경 8건" [ref=e68] [cursor=pointer]:
+              - generic [ref=e69]: 뇌·신경
+              - generic [ref=e70]: 8건
+            - radio "외상·골절 17건" [ref=e71] [cursor=pointer]:
+              - generic [ref=e72]: 외상·골절
+              - generic [ref=e73]: 17건
+            - radio "소화기 13건" [ref=e74] [cursor=pointer]:
+              - generic [ref=e75]: 소화기
+              - generic [ref=e76]: 13건
+            - radio "여성·임신 8건" [ref=e77] [cursor=pointer]:
+              - generic [ref=e78]: 여성·임신
+              - generic [ref=e79]: 8건
+            - radio "소아 9건" [ref=e80] [cursor=pointer]:
+              - generic [ref=e81]: 소아
+              - generic [ref=e82]: 9건
+            - radio "신장·비뇨 7건" [ref=e83] [cursor=pointer]:
+              - generic [ref=e84]: 신장·비뇨
+              - generic [ref=e85]: 7건
+            - radio "눈·귀·코·입 13건" [ref=e86] [cursor=pointer]:
+              - generic [ref=e87]: 눈·귀·코·입
+              - generic [ref=e88]: 13건
+            - radio "피부·근골격 10건" [ref=e89] [cursor=pointer]:
+              - generic [ref=e90]: 피부·근골격
+              - generic [ref=e91]: 10건
+            - radio "정신 5건" [ref=e92] [cursor=pointer]:
+              - generic [ref=e93]: 정신
+              - generic [ref=e94]: 5건
+            - radio "전신·기타 21건" [ref=e95] [cursor=pointer]:
+              - generic [ref=e96]: 전신·기타
+              - generic [ref=e97]: 21건
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - text: 세부 질환 · 상태
+            - emphasis [ref=e100]: 심장·혈관 10건
+          - generic [ref=e101]:
+            - combobox "세부 질환 · 상태 심장·혈관 10건" [ref=e102] [cursor=pointer]:
+              - option "심장 · 심정지 (심실세동/무맥성 VT/무수축)"
+              - option "심장 · 심장눌림증 (심낭압전)"
+              - option "심장 · 고도 서맥·완전방실차단 + 쇼크"
+              - option "심장 · ST분절상승 심근경색 (STEMI)" [selected]
+              - option "심장 · 불안정형 협심증 / 비ST상승 심근경색"
+              - option "심장 · 급성 대동맥박리"
+              - option "혈관 · 급성 사지동맥 폐색"
+              - option "심장 · 급성 심부전 · 폐부종"
+              - option "심장 · 심방세동 (빠른 심실반응)"
+              - option "심장 · 발작성 상심실성 빈맥 (PSVT)"
+            - generic:
+              - img
+        - generic [ref=e103]:
+          - generic [ref=e104]:
+            - text: KTAS 등급
+            - emphasis [ref=e105]: 자동
+          - radiogroup "KTAS 등급 자동" [ref=e106]:
+            - radio "KTAS 1 소생" [ref=e108] [cursor=pointer]:
+              - generic [ref=e109]: "1"
+              - generic [ref=e111]: 소생
+            - radio "KTAS 2 긴급" [checked] [ref=e112] [cursor=pointer]:
+              - generic [ref=e113]: "2"
+              - generic [ref=e115]: 긴급
+            - radio "KTAS 3 응급" [ref=e116] [cursor=pointer]:
+              - generic [ref=e117]: "3"
+              - generic [ref=e119]: 응급
+            - radio "KTAS 4 준응급" [ref=e120] [cursor=pointer]:
+              - generic [ref=e121]: "4"
+              - generic [ref=e123]: 준응급
+            - radio "KTAS 5 비응급" [ref=e124] [cursor=pointer]:
+              - generic [ref=e125]: "5"
+              - generic [ref=e127]: 비응급
+        - generic [ref=e128]:
+          - generic [ref=e129]:
+            - text: 필요 진료과
+            - emphasis [ref=e130]: 자동 · 변경 가능
+          - generic [ref=e131]:
+            - combobox "필요 진료과 자동 · 변경 가능" [ref=e132] [cursor=pointer]:
+              - option "순환기내과" [selected]
+              - option "호흡기내과"
+              - option "신경과"
+              - option "신경외과"
+              - option "외과"
+              - option "정형외과"
+              - option "성형외과"
+              - option "산부인과"
+              - option "소아청소년과"
+              - option "안과"
+              - option "이비인후과"
+              - option "비뇨의학과"
+              - option "피부과"
+              - option "치과"
+              - option "정신건강의학과"
+              - option "혈액·종양내과"
+              - option "영상의학과"
+              - option "기타 진료과"
+            - generic:
+              - img
+        - generic [ref=e133]:
+          - generic [ref=e134]:
+            - text: 출동 위치
+            - emphasis [ref=e135]: 지도 탭으로도 지정
+          - radiogroup "출동 위치 지도 탭으로도 지정" [ref=e136]:
+            - radio "광화문" [checked] [ref=e138] [cursor=pointer]
+            - radio "강남역" [ref=e139] [cursor=pointer]
+            - radio "여의도" [ref=e140] [cursor=pointer]
+          - generic [ref=e141]: 현재 좌표37.57590, 126.97690
+        - button "실시간 경로로 병원 추천" [ref=e143] [cursor=pointer]:
+          - img [ref=e145]
+          - generic [ref=e148]: 실시간 경로로 병원 추천
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - generic [ref=e151]: KTAS 2 · 긴급
+          - heading "ST분절상승 심근경색 (STEMI)" [level=3] [ref=e152]
+        - generic [ref=e153]:
+          - generic [ref=e154]: 심장
+          - generic [ref=e155]: 필요 진료과 순환기내과
+          - generic [ref=e156]: 중증응급 재관류중재술
+          - generic [ref=e157]:
+            - img [ref=e158]
+            - text: 권장 진료 15분 이내
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - term [ref=e163]: 주요 증상 · 소견
+            - definition [ref=e164]: 30분 이상 조이는 흉통, 식은땀, 방사통
+          - generic [ref=e165]:
+            - term [ref=e166]: 심각성 (왜 위험한가)
+            - definition [ref=e167]: 심근 괴사 진행, 치명적 부정맥·심인성 쇼크
+          - generic [ref=e168]:
+            - term [ref=e169]: 필요한 치료 · 처치
+            - definition [ref=e170]: 도착 10분 내 심전도, 항혈소판제(아스피린+P2Y12), 항응고, 응급 관상동맥중재술(PCI)
+          - generic [ref=e171]:
+            - term [ref=e172]: 골든타임
+            - definition [ref=e173]:
+              - strong [ref=e174]: 1.5시간
+              - text: 90분
+              - generic [ref=e175]: 원문 · Door-to-Balloon 90분 이내
+      - generic [ref=e176]:
+        - paragraph [ref=e177]: 활력징후 기록 · 선택 항목
+        - generic [ref=e178]:
+          - generic [ref=e179]:
+            - generic [ref=e180]: 심박수 · 회/분
+            - spinbutton "심박수 · 회/분" [ref=e181]
+          - generic [ref=e182]:
+            - generic [ref=e183]: 호흡수 · 회/분
+            - spinbutton "호흡수 · 회/분" [ref=e184]
+          - generic [ref=e185]:
+            - generic [ref=e186]: 산소포화도 · %
+            - spinbutton "산소포화도 · %" [ref=e187]
+          - generic [ref=e188]:
+            - generic [ref=e189]: 수축기 혈압 · mmHg
+            - spinbutton "수축기 혈압 · mmHg" [ref=e190]
+          - generic [ref=e191]:
+            - generic [ref=e192]: 체온 · °C
+            - spinbutton "체온 · °C" [ref=e193]
+          - generic [ref=e194]:
+            - generic [ref=e195]: 의식 수준
+            - combobox "의식 수준" [ref=e196]:
+              - option "선택 안 함" [selected]
+              - option "Alert"
+              - option "Voice"
+              - option "Pain"
+              - option "Unresponsive"
+              - option "GCS 기록 필요"
+          - button "현재 측정값 기록" [ref=e198] [cursor=pointer]
+  - region "서울 응급실 · 교통량 지도" [ref=e201]:
+    - generic [ref=e202]:
+      - button "실시간 교통" [pressed] [ref=e203] [cursor=pointer]:
+        - img [ref=e205]
+        - text: 실시간 교통
+      - 'button "모의: 1순위 거절" [disabled] [ref=e207]':
+        - img [ref=e209]
+        - text: "모의: 1순위 거절"
+    - generic [ref=e212]:
+      - generic [ref=e213]:
+        - application "서울 응급의료기관 지도. 지도를 클릭해 출동 위치를 지정할 수 있습니다." [ref=e214]:
+          - generic [ref=e215]:
+            - generic:
+              - img [ref=e217]
+              - generic:
+                - img "현재 출동 위치" [ref=e219]
+                - button "경희대병원, 모의 병상 7/42, 응급실 불가" [ref=e221] [cursor=pointer]:
+                  - generic [ref=e222]: ×
+                - button "순천향대서울병원, 모의 병상 5/30, 혼잡" [ref=e224] [cursor=pointer]:
+                  - generic [ref=e225]: "5"
+                - button "이대목동병원, 모의 병상 11/34, 여유" [ref=e227] [cursor=pointer]:
+                  - generic [ref=e228]: "11"
+                - button "신촌세브란스병원, 모의 병상 4/58, 응급실 불가" [ref=e230] [cursor=pointer]:
+                  - generic [ref=e231]: ×
+                - button "고대안암병원, 모의 병상 13/40, 여유" [ref=e233] [cursor=pointer]:
+                  - generic [ref=e234]: "13"
+                - button "서울아산병원, 모의 병상 9/62, 혼잡" [ref=e236] [cursor=pointer]:
+                  - generic [ref=e237]: "9"
+                - button "삼성서울병원, 모의 병상 6/55, 응급실 불가" [ref=e239] [cursor=pointer]:
+                  - generic [ref=e240]: ×
+                - button "서울성모병원, 모의 병상 16/48, 여유" [ref=e242] [cursor=pointer]:
+                  - generic [ref=e243]: "16"
+                - button "한양대병원, 모의 병상 8/36, 응급실 불가" [ref=e245] [cursor=pointer]:
+                  - generic [ref=e246]: ×
+                - button "고대구로병원, 모의 병상 14/44, 여유" [ref=e248] [cursor=pointer]:
+                  - generic [ref=e249]: "14"
+                - button "상계백병원, 모의 병상 9/28, 여유" [ref=e251] [cursor=pointer]:
+                  - generic [ref=e252]: "9"
+                - button "서울대병원, 모의 병상 3/60, 혼잡" [ref=e254] [cursor=pointer]:
+                  - generic [ref=e255]: "3"
+                - button "서울한일병원, 모의 병상 7/18, 여유" [ref=e257] [cursor=pointer]:
+                  - generic [ref=e258]: "7"
+                - button "경찰병원, 모의 병상 10/22, 응급실 불가" [ref=e260] [cursor=pointer]:
+                  - generic [ref=e261]: ×
+                - button "H+양지병원, 모의 병상 8/24, 여유" [ref=e263] [cursor=pointer]:
+                  - generic [ref=e264]: "8"
+                - button "강동경희대병원, 모의 병상 12/32, 여유" [ref=e266] [cursor=pointer]:
+                  - generic [ref=e267]: "12"
+                - button "혜민병원, 모의 병상 6/16, 여유" [ref=e269] [cursor=pointer]:
+                  - generic [ref=e270]: "6"
+                - button "성애병원, 모의 병상 5/20, 여유" [ref=e272] [cursor=pointer]:
+                  - generic [ref=e273]: "5"
+                - button "건국대병원, 모의 병상 11/38, 응급실 불가" [ref=e275] [cursor=pointer]:
+                  - generic [ref=e276]: ×
+                - button "강북삼성병원, 모의 병상 2/34, 응급실 불가" [ref=e278] [cursor=pointer]:
+                  - generic [ref=e279]: ×
+                - button "서울시립서남병원, 모의 병상 13/19, 여유" [ref=e281] [cursor=pointer]:
+                  - generic [ref=e282]: "13"
+                - button "삼육서울병원, 모의 병상 9/21, 여유" [ref=e284] [cursor=pointer]:
+                  - generic [ref=e285]: "9"
+                - button "이대서울병원, 모의 병상 18/46, 여유" [ref=e287] [cursor=pointer]:
+                  - generic [ref=e288]: "18"
+                - button "은평성모병원, 모의 병상 15/40, 여유" [ref=e290] [cursor=pointer]:
+                  - generic [ref=e291]: "15"
+                - button "보라매병원, 모의 병상 10/35, 여유" [ref=e293] [cursor=pointer]:
+                  - generic [ref=e294]: "10"
+                - button "중앙대병원, 모의 병상 0/33, 만석" [ref=e296] [cursor=pointer]:
+                  - generic [ref=e297]: "0"
+                - button "강동성심병원, 모의 병상 7/26, 응급실 불가" [ref=e299] [cursor=pointer]:
+                  - generic [ref=e300]: ×
+                - button "노원을지대병원, 모의 병상 12/31, 응급실 불가" [ref=e302] [cursor=pointer]:
+                  - generic [ref=e303]: ×
+                - button "강남세브란스병원, 모의 병상 8/45, 혼잡" [ref=e305] [cursor=pointer]:
+                  - generic [ref=e306]: "8"
+          - generic [ref=e307]:
+            - generic [ref=e310]: 8km
+            - link "Kakao 맵으로 이동(새창열림)" [ref=e312] [cursor=pointer]:
+              - /url: http://map.kakao.com/
+              - img "Kakao 맵으로 이동(새창열림)" [ref=e313]
+        - generic:
+          - generic:
+            - img
+          - text: 탭해서 출동 위치 지정 · 드래그로 이동
+        - generic "지도 확대 축소" [ref=e314]:
+          - button "지도 확대" [ref=e315] [cursor=pointer]:
+            - img [ref=e317]
+          - button "지도 축소" [ref=e319] [cursor=pointer]:
+            - img [ref=e321]
+          - button "지도 원래 크기" [ref=e322] [cursor=pointer]:
+            - img [ref=e324]
+      - generic [ref=e326]:
+        - generic [ref=e327]:
+          - generic [ref=e328]: 병상
+          - generic [ref=e329]: 여유
+          - generic [ref=e331]: 혼잡
+          - generic [ref=e333]: 만석
+          - generic [ref=e335]: 응급실 불가
+        - generic [ref=e337]:
+          - generic [ref=e338]: 도로
+          - generic [ref=e339]: 카카오맵 실시간 교통정보 · 제공 구간 표시

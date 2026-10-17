@@ -1,0 +1,40 @@
+- generic [active] [ref=e1]:
+  - navigation "이용 모드" [ref=e34]:
+    - generic [ref=e35]: SAVIOR · 일반인용 안내
+    - button "홈 화면으로 돌아가기" [ref=e36] [cursor=pointer]
+  - main [ref=e37]:
+    - generic [ref=e38]:
+      - generic [ref=e40]:
+        - paragraph [ref=e41]: SAVIOR · 일반인용
+        - heading "응급상황인가요?" [level=1] [ref=e42]
+        - paragraph [ref=e43]: 위급하거나 판단이 어렵다면 먼저 119에 전화하세요.
+      - region "환자가 반응하나요?" [ref=e97]:
+        - generic [ref=e98]:
+          - button "처음" [ref=e99] [cursor=pointer]:
+            - img [ref=e101]
+            - text: 처음
+          - generic [ref=e103]: 1 / 4
+        - generic [ref=e104]:
+          - heading "환자가 반응하나요?" [level=2] [ref=e105]
+          - paragraph [ref=e106]: 말을 걸었을 때나 어깨를 가볍게 두드렸을 때를 기준으로 합니다.
+          - generic [ref=e108]:
+            - button "반응 있음" [ref=e109] [cursor=pointer]:
+              - img [ref=e111]
+              - strong [ref=e114]: 반응 있음
+            - button "반응 없음" [ref=e115] [cursor=pointer]:
+              - img [ref=e117]
+              - strong [ref=e119]: 반응 없음
+            - button "모르겠어요" [ref=e120] [cursor=pointer]:
+              - img [ref=e122]
+              - strong [ref=e125]: 모르겠어요
+        - generic [ref=e126]:
+          - button "이전" [disabled] [ref=e127] [cursor=pointer]
+          - button "건너뛰기" [ref=e128] [cursor=pointer]
+          - button "다음" [ref=e129] [cursor=pointer]
+    - generic [ref=e90]:
+      - link "119 전화하기" [ref=e91] [cursor=pointer]:
+        - /url: tel:119
+        - img [ref=e93]
+        - generic [ref=e95]: 입력 건너뛰고 119 전화하기
+      - generic [ref=e96]: 버튼을 누르면 전화 앱이 열립니다. 입력 내용은 자동 전달되지 않습니다.
+  - text: › › › ›

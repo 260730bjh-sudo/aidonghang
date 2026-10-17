@@ -1,0 +1,158 @@
+- main [ref=e36]:
+  - complementary "의료진 정보 패널" [ref=e37]:
+    - generic "사이드바 높이 조절" [ref=e38]
+    - generic [ref=e40]:
+      - navigation "사이드 패널 선택" [ref=e41]:
+        - button "환자 입력" [pressed] [ref=e43] [cursor=pointer]
+        - button "추천 병원" [ref=e44] [cursor=pointer]
+      - button "데모 데이터" [ref=e45] [cursor=pointer]
+    - region "환자 입력" [ref=e46]:
+      - generic [ref=e48]:
+        - heading "환자 입력" [level=2] [ref=e49]
+        - paragraph [ref=e50]: 의료진 판단 보조용 · 실제 환자 식별정보는 입력하지 마세요
+      - generic [ref=e51]:
+        - generic [ref=e52]: 질환명 또는 증상 검색
+        - generic [ref=e53]:
+          - img [ref=e55]
+          - searchbox "질환명 또는 증상 검색" [ref=e58]
+        - generic "자주 선택하는 응급 상태" [ref=e59]:
+          - button "심정지" [ref=e60] [cursor=pointer]
+          - button "STEMI" [ref=e61] [cursor=pointer]
+          - button "뇌졸중" [ref=e62] [cursor=pointer]
+          - button "중증 외상" [ref=e63] [cursor=pointer]
+          - button "호흡곤란" [ref=e64] [cursor=pointer]
+          - button "의식저하" [ref=e65] [cursor=pointer]
+      - group [ref=e66]:
+        - generic "전체 분류에서 찾기 ›" [ref=e67] [cursor=pointer]
+        - option "심장 · 심정지 (심실세동/무맥성 VT/무수축)"
+        - option "심장 · 심장눌림증 (심낭압전)"
+        - option "심장 · 고도 서맥·완전방실차단 + 쇼크"
+        - option "심장 · ST분절상승 심근경색 (STEMI)" [selected]
+        - option "심장 · 불안정형 협심증 / 비ST상승 심근경색"
+        - option "심장 · 급성 대동맥박리"
+        - option "혈관 · 급성 사지동맥 폐색"
+        - option "심장 · 급성 심부전 · 폐부종"
+        - option "심장 · 심방세동 (빠른 심실반응)"
+        - option "심장 · 발작성 상심실성 빈맥 (PSVT)"
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - generic [ref=e70]: KTAS 2 긴급 · 순환기내과 · 골든타임 90분
+          - generic [ref=e71]: 자동 판정 요약
+        - button "변경" [ref=e72] [cursor=pointer]
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - generic [ref=e75]: 출동 위치 · 광화문
+          - generic [ref=e76]: 지도에서 탭해서 변경
+        - button "변경" [ref=e77] [cursor=pointer]
+      - group [ref=e78]:
+        - generic "일반인 화면에서 전달된 요약 ›" [ref=e79] [cursor=pointer]
+      - group [ref=e80]:
+        - generic "질환 참고 정보 ›" [ref=e81] [cursor=pointer]
+      - group [ref=e82]:
+        - generic "활력징후 기록 (선택) ›" [ref=e83] [cursor=pointer]
+        - option "선택 안 함" [selected]
+        - option "Alert"
+        - option "Voice"
+        - option "Pain"
+        - option "Unresponsive"
+    - button "병원 찾기" [ref=e85] [cursor=pointer]:
+      - img [ref=e87]
+      - generic [ref=e90]: 병원 찾기
+  - region "서울 응급실 · 교통량 지도" [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - application "서울 응급의료기관 지도. 지도를 클릭해 출동 위치를 지정할 수 있습니다." [ref=e95]:
+          - generic [ref=e96]:
+            - generic:
+              - img [ref=e98]
+              - generic:
+                - img "현재 출동 위치" [ref=e100]
+                - button "경희대병원, 병상 7/42, 응급실 불가" [ref=e102] [cursor=pointer]:
+                  - generic [ref=e103]: ×
+                - button "순천향대서울병원, 병상 5/30, 혼잡" [ref=e105] [cursor=pointer]:
+                  - generic [ref=e106]: "5"
+                - button "이대목동병원, 병상 11/34, 여유" [ref=e108] [cursor=pointer]:
+                  - generic [ref=e109]: "11"
+                - button "신촌세브란스병원, 병상 4/58, 응급실 불가" [ref=e111] [cursor=pointer]:
+                  - generic [ref=e112]: ×
+                - button "고대안암병원, 병상 13/40, 여유" [ref=e114] [cursor=pointer]:
+                  - generic [ref=e115]: "13"
+                - button "서울아산병원, 병상 9/62, 혼잡" [ref=e117] [cursor=pointer]:
+                  - generic [ref=e118]: "9"
+                - button "삼성서울병원, 병상 6/55, 응급실 불가" [ref=e120] [cursor=pointer]:
+                  - generic [ref=e121]: ×
+                - button "서울성모병원, 병상 16/48, 여유" [ref=e123] [cursor=pointer]:
+                  - generic [ref=e124]: "16"
+                - button "한양대병원, 병상 8/36, 응급실 불가" [ref=e126] [cursor=pointer]:
+                  - generic [ref=e127]: ×
+                - button "고대구로병원, 병상 14/44, 여유" [ref=e129] [cursor=pointer]:
+                  - generic [ref=e130]: "14"
+                - button "상계백병원, 병상 9/28, 여유" [ref=e132] [cursor=pointer]:
+                  - generic [ref=e133]: "9"
+                - button "서울대병원, 병상 3/60, 혼잡" [ref=e135] [cursor=pointer]:
+                  - generic [ref=e136]: "3"
+                - button "서울한일병원, 병상 7/18, 여유" [ref=e138] [cursor=pointer]:
+                  - generic [ref=e139]: "7"
+                - button "경찰병원, 병상 10/22, 응급실 불가" [ref=e141] [cursor=pointer]:
+                  - generic [ref=e142]: ×
+                - button "H+양지병원, 병상 8/24, 여유" [ref=e144] [cursor=pointer]:
+                  - generic [ref=e145]: "8"
+                - button "강동경희대병원, 병상 12/32, 여유" [ref=e147] [cursor=pointer]:
+                  - generic [ref=e148]: "12"
+                - button "혜민병원, 병상 6/16, 여유" [ref=e150] [cursor=pointer]:
+                  - generic [ref=e151]: "6"
+                - button "성애병원, 병상 5/20, 여유" [ref=e153] [cursor=pointer]:
+                  - generic [ref=e154]: "5"
+                - button "건국대병원, 병상 11/38, 응급실 불가" [ref=e156] [cursor=pointer]:
+                  - generic [ref=e157]: ×
+                - button "강북삼성병원, 병상 2/34, 응급실 불가" [ref=e159] [cursor=pointer]:
+                  - generic [ref=e160]: ×
+                - button "서울시립서남병원, 병상 13/19, 여유" [ref=e162] [cursor=pointer]:
+                  - generic [ref=e163]: "13"
+                - button "삼육서울병원, 병상 9/21, 여유" [ref=e165] [cursor=pointer]:
+                  - generic [ref=e166]: "9"
+                - button "이대서울병원, 병상 18/46, 여유" [ref=e168] [cursor=pointer]:
+                  - generic [ref=e169]: "18"
+                - button "은평성모병원, 병상 15/40, 여유" [ref=e171] [cursor=pointer]:
+                  - generic [ref=e172]: "15"
+                - button "보라매병원, 병상 10/35, 여유" [ref=e174] [cursor=pointer]:
+                  - generic [ref=e175]: "10"
+                - button "중앙대병원, 병상 0/33, 만석" [ref=e177] [cursor=pointer]:
+                  - generic [ref=e178]: "0"
+                - button "강동성심병원, 병상 7/26, 응급실 불가" [ref=e180] [cursor=pointer]:
+                  - generic [ref=e181]: ×
+                - button "노원을지대병원, 병상 12/31, 응급실 불가" [ref=e183] [cursor=pointer]:
+                  - generic [ref=e184]: ×
+                - button "강남세브란스병원, 병상 8/45, 혼잡" [ref=e186] [cursor=pointer]:
+                  - generic [ref=e187]: "8"
+          - generic [ref=e188]:
+            - generic [ref=e191]: 8km
+            - link "Kakao 맵으로 이동(새창열림)" [ref=e193] [cursor=pointer]:
+              - /url: http://map.kakao.com/
+              - img "Kakao 맵으로 이동(새창열림)" [ref=e194]
+        - group "지도 빠른 도구" [ref=e195]:
+          - button "홈 화면으로 돌아가기" [ref=e196] [cursor=pointer]:
+            - img [ref=e198]
+          - button "실시간 교통 레이어 끄기" [pressed] [ref=e201] [cursor=pointer]:
+            - img [ref=e203]
+        - generic:
+          - generic:
+            - img
+          - text: 탭해서 출동 위치 지정 · 드래그로 이동
+        - generic "지도 확대 축소" [ref=e205]:
+          - button "지도 확대" [ref=e206] [cursor=pointer]:
+            - img [ref=e208]
+          - button "지도 축소" [ref=e210] [cursor=pointer]:
+            - img [ref=e212]
+          - button "지도 원래 크기" [ref=e213] [cursor=pointer]:
+            - img [ref=e215]
+      - generic [ref=e217]:
+        - generic [ref=e218]:
+          - generic [ref=e219]: 병상
+          - generic [ref=e220]: 여유
+          - generic [ref=e222]: 혼잡
+          - generic [ref=e224]: 만석
+          - generic [ref=e226]: 응급실 불가
+        - generic [ref=e228]:
+          - generic [ref=e229]: 도로
+          - generic [ref=e230]: 카카오맵 실시간 교통정보 · 제공 구간 표시

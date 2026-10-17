@@ -1,0 +1,27 @@
+- region "응급상황에서 필요한 다음 행동을." [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - img [ref=e6]
+      - generic [ref=e8]: SAVIOR SEOUL
+    - paragraph [ref=e9]: 서울 응급의료 연결 서비스
+    - heading "응급상황에서 필요한 다음 행동을." [level=1] [ref=e10]:
+      - text: 응급상황에서
+      - text: 필요한 다음 행동을.
+    - paragraph [ref=e11]: 상황에 맞는 안내와 병원 이송 정보를 한곳에서 확인하세요. 이 서비스는 진단이나 119 신고를 대신하지 않습니다.
+    - generic [ref=e12]:
+      - img [ref=e14]
+      - generic [ref=e17]: 생명이 위급하거나 판단이 어렵다면 먼저 119에 전화하세요.
+      - link "119 전화" [ref=e18] [cursor=pointer]:
+        - /url: tel:119
+    - generic [ref=e19]:
+      - button "일반인 · 보호자 환자 상태를 정리하고 119 신고와 기본 응급처치 안내를 확인합니다." [ref=e20] [cursor=pointer]:
+        - img [ref=e22]
+        - heading "일반인 · 보호자" [level=2] [ref=e25]
+        - paragraph [ref=e26]: 환자 상태를 정리하고 119 신고와 기본 응급처치 안내를 확인합니다.
+      - button "의료진용 의료진 · 구급대원 환자 상태 기록, 병원 후보 비교, 이송 및 인계 정보를 확인합니다. 의료진 화면 열기 →" [ref=e27] [cursor=pointer]:
+        - img [ref=e29]
+        - generic [ref=e31]: 의료진용
+        - heading "의료진 · 구급대원" [level=2] [ref=e32]
+        - paragraph [ref=e33]: 환자 상태 기록, 병원 후보 비교, 이송 및 인계 정보를 확인합니다.
+        - generic [ref=e34]: 의료진 화면 열기 →
+    - paragraph [ref=e35]: 병원 수용·병상·교통 정보는 현재 데모 시뮬레이션이며 실시간 의료기관 정보가 아닙니다.

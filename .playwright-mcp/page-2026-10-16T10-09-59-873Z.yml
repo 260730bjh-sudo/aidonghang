@@ -1,0 +1,48 @@
+- generic [active] [ref=e1]:
+  - navigation "이용 모드" [ref=e34]:
+    - generic [ref=e35]: SAVIOR · 일반인용 안내
+    - button "홈 화면으로 돌아가기" [ref=e36] [cursor=pointer]
+  - main [ref=e37]:
+    - generic [ref=e38]:
+      - generic [ref=e40]:
+        - paragraph [ref=e41]: SAVIOR · 일반인용
+        - heading "응급상황인가요?" [level=1] [ref=e42]
+        - paragraph [ref=e43]: 위급하거나 판단이 어렵다면 먼저 119에 전화하세요.
+      - generic [ref=e44]:
+        - generic "환자 상태 선택" [ref=e45]:
+          - button "반응 없음 / 심정지 의심 즉시 119에 전화하세요" [ref=e46] [cursor=pointer]:
+            - img [ref=e48]
+            - generic [ref=e51]:
+              - strong [ref=e52]: 반응 없음 / 심정지 의심
+              - generic [ref=e53]: 즉시 119에 전화하세요
+          - button "숨쉬기 어려움 / 호흡 이상 즉시 119에 전화하세요" [ref=e54] [cursor=pointer]:
+            - img [ref=e56]
+            - generic [ref=e59]:
+              - strong [ref=e60]: 숨쉬기 어려움 / 호흡 이상
+              - generic [ref=e61]: 즉시 119에 전화하세요
+          - button "심한 출혈 즉시 119에 전화하세요" [ref=e62] [cursor=pointer]:
+            - img [ref=e64]
+            - generic [ref=e67]:
+              - strong [ref=e68]: 심한 출혈
+              - generic [ref=e69]: 즉시 119에 전화하세요
+          - button "다치거나 외상 환자 상태를 차례로 확인합니다" [ref=e70] [cursor=pointer]:
+            - img [ref=e72]
+            - generic [ref=e75]:
+              - strong [ref=e76]: 다치거나 외상
+              - generic [ref=e77]: 환자 상태를 차례로 확인합니다
+          - button "그 외 증상 환자 상태를 차례로 확인합니다" [ref=e78] [cursor=pointer]:
+            - img [ref=e80]
+            - generic [ref=e83]:
+              - strong [ref=e84]: 그 외 증상
+              - generic [ref=e85]: 환자 상태를 차례로 확인합니다
+        - generic [ref=e86]:
+          - button "신고하며 전달할 정보" [ref=e87] [cursor=pointer]
+          - button "응급처치 안내" [ref=e88] [cursor=pointer]
+        - paragraph [ref=e89]: 선택지는 상태를 정리하기 위한 것이며 진단이 아닙니다. 답변하지 않고도 아래 119 버튼을 누를 수 있습니다.
+    - generic [ref=e90]:
+      - link "119 전화하기" [ref=e91] [cursor=pointer]:
+        - /url: tel:119
+        - img [ref=e93]
+        - generic [ref=e95]: 119 전화하기
+      - generic [ref=e96]: 버튼을 누르면 전화 앱이 열립니다. 입력 내용은 자동 전달되지 않습니다.
+  - text: › › › ›

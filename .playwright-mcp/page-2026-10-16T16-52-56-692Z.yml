@@ -1,0 +1,100 @@
+- generic [active]:
+  - text: ›
+  - main [ref=e34]:
+    - complementary "의료진 정보 패널" [ref=e35]:
+      - generic "사이드바 높이 조절" [ref=e36]
+      - generic [ref=e38]:
+        - navigation "사이드 패널 선택" [ref=e39]:
+          - button "환자 입력" [pressed] [ref=e41] [cursor=pointer]
+          - button "추천 병원" [ref=e42] [cursor=pointer]
+        - button "데이터 안내" [ref=e43] [cursor=pointer]
+      - region "환자 입력" [ref=e44]:
+        - generic [ref=e46]:
+          - heading "환자 입력" [level=2] [ref=e47]
+          - paragraph [ref=e48]: 의료진 판단 보조용 · 실제 환자 식별정보는 입력하지 마세요
+        - generic [ref=e49]:
+          - generic [ref=e50]: 질환명 또는 증상 검색
+          - generic [ref=e51]:
+            - img [ref=e53]
+            - searchbox "질환명 또는 증상 검색" [ref=e56]
+          - generic "자주 선택하는 응급 상태" [ref=e57]:
+            - button "심정지" [ref=e58] [cursor=pointer]
+            - button "STEMI" [ref=e59] [cursor=pointer]
+            - button "뇌졸중" [ref=e60] [cursor=pointer]
+            - button "중증 외상" [ref=e61] [cursor=pointer]
+            - button "호흡곤란" [ref=e62] [cursor=pointer]
+            - button "의식저하" [ref=e63] [cursor=pointer]
+        - group [ref=e64]:
+          - generic "전체 분류에서 찾기 ›" [ref=e65] [cursor=pointer]
+          - option "심장 · 심정지 (심실세동/무맥성 VT/무수축)"
+          - option "심장 · 심장눌림증 (심낭압전)"
+          - option "심장 · 고도 서맥·완전방실차단 + 쇼크"
+          - option "심장 · ST분절상승 심근경색 (STEMI)" [selected]
+          - option "심장 · 불안정형 협심증 / 비ST상승 심근경색"
+          - option "심장 · 급성 대동맥박리"
+          - option "혈관 · 급성 사지동맥 폐색"
+          - option "심장 · 급성 심부전 · 폐부종"
+          - option "심장 · 심방세동 (빠른 심실반응)"
+          - option "심장 · 발작성 상심실성 빈맥 (PSVT)"
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - generic [ref=e68]: KTAS 2 긴급 · 순환기내과 · 골든타임 90분
+            - generic [ref=e69]: 자동 판정 요약
+          - button "변경" [ref=e70] [cursor=pointer]
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - generic [ref=e73]: 환자 위치 · 미설정
+            - generic [ref=e74]: 현재 위치 또는 주소를 지정해 주세요
+          - button "위치 설정" [ref=e75] [cursor=pointer]
+        - text: ›
+        - group [ref=e76]:
+          - generic "질환 참고 정보 ›" [ref=e77] [cursor=pointer]
+        - group [ref=e78]:
+          - generic "활력징후 기록 (선택) ›" [ref=e79] [cursor=pointer]
+          - option "선택 안 함" [selected]
+          - option "Alert"
+          - option "Voice"
+          - option "Pain"
+          - option "Unresponsive"
+      - button "위치 설정 필요" [disabled] [ref=e81]:
+        - img [ref=e83]
+        - generic [ref=e86]: 위치 설정 필요
+    - region "전국 응급의료기관 지도" [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - application "전국 응급의료기관 지도. 위치 변경 모드에서만 지도를 눌러 환자 위치를 지정할 수 있습니다." [ref=e91]:
+            - img [ref=e94]
+            - generic [ref=e95]:
+              - generic [ref=e98]: 128km
+              - link "Kakao 맵으로 이동(새창열림)" [ref=e100] [cursor=pointer]:
+                - /url: http://map.kakao.com/
+                - img "Kakao 맵으로 이동(새창열림)" [ref=e101]
+          - group "지도 빠른 도구" [ref=e102]:
+            - button "홈 화면으로 돌아가기" [ref=e103] [cursor=pointer]:
+              - img [ref=e105]
+            - button "실시간 교통 레이어 끄기" [pressed] [ref=e108] [cursor=pointer]:
+              - img [ref=e110]
+          - generic:
+            - generic:
+              - img
+            - generic: 지도 이동만으로 환자 위치나 결과는 바뀌지 않습니다. ‘이 지역 검색’을 눌러 범위를 적용하세요.
+          - generic "지도 확대 축소" [ref=e112]:
+            - button "지도 확대" [ref=e113] [cursor=pointer]:
+              - img [ref=e115]
+            - button "지도 축소" [ref=e117] [cursor=pointer]:
+              - img [ref=e119]
+            - button "지도 원래 크기" [ref=e120] [cursor=pointer]:
+              - img [ref=e122]
+        - generic [ref=e124]:
+          - generic [ref=e125]:
+            - generic [ref=e126]: 병상
+            - generic [ref=e127]: 4개 이상
+            - generic [ref=e129]: 1–3개
+            - generic [ref=e131]: 0개
+            - generic [ref=e133]: 정보 없음
+          - generic [ref=e135]:
+            - generic [ref=e136]: 도로
+            - generic [ref=e137]: 카카오맵 실시간 교통정보 · 제공 구간 표시
+      - generic [ref=e138]:
+        - button "이 지역 검색" [ref=e139] [cursor=pointer]
+        - generic [ref=e140]: 전국 검색 · 환자 위치 기준

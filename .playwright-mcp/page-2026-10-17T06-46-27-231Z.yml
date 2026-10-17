@@ -1,0 +1,199 @@
+- generic [active]:
+  - text: ›
+  - main [ref=e34]:
+    - complementary "의료진 정보 패널" [ref=e35]:
+      - generic [ref=e36]:
+        - navigation "사이드 패널 선택" [ref=e37]:
+          - button "환자 입력" [ref=e39] [cursor=pointer]
+          - button "추천 병원" [pressed] [ref=e40] [cursor=pointer]
+        - button "데이터 안내" [ref=e41] [cursor=pointer]
+      - text: › › › ›
+      - region "치료 조건 확인 병원" [ref=e42]:
+        - generic [ref=e44]:
+          - heading "치료 조건 확인 병원" [level=2] [ref=e45]
+          - paragraph [ref=e46]: NEDIS 기관·병상 정보를 확인하는 중
+        - generic [ref=e48]: 반경 400km · 조건 확인 259/224곳 · 경로 확인 0곳
+      - button "경로 반영 중…" [disabled] [ref=e69]
+    - region "전국 응급의료기관 지도" [ref=e71]:
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - application "전국 응급의료기관 지도. 위치 변경 모드에서만 지도를 눌러 환자 위치를 지정할 수 있습니다." [ref=e74]:
+            - generic [ref=e75]:
+              - generic:
+                - img [ref=e77]
+                - generic:
+                  - img "설정된 환자 위치" [ref=e79]
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e81] [cursor=pointer]: "2"
+                  - button "가톨릭대학교여의도성모병원, 가용" [ref=e83] [cursor=pointer]:
+                    - generic [ref=e84]: "7"
+                  - button "가톨릭대학교은평성모병원, 가용" [ref=e86] [cursor=pointer]:
+                    - generic [ref=e87]: "5"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e89] [cursor=pointer]: "2"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e91] [cursor=pointer]: "2"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e93] [cursor=pointer]: "2"
+                  - button "강동경희대학교병원, 가용" [ref=e95] [cursor=pointer]:
+                    - generic [ref=e96]: "4"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e98] [cursor=pointer]: "2"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e100] [cursor=pointer]: "2"
+                  - button "강서케이병원, 정보 미확인" [ref=e102] [cursor=pointer]:
+                    - generic [ref=e103]: —
+                  - button "강철병원, 정보 미확인" [ref=e105] [cursor=pointer]:
+                    - generic [ref=e106]: —
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e108] [cursor=pointer]: "2"
+                  - button "경찰병원, 정보 미확인" [ref=e110] [cursor=pointer]:
+                    - generic [ref=e111]: —
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e113] [cursor=pointer]: "2"
+                  - button "고려대학교의과대학부속구로병원, 가용" [ref=e115] [cursor=pointer]:
+                    - generic [ref=e116]: "9"
+                  - button "광명성애병원, 가용" [ref=e118] [cursor=pointer]:
+                    - generic [ref=e119]: "5"
+                  - button "구로성심병원, 가용" [ref=e121] [cursor=pointer]:
+                    - generic [ref=e122]: "7"
+                  - button "국립암센터, 가용 적음" [ref=e124] [cursor=pointer]:
+                    - generic [ref=e125]: "3"
+                  - button "국립중앙의료원, 가용" [ref=e127] [cursor=pointer]:
+                    - generic [ref=e128]: "6"
+                  - button "국민건강보험공단일산병원, 가용" [ref=e130] [cursor=pointer]:
+                    - generic [ref=e131]: "11"
+                  - button "근로복지공단인천병원, 정보 미확인" [ref=e133] [cursor=pointer]:
+                    - generic [ref=e134]: —
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e136] [cursor=pointer]: "2"
+                  - button "남양주한양병원, 가용" [ref=e138] [cursor=pointer]:
+                    - generic [ref=e139]: "12"
+                  - button "낭만병원, 정보 미확인" [ref=e141] [cursor=pointer]:
+                    - generic [ref=e142]: —
+                  - button "노원을지대학교병원, 가용" [ref=e144] [cursor=pointer]:
+                    - generic [ref=e145]: "12"
+                  - button "녹색병원, 가용" [ref=e147] [cursor=pointer]:
+                    - generic [ref=e148]: "4"
+                  - button "대림성모병원, 가용" [ref=e150] [cursor=pointer]:
+                    - generic [ref=e151]: "8"
+                  - button "더드림병원, 정보 미확인" [ref=e153] [cursor=pointer]:
+                    - generic [ref=e154]: —
+                  - button "동국대학교일산불교병원, 가용" [ref=e156] [cursor=pointer]:
+                    - generic [ref=e157]: "5"
+                  - button "명지성모병원, 가용" [ref=e159] [cursor=pointer]:
+                    - generic [ref=e160]: "8"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e162] [cursor=pointer]: "2"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e164] [cursor=pointer]: "2"
+                  - button "부민병원, 가용" [ref=e166] [cursor=pointer]:
+                    - generic [ref=e167]: "7"
+                  - button "부천우리병원, 정보 미확인" [ref=e169] [cursor=pointer]:
+                    - generic [ref=e170]: —
+                  - button "삼성서울병원, 정보 미확인" [ref=e172] [cursor=pointer]:
+                    - generic [ref=e173]: —
+                  - button "서울고든병원, 정보 미확인" [ref=e175] [cursor=pointer]:
+                    - generic [ref=e176]: —
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e178] [cursor=pointer]: "2"
+                  - button "서울성심병원, 가용" [ref=e180] [cursor=pointer]:
+                    - generic [ref=e181]: "16"
+                  - button "서울적십자병원, 가용" [ref=e183] [cursor=pointer]:
+                    - generic [ref=e184]: "10"
+                  - button "서울특별시동부병원, 가용" [ref=e186] [cursor=pointer]:
+                    - generic [ref=e187]: "8"
+                  - button "서울특별시보라매병원, 가용" [ref=e189] [cursor=pointer]:
+                    - generic [ref=e190]: "17"
+                  - button "서울특별시서남병원, 가용" [ref=e192] [cursor=pointer]:
+                    - generic [ref=e193]: "16"
+                  - button "서울특별시서울의료원, 정보 미확인" [ref=e195] [cursor=pointer]:
+                    - generic [ref=e196]: —
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e198] [cursor=pointer]: "2"
+                  - button "성심의료재단강동성심병원, 가용" [ref=e200] [cursor=pointer]:
+                    - generic [ref=e201]: "7"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e203] [cursor=pointer]: "2"
+                  - button "순천향대학교부속부천병원, 가용" [ref=e205] [cursor=pointer]:
+                    - generic [ref=e206]: "7"
+                  - button "순천향대학교부속서울병원, 가용" [ref=e208] [cursor=pointer]:
+                    - generic [ref=e209]: "9"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e211] [cursor=pointer]: "2"
+                  - button "3개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e213] [cursor=pointer]: "3"
+                  - button "엘병원, 가용" [ref=e215] [cursor=pointer]:
+                    - generic [ref=e216]: "8"
+                  - button "우리들병원, 정보 미확인" [ref=e218] [cursor=pointer]:
+                    - generic [ref=e219]: —
+                  - button "윤서병원, 정보 미확인" [ref=e221] [cursor=pointer]:
+                    - generic [ref=e222]: —
+                  - button "3개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e224] [cursor=pointer]: "3"
+                  - button "의료법인대인의료재단다니엘종합병원, 가용 적음" [ref=e226] [cursor=pointer]:
+                    - generic [ref=e227]: "2"
+                  - button "의료법인동신의료재단동신병원, 가용" [ref=e229] [cursor=pointer]:
+                    - generic [ref=e230]: "5"
+                  - button "의료법인록향의료재단신천연합병원, 가용" [ref=e232] [cursor=pointer]:
+                    - generic [ref=e233]: "5"
+                  - button "의료법인명지의료재단명지병원, 가용 적음" [ref=e235] [cursor=pointer]:
+                    - generic [ref=e236]: "2"
+                  - button "의료법인서울효천의료재단 에이치플러스양지병원, 가용" [ref=e238] [cursor=pointer]:
+                    - generic [ref=e239]: "9"
+                  - button "의료법인성광의료재단일산차병원, 가용 적음" [ref=e241] [cursor=pointer]:
+                    - generic [ref=e242]: "2"
+                  - button "의료법인성화의료재단대한병원, 정보 미확인" [ref=e244] [cursor=pointer]:
+                    - generic [ref=e245]: —
+                  - button "의료법인일산복음병원, 정보 미확인" [ref=e247] [cursor=pointer]:
+                    - generic [ref=e248]: —
+                  - button "의료법인자인의료재단더자인병원, 가용" [ref=e250] [cursor=pointer]:
+                    - generic [ref=e251]: "16"
+                  - button "의료법인풍산의료재단동부제일병원, 가용" [ref=e253] [cursor=pointer]:
+                    - generic [ref=e254]: "7"
+                  - button "의료법인한전의료재단 한일병원, 가용" [ref=e256] [cursor=pointer]:
+                    - generic [ref=e257]: "5"
+                  - button "이화여자대학교의과대학부속목동병원, 가용 적음" [ref=e259] [cursor=pointer]:
+                    - generic [ref=e260]: "3"
+                  - button "인제대학교상계백병원, 가용" [ref=e262] [cursor=pointer]:
+                    - generic [ref=e263]: "10"
+                  - button "인제대학교일산백병원, 가용" [ref=e265] [cursor=pointer]:
+                    - generic [ref=e266]: "8"
+                  - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e268] [cursor=pointer]: "2"
+                  - button "재단법인아산사회복지재단 서울아산병원, 가용 0" [ref=e270] [cursor=pointer]:
+                    - generic [ref=e271]: "0"
+                  - button "중앙대학교병원, 가용 0" [ref=e273] [cursor=pointer]:
+                    - generic [ref=e274]: "0"
+                  - button "차의과학대학교강남차병원, 정보 미확인" [ref=e276] [cursor=pointer]:
+                    - generic [ref=e277]: —
+                  - button "학교법인 고려중앙학원 고려대학교의과대학부속병원(안암병원), 가용" [ref=e279] [cursor=pointer]:
+                    - generic [ref=e280]: "7"
+                  - button "학교법인가톨릭학원가톨릭대학교서울성모병원, 정보 미확인" [ref=e282] [cursor=pointer]:
+                    - generic [ref=e283]: —
+                  - button "한국보훈복지의료공단중앙보훈병원, 가용" [ref=e285] [cursor=pointer]:
+                    - generic [ref=e286]: "10"
+                  - button "한국원자력의학원원자력병원, 가용" [ref=e288] [cursor=pointer]:
+                    - generic [ref=e289]: "8"
+                  - button "한양대학교구리병원, 가용" [ref=e291] [cursor=pointer]:
+                    - generic [ref=e292]: "12"
+                  - button "홍익병원, 가용" [ref=e294] [cursor=pointer]:
+                    - generic [ref=e295]: "5"
+                  - button "희명병원, 가용" [ref=e297] [cursor=pointer]:
+                    - generic [ref=e298]: "9"
+            - generic [ref=e299]:
+              - generic [ref=e302]: 2km
+              - link "Kakao 맵으로 이동(새창열림)" [ref=e304] [cursor=pointer]:
+                - /url: http://map.kakao.com/
+                - img "Kakao 맵으로 이동(새창열림)" [ref=e305]
+          - group "지도 빠른 도구" [ref=e306]:
+            - button "홈 화면으로 돌아가기" [ref=e307] [cursor=pointer]:
+              - img [ref=e309]
+            - button "실시간 교통 레이어 끄기" [pressed] [ref=e312] [cursor=pointer]:
+              - img [ref=e314]
+          - generic:
+            - generic:
+              - img
+            - generic: 지도 이동만으로 환자 위치나 결과는 바뀌지 않습니다. ‘이 지역 검색’을 눌러 범위를 적용하세요.
+          - generic "지도 확대 축소" [ref=e316]:
+            - button "지도 확대" [ref=e317] [cursor=pointer]:
+              - img [ref=e319]
+            - button "지도 축소" [ref=e321] [cursor=pointer]:
+              - img [ref=e323]
+            - button "지도 원래 크기" [ref=e324] [cursor=pointer]:
+              - img [ref=e326]
+        - generic [ref=e328]:
+          - generic [ref=e329]:
+            - generic [ref=e330]: 병상
+            - generic [ref=e331]: 4개 이상
+            - generic [ref=e333]: 1–3개
+            - generic [ref=e335]: 0개
+            - generic [ref=e337]: 정보 없음
+          - generic [ref=e339]:
+            - generic [ref=e340]: 도로
+            - generic [ref=e341]: 카카오맵 실시간 교통정보 · 제공 구간 표시
+      - generic [ref=e342]:
+        - button "이 지역 검색" [ref=e343] [cursor=pointer]
+        - generic [ref=e344]: 전국 검색 · 환자 위치 기준

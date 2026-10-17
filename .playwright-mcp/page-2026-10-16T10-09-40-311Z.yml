@@ -1,0 +1,53 @@
+- generic [active] [ref=e1]:
+  - navigation "이용 모드" [ref=e34]:
+    - generic [ref=e35]: SAVIOR · 일반인용 안내
+    - button "홈 화면으로 돌아가기" [ref=e36] [cursor=pointer]
+  - main [ref=e37]:
+    - generic [ref=e38]:
+      - generic [ref=e40]:
+        - paragraph [ref=e41]: SAVIOR · 일반인용
+        - heading "응급상황인가요?" [level=1] [ref=e42]
+        - paragraph [ref=e43]: 위급하거나 판단이 어렵다면 먼저 119에 전화하세요.
+      - region "환자가 반응하나요?" [ref=e97]:
+        - generic [ref=e98]:
+          - button "처음" [ref=e99] [cursor=pointer]:
+            - img [ref=e101]
+            - text: 처음
+          - generic [ref=e103]: 119 우선
+        - generic [ref=e130]:
+          - heading "지금 119에 전화하세요" [level=2] [ref=e131]
+          - paragraph [ref=e132]: 반응이 없다고 입력했습니다. 진단은 아니지만 응급상황일 수 있으니 지금 119에 전화하세요.
+          - generic [ref=e133]:
+            - strong [ref=e134]: 현재까지 정리된 정보
+            - list [ref=e135]:
+              - listitem [ref=e136]:
+                - strong [ref=e137]: "발생 위치:"
+                - text: 미입력
+              - listitem [ref=e138]:
+                - strong [ref=e139]: "상황:"
+                - text: 심정지 의심 (선택)
+              - listitem [ref=e140]:
+                - strong [ref=e141]: "반응:"
+                - text: 반응 없음
+              - listitem [ref=e142]:
+                - strong [ref=e143]: "호흡:"
+                - text: 미입력
+              - listitem [ref=e144]:
+                - strong [ref=e145]: "심한 출혈:"
+                - text: 미입력
+            - generic [ref=e146]:
+              - button "요약 복사" [ref=e147] [cursor=pointer]
+              - button "의료진 화면에서 열기" [ref=e148] [cursor=pointer]
+            - paragraph [ref=e149]: 요약은 119에 자동 전송되지 않습니다.
+          - list [ref=e150]:
+            - listitem [ref=e151]: 119에 전화하고 스피커폰으로 전환하세요.
+            - listitem [ref=e152]: 반응이 없다고 알리고 호흡 상태를 설명한 뒤 상담원의 지시를 따르세요.
+          - strong [ref=e153]: 119 상담원의 안내를 우선 따라 주세요.
+          - button "남은 질문 건너뛰고 요약 보기" [ref=e154] [cursor=pointer]
+    - generic [ref=e90]:
+      - link "119 전화하기" [ref=e91] [cursor=pointer]:
+        - /url: tel:119
+        - img [ref=e93]
+        - generic [ref=e95]: 지금 119 전화하기
+      - generic [ref=e96]: 버튼을 누르면 전화 앱이 열립니다. 입력 내용은 자동 전달되지 않습니다.
+  - text: › › › ›

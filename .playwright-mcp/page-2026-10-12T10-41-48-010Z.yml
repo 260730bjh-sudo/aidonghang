@@ -1,0 +1,309 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - img [ref=e6]
+      - generic [ref=e8]:
+        - heading "SAVIOR 응급 이송 매칭 · 서울" [level=1] [ref=e9]
+        - paragraph [ref=e10]: KTAS 132개 질환 × 서울 응급의료기관 29곳 × 실시간 교통량 반영 매칭
+  - main [ref=e11]:
+    - region "환자 상태 입력" [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]: "1"
+        - generic [ref=e15]:
+          - heading "환자 상태 입력" [level=2] [ref=e16]
+          - paragraph [ref=e17]: 현장 구급대원 화면 · 질환을 고르면 KTAS 등급과 필요 진료과가 자동 결정됩니다
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - text: 부위 · 대분류
+            - emphasis [ref=e21]: KTAS 자료 132건
+          - radiogroup "부위 · 대분류 KTAS 자료 132건" [ref=e22]:
+            - radio "심장·혈관 10건" [checked] [ref=e24] [cursor=pointer]:
+              - generic [ref=e25]: 심장·혈관
+              - generic [ref=e26]: 10건
+            - radio "호흡기 11건" [ref=e27] [cursor=pointer]:
+              - generic [ref=e28]: 호흡기
+              - generic [ref=e29]: 11건
+            - radio "뇌·신경 8건" [ref=e30] [cursor=pointer]:
+              - generic [ref=e31]: 뇌·신경
+              - generic [ref=e32]: 8건
+            - radio "외상·골절 17건" [ref=e33] [cursor=pointer]:
+              - generic [ref=e34]: 외상·골절
+              - generic [ref=e35]: 17건
+            - radio "소화기 13건" [ref=e36] [cursor=pointer]:
+              - generic [ref=e37]: 소화기
+              - generic [ref=e38]: 13건
+            - radio "여성·임신 8건" [ref=e39] [cursor=pointer]:
+              - generic [ref=e40]: 여성·임신
+              - generic [ref=e41]: 8건
+            - radio "소아 9건" [ref=e42] [cursor=pointer]:
+              - generic [ref=e43]: 소아
+              - generic [ref=e44]: 9건
+            - radio "신장·비뇨 7건" [ref=e45] [cursor=pointer]:
+              - generic [ref=e46]: 신장·비뇨
+              - generic [ref=e47]: 7건
+            - radio "눈·귀·코·입 13건" [ref=e48] [cursor=pointer]:
+              - generic [ref=e49]: 눈·귀·코·입
+              - generic [ref=e50]: 13건
+            - radio "피부·근골격 10건" [ref=e51] [cursor=pointer]:
+              - generic [ref=e52]: 피부·근골격
+              - generic [ref=e53]: 10건
+            - radio "정신 5건" [ref=e54] [cursor=pointer]:
+              - generic [ref=e55]: 정신
+              - generic [ref=e56]: 5건
+            - radio "전신·기타 21건" [ref=e57] [cursor=pointer]:
+              - generic [ref=e58]: 전신·기타
+              - generic [ref=e59]: 21건
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - text: 세부 질환 · 상태
+            - emphasis [ref=e62]: 심장·혈관 10건
+          - generic [ref=e63]:
+            - combobox "세부 질환 · 상태 심장·혈관 10건" [ref=e64] [cursor=pointer]:
+              - option "심장 · 심정지 (심실세동/무맥성 VT/무수축)"
+              - option "심장 · 심장눌림증 (심낭압전)"
+              - option "심장 · 고도 서맥·완전방실차단 + 쇼크"
+              - option "심장 · ST분절상승 심근경색 (STEMI)" [selected]
+              - option "심장 · 불안정형 협심증 / 비ST상승 심근경색"
+              - option "심장 · 급성 대동맥박리"
+              - option "혈관 · 급성 사지동맥 폐색"
+              - option "심장 · 급성 심부전 · 폐부종"
+              - option "심장 · 심방세동 (빠른 심실반응)"
+              - option "심장 · 발작성 상심실성 빈맥 (PSVT)"
+            - generic:
+              - img
+        - generic [ref=e65]:
+          - generic [ref=e66]:
+            - text: KTAS 등급
+            - emphasis [ref=e67]: 자동
+          - radiogroup "KTAS 등급 자동" [ref=e68]:
+            - radio "KTAS 1 소생" [ref=e70] [cursor=pointer]:
+              - generic [ref=e71]: "1"
+              - generic [ref=e73]: 소생
+            - radio "KTAS 2 긴급" [checked] [ref=e74] [cursor=pointer]:
+              - generic [ref=e75]: "2"
+              - generic [ref=e77]: 긴급
+            - radio "KTAS 3 응급" [ref=e78] [cursor=pointer]:
+              - generic [ref=e79]: "3"
+              - generic [ref=e81]: 응급
+            - radio "KTAS 4 준응급" [ref=e82] [cursor=pointer]:
+              - generic [ref=e83]: "4"
+              - generic [ref=e85]: 준응급
+            - radio "KTAS 5 비응급" [ref=e86] [cursor=pointer]:
+              - generic [ref=e87]: "5"
+              - generic [ref=e89]: 비응급
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - text: 필요 진료과
+            - emphasis [ref=e92]: 자동 · 변경 가능
+          - generic [ref=e93]:
+            - combobox "필요 진료과 자동 · 변경 가능" [ref=e94] [cursor=pointer]:
+              - option "순환기내과" [selected]
+              - option "호흡기내과"
+              - option "신경과"
+              - option "신경외과"
+              - option "외과"
+              - option "정형외과"
+              - option "성형외과"
+              - option "산부인과"
+              - option "소아청소년과"
+              - option "안과"
+              - option "이비인후과"
+              - option "비뇨의학과"
+              - option "피부과"
+              - option "치과"
+              - option "정신건강의학과"
+              - option "혈액·종양내과"
+              - option "영상의학과"
+              - option "기타 진료과"
+            - generic:
+              - img
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - text: 출동 위치
+            - emphasis [ref=e97]: 지도 탭으로도 지정
+          - radiogroup "출동 위치 지도 탭으로도 지정" [ref=e98]:
+            - radio "광화문" [checked] [ref=e100] [cursor=pointer]
+            - radio "강남역" [ref=e101] [cursor=pointer]
+            - radio "여의도" [ref=e102] [cursor=pointer]
+          - generic [ref=e103]: 현재 좌표37.57590, 126.97690
+        - button "병원 찾기 · 동시 문의" [ref=e105] [cursor=pointer]:
+          - img [ref=e107]
+          - generic [ref=e110]: 병원 찾기 · 동시 문의
+      - generic [ref=e111]:
+        - generic [ref=e112]:
+          - generic [ref=e113]: KTAS 2 · 긴급
+          - heading "ST분절상승 심근경색 (STEMI)" [level=3] [ref=e114]
+        - generic [ref=e115]:
+          - generic [ref=e116]: 심장
+          - generic [ref=e117]: 필요 진료과 순환기내과
+          - generic [ref=e118]: 중증응급 재관류중재술
+          - generic [ref=e119]:
+            - img [ref=e120]
+            - text: 권장 진료 15분 이내
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - term [ref=e125]: 주요 증상 · 소견
+            - definition [ref=e126]: 30분 이상 조이는 흉통, 식은땀, 방사통
+          - generic [ref=e127]:
+            - term [ref=e128]: 심각성 (왜 위험한가)
+            - definition [ref=e129]: 심근 괴사 진행, 치명적 부정맥·심인성 쇼크
+          - generic [ref=e130]:
+            - term [ref=e131]: 필요한 치료 · 처치
+            - definition [ref=e132]: 도착 10분 내 심전도, 항혈소판제(아스피린+P2Y12), 항응고, 응급 관상동맥중재술(PCI)
+          - generic [ref=e133]:
+            - term [ref=e134]: 골든타임
+            - definition [ref=e135]:
+              - strong [ref=e136]: 1.5시간
+              - text: 90분
+              - generic [ref=e137]: 원문 · Door-to-Balloon 90분 이내
+    - generic [ref=e138]:
+      - region "서울 응급실 · 교통량 지도" [ref=e139]:
+        - generic [ref=e140]:
+          - generic [ref=e141]: "2"
+          - generic [ref=e142]:
+            - heading "서울 응급실 · 교통량 지도" [level=2] [ref=e143]
+            - paragraph [ref=e144]: 서울특별시 · 벡터 개략도 · 모의 교통량
+          - generic [ref=e145]:
+            - button "교통량" [pressed] [ref=e146] [cursor=pointer]:
+              - img [ref=e148]
+              - text: 교통량
+            - button "1순위 수용 거절" [disabled] [ref=e150]:
+              - img [ref=e152]
+              - text: 1순위 수용 거절
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - img "서울 응급의료기관과 주요 간선도로 교통량 지도. 탭하면 출동 위치가 지정됩니다." [ref=e157]:
+              - generic [ref=e179]:
+                - generic [ref=e181]: 종로구
+                - generic [ref=e183]: 중구
+                - generic [ref=e185]: 중랑구
+                - generic [ref=e187]: 성북구
+                - generic [ref=e189]: 도봉구
+                - generic [ref=e191]: 마포구
+                - generic [ref=e193]: 구로구
+                - generic [ref=e195]: 금천구
+                - generic [ref=e197]: 영등포구
+                - generic [ref=e199]: 관악구
+                - generic [ref=e201]: 서초구
+              - generic [ref=e202]:
+                - generic "강변북로 · 19km/h · 정체" [ref=e218]
+                - generic "올림픽대로 · 15km/h · 정체" [ref=e219]
+                - generic "내부순환로 · 24km/h · 서행" [ref=e220]
+                - generic "동부간선도로 · 13km/h · 정체" [ref=e221]
+                - generic "경부고속(한남~양재) · 20km/h · 정체" [ref=e222]
+                - generic "한강대로·세종대로 · 12km/h · 정체" [ref=e223]
+                - generic "종로 · 11km/h · 정체" [ref=e224]
+                - generic "테헤란로 · 14km/h · 정체" [ref=e225]
+                - generic "남부순환로 · 16km/h · 정체" [ref=e226]
+                - generic "강남대로 · 12km/h · 정체" [ref=e227]
+                - generic "서부간선도로 · 18km/h · 정체" [ref=e228]
+                - generic "북부간선도로 · 25km/h · 서행" [ref=e229]
+                - generic "천호대로 · 16km/h · 정체" [ref=e230]
+                - generic "양재대로 · 27km/h · 서행" [ref=e231]
+                - generic "통일로 · 22km/h · 정체" [ref=e232]
+              - generic [ref=e233]:
+                - generic "경희대병원 · 병상 7/42 · 응급실 불가" [ref=e234] [cursor=pointer]:
+                  - generic [ref=e237]: ✕
+                - generic "순천향대서울병원 · 병상 5/30 · 혼잡" [ref=e238] [cursor=pointer]:
+                  - generic [ref=e241]: "5"
+                  - generic [ref=e242]: 순천향대서울병원
+                - generic "이대목동병원 · 병상 11/34 · 여유" [ref=e243] [cursor=pointer]:
+                  - generic [ref=e246]: "11"
+                - generic "신촌세브란스병원 · 병상 4/58 · 응급실 불가" [ref=e247] [cursor=pointer]:
+                  - generic [ref=e250]: ✕
+                  - generic [ref=e251]: 신촌세브란스병원
+                - generic "고대안암병원 · 병상 13/40 · 여유" [ref=e252] [cursor=pointer]:
+                  - generic [ref=e255]: "13"
+                - generic "서울아산병원 · 병상 9/62 · 혼잡" [ref=e256] [cursor=pointer]:
+                  - generic [ref=e259]: "9"
+                  - generic [ref=e260]: 서울아산병원
+                - generic "삼성서울병원 · 병상 6/55 · 응급실 불가" [ref=e261] [cursor=pointer]:
+                  - generic [ref=e264]: ✕
+                  - generic [ref=e265]: 삼성서울병원
+                - generic "서울성모병원 · 병상 16/48 · 여유" [ref=e266] [cursor=pointer]:
+                  - generic [ref=e269]: "16"
+                  - generic [ref=e270]: 서울성모병원
+                - generic "한양대병원 · 병상 8/36 · 응급실 불가" [ref=e271] [cursor=pointer]:
+                  - generic [ref=e274]: ✕
+                - generic "고대구로병원 · 병상 14/44 · 여유" [ref=e275] [cursor=pointer]:
+                  - generic [ref=e278]: "14"
+                  - generic [ref=e279]: 고대구로병원
+                - generic "상계백병원 · 병상 9/28 · 여유" [ref=e280] [cursor=pointer]:
+                  - generic [ref=e283]: "9"
+                - generic "서울대병원 · 병상 3/60 · 혼잡" [ref=e284] [cursor=pointer]:
+                  - generic [ref=e287]: "3"
+                - generic "서울한일병원 · 병상 7/18 · 여유" [ref=e288] [cursor=pointer]:
+                  - generic [ref=e291]: "7"
+                  - generic [ref=e292]: 서울한일병원
+                - generic "경찰병원 · 병상 10/22 · 응급실 불가" [ref=e293] [cursor=pointer]:
+                  - generic [ref=e296]: ✕
+                - generic "H+양지병원 · 병상 8/24 · 여유" [ref=e297] [cursor=pointer]:
+                  - generic [ref=e300]: "8"
+                - generic "강동경희대병원 · 병상 12/32 · 여유" [ref=e301] [cursor=pointer]:
+                  - generic [ref=e304]: "12"
+                - generic "혜민병원 · 병상 6/16 · 여유" [ref=e305] [cursor=pointer]:
+                  - generic [ref=e308]: "6"
+                - generic "성애병원 · 병상 5/20 · 여유" [ref=e309] [cursor=pointer]:
+                  - generic [ref=e312]: "5"
+                - generic "건국대병원 · 병상 11/38 · 응급실 불가" [ref=e313] [cursor=pointer]:
+                  - generic [ref=e316]: ✕
+                - generic "강북삼성병원 · 병상 2/34 · 응급실 불가" [ref=e317] [cursor=pointer]:
+                  - generic [ref=e320]: ✕
+                - generic "서울시립서남병원 · 병상 13/19 · 여유" [ref=e321] [cursor=pointer]:
+                  - generic [ref=e324]: "13"
+                  - generic [ref=e325]: 서울시립서남병원
+                - generic "삼육서울병원 · 병상 9/21 · 여유" [ref=e326] [cursor=pointer]:
+                  - generic [ref=e329]: "9"
+                  - generic [ref=e330]: 삼육서울병원
+                - generic "이대서울병원 · 병상 18/46 · 여유" [ref=e331] [cursor=pointer]:
+                  - generic [ref=e334]: "18"
+                - generic "은평성모병원 · 병상 15/40 · 여유" [ref=e335] [cursor=pointer]:
+                  - generic [ref=e338]: "15"
+                  - generic [ref=e339]: 은평성모병원
+                - generic "보라매병원 · 병상 10/35 · 여유" [ref=e340] [cursor=pointer]:
+                  - generic [ref=e343]: "10"
+                - generic "중앙대병원 · 병상 0/33 · 만석" [ref=e344] [cursor=pointer]:
+                  - generic [ref=e347]: "0"
+                - generic "강동성심병원 · 병상 7/26 · 응급실 불가" [ref=e348] [cursor=pointer]:
+                  - generic [ref=e351]: ✕
+                - generic "노원을지대병원 · 병상 12/31 · 응급실 불가" [ref=e352] [cursor=pointer]:
+                  - generic [ref=e355]: ✕
+                  - generic [ref=e356]: 노원을지대병원
+                - generic "강남세브란스병원 · 병상 8/45 · 혼잡" [ref=e357] [cursor=pointer]:
+                  - generic [ref=e360]: "8"
+            - generic:
+              - generic:
+                - img
+              - text: 탭해서 출동 위치 지정 · 드래그로 이동
+            - generic "지도 확대 축소" [ref=e365]:
+              - button "지도 확대" [ref=e366] [cursor=pointer]:
+                - img [ref=e368]
+              - button "지도 축소" [ref=e370] [cursor=pointer]:
+                - img [ref=e372]
+              - button "지도 원래 크기" [ref=e373] [cursor=pointer]:
+                - img [ref=e375]
+          - generic [ref=e377]:
+            - generic [ref=e378]:
+              - generic [ref=e379]: 병상
+              - generic [ref=e380]: 여유
+              - generic [ref=e382]: 혼잡
+              - generic [ref=e384]: 만석
+              - generic [ref=e386]: 응급실 불가
+            - generic [ref=e388]:
+              - generic [ref=e389]: 교통
+              - generic [ref=e390]: 원활 40+
+              - generic [ref=e392]: 양호 30~40
+              - generic [ref=e394]: 서행 22~30
+              - generic [ref=e396]: 정체 ~22km/h
+      - region "추천 병원" [ref=e398]:
+        - generic [ref=e399]:
+          - generic [ref=e400]: "3"
+          - generic [ref=e401]:
+            - heading "추천 병원" [level=2] [ref=e402]
+            - paragraph [ref=e403]: 수용 가능성 점수 순 · 최종 확정은 구급대원
+        - generic [ref=e405]:
+          - img [ref=e407]
+          - text: 질환과 출동 위치를 정하고 병원 찾기를 누르면
+          - text: 후보 병원에 동시 문의가 나갑니다.
+    - generic [ref=e413]: Team Avengers

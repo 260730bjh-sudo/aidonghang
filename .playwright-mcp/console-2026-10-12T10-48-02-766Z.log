@@ -1,0 +1,3 @@
+[      56ms] TypeError: Cannot read properties of null (reading 'addEventListener')
+    at https://ndj5a4723rgwets8.jitda.io/:1882:26
+[      70ms] [INFO] [preview-bridge] v1.0.0 @ https://ndj5a4723rgwets8.jitda.io/__preview-bridge.js:1

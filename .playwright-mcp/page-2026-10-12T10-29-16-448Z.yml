@@ -1,0 +1,397 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e6]
+        - generic [ref=e8]:
+          - heading "SAVIOR 응급 이송 매칭 · 서울" [level=1] [ref=e9]
+          - paragraph [ref=e10]: KTAS 132개 질환 × 서울 응급의료기관 29곳 × 실시간 교통량 반영 매칭
+      - generic [ref=e11]:
+        - generic [ref=e12]: 진료제한 · 질환분류 = 제공 데이터
+        - generic [ref=e13]: 병상 · 수용이력 = 시뮬레이션
+  - main [ref=e14]:
+    - region "환자 상태 입력" [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]: "1"
+        - generic [ref=e18]:
+          - heading "환자 상태 입력" [level=2] [ref=e19]
+          - paragraph [ref=e20]: 현장 구급대원 화면 · 질환을 고르면 KTAS 등급과 필요 진료과가 자동 결정됩니다
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - text: 질환 · 상태
+            - emphasis [ref=e24]: KTAS 자료 132건
+          - generic [ref=e25]:
+            - combobox "질환 · 상태 KTAS 자료 132건" [ref=e26] [cursor=pointer]:
+              - option "심장 · 심정지 (심실세동/무맥성 VT/무수축)"
+              - option "호흡 · 호흡정지·무호흡"
+              - option "호흡 · 완전 기도폐쇄 (이물, 후두부종)"
+              - option "면역 · 아나필락시스 쇼크"
+              - option "외상 · 중증 다발성 외상 + 쇼크"
+              - option "외상 · 대량 외출혈 / 출혈성 쇼크"
+              - option "호흡 · 긴장성 기흉"
+              - option "심장 · 심장눌림증 (심낭압전)"
+              - option "신경 · 중증 두부외상 (GCS 8점 이하)"
+              - option "신경 · 경련중첩증 (5분 이상 지속)"
+              - option "내분비 · 중증 저혈당 혼수"
+              - option "심장 · 고도 서맥·완전방실차단 + 쇼크"
+              - option "호흡 · 익수·질식"
+              - option "외상 · 중증 화상 (체표 30% 초과 또는 기도화상)"
+              - option "환경 · 중증 저체온증 (28도 미만)"
+              - option "중독 · 중증 중독 (의식저하·호흡억제)"
+              - option "소아 · 신생아·영아 무호흡 / 신생아 가사"
+              - option "산과 · 산모 심정지 / 자궁파열"
+              - option "심장 · ST분절상승 심근경색 (STEMI)" [selected]
+              - option "심장 · 불안정형 협심증 / 비ST상승 심근경색"
+              - option "신경 · 급성 허혈성 뇌졸중"
+              - option "신경 · 뇌출혈 · 지주막하출혈"
+              - option "심장 · 급성 대동맥박리"
+              - option "호흡 · 폐색전증"
+              - option "감염 · 패혈증 · 패혈성 쇼크"
+              - option "호흡 · 중증 천식발작 (Status asthmaticus)"
+              - option "호흡 · COPD 급성악화 (호흡부전)"
+              - option "소화 · 상부위장관 대량출혈"
+              - option "산부인과 · 자궁외임신 파열"
+              - option "비뇨 · 고환염전"
+              - option "혈관 · 급성 사지동맥 폐색"
+              - option "내분비 · 당뇨병성 케톤산증 (DKA)"
+              - option "내분비 · 고삼투압성 고혈당 상태 (HHS)"
+              - option "전해질 · 중증 고칼륨혈증 (심전도 변화 동반)"
+              - option "전해질 · 중증 저나트륨혈증 (경련 동반)"
+              - option "감염 · 세균성 수막염"
+              - option "소아 · 급성 후두개염"
+              - option "소아 · 3개월 미만 영아 발열"
+              - option "소아 · 소아 쇼크 / 중증 탈수"
+              - option "심장 · 급성 심부전 · 폐부종"
+              - option "외상 · 경추·척수 손상 의심"
+              - option "외상 · 개방성 골절 · 골반 골절"
+              - option "안과 · 안구 화학손상 (산·알칼리)"
+              - option "안과 · 중심망막동맥폐색"
+              - option "안과 · 급성 폐쇄각 녹내장"
+              - option "정신 · 자살시도 · 급성 자해"
+              - option "산부인과 · 태반조기박리 · 전치태반 출혈"
+              - option "산부인과 · 중증 자간전증 · 자간증"
+              - option "면역 · 전신 아나필락시스 (쇼크 전 단계)"
+              - option "혈액 · 신경학적 증상 동반 중증 빈혈·수혈반응"
+              - option "소화 · 급성 충수염"
+              - option "소화 · 급성 담낭염 · 담관염"
+              - option "소화 · 급성 췌장염"
+              - option "소화 · 장폐색 · 장간막 허혈"
+              - option "소화 · 게실염"
+              - option "소화 · 위장관 출혈 (혈역학 안정)"
+              - option "비뇨 · 급성 신우신염"
+              - option "비뇨 · 요로결석 (신산통)"
+              - option "비뇨 · 급성 요폐"
+              - option "호흡 · 지역사회획득 폐렴"
+              - option "호흡 · 중등도 천식 발작"
+              - option "심장 · 심방세동 (빠른 심실반응)"
+              - option "심장 · 발작성 상심실성 빈맥 (PSVT)"
+              - option "신경 · 일과성 허혈발작 (TIA)"
+              - option "신경 · 벼락두통 · 심한 급성 두통"
+              - option "신경 · 급성 현훈 (중추성 배제 필요)"
+              - option "외상 · 경도 두부외상 + 항응고제 복용"
+              - option "외상 · 폐쇄성 사지 골절"
+              - option "외상 · 관절 탈구 (어깨·고관절·슬관절)"
+              - option "외상 · 깊은 열상 · 건 손상"
+              - option "외상 · 구획증후군 의심"
+              - option "피부 · 봉와직염 (전신증상 동반)"
+              - option "피부 · 피부·연조직 농양"
+              - option "소아 · 장중첩증"
+              - option "소아 · 3개월~3세 고열 (원인 불명)"
+              - option "소아 · 세기관지염 · 크룹"
+              - option "신장 · 급성 신손상 / 고칼륨 동반"
+              - option "이비인후 · 조절되지 않는 코피"
+              - option "이비인후 · 식도 이물 (특히 단추형 전지)"
+              - option "정신 · 알코올 금단 · 진전섬망"
+              - option "정신 · 급성 정신증 · 심한 초조"
+              - option "산부인과 · 임신 초기 출혈 · 유산 위험"
+              - option "산부인과 · 골반염 (PID)"
+              - option "내분비 · 저혈당 (의식 명료)"
+              - option "감염 · 동물·사람 교상"
+              - option "노인 · 노인 중등도 탈수 · 전해질 이상"
+              - option "혈액 · 항응고제 복용 중 출혈"
+              - option "소화 · 급성 위장관염 (경증 탈수)"
+              - option "비뇨 · 단순 방광염 (하부요로감염)"
+              - option "호흡 · 고열 동반 상기도감염"
+              - option "이비인후 · 급성 편도염 · 인두염"
+              - option "이비인후 · 급성 중이염"
+              - option "이비인후 · 급성 부비동염"
+              - option "안과 · 급성 결막염"
+              - option "안과 · 결막·각막 이물"
+              - option "외상 · 단순 열상 (오염 적음)"
+              - option "외상 · 염좌 · 타박상"
+              - option "외상 · 수지·족지 골절"
+              - option "외상 · 경미한 두부외상 (의식소실 없음)"
+              - option "외상 · 조갑하 혈종"
+              - option "근골격 · 급성 요통 (신경증상 없음)"
+              - option "피부 · 전신 두드러기 (호흡증상 없음)"
+              - option "피부 · 2도 표재성 화상 (소범위)"
+              - option "피부 · 대상포진"
+              - option "치과 · 치성 농양 · 심한 치통"
+              - option "소화 · 변비 · 분변매복"
+              - option "소화 · 치핵 출혈 · 항문열상"
+              - option "이비인후 · 외이도 이물 · 귀지 폐색"
+              - option "면역 · 경미한 알레르기 반응"
+              - option "전해질 · 경미한 전해질 이상 · 근육경련"
+              - option "산부인과 · 임신오조 (경증 탈수)"
+              - option "소아 · 단순 열성경련 (회복 후 의식 명료)"
+              - option "소아 · 소아 경미 탈수"
+              - option "정신 · 불안발작 · 과호흡"
+              - option "호흡 · 단순 감기 (상기도감염)"
+              - option "소화 · 경미한 설사 (탈수 없음)"
+              - option "소화 · 소화불량 · 경증 위염"
+              - option "소화 · 만성 변비"
+              - option "근골격 · 만성 요통 · 목통증"
+              - option "근골격 · 경미한 근육통 · 관절통"
+              - option "신경 · 만성 두통 (기존과 동일한 양상)"
+              - option "외상 · 찰과상 · 경미한 좌상"
+              - option "외상 · 상처 드레싱 교체 · 봉합사 제거"
+              - option "피부 · 만성 피부질환 (습진·건선·무좀)"
+              - option "피부 · 티눈 · 사마귀 · 굳은살"
+              - option "안과 · 경미한 결막 충혈 (분비물 없음)"
+              - option "산부인과 · 경증 월경통"
+              - option "비뇨 · 정기 도뇨관 교체"
+              - option "행정 · 처방전 재발급 · 약 소진"
+              - option "행정 · 진단서 · 소견서 발급 요청"
+              - option "행정 · 예방접종 문의 · 건강 상담"
+              - option "정신 · 만성 불면 · 경미한 불안"
+            - generic:
+              - img
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - text: KTAS 등급
+            - emphasis [ref=e29]: 자동
+          - radiogroup "KTAS 등급 자동" [ref=e30]:
+            - radio "KTAS 1 소생" [ref=e32] [cursor=pointer]:
+              - generic [ref=e33]: "1"
+              - generic [ref=e35]: 소생
+            - radio "KTAS 2 긴급" [checked] [ref=e36] [cursor=pointer]:
+              - generic [ref=e37]: "2"
+              - generic [ref=e39]: 긴급
+            - radio "KTAS 3 응급" [ref=e40] [cursor=pointer]:
+              - generic [ref=e41]: "3"
+              - generic [ref=e43]: 응급
+            - radio "KTAS 4 준응급" [ref=e44] [cursor=pointer]:
+              - generic [ref=e45]: "4"
+              - generic [ref=e47]: 준응급
+            - radio "KTAS 5 비응급" [ref=e48] [cursor=pointer]:
+              - generic [ref=e49]: "5"
+              - generic [ref=e51]: 비응급
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - text: 필요 진료과
+            - emphasis [ref=e54]: 자동 · 변경 가능
+          - generic [ref=e55]:
+            - combobox "필요 진료과 자동 · 변경 가능" [ref=e56] [cursor=pointer]:
+              - option "순환기내과" [selected]
+              - option "호흡기내과"
+              - option "신경과"
+              - option "신경외과"
+              - option "외과"
+              - option "정형외과"
+              - option "성형외과"
+              - option "산부인과"
+              - option "소아청소년과"
+              - option "안과"
+              - option "이비인후과"
+              - option "비뇨의학과"
+              - option "피부과"
+              - option "치과"
+              - option "정신건강의학과"
+              - option "혈액·종양내과"
+              - option "영상의학과"
+              - option "기타 진료과"
+            - generic:
+              - img
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - text: 출동 위치
+            - emphasis [ref=e59]: 지도 탭으로도 지정
+          - radiogroup "출동 위치 지도 탭으로도 지정" [ref=e60]:
+            - radio "광화문" [checked] [ref=e62] [cursor=pointer]
+            - radio "강남역" [ref=e63] [cursor=pointer]
+            - radio "여의도" [ref=e64] [cursor=pointer]
+          - generic [ref=e65]: 현재 좌표37.57590, 126.97690
+        - button "병원 찾기 · 동시 문의" [ref=e67] [cursor=pointer]:
+          - img [ref=e69]
+          - generic [ref=e72]: 병원 찾기 · 동시 문의
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - generic [ref=e75]: KTAS 2 · 긴급
+          - heading "ST분절상승 심근경색 (STEMI)" [level=3] [ref=e76]
+        - generic [ref=e77]:
+          - generic [ref=e78]: 심장
+          - generic [ref=e79]: 필요 진료과 순환기내과
+          - generic [ref=e80]: 중증응급 재관류중재술
+          - generic [ref=e81]:
+            - img [ref=e82]
+            - text: 권장 진료 15분 이내
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - term [ref=e87]: 주요 증상 · 소견
+            - definition [ref=e88]: 30분 이상 조이는 흉통, 식은땀, 방사통
+          - generic [ref=e89]:
+            - term [ref=e90]: 심각성 (왜 위험한가)
+            - definition [ref=e91]: 심근 괴사 진행, 치명적 부정맥·심인성 쇼크
+          - generic [ref=e92]:
+            - term [ref=e93]: 필요한 치료 · 처치
+            - definition [ref=e94]: 도착 10분 내 심전도, 항혈소판제(아스피린+P2Y12), 항응고, 응급 관상동맥중재술(PCI)
+          - generic [ref=e95]:
+            - term [ref=e96]: 골든타임
+            - definition [ref=e97]:
+              - strong [ref=e98]: 1.5시간
+              - text: 90분
+              - generic [ref=e99]: 원문 · Door-to-Balloon 90분 이내
+    - generic [ref=e100]:
+      - region "서울 응급실 · 교통량 지도" [ref=e101]:
+        - generic [ref=e102]:
+          - generic [ref=e103]: "2"
+          - generic [ref=e104]:
+            - heading "서울 응급실 · 교통량 지도" [level=2] [ref=e105]
+            - paragraph [ref=e106]: 서울특별시 · 벡터 개략도 · 모의 교통량
+          - generic [ref=e107]:
+            - button "교통량" [pressed] [ref=e108] [cursor=pointer]:
+              - img [ref=e110]
+              - text: 교통량
+            - button "1순위 수용 거절" [disabled] [ref=e112]:
+              - img [ref=e114]
+              - text: 1순위 수용 거절
+        - generic [ref=e117]:
+          - generic [ref=e118]:
+            - img "서울 응급의료기관과 주요 간선도로 교통량 지도. 탭하면 출동 위치가 지정됩니다." [ref=e119]:
+              - generic [ref=e141]:
+                - generic [ref=e143]: 종로구
+                - generic [ref=e145]: 중구
+                - generic [ref=e147]: 중랑구
+                - generic [ref=e149]: 성북구
+                - generic [ref=e151]: 도봉구
+                - generic [ref=e153]: 마포구
+                - generic [ref=e155]: 구로구
+                - generic [ref=e157]: 금천구
+                - generic [ref=e159]: 영등포구
+                - generic [ref=e161]: 관악구
+                - generic [ref=e163]: 서초구
+              - generic [ref=e164]:
+                - generic "강변북로 · 19km/h · 정체" [ref=e180]
+                - generic "올림픽대로 · 15km/h · 정체" [ref=e181]
+                - generic "내부순환로 · 24km/h · 서행" [ref=e182]
+                - generic "동부간선도로 · 13km/h · 정체" [ref=e183]
+                - generic "경부고속(한남~양재) · 20km/h · 정체" [ref=e184]
+                - generic "한강대로·세종대로 · 12km/h · 정체" [ref=e185]
+                - generic "종로 · 11km/h · 정체" [ref=e186]
+                - generic "테헤란로 · 14km/h · 정체" [ref=e187]
+                - generic "남부순환로 · 16km/h · 정체" [ref=e188]
+                - generic "강남대로 · 12km/h · 정체" [ref=e189]
+                - generic "서부간선도로 · 18km/h · 정체" [ref=e190]
+                - generic "북부간선도로 · 25km/h · 서행" [ref=e191]
+                - generic "천호대로 · 16km/h · 정체" [ref=e192]
+                - generic "양재대로 · 27km/h · 서행" [ref=e193]
+                - generic "통일로 · 22km/h · 정체" [ref=e194]
+              - generic [ref=e195]:
+                - generic "경희대병원 · 병상 7/42 · 응급실 불가" [ref=e196] [cursor=pointer]:
+                  - generic [ref=e199]: ✕
+                - generic "순천향대서울병원 · 병상 5/30 · 혼잡" [ref=e200] [cursor=pointer]:
+                  - generic [ref=e203]: "5"
+                  - generic [ref=e204]: 순천향대서울병원
+                - generic "이대목동병원 · 병상 11/34 · 여유" [ref=e205] [cursor=pointer]:
+                  - generic [ref=e208]: "11"
+                - generic "신촌세브란스병원 · 병상 4/58 · 응급실 불가" [ref=e209] [cursor=pointer]:
+                  - generic [ref=e212]: ✕
+                  - generic [ref=e213]: 신촌세브란스병원
+                - generic "고대안암병원 · 병상 13/40 · 여유" [ref=e214] [cursor=pointer]:
+                  - generic [ref=e217]: "13"
+                - generic "서울아산병원 · 병상 9/62 · 혼잡" [ref=e218] [cursor=pointer]:
+                  - generic [ref=e221]: "9"
+                  - generic [ref=e222]: 서울아산병원
+                - generic "삼성서울병원 · 병상 6/55 · 응급실 불가" [ref=e223] [cursor=pointer]:
+                  - generic [ref=e226]: ✕
+                  - generic [ref=e227]: 삼성서울병원
+                - generic "서울성모병원 · 병상 16/48 · 여유" [ref=e228] [cursor=pointer]:
+                  - generic [ref=e231]: "16"
+                  - generic [ref=e232]: 서울성모병원
+                - generic "한양대병원 · 병상 8/36 · 응급실 불가" [ref=e233] [cursor=pointer]:
+                  - generic [ref=e236]: ✕
+                - generic "고대구로병원 · 병상 14/44 · 여유" [ref=e237] [cursor=pointer]:
+                  - generic [ref=e240]: "14"
+                  - generic [ref=e241]: 고대구로병원
+                - generic "상계백병원 · 병상 9/28 · 여유" [ref=e242] [cursor=pointer]:
+                  - generic [ref=e245]: "9"
+                - generic "서울대병원 · 병상 3/60 · 혼잡" [ref=e246] [cursor=pointer]:
+                  - generic [ref=e249]: "3"
+                - generic "서울한일병원 · 병상 7/18 · 여유" [ref=e250] [cursor=pointer]:
+                  - generic [ref=e253]: "7"
+                  - generic [ref=e254]: 서울한일병원
+                - generic "경찰병원 · 병상 10/22 · 응급실 불가" [ref=e255] [cursor=pointer]:
+                  - generic [ref=e258]: ✕
+                - generic "H+양지병원 · 병상 8/24 · 여유" [ref=e259] [cursor=pointer]:
+                  - generic [ref=e262]: "8"
+                - generic "강동경희대병원 · 병상 12/32 · 여유" [ref=e263] [cursor=pointer]:
+                  - generic [ref=e266]: "12"
+                - generic "혜민병원 · 병상 6/16 · 여유" [ref=e267] [cursor=pointer]:
+                  - generic [ref=e270]: "6"
+                - generic "성애병원 · 병상 5/20 · 여유" [ref=e271] [cursor=pointer]:
+                  - generic [ref=e274]: "5"
+                - generic "건국대병원 · 병상 11/38 · 응급실 불가" [ref=e275] [cursor=pointer]:
+                  - generic [ref=e278]: ✕
+                - generic "강북삼성병원 · 병상 2/34 · 응급실 불가" [ref=e279] [cursor=pointer]:
+                  - generic [ref=e282]: ✕
+                - generic "서울시립서남병원 · 병상 13/19 · 여유" [ref=e283] [cursor=pointer]:
+                  - generic [ref=e286]: "13"
+                  - generic [ref=e287]: 서울시립서남병원
+                - generic "삼육서울병원 · 병상 9/21 · 여유" [ref=e288] [cursor=pointer]:
+                  - generic [ref=e291]: "9"
+                  - generic [ref=e292]: 삼육서울병원
+                - generic "이대서울병원 · 병상 18/46 · 여유" [ref=e293] [cursor=pointer]:
+                  - generic [ref=e296]: "18"
+                - generic "은평성모병원 · 병상 15/40 · 여유" [ref=e297] [cursor=pointer]:
+                  - generic [ref=e300]: "15"
+                  - generic [ref=e301]: 은평성모병원
+                - generic "보라매병원 · 병상 10/35 · 여유" [ref=e302] [cursor=pointer]:
+                  - generic [ref=e305]: "10"
+                - generic "중앙대병원 · 병상 0/33 · 만석" [ref=e306] [cursor=pointer]:
+                  - generic [ref=e309]: "0"
+                - generic "강동성심병원 · 병상 7/26 · 응급실 불가" [ref=e310] [cursor=pointer]:
+                  - generic [ref=e313]: ✕
+                - generic "노원을지대병원 · 병상 12/31 · 응급실 불가" [ref=e314] [cursor=pointer]:
+                  - generic [ref=e317]: ✕
+                  - generic [ref=e318]: 노원을지대병원
+                - generic "강남세브란스병원 · 병상 8/45 · 혼잡" [ref=e319] [cursor=pointer]:
+                  - generic [ref=e322]: "8"
+            - generic:
+              - generic:
+                - img
+              - text: 탭해서 출동 위치 지정 · 드래그로 이동
+            - generic "지도 확대 축소" [ref=e327]:
+              - button "지도 확대" [ref=e328] [cursor=pointer]:
+                - img [ref=e330]
+              - button "지도 축소" [ref=e332] [cursor=pointer]:
+                - img [ref=e334]
+              - button "지도 원래 크기" [ref=e335] [cursor=pointer]:
+                - img [ref=e337]
+          - generic [ref=e339]:
+            - generic [ref=e340]:
+              - generic [ref=e341]: 병상
+              - generic [ref=e342]: 여유
+              - generic [ref=e344]: 혼잡
+              - generic [ref=e346]: 만석
+              - generic [ref=e348]: 응급실 불가
+            - generic [ref=e350]:
+              - generic [ref=e351]: 교통
+              - generic [ref=e352]: 원활 40+
+              - generic [ref=e354]: 양호 30~40
+              - generic [ref=e356]: 서행 22~30
+              - generic [ref=e358]: 정체 ~22km/h
+      - region "추천 병원" [ref=e360]:
+        - generic [ref=e361]:
+          - generic [ref=e362]: "3"
+          - generic [ref=e363]:
+            - heading "추천 병원" [level=2] [ref=e364]
+            - paragraph [ref=e365]: 수용 가능성 점수 순 · 최종 확정은 구급대원
+        - generic [ref=e367]:
+          - img [ref=e369]
+          - text: 질환과 출동 위치를 정하고 병원 찾기를 누르면
+          - text: 후보 병원에 동시 문의가 나갑니다.
+    - paragraph [ref=e375]:
+      - text: 데이터 출처 · 질환 분류 132건 = 「응급실_중증도별_질환_치료_정리.xlsx」(KTAS 기준) · 병원별 진료제한 = 「응급실_병원별_진료과.csv」(응급실 종합상황판 형식의 진료제한 메시지로 해석) · 도로 교통량 = 서울 주요 간선 15개 구간의 평균 통행속도 예시값(실시간 API 미연동).
+      - text: 시뮬레이션 값 · 병상 수 · 최근 수용/거절 이력 · 병원 좌표(±200m 근사)는 데모용 가상 데이터입니다. 실제 의료기관의 수용 능력이나 진료 실적을 나타내지 않습니다. 지도는 서울 경계·한강·주요 녹지를 단순화한 개략도입니다.
+      - text: 본 화면은 해커톤 데모이며 119 상황실·NEDIS 등 실제 시스템과 연동되어 있지 않습니다.

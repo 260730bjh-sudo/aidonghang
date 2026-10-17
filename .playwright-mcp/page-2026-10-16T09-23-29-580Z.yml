@@ -1,0 +1,458 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - link "콘텐츠 바로가기" [ref=e2] [cursor=pointer]:
+      - /url: "#contents"
+    - link "푸터 바로가기" [ref=e3] [cursor=pointer]:
+      - /url: "#krds-footer"
+  - generic [ref=e4]:
+    - generic [ref=e9]: 이 누리집은 대한민국 공식 전자정부 누리집입니다.
+    - banner [ref=e10]:
+      - generic [ref=e14]:
+        - heading "DATA.GO.KR 공공데이터포털" [level=2] [ref=e15]:
+          - link "DATA.GO.KR 공공데이터포털" [ref=e16] [cursor=pointer]:
+            - /url: /index.do
+            - generic [ref=e17]: DATA.GO.KR 공공데이터포털
+        - generic [ref=e19]:
+          - link "로그인" [ref=e20] [cursor=pointer]:
+            - /url: javascript:procLogin()
+          - button "전체메뉴" [ref=e21] [cursor=pointer]
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - navigation "현재 경로" [ref=e25]
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]:
+              - generic [ref=e30]:
+                - generic [ref=e31]: XML
+                - generic [ref=e32]:
+                  - button "새창 열림 페이스북 공유하기" [ref=e33] [cursor=pointer]:
+                    - generic [ref=e35]: 새창 열림
+                  - button "새창 열림 엑스 공유하기" [ref=e36] [cursor=pointer]:
+                    - generic [ref=e38]: 새창 열림
+                  - button "새창 열림 URL 복사하기" [ref=e39] [cursor=pointer]:
+                    - generic [ref=e41]: 새창 열림
+              - heading "국립중앙의료원_전국 응급의료기관 정보 조회 서비스" [level=1] [ref=e42]
+            - generic [ref=e44]:
+              - text: Quick
+              - generic [ref=e45]: AI
+              - text: Summary
+            - generic [ref=e47]:
+              - generic [ref=e48]:
+                - checkbox "관심목록에 추가" [ref=e49]
+                - generic [ref=e50] [cursor=pointer]: 관심목록에 추가
+              - button "활용신청" [ref=e51] [cursor=pointer]: 활용신청
+              - generic [ref=e53]:
+                - button "27 좋아요" [ref=e54] [cursor=pointer]: "27"
+                - button "0 싫어요" [ref=e55] [cursor=pointer]: "0"
+            - generic [ref=e56]:
+              - generic [ref=e57]:
+                - paragraph [ref=e58]: 이 페이지의 구성
+                - paragraph [ref=e59]: 오픈API 상세
+              - navigation [ref=e60]:
+                - list [ref=e61]:
+                  - listitem [ref=e62]:
+                    - link "오픈 API 정보" [ref=e63] [cursor=pointer]:
+                      - /url: "#tab-layer-api-01"
+                  - listitem [ref=e64]:
+                    - link "이용 조건 및 라이선스 정보" [ref=e65] [cursor=pointer]:
+                      - /url: "#tab-layer-api-02"
+                  - listitem [ref=e66]:
+                    - link "참고문서" [ref=e67] [cursor=pointer]:
+                      - /url: "#tab-layer-api-03"
+                  - listitem [ref=e68]:
+                    - link "표준 메타데이터" [ref=e69] [cursor=pointer]:
+                      - /url: "#tab-layer-api-04"
+                  - listitem [ref=e70]:
+                    - link "활용 정보" [ref=e71] [cursor=pointer]:
+                      - /url: "#tab-layer-api-05"
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - heading "오픈 API 정보" [level=3] [ref=e75]
+                - generic [ref=e76]:
+                  - strong [ref=e77]: 데이터 오류·개선 의견이 있으신가요?
+                  - button "데이터 개선요청" [ref=e78] [cursor=pointer]: 데이터 개선요청
+                  - button "오류신고 및 문의" [ref=e80] [cursor=pointer]: 오류신고 및 문의
+              - generic [ref=e82]:
+                - generic [ref=e83]:
+                  - heading "기본 정보" [level=4] [ref=e84]
+                  - list [ref=e86]:
+                    - listitem [ref=e87]:
+                      - strong [ref=e88]: OpenAPI 명
+                      - generic [ref=e89]: 국립중앙의료원_전국 응급의료기관 정보 조회 서비스
+                    - listitem [ref=e90]:
+                      - strong [ref=e91]: 분류체계
+                      - generic [ref=e92]: 보건 - 보건의료
+                    - listitem [ref=e93]:
+                      - strong [ref=e94]: 제공기관
+                      - link "국립중앙의료원" [ref=e96] [cursor=pointer]:
+                        - /url: /tcs/dss/selectDataSetList.do?dType=&keyword=&orgNm=국립중앙의료원&conditionType=search
+                        - text: 국립중앙의료원
+                    - listitem [ref=e98]:
+                      - strong [ref=e99]: 관리부서명
+                      - generic [ref=e100]: 응급의료정보화팀
+                    - listitem [ref=e101]:
+                      - strong [ref=e102]: 관리부서 전화번호
+                      - strong [ref=e104]: 02-6362-3471
+                - generic [ref=e105]:
+                  - heading "상세 및 제공정보 오픈API 에러코드 안내" [level=4] [ref=e106]:
+                    - text: 상세 및 제공정보
+                    - button "오픈API 에러코드 안내" [ref=e107] [cursor=pointer]: 오픈API 에러코드 안내
+                  - list [ref=e110]:
+                    - listitem [ref=e111]:
+                      - strong [ref=e112]: 설명
+                      - generic [ref=e113]: 전국 응급의료기관 정보를 조회하기 위한 서비스로서 진료일, 진료과목, 응급의료기관분류, 대표전화, 응급실 전화, 병원 경도, 병원 위도 ,실시간 응급실 가용병상정보(응급실, 수술실, 뇌경색의 재관류, 복부손상의수술, 응급내시경, 병상 수 ,흉부 중환자실, 입원실, 일반 중환자실, 팩스번호, 진료 시작시간, 진료종로시간 등) 및 중증질환 수용가능정보, 경/위도를 기준으로 응급의료기관의 위치 정보 등을 조회할 수 있다. 또한 주소 및 시술명을 기준으로 중증질환자 수용정보를 조회하는 기능도 제공하고 있다.
+                    - listitem [ref=e114]:
+                      - strong [ref=e115]: API 유형
+                      - generic [ref=e116]: REST
+                    - listitem [ref=e117]:
+                      - strong [ref=e118]: 데이터 포맷
+                      - generic [ref=e119]: XML
+                    - listitem [ref=e120]:
+                      - strong [ref=e121]: 공간범위
+                      - generic [ref=e122]: 전국
+                    - listitem [ref=e123]:
+                      - strong [ref=e124]: 시간범위
+                      - generic [ref=e125]: 2025년 2월
+                    - listitem [ref=e126]:
+                      - strong [ref=e127]: 키워드
+                      - generic [ref=e128]: 응급의료기관,응급실,응급의료,주소(시도),주소(시군구),질환수술(시술명),페이지번호,목록건수
+                    - listitem [ref=e129]:
+                      - strong [ref=e130]: 활용신청 수
+                      - generic [ref=e131]: "5707"
+                    - listitem [ref=e132]:
+                      - strong [ref=e133]: 등록일
+                      - generic [ref=e134]: 2017-03-16
+                    - listitem [ref=e135]:
+                      - strong [ref=e136]: 수정일
+                      - generic [ref=e137]: 2026-08-27
+            - generic [ref=e138]:
+              - heading "이용 조건 및 라이선스 정보" [level=3] [ref=e140]
+              - list [ref=e143]:
+                - listitem [ref=e144]:
+                  - strong [ref=e145]: 비용부과유무
+                  - generic [ref=e146]: 무료
+                - listitem [ref=e147]:
+                  - strong [ref=e148]: 업데이트 주기
+                  - generic [ref=e149]: 실시간
+                - listitem [ref=e150]:
+                  - strong [ref=e151]: 이용허락범위
+                  - link "이용허락범위 제한 없음" [ref=e154] [cursor=pointer]:
+                    - /url: /ugs/selectPortalPolicyView.do
+                - listitem [ref=e155]:
+                  - strong [ref=e156]: 심의유형
+                  - generic [ref=e157]: "개발단계 : 자동승인 / 운영단계 : 자동승인"
+                - listitem [ref=e158]:
+                  - strong [ref=e159]: 신청 가능 트래픽
+                  - generic [ref=e160]: "개발계정 : / 운영계정 : 활용사례 등록시 신청하면 트래픽 증가 가능"
+            - generic [ref=e161]:
+              - heading "참고문서" [level=3] [ref=e163]
+              - list [ref=e167]:
+                - listitem [ref=e168]:
+                  - generic [ref=e169]:
+                    - generic [ref=e170]: NIA-IFT-OpenAPI활용가이드-01.국립중앙의료원-응급의료정보조회서비스_V13.hwp
+                    - button "다운로드" [ref=e172] [cursor=pointer]: 다운로드
+            - generic [ref=e174]:
+              - heading "표준 메타데이터" [level=3] [ref=e176]
+              - generic [ref=e177]:
+                - paragraph [ref=e178]: ※ 데이터 연계 및 검색을 위한 표준 메타데이터입니다.
+                - link "Schema.org" [ref=e179] [cursor=pointer]:
+                  - /url: /catalog/15000563/openapi.json
+                  - text: Schema.org
+                - link "DCAT" [ref=e181] [cursor=pointer]:
+                  - /url: /biz/dcat/metadata/15000563.do
+                  - text: DCAT
+            - generic [ref=e183]:
+              - heading "활용 정보" [level=3] [ref=e185]
+              - generic [ref=e186]:
+                - tablist [ref=e188]:
+                  - tab "상세기능 선택됨" [selected] [ref=e189]:
+                    - button "상세기능 선택됨" [ref=e190] [cursor=pointer]:
+                      - text: 상세기능
+                      - generic [ref=e191]: 선택됨
+                  - tab "활용사례" [ref=e192]:
+                    - button "활용사례" [ref=e193] [cursor=pointer]
+                  - tab "추천데이터" [ref=e194]:
+                    - button "추천데이터" [ref=e195] [cursor=pointer]
+                - generic [ref=e196]:
+                  - tabpanel "상세기능 선택됨" [ref=e197]:
+                    - generic [ref=e198]:
+                      - heading "활용명세" [level=3] [ref=e199]
+                      - generic [ref=e200]:
+                        - button "오픈 API 명세 확인 가이드" [ref=e201] [cursor=pointer]: 오픈 API 명세 확인 가이드
+                        - button "가이드 다운로드" [ref=e203] [cursor=pointer]: 가이드 다운로드
+                    - generic [ref=e208]:
+                      - generic [ref=e211]:
+                        - img "Swagger UI" [ref=e213]
+                        - generic [ref=e214]:
+                          - textbox [ref=e215]
+                          - button "Explore" [ref=e216] [cursor=pointer]
+                      - generic [ref=e217]:
+                        - generic:
+                          - img
+                        - generic [ref=e218]:
+                          - generic [ref=e222]:
+                            - generic [ref=e223]:
+                              - heading "국립중앙의료원_전국 응급의료기관 정보 조회 서비스 1.0.0" [level=2] [ref=e224]:
+                                - text: 국립중앙의료원_전국 응급의료기관 정보 조회 서비스
+                                - generic [ref=e226]: 1.0.0
+                              - generic [ref=e227]: "[ Base URL: apis.data.go.kr/B552657/ErmctInfoInqireService ]"
+                            - paragraph [ref=e230]: 전국 응급의료기관 정보를 조회하기 위한 서비스로서 진료일, 진료과목, 응급의료기관분류, 대표전화, 응급실 전화, 병원 경도, 병원 위도 ,실시간 응급실 가용병상정보(응급실, 수술실, 뇌경색의 재관류, 복부손상의수술, 응급내시경, 병상 수 ,흉부 중환자실, 입원실, 일반 중환자실, 팩스번호, 진료 시작시간, 진료종로시간 등) 및 중증질환 수용가능정보, 경/위도를 기준으로 응급의료기관의 위치 정보 등을 조회할 수 있다. 또한 주소 및 시술명을 기준으로 중증질환자 수용정보를 조회하는 기능도 제공하고 있다.
+                          - generic [ref=e233] [cursor=pointer]:
+                            - generic [ref=e234]: Schemes
+                            - combobox [ref=e235]:
+                              - option "https" [selected]
+                              - option "http"
+                          - generic [ref=e240]:
+                            - heading "API 목록 Collapse operation" [level=3] [ref=e241] [cursor=pointer]:
+                              - link "API 목록" [ref=e242]:
+                                - /url: "#/API%20목록"
+                              - button "Collapse operation" [expanded] [ref=e243]:
+                                - img [ref=e244]
+                            - generic [ref=e247]:
+                              - generic [ref=e250] [cursor=pointer]:
+                                - button "get /getEmrrmRltmUsefulSckbdInfoInqire" [ref=e251]:
+                                  - generic [ref=e252]: GET
+                                  - link "/getEmrrmRltmUsefulSckbdInfoInqire" [ref=e254]:
+                                    - /url: "#/API%20목록/getEmrrmRltmUsefulSckbdInfoInqire"
+                                  - generic [ref=e255]: 응급실 실시간 가용병상정보 조회
+                                  - img [ref=e256]
+                                - generic "Copy to clipboard":
+                                  - img
+                              - generic [ref=e261] [cursor=pointer]:
+                                - button "get /getSrsillDissAceptncPosblInfoInqire" [ref=e262]:
+                                  - generic [ref=e263]: GET
+                                  - link "/getSrsillDissAceptncPosblInfoInqire" [ref=e265]:
+                                    - /url: "#/API%20목록/getSrsillDissAceptncPosblInfoInqire"
+                                  - generic [ref=e266]: 중증질환자 수용가능정보 조회
+                                  - img [ref=e267]
+                                - generic "Copy to clipboard":
+                                  - img
+                              - generic [ref=e272] [cursor=pointer]:
+                                - button "get /getEgytListInfoInqire" [ref=e273]:
+                                  - generic [ref=e274]: GET
+                                  - link "/getEgytListInfoInqire" [ref=e276]:
+                                    - /url: "#/API%20목록/getEgytListInfoInqire"
+                                  - generic [ref=e277]: 응급의료기관 목록정보 조회
+                                  - img [ref=e278]
+                                - generic "Copy to clipboard":
+                                  - img
+                              - generic [ref=e283] [cursor=pointer]:
+                                - button "get /getEgytLcinfoInqire" [ref=e284]:
+                                  - generic [ref=e285]: GET
+                                  - link "/getEgytLcinfoInqire" [ref=e287]:
+                                    - /url: "#/API%20목록/getEgytLcinfoInqire"
+                                  - generic [ref=e288]: 응급의료기관 위치정보 조회
+                                  - img [ref=e289]
+                                - generic "Copy to clipboard":
+                                  - img
+                              - generic [ref=e294] [cursor=pointer]:
+                                - button "get /getEgytBassInfoInqire" [ref=e295]:
+                                  - generic [ref=e296]: GET
+                                  - link "/getEgytBassInfoInqire" [ref=e298]:
+                                    - /url: "#/API%20목록/getEgytBassInfoInqire"
+                                  - generic [ref=e299]: 응급의료기관 기본정보 조회
+                                  - img [ref=e300]
+                                - generic "Copy to clipboard":
+                                  - img
+                              - generic [ref=e305] [cursor=pointer]:
+                                - button "get /getStrmListInfoInqire" [ref=e306]:
+                                  - generic [ref=e307]: GET
+                                  - link "/getStrmListInfoInqire" [ref=e309]:
+                                    - /url: "#/API%20목록/getStrmListInfoInqire"
+                                  - generic [ref=e310]: 외상센터 목록정보 조회
+                                  - img [ref=e311]
+                                - generic "Copy to clipboard":
+                                  - img
+                              - generic [ref=e316] [cursor=pointer]:
+                                - button "get /getStrmLcinfoInqire" [ref=e317]:
+                                  - generic [ref=e318]: GET
+                                  - link "/getStrmLcinfoInqire" [ref=e320]:
+                                    - /url: "#/API%20목록/getStrmLcinfoInqire"
+                                  - generic [ref=e321]: 외상센터 위치정보 조회
+                                  - img [ref=e322]
+                                - generic "Copy to clipboard":
+                                  - img
+                              - generic [ref=e327] [cursor=pointer]:
+                                - button "get /getStrmBassInfoInqire" [ref=e328]:
+                                  - generic [ref=e329]: GET
+                                  - link "/getStrmBassInfoInqire" [ref=e331]:
+                                    - /url: "#/API%20목록/getStrmBassInfoInqire"
+                                  - generic [ref=e332]: 외상센터 기본정보 조회
+                                  - img [ref=e333]
+                                - generic "Copy to clipboard":
+                                  - img
+                              - generic [ref=e338] [cursor=pointer]:
+                                - button "get /getEmrrmSrsillDissMsgInqire" [ref=e339]:
+                                  - generic [ref=e340]: GET
+                                  - link "/getEmrrmSrsillDissMsgInqire" [ref=e342]:
+                                    - /url: "#/API%20목록/getEmrrmSrsillDissMsgInqire"
+                                  - generic [ref=e343]: 응급실 및 중증질환 메시지 조회
+                                  - img [ref=e344]
+                                - generic "Copy to clipboard":
+                                  - img
+                          - generic [ref=e349]:
+                            - heading "Models" [level=4] [ref=e350] [cursor=pointer]:
+                              - button "Models" [expanded] [ref=e351]:
+                                - generic [ref=e352]: Models
+                                - img [ref=e353]
+                            - generic [ref=e355]:
+                              - button "getEmrrmRltmUsefulSckbdInfoInqire_response" [ref=e358] [cursor=pointer]:
+                                - generic [ref=e360]: getEmrrmRltmUsefulSckbdInfoInqire_response
+                              - button "getSrsillDissAceptncPosblInfoInqire_response" [ref=e364] [cursor=pointer]:
+                                - generic [ref=e366]: getSrsillDissAceptncPosblInfoInqire_response
+                              - button "getEgytListInfoInqire_response" [ref=e370] [cursor=pointer]:
+                                - generic [ref=e372]: getEgytListInfoInqire_response
+                              - button "getEgytLcinfoInqire_response" [ref=e376] [cursor=pointer]:
+                                - generic [ref=e378]: getEgytLcinfoInqire_response
+                              - button "getEgytBassInfoInqire_response" [ref=e382] [cursor=pointer]:
+                                - generic [ref=e384]: getEgytBassInfoInqire_response
+                              - button "getStrmListInfoInqire_response" [ref=e388] [cursor=pointer]:
+                                - generic [ref=e390]: getStrmListInfoInqire_response
+                              - button "getStrmLcinfoInqire_response" [ref=e394] [cursor=pointer]:
+                                - generic [ref=e396]: getStrmLcinfoInqire_response
+                              - button "getStrmBassInfoInqire_response" [ref=e400] [cursor=pointer]:
+                                - generic [ref=e402]: getStrmBassInfoInqire_response
+                              - button "getEmrrmSrsillDissMsgInqire_response" [ref=e406] [cursor=pointer]:
+                                - generic [ref=e408]: getEmrrmSrsillDissMsgInqire_response
+                  - text: 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일 번호 개발유형 사례명 등록일
+          - button "목록으로 돌아가기" [ref=e412] [cursor=pointer]
+      - button "페이지 상단으로 이동" [ref=e413] [cursor=pointer]
+    - contentinfo [ref=e415]:
+      - generic [ref=e417]:
+        - generic [ref=e418]:
+          - button "관련기관" [ref=e419] [cursor=pointer]
+          - list:
+            - listitem [ref=e420]:
+              - link "행정안전부" [ref=e421] [cursor=pointer]:
+                - /url: https://www.mois.go.kr/
+            - listitem [ref=e422]:
+              - link "한국지능정보사회진흥원" [ref=e423] [cursor=pointer]:
+                - /url: https://www.nia.or.kr/
+            - listitem [ref=e424]:
+              - link "오픈데이터포럼" [ref=e425] [cursor=pointer]:
+                - /url: https://www.odf.or.kr/
+            - listitem [ref=e426]:
+              - link "국가정보자원관리원" [ref=e427] [cursor=pointer]:
+                - /url: https://www.nirs.go.kr/
+            - listitem [ref=e428]:
+              - link "한국지역정보개발원" [ref=e429] [cursor=pointer]:
+                - /url: https://www.klid.or.kr/
+        - generic [ref=e430]:
+          - button "지역별 데이터포털" [ref=e431] [cursor=pointer]
+          - list:
+            - listitem [ref=e432]:
+              - link "서울 열린데이터광장" [ref=e433] [cursor=pointer]:
+                - /url: https://data.seoul.go.kr/
+            - listitem [ref=e434]:
+              - link "경기데이터드림" [ref=e435] [cursor=pointer]:
+                - /url: https://data.gg.go.kr/
+            - listitem [ref=e436]:
+              - link "부산데이터웨이브" [ref=e437] [cursor=pointer]:
+                - /url: https://data.busan.go.kr/
+            - listitem [ref=e438]:
+              - link "D-데이터허브" [ref=e439] [cursor=pointer]:
+                - /url: https://data.daegu.go.kr/
+            - listitem [ref=e440]:
+              - link "인천데이터포털" [ref=e441] [cursor=pointer]:
+                - /url: https://data.incheon.go.kr/
+            - listitem [ref=e442]:
+              - link "울산광역시 데이터포털" [ref=e443] [cursor=pointer]:
+                - /url: https://data.ulsan.go.kr/
+            - listitem [ref=e444]:
+              - link "전남광주통합특별시 빅데이터 플랫폼" [ref=e445] [cursor=pointer]:
+                - /url: https://bigdata.gwangju.go.kr/
+            - listitem [ref=e446]:
+              - link "대전광역시 데이터포털" [ref=e447] [cursor=pointer]:
+                - /url: https://openlab.daejeon.go.kr/
+            - listitem [ref=e448]:
+              - link "세종특별자치시 데이터포털" [ref=e449] [cursor=pointer]:
+                - /url: https://www.sejong.go.kr/
+            - listitem [ref=e450]:
+              - link "충청북도 데이터허브" [ref=e451] [cursor=pointer]:
+                - /url: https://data.chungbuk.go.kr/
+        - generic [ref=e452]:
+          - button "분야별 데이터포털" [ref=e453] [cursor=pointer]
+          - list:
+            - listitem [ref=e454]:
+              - link "기상자료개방포털" [ref=e455] [cursor=pointer]:
+                - /url: https://data.kma.go.kr/
+            - listitem [ref=e456]:
+              - link "국토교통부 공간정보오픈플랫폼" [ref=e457] [cursor=pointer]:
+                - /url: https://www.vworld.kr/
+            - listitem [ref=e458]:
+              - link "환경부 환경데이터포털" [ref=e459] [cursor=pointer]:
+                - /url: https://www.bigdata-environment.kr/
+            - listitem [ref=e460]:
+              - link "문화데이터광장" [ref=e461] [cursor=pointer]:
+                - /url: https://www.culture.go.kr/
+            - listitem [ref=e462]:
+              - link "농림축산식품 공공데이터포털" [ref=e463] [cursor=pointer]:
+                - /url: https://data.mafra.go.kr/
+            - listitem [ref=e464]:
+              - link "보건의료빅데이터개방시스템" [ref=e465] [cursor=pointer]:
+                - /url: https://opendata.hira.or.kr/
+            - listitem [ref=e466]:
+              - link "식품의약품안전처 데이터포털" [ref=e467] [cursor=pointer]:
+                - /url: https://www.foodsafetykorea.go.kr/
+            - listitem [ref=e468]:
+              - link "교육통계서비스" [ref=e469] [cursor=pointer]:
+                - /url: https://kess.kedi.re.kr/
+      - generic [ref=e470]:
+        - link "공공데이터포털 바로가기" [ref=e471] [cursor=pointer]:
+          - /url: /index.do
+          - generic [ref=e473]: 공공데이터포털 바로가기
+        - generic [ref=e474]:
+          - generic [ref=e475]:
+            - paragraph [ref=e476]: (30112) 세종특별자치시 도움6로 42
+            - list [ref=e477]:
+              - listitem [ref=e478]:
+                - strong [ref=e479]:
+                  - text: 대표전화
+                  - generic [ref=e480]:
+                    - link "1566-0025" [ref=e481] [cursor=pointer]:
+                      - /url: tel:1566-0025
+                    - text: "| (유료, 평일 09시-18시)"
+              - listitem [ref=e482]:
+                - link "운영자 메일 상담 opendata_help@nia.or.kr" [ref=e483] [cursor=pointer]:
+                  - /url: mailto:opendata_help@nia.or.kr
+                  - strong [ref=e484]:
+                    - text: 운영자 메일 상담
+                    - generic [ref=e485]: opendata_help@nia.or.kr
+          - generic [ref=e486]:
+            - generic [ref=e487]:
+              - link "이용가이드" [ref=e488] [cursor=pointer]:
+                - /url: /ugs/selectPublicDataUseGuideView.do
+                - text: 이용가이드
+              - link "분쟁조정 신청" [ref=e490] [cursor=pointer]:
+                - /url: /tcs/dor/insertTrublMdatReqstProcssView.do
+                - text: 분쟁조정 신청
+              - link "문의하기" [ref=e492] [cursor=pointer]:
+                - /url: /bbs/faq/selectFaqList.do
+                - text: 문의하기
+            - generic [ref=e494]:
+              - link "유튜브" [ref=e495] [cursor=pointer]:
+                - /url: https://www.youtube.com/@koropendata
+                - generic [ref=e496]: 유튜브
+              - link "X" [ref=e498] [cursor=pointer]:
+                - /url: https://twitter.com/koreadataportal
+                - generic [ref=e499]: X
+              - link "페이스북" [ref=e501] [cursor=pointer]:
+                - /url: http://www.facebook.com/koreadataportal
+                - generic [ref=e502]: 페이스북
+              - link "블로그" [ref=e504] [cursor=pointer]:
+                - /url: http://blog.naver.com/nia_korea
+                - generic [ref=e505]: 블로그
+        - generic [ref=e507]:
+          - generic [ref=e508]:
+            - generic [ref=e509]:
+              - link "이용약관" [ref=e510] [cursor=pointer]:
+                - /url: /ugs/selectPortalPolicyView.do#use_stplat
+              - link "개인정보처리방침" [ref=e511] [cursor=pointer]:
+                - /url: /ugs/selectPortalPolicyView.do#indvdlinfo_process
+              - link "공공데이터포털 소개" [ref=e512] [cursor=pointer]:
+                - /url: /ugs/selectPortalInfoView.do#portal_info
+            - paragraph [ref=e513]: © Ministry of the Interior and Safety. All rights reserved.
+          - generic [ref=e514]:
+            - generic [ref=e516]: 행정안전부
+            - generic [ref=e517]: 이 누리집은 행정안전부 누리집입니다.
