@@ -748,6 +748,13 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #clinicianSidebar .clinical-options,
 #clinicianSidebar .origin-options{border:1px solid var(--sep);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.035)}
 #clinicianSidebar .origin-summary-row{padding:10px 12px;border-radius:14px}
+#clinicianSidebar .patient-input-card{margin:0 0 8px;padding:12px;border:1px solid var(--sep);border-radius:14px;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.045)}
+#clinicianSidebar .patient-input-card .panel-hd{padding:2px 2px 12px}
+#clinicianSidebar .patient-input-card .disease-picker{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+#clinicianSidebar .patient-input-card .compact-disclosure#allCategories{margin:10px 0 0;padding-top:8px;border:0;border-top:1px solid var(--sep);border-radius:0;background:transparent;box-shadow:none}
+#clinicianSidebar .patient-input-card #allCategories>summary{min-height:44px;padding:0 2px}
+#clinicianSidebar .patient-input-card #allCategories>.field{margin:8px 0 0}
+#clinicianSidebar .patient-input-card #allCategories>.field+.field{margin-top:10px}
 .sidebar-pane .banner{margin:0 0 8px;padding:10px 12px}
 .sidebar-pane .banner strong{font-size:.9375rem}
 .sidebar-pane .banner p{font-size:.75rem}
@@ -1191,34 +1198,36 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     </div>
   </aside>
   <section class="panel sidebar-pane" id="patientPanel" role="region" aria-labelledby="h-input">
-    <div class="panel-hd">
-      <div class="hd-txt">
-        <h2 id="h-input">환자 입력</h2>
-        <p>의료진 판단 보조용 · 실제 환자 식별정보는 입력하지 마세요</p>
+    <div class="patient-input-card">
+      <div class="panel-hd">
+        <div class="hd-txt">
+          <h2 id="h-input">환자 입력</h2>
+          <p>의료진 판단 보조용 · 실제 환자 식별정보는 입력하지 마세요</p>
+        </div>
       </div>
-    </div>
 
-    <div class="disease-picker">
-      <label class="sr-only" for="dxSearch">질환명 또는 증상 검색</label>
-      <div class="dx-search-wrap">
-        <span data-ic="search" data-s="19"></span>
-        <input id="dxSearch" type="search" autocomplete="off" placeholder="질환·증상 검색 (예: 흉통, STEMI)" aria-controls="dxSuggestions" aria-expanded="false">
-        <div class="dx-suggestions" id="dxSuggestions" role="listbox" hidden></div>
+      <div class="disease-picker">
+        <label class="sr-only" for="dxSearch">질환명 또는 증상 검색</label>
+        <div class="dx-search-wrap">
+          <span data-ic="search" data-s="19"></span>
+          <input id="dxSearch" type="search" autocomplete="off" placeholder="질환·증상 검색 (예: 흉통, STEMI)" aria-controls="dxSuggestions" aria-expanded="false">
+          <div class="dx-suggestions" id="dxSuggestions" role="listbox" hidden></div>
+        </div>
+        <div class="quick-dx" id="quickDx" aria-label="자주 선택하는 응급 상태"></div>
       </div>
-      <div class="quick-dx" id="quickDx" aria-label="자주 선택하는 응급 상태"></div>
-    </div>
 
-    <details class="compact-disclosure" id="allCategories">
-      <summary>전체 분류에서 찾기</summary>
-      <div class="field">
-        <span class="lbl" id="catLbl">부위 · 대분류</span>
-        <div class="seg grid still" id="catSeg" role="radiogroup" aria-labelledby="catLbl"><span class="seg-thumb"></span></div>
-      </div>
-      <div class="field category-disease-select">
-        <label class="lbl" for="dx">세부 질환 · 상태 <em id="subCount" hidden></em></label>
-        <div class="select"><select id="dx"></select><span data-ic="updown" data-s="14"></span></div>
-      </div>
-    </details>
+      <details class="compact-disclosure" id="allCategories">
+        <summary>전체 분류에서 찾기</summary>
+        <div class="field">
+          <span class="lbl" id="catLbl">부위 · 대분류</span>
+          <div class="seg grid still" id="catSeg" role="radiogroup" aria-labelledby="catLbl"><span class="seg-thumb"></span></div>
+        </div>
+        <div class="field category-disease-select">
+          <label class="lbl" for="dx">세부 질환 · 상태 <em id="subCount" hidden></em></label>
+          <div class="select"><select id="dx"></select><span data-ic="updown" data-s="14"></span></div>
+        </div>
+      </details>
+    </div>
 
     <div class="auto-summary-row">
       <div><div class="auto-summary" id="autoSummary"></div><div class="auto-summary-caption">자동 판정 요약</div></div>
