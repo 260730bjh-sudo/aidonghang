@@ -1221,11 +1221,9 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 
     <div class="origin-summary-row">
       <div><div class="origin-summary" id="originSummary">위치 · 미설정</div><div class="auto-summary-caption" id="coordTxt">위치 또는 주소를 지정해 주세요</div></div>
-      <button type="button" class="quiet-action" id="toggleOriginOptions" aria-expanded="false">위치 설정</button>
     </div>
     <div class="origin-options" id="originOptions" hidden>
       <div class="origin-location-actions">
-        <button type="button" class="public-secondary" id="useCurrentLocation">위치 사용</button>
         <button type="button" class="public-secondary" id="pickOriginOnMap">지도에서 위치 선택</button>
       </div>
       <div class="origin-address-row">
@@ -2278,7 +2276,7 @@ const state = {
   scoreRequestId:0, routeScoreAvailable:false, routeScoreFailed:false, routeFailures:0,
   liveBedsReady:false, liveBedsStatus:'idle', liveBedsUpdatedAt:null, liveBedsFetchedAt:0, liveBedsMatched:0, liveBedsValues:0, liveBedsFacilityRevision:-1,liveBedsError:null,
   facilityStatus:'idle',facilityFetchedAt:0,facilityRevision:0,facilityError:null,
-  searchRadiusIndex:0,searchAreaBounds:null,pickOriginMode:false,searchStats:null,originAutoAttempted:false
+  searchRadiusIndex:0,searchAreaBounds:null,pickOriginMode:false,searchStats:null
 };
 const $ = id => document.getElementById(id);
 const el = {
@@ -2291,6 +2289,7 @@ const el = {
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const narrow = matchMedia('(max-width: 980px)');
 let MAP=null, liveBedRequest=null, liveBedTimer=null, directoryRequest=null;
+let originWatchId=null;
 let searchController=null, detailController=null, routeController=null, geocodeController=null;
 const facilityDetailsCache=new Map(), facilityDetailsPending=new Map();
 $('clinicianSidebar').insertBefore($('patientPanel'),$('patientActionFooter'));
@@ -2386,6 +2385,7 @@ function escapeHTML(value){
   return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 function selectRole(role){
+  if(role!=='clinician'&&originWatchId!==null){navigator.geolocation?.clearWatch(originWatchId);originWatchId=null;}
   $('roleGate').hidden=true;
   $('modeBar').hidden=role==='clinician';
   $('publicApp').hidden=role!=='public';
@@ -2398,7 +2398,7 @@ function selectRole(role){
     showHandover(); selectClinicianPanel('patient');
     if(innerWidth<768){ $('clinicianSidebar').dataset.sheetState='half'; $('clinicianSidebar').removeAttribute('data-dragging'); $('clinicianSidebar').style.height=''; }
     syncFacilityDirectory().then(loaded=>{if(loaded) syncLiveBeds();});
-    if(!state.origin&&!state.originAutoAttempted){state.originAutoAttempted=true;requestCurrentOrigin({automatic:true});}
+    requestCurrentOrigin({automatic:true});
     if(!liveBedTimer) liveBedTimer=setInterval(()=>{
       if(document.body.dataset.mode==='clinician'&&document.visibilityState==='visible') syncLiveBeds({force:true});
     },180_000);
@@ -2824,28 +2824,30 @@ function setOrigin(pos,label='지도에서 선택'){
   return true;
 }
 function requestCurrentOrigin({automatic=false}={}){
-  const button=$('useCurrentLocation');
   if(!navigator.geolocation){
     $('originStatus').textContent='이 브라우저에서 위치를 확인할 수 없습니다. 주소 검색이나 지도 선택을 이용해 주세요.';
-    if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');}
+    $('originOptions').hidden=false;
     return;
   }
-  if(button) button.disabled=true;
+  if(originWatchId!==null) return;
   $('originStatus').textContent=automatic?'위치 권한을 확인하는 중…':'위치를 확인하는 중…';
-  navigator.geolocation.getCurrentPosition(position=>{
-    if(button) button.disabled=false;
+  originWatchId=navigator.geolocation.watchPosition(position=>{
     const {latitude,longitude}=position.coords;
-    if(!setOrigin({lat:latitude,lng:longitude},'위치')){
-      if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');}
-      return;
+    const pos={lat:latitude,lng:longitude};
+    if(state.origin){
+      const radians=value=>value*Math.PI/180;
+      const latDelta=radians(pos.lat-state.origin.lat),lngDelta=radians(pos.lng-state.origin.lng);
+      const a=Math.sin(latDelta/2)**2+Math.cos(radians(state.origin.lat))*Math.cos(radians(pos.lat))*Math.sin(lngDelta/2)**2;
+      if(6371000*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))<25) return;
     }
+    if(!setOrigin(pos,'위치')){$('originOptions').hidden=false;el.searchTxt.textContent='위치 없음';return;}
     state.pickOriginMode=false;$('pickOriginOnMap').setAttribute('aria-pressed','false');
-    $('originStatus').textContent='위치를 설정했습니다. 병원 찾기를 눌러 검색하세요.';
+    $('originStatus').textContent='현재 위치를 따라가고 있습니다. 병원 찾기를 눌러 검색하세요.';
     afterOriginChange();setSearching(false);
   },()=>{
-    if(button) button.disabled=false;
-    $('originStatus').textContent=automatic?'위치를 확인하지 못했습니다. 위치 버튼을 다시 누르거나 주소·지도에서 지정해 주세요.':'위치 권한을 확인하지 못했습니다. 주소 검색이나 지도 선택을 이용해 주세요.';
-    if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');}
+    $('originStatus').textContent=automatic?'위치를 확인하지 못했습니다. 주소나 지도에서 위치를 지정해 주세요.':'위치 권한을 확인하지 못했습니다. 주소 검색이나 지도 선택을 이용해 주세요.';
+    $('originOptions').hidden=false;
+    el.searchTxt.textContent='위치 없음';
   },{enableHighAccuracy:false,timeout:10000,maximumAge:60000});
 }
 function afterOriginChange(){
@@ -3088,7 +3090,7 @@ async function requestDirections(h){
 
 function setSearching(on){
   el.searchBtn.disabled=on||!state.origin; el.searchBtn.classList.toggle('busy',on);
-  el.searchTxt.textContent=on?'조건·경로 확인 중…':state.origin?'병원 찾기':'위치 설정 필요';
+  el.searchTxt.textContent=on?'조건·경로 확인 중…':state.origin?'병원 찾기':'위치 확인 중';
   updateSidebarFooter();
 }
 function setRoadBtn(on){
@@ -3145,7 +3147,7 @@ async function requestCandidateRoutes(candidates,signal){
 async function runSearch({radiusIndex=state.searchRadiusIndex,area=state.searchAreaBounds}={}){
   if(state.searching) return;
   if(!state.origin){
-    $('originOptions').hidden=false; $('toggleOriginOptions').setAttribute('aria-expanded','true'); $('originStatus').textContent='위치를 먼저 지정해야 반경 검색을 할 수 있습니다.';
+    $('originOptions').hidden=false; $('originStatus').textContent='위치를 먼저 지정해야 반경 검색을 할 수 있습니다.';
     toast('먼저 위치를 지정해 주세요.','warn'); return;
   }
   cancelSearchRequests();
@@ -3307,13 +3309,6 @@ $('toggleClinicalOptions').addEventListener('click',()=>{
   const open=$('clinicalOptions').hidden;
   $('clinicalOptions').hidden=!open; $('toggleClinicalOptions').setAttribute('aria-expanded',String(open));
 });
-$('toggleOriginOptions').addEventListener('click',()=>{
-  const open=$('originOptions').hidden;
-  $('originOptions').hidden=!open; $('toggleOriginOptions').setAttribute('aria-expanded',String(open));
-});
-$('useCurrentLocation').addEventListener('click',()=>{
-  requestCurrentOrigin();
-});
 $('searchOriginAddress').addEventListener('click',async()=>{
   const address=$('originAddress').value.trim();
   if(address.length<2){$('originAddress').focus();$('originStatus').textContent='주소나 가까운 장소를 입력해 주세요.';return;}
@@ -3353,7 +3348,7 @@ $('pickOriginOnMap').addEventListener('click',()=>{
   $('originStatus').textContent=state.pickOriginMode?'지도를 한 번 눌러 위치를 설정하세요. 지도 이동만으로 위치는 바뀌지 않습니다.':'지도 위치 선택을 취소했습니다.';
 });
 $('searchThisArea').addEventListener('click',()=>{
-  if(!state.origin){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');$('originStatus').textContent='위치를 먼저 지정한 뒤 이 지역 검색을 눌러 주세요.';return;}
+  if(!state.origin){$('originOptions').hidden=false;$('originStatus').textContent='위치를 먼저 지정한 뒤 이 지역 검색을 눌러 주세요.';return;}
   const bounds=MAP.getBounds?.();
   if(!bounds){toast('지도를 사용할 수 없어 지역 한정 검색을 시작할 수 없습니다.','warn');return;}
   if(state.searching) cancelSearchRequests();
@@ -3383,6 +3378,7 @@ $('quickDx').addEventListener('click',event=>{
   const chip=event.target.closest('[data-dx-no]'); if(chip) selectDisease(chip.dataset.dxNo);
 });
 function returnToRoleGate(){
+  if(originWatchId!==null){navigator.geolocation?.clearWatch(originWatchId);originWatchId=null;}
   $('publicApp').hidden=true; $('clinicianApp').hidden=true; $('bar').hidden=true;
   $('modeBar').hidden=true; $('roleGate').hidden=false; document.body.removeAttribute('data-mode');
   window.scrollTo({top:0,behavior:'auto'});
