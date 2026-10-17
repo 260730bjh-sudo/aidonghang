@@ -208,14 +208,6 @@ b{font-weight:650}
 .map-zoom button{width:44px;height:44px;border:0;background:transparent;color:var(--label);display:grid;place-items:center;cursor:pointer;transition:background-color .15s}
 .map-zoom button+button{border-top:.5px solid var(--sep)}
 .map-zoom button:active{background:var(--fill)}
-.map-legend{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);border-radius:14px;padding:9px 12px;
-  font:500 11.5px/1.2 var(--font);color:var(--label-2);display:grid;gap:7px}
-.lg-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
-.lg-row b{color:var(--label);font-weight:600;min-width:22px}
-.lg{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
-.lg i{width:9px;height:9px;border-radius:50%}
-.lg i.bar{width:16px;height:4px;border-radius:2px}
-
 /* SVG 지도 */
 .m-outer{fill:var(--map-outer)}
 .m-land{fill:var(--map-land)}
@@ -366,7 +358,6 @@ b{font-weight:650}
   .chip.time{margin-left:0}
   .map-wrap{margin:10px}
   #mapBox{min-height:340px}
-  .map-legend{position:static;margin-top:10px;max-width:100%;background:var(--material);box-shadow:0 2px 8px rgba(0,0,0,.10),0 8px 24px rgba(0,0,0,.08),inset 0 0 0 1px var(--material-edge)}
   #resultList{padding:8px 12px 12px}
   .banner{margin:8px 12px 0}.excluded{margin:0 12px 12px}
 }
@@ -404,6 +395,8 @@ b{font-weight:650}
 #modeBar[data-mode="clinician"] .mode-label{padding:9px 14px;border-radius:10px;background:#173e78;color:#fff;font-size:16px;letter-spacing:.01em;box-shadow:0 3px 10px #173e7828}
 .mode-switch{min-height:42px;padding:0 14px;border:1px solid #ccd7db;border-radius:999px;background:#fff;color:#223840;font:650 14px var(--font);cursor:pointer;white-space:nowrap}
 .mode-switch:hover{background:#f0f5f8;border-color:#9eafb9}
+.bar-location-action{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;z-index:70;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 14px;border:1px solid var(--blue-soft);border-radius:999px;background:var(--material);color:var(--blue-text);font:650 14px var(--font);white-space:nowrap;box-shadow:var(--shadow-float);cursor:pointer}
+.bar-location-action:hover{filter:brightness(.96)}
 .handover-actions .mode-switch{min-height:42px;padding:0 14px;border:1px solid #ccd7db;border-radius:999px;background:#fff;color:#223840;font:600 14px var(--font);cursor:pointer}
 .public-app{background:#f4f7f8}
 .public-shell{width:min(100% - 32px,1020px);margin:0 auto;padding:28px 0 60px}
@@ -1180,6 +1173,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 </header>
 
 <main class="wrap" id="clinicianApp" hidden>
+  <button type="button" class="bar-location-action" id="clinicalTopLocationButton" aria-controls="originOptions" aria-expanded="false"><span data-ic="pin" data-s="17"></span>위치 재조정</button>
   <aside class="clinician-sidebar" id="clinicianSidebar" aria-label="의료진 정보 패널">
     <div class="sheet-drag" id="sheetDragHandle" aria-label="사이드바 높이 조절"><span></span></div>
     <div class="sidebar-nav-row">
@@ -1248,17 +1242,17 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     </div>
 
     <div class="origin-summary-row">
-      <div><div class="origin-summary" id="originSummary">환자 위치 · 미설정</div><div class="auto-summary-caption" id="coordTxt">현재 위치 또는 주소를 지정해 주세요</div></div>
+      <div><div class="origin-summary" id="originSummary">위치 · 미설정</div><div class="auto-summary-caption" id="coordTxt">위치 또는 주소를 지정해 주세요</div></div>
       <button type="button" class="quiet-action" id="toggleOriginOptions" aria-expanded="false">위치 설정</button>
     </div>
     <div class="origin-options" id="originOptions" hidden>
       <div class="origin-location-actions">
-        <button type="button" class="public-secondary" id="useCurrentLocation">현재 위치 사용</button>
-        <button type="button" class="public-secondary" id="pickOriginOnMap">지도에서 환자 위치 선택</button>
+        <button type="button" class="public-secondary" id="useCurrentLocation">위치 사용</button>
+        <button type="button" class="public-secondary" id="pickOriginOnMap">지도에서 위치 선택</button>
       </div>
       <div class="origin-address-row">
         <label for="originAddress">주소로 위치 찾기</label>
-        <div><input id="originAddress" type="search" autocomplete="street-address" placeholder="환자 주소 또는 가까운 장소"><button type="button" id="searchOriginAddress">주소 검색</button></div>
+        <div><input id="originAddress" type="search" autocomplete="street-address" placeholder="주소 또는 가까운 장소"><button type="button" id="searchOriginAddress">주소 검색</button></div>
       </div>
       <div class="origin-address-results" id="originAddressResults" hidden aria-live="polite"></div>
       <p class="origin-status" id="originStatus" aria-live="polite">위치 권한은 선택 사항입니다. 지도 이동만으로 위치는 바뀌지 않습니다.</p>
@@ -1308,7 +1302,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       </div>
       <div class="map-wrap">
         <div id="mapBox">
-            <div id="map" role="application" aria-label="전국 응급의료기관 지도. 위치 변경 모드에서만 지도를 눌러 환자 위치를 지정할 수 있습니다."></div>
+            <div id="map" role="application" aria-label="전국 응급의료기관 지도. 위치 변경 모드에서만 지도를 눌러 위치를 지정할 수 있습니다."></div>
           <p class="map-error" id="mapError" hidden>Kakao 지도를 불러오지 못했습니다. Kakao Developers에서 웹 도메인 등록과 OPEN_MAP_AND_LOCAL 서비스 사용 설정을 확인해 주세요.</p>
           <div class="map-actions mat" role="group" aria-label="지도 빠른 도구">
             <button type="button" class="map-action" id="sidebarHomeButton" aria-label="홈 화면으로 돌아가기" title="홈 화면으로 돌아가기"><span data-ic="home" data-s="19"></span></button>
@@ -1325,7 +1319,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       <div class="map-scope-actions">
         <button type="button" class="public-secondary" id="searchThisArea">이 지역 검색</button>
         <button type="button" class="public-secondary" id="clearSearchArea" hidden>전국 범위로 전환</button>
-        <span id="searchScopeLabel">전국 검색 · 환자 위치 기준</span>
+        <span id="searchScopeLabel">전국 검색 · 위치 기준</span>
       </div>
     </section>
 
@@ -1337,7 +1331,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
         </div>
       </div>
       <div class="search-range-status" id="searchRangeStatus" aria-live="polite">
-        <span id="searchRangeText">환자 위치를 지정한 뒤 병원을 찾으세요.</span>
+        <span id="searchRangeText">위치를 지정한 뒤 병원을 찾으세요.</span>
         <button type="button" class="public-secondary" id="expandSearchBtn" hidden>탐색 범위 넓히기</button>
       </div>
       <div class="banner" id="confirmBanner" hidden>
@@ -1349,7 +1343,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
         </div>
       </div>
       <div id="resultList" aria-live="polite">
-          <div class="empty">환자 위치를 지정한 뒤 병원 찾기를 누르세요. 확인 가능한 치료 조건을 먼저 검사하고, 확인된 후보에만 자동차 경로를 요청합니다.</div>
+          <div class="empty">위치를 지정한 뒤 병원 찾기를 누르세요. 확인 가능한 치료 조건을 먼저 검사하고, 확인된 후보에만 자동차 경로를 요청합니다.</div>
       </div>
       <div class="route-summary" id="routeSummary" hidden aria-live="polite">
         <div class="route-summary-head"><strong id="routeTitle">경로 조회 준비</strong><span>카카오모빌리티</span></div>
@@ -2256,7 +2250,7 @@ function KakaoMap(container){
     renderMe(pos){
       if(!pos){if(meOverlay)meOverlay.setMap(null);meOverlay=null;return;}
       if(meOverlay) meOverlay.setMap(null);
-      const dot=document.createElement('div'); dot.className='kakao-me'; dot.setAttribute('role','img'); dot.setAttribute('aria-label','설정된 환자 위치');
+      const dot=document.createElement('div'); dot.className='kakao-me'; dot.setAttribute('role','img'); dot.setAttribute('aria-label','설정된 위치');
       meOverlay=new kakao.maps.CustomOverlay({position:point(pos),content:dot,yAnchor:.5,zIndex:30});
       meOverlay.setMap(map);
     },
@@ -2813,12 +2807,12 @@ function updatePatientSummary(){
 }
 function updateOriginSummary(){
   if(!state.origin){
-    $('originSummary').textContent='환자 위치 · 미설정';
-    el.coordTxt.textContent='현재 위치 또는 주소를 지정해 주세요';
+    $('originSummary').textContent='위치 · 미설정';
+    el.coordTxt.textContent='위치 또는 주소를 지정해 주세요';
     return;
   }
-  $('originSummary').textContent=`환자 위치 · ${state.originLabel||'지도에서 선택'}`;
-  el.coordTxt.textContent=state.originAreaLabel||state.originLabel||'현재 위치';
+  $('originSummary').textContent=`위치 · ${state.originLabel||'지도에서 선택'}`;
+  el.coordTxt.textContent=state.originAreaLabel||state.originLabel||'위치';
 }
 
 async function lookupOriginArea(pos,lookupId){
@@ -2887,25 +2881,25 @@ function requestCurrentOrigin({automatic=false}={}){
   const button=$('useCurrentLocation');
   if(!navigator.geolocation){
     $('originStatus').textContent='이 브라우저에서 위치를 확인할 수 없습니다. 주소 검색이나 지도 선택을 이용해 주세요.';
-    if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');}
+    if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');$('clinicalTopLocationButton').setAttribute('aria-expanded','true');}
     return;
   }
   if(button) button.disabled=true;
-  $('originStatus').textContent=automatic?'현재 위치 권한을 확인하는 중…':'현재 위치 확인 중…';
+  $('originStatus').textContent=automatic?'위치 권한을 확인하는 중…':'위치를 확인하는 중…';
   navigator.geolocation.getCurrentPosition(position=>{
     if(button) button.disabled=false;
     const {latitude,longitude}=position.coords;
-    if(!setOrigin({lat:latitude,lng:longitude},'현재 위치')){
-      if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');}
+    if(!setOrigin({lat:latitude,lng:longitude},'내 위치')){
+      if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');$('clinicalTopLocationButton').setAttribute('aria-expanded','true');}
       return;
     }
     state.pickOriginMode=false;$('pickOriginOnMap').setAttribute('aria-pressed','false');
-    $('originStatus').textContent='현위치를 환자 위치로 설정했습니다. 병원 찾기를 눌러 검색하세요.';
+    $('originStatus').textContent='위치를 설정했습니다. 병원 찾기를 눌러 검색하세요.';
     afterOriginChange();setSearching(false);
   },()=>{
     if(button) button.disabled=false;
-    $('originStatus').textContent=automatic?'현위치 권한을 확인하지 못했습니다. 현재 위치 버튼을 다시 누르거나 주소·지도에서 지정해 주세요.':'위치 권한을 확인하지 못했습니다. 주소 검색이나 지도 선택을 이용해 주세요.';
-    if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');}
+    $('originStatus').textContent=automatic?'위치를 확인하지 못했습니다. 위치 버튼을 다시 누르거나 주소·지도에서 지정해 주세요.':'위치 권한을 확인하지 못했습니다. 주소 검색이나 지도 선택을 이용해 주세요.';
+    if(automatic){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');$('clinicalTopLocationButton').setAttribute('aria-expanded','true');}
   },{enableHighAccuracy:false,timeout:10000,maximumAge:60000});
 }
 function afterOriginChange(){
@@ -2913,9 +2907,9 @@ function afterOriginChange(){
   state.ranked=[]; state.excluded=[]; state.activeHospitalId=null; state.confirmed=null;
   state.routeScoreAvailable=false; state.routeScoreFailed=false; state.routeFailures=0;state.searchRadiusIndex=0;
   $('routeSummary').hidden=true; el.banner.hidden=true;
-  el.list.innerHTML='<div class="empty">환자 위치가 변경되었습니다. 병원 찾기를 눌러 다시 검색하세요.</div>';
+  el.list.innerHTML='<div class="empty">위치가 변경되었습니다. 병원 찾기를 눌러 다시 검색하세요.</div>';
   updateSearchScopeLabel();
-  updateSearchRangeStatus('환자 위치가 변경되었습니다. 검색 버튼을 눌러 다시 찾으세요.');
+  updateSearchRangeStatus('위치가 변경되었습니다. 검색 버튼을 눌러 다시 찾으세요.');
   refreshMarkers([]);
 }
 
@@ -3163,7 +3157,7 @@ function updateSearchRangeStatus(message,{showExpand=false}={}){
   $('clearSearchArea').hidden=!state.searchAreaBounds;
 }
 function updateSearchScopeLabel(){
-  $('searchScopeLabel').textContent=state.searchAreaBounds?'지도에서 지정한 지역에 한정 · 환자 위치는 별도 유지':'전국 검색 · 환자 위치 기준';
+  $('searchScopeLabel').textContent=state.searchAreaBounds?'지도에서 지정한 지역에 한정 · 위치는 별도 유지':'전국 검색 · 위치 기준';
   $('clearSearchArea').hidden=!state.searchAreaBounds;
   $('mapHintText').textContent=state.searchAreaBounds?'지역 검색 범위 고정됨 · 다시 이동해도 결과는 바뀌지 않습니다':'지도 이동 후 ‘이 지역 검색’을 눌러 범위를 제한하세요';
 }
@@ -3205,8 +3199,8 @@ async function requestCandidateRoutes(candidates,signal){
 async function runSearch({radiusIndex=state.searchRadiusIndex,area=state.searchAreaBounds}={}){
   if(state.searching) return;
   if(!state.origin){
-    $('originOptions').hidden=false; $('originStatus').textContent='환자 위치를 먼저 지정해야 반경 검색을 할 수 있습니다.';
-    toast('먼저 현재 위치, 주소 또는 지도에서 환자 위치를 지정해 주세요.','warn'); return;
+    $('originOptions').hidden=false; $('toggleOriginOptions').setAttribute('aria-expanded','true'); $('clinicalTopLocationButton').setAttribute('aria-expanded','true'); $('originStatus').textContent='위치를 먼저 지정해야 반경 검색을 할 수 있습니다.';
+    toast('먼저 위치를 지정해 주세요.','warn'); return;
   }
   cancelSearchRequests();
   const searchId=++state.scoreRequestId;
@@ -3370,6 +3364,13 @@ $('toggleClinicalOptions').addEventListener('click',()=>{
 $('toggleOriginOptions').addEventListener('click',()=>{
   const open=$('originOptions').hidden;
   $('originOptions').hidden=!open; $('toggleOriginOptions').setAttribute('aria-expanded',String(open));
+  $('clinicalTopLocationButton').setAttribute('aria-expanded',String(open));
+});
+$('clinicalTopLocationButton').addEventListener('click',()=>{
+  $('originOptions').hidden=false;
+  $('toggleOriginOptions').setAttribute('aria-expanded','true');
+  $('clinicalTopLocationButton').setAttribute('aria-expanded','true');
+  $('originSummary').scrollIntoView({behavior:'smooth',block:'center'});
 });
 $('useCurrentLocation').addEventListener('click',()=>{
   requestCurrentOrigin();
@@ -3410,10 +3411,10 @@ $('originAddress').addEventListener('keydown',event=>{
 $('pickOriginOnMap').addEventListener('click',()=>{
   state.pickOriginMode=!state.pickOriginMode;
   $('pickOriginOnMap').setAttribute('aria-pressed',String(state.pickOriginMode));
-  $('originStatus').textContent=state.pickOriginMode?'지도를 한 번 눌러 환자 위치를 설정하세요. 지도 이동만으로 위치는 바뀌지 않습니다.':'지도 위치 선택을 취소했습니다.';
+  $('originStatus').textContent=state.pickOriginMode?'지도를 한 번 눌러 위치를 설정하세요. 지도 이동만으로 위치는 바뀌지 않습니다.':'지도 위치 선택을 취소했습니다.';
 });
 $('searchThisArea').addEventListener('click',()=>{
-  if(!state.origin){$('originOptions').hidden=false;$('originStatus').textContent='환자 위치를 먼저 지정한 뒤 이 지역 검색을 눌러 주세요.';return;}
+  if(!state.origin){$('originOptions').hidden=false;$('toggleOriginOptions').setAttribute('aria-expanded','true');$('clinicalTopLocationButton').setAttribute('aria-expanded','true');$('originStatus').textContent='위치를 먼저 지정한 뒤 이 지역 검색을 눌러 주세요.';return;}
   const bounds=MAP.getBounds?.();
   if(!bounds){toast('지도를 사용할 수 없어 지역 한정 검색을 시작할 수 없습니다.','warn');return;}
   if(state.searching) cancelSearchRequests();
@@ -3685,11 +3686,11 @@ MAP.onClick(pos => {
   if(!setOrigin(pos,'지도에서 선택')) return;
   state.pickOriginMode=false;
   $('pickOriginOnMap').setAttribute('aria-pressed','false');
-  $('originStatus').textContent='지도에서 환자 위치를 지정했습니다. 병원 찾기를 눌러 검색하세요.';
+  $('originStatus').textContent='지도에서 위치를 지정했습니다. 병원 찾기를 눌러 검색하세요.';
   afterOriginChange();setSearching(false);
 });
 MAP.onViewportChange(()=>{
-  if(!state.pickOriginMode) $('mapHintText').textContent='지도 이동만으로 환자 위치나 결과는 바뀌지 않습니다. ‘이 지역 검색’을 눌러 범위를 적용하세요.';
+  if(!state.pickOriginMode) $('mapHintText').textContent='지도 이동만으로 위치나 결과는 바뀌지 않습니다. ‘이 지역 검색’을 눌러 범위를 적용하세요.';
 });
 MAP.reset();
 MAP.renderRoads(state.showRoads);

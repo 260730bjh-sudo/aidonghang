@@ -1,0 +1,120 @@
+- generic:
+  - text: ›
+  - main [ref=e34]:
+    - button "위치 재조정" [expanded] [active] [ref=e35] [cursor=pointer]:
+      - img [ref=e37]
+      - text: 위치 재조정
+    - complementary "의료진 정보 패널" [ref=e40]:
+      - generic "사이드바 높이 조절" [ref=e41]
+      - generic [ref=e43]:
+        - navigation "사이드 패널 선택" [ref=e44]:
+          - button "환자 입력" [pressed] [ref=e46] [cursor=pointer]
+          - button "병원 후보" [ref=e47] [cursor=pointer]
+        - button "데이터 안내" [ref=e48] [cursor=pointer]
+      - region "환자 입력" [ref=e49]:
+        - generic [ref=e51]:
+          - heading "환자 입력" [level=2] [ref=e52]
+          - paragraph [ref=e53]: 의료진 판단 보조용 · 실제 환자 식별정보는 입력하지 마세요
+        - generic [ref=e54]:
+          - generic [ref=e55]: 질환명 또는 증상 검색
+          - generic [ref=e56]:
+            - img [ref=e58]
+            - searchbox "질환명 또는 증상 검색" [ref=e61]
+          - generic "자주 선택하는 응급 상태" [ref=e62]:
+            - button "심정지" [ref=e63] [cursor=pointer]
+            - button "STEMI" [ref=e64] [cursor=pointer]
+            - button "뇌졸중" [ref=e65] [cursor=pointer]
+            - button "중증 외상" [ref=e66] [cursor=pointer]
+            - button "호흡곤란" [ref=e67] [cursor=pointer]
+            - button "의식저하" [ref=e68] [cursor=pointer]
+        - group [ref=e69]:
+          - generic "전체 분류에서 찾기 ›" [ref=e70] [cursor=pointer]
+          - option "심장 · 심정지 (심실세동/무맥성 VT/무수축)"
+          - option "심장 · 심장눌림증 (심낭압전)"
+          - option "심장 · 고도 서맥·완전방실차단 + 쇼크"
+          - option "심장 · ST분절상승 심근경색 (STEMI)" [selected]
+          - option "심장 · 불안정형 협심증 / 비ST상승 심근경색"
+          - option "심장 · 급성 대동맥박리"
+          - option "혈관 · 급성 사지동맥 폐색"
+          - option "심장 · 급성 심부전 · 폐부종"
+          - option "심장 · 심방세동 (빠른 심실반응)"
+          - option "심장 · 발작성 상심실성 빈맥 (PSVT)"
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - generic [ref=e73]: KTAS 2 긴급 · 순환기내과 · 골든타임 90분
+            - generic [ref=e74]: 자동 판정 요약
+          - button "변경" [ref=e75] [cursor=pointer]
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - generic [ref=e78]: 위치 · 미설정
+            - generic [ref=e79]: 위치 또는 주소를 지정해 주세요
+          - button "위치 설정" [expanded] [ref=e80] [cursor=pointer]
+        - generic [ref=e81]:
+          - generic [ref=e82]:
+            - button "위치 사용" [ref=e83] [cursor=pointer]
+            - button "지도에서 위치 선택" [ref=e84] [cursor=pointer]
+          - generic [ref=e85]:
+            - generic [ref=e86]: 주소로 위치 찾기
+            - generic [ref=e87]:
+              - searchbox "주소로 위치 찾기" [ref=e88]
+              - button "주소 검색" [ref=e89]
+          - paragraph [ref=e90]: 선택 위치가 NEDIS 전국 기관 조회 범위 밖입니다. 대한민국 안의 위치를 선택해 주세요.
+        - text: ›
+        - group [ref=e91]:
+          - generic "질환 참고 정보 ›" [ref=e92] [cursor=pointer]
+        - group [ref=e93]:
+          - generic "활력징후 기록 (선택) ›" [ref=e94] [cursor=pointer]
+          - option "선택 안 함" [selected]
+          - option "Alert"
+          - option "Voice"
+          - option "Pain"
+          - option "Unresponsive"
+      - button "위치 설정 필요" [disabled] [ref=e96]:
+        - img [ref=e98]
+        - generic [ref=e101]: 위치 설정 필요
+    - region "전국 응급의료기관 지도" [ref=e103]:
+      - generic [ref=e105]:
+        - application "전국 응급의료기관 지도. 위치 변경 모드에서만 지도를 눌러 위치를 지정할 수 있습니다." [ref=e106]:
+          - generic [ref=e107]:
+            - generic:
+              - img [ref=e109]
+              - generic:
+                - button "68개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e111] [cursor=pointer]: "68"
+                - button "77개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e113] [cursor=pointer]: "77"
+                - button "217개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e115] [cursor=pointer]: "217"
+                - button "61개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e117] [cursor=pointer]: "61"
+                - button "4개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e119] [cursor=pointer]: "4"
+                - button "13개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e121] [cursor=pointer]: "13"
+                - button "18개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e123] [cursor=pointer]: "18"
+                - button "46개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e125] [cursor=pointer]: "46"
+                - button "12개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e127] [cursor=pointer]: "12"
+                - button "4개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e129] [cursor=pointer]: "4"
+                - button "4개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e131] [cursor=pointer]: "4"
+                - button "울릉군보건의료원, 가용" [ref=e133] [cursor=pointer]:
+                  - generic [ref=e134]: "4"
+                - button "3개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e136] [cursor=pointer]: "3"
+                - button "인천광역시의료원백령병원, 가용" [ref=e138] [cursor=pointer]:
+                  - generic [ref=e139]: "4"
+                - button "학교법인울산공업학원울산대학교병원, 정보 미확인" [ref=e141] [cursor=pointer]:
+                  - generic [ref=e142]: —
+          - generic [ref=e143]:
+            - generic [ref=e146]: 128km
+            - link "Kakao 맵으로 이동(새창열림)" [ref=e148] [cursor=pointer]:
+              - /url: http://map.kakao.com/
+              - img "Kakao 맵으로 이동(새창열림)" [ref=e149]
+        - group "지도 빠른 도구" [ref=e150]:
+          - button "홈 화면으로 돌아가기" [ref=e151] [cursor=pointer]:
+            - img [ref=e153]
+          - button "실시간 교통 레이어 끄기" [pressed] [ref=e156] [cursor=pointer]:
+            - img [ref=e158]
+        - generic:
+          - generic:
+            - img
+          - generic: 지도 이동만으로 위치나 결과는 바뀌지 않습니다. ‘이 지역 검색’을 눌러 범위를 적용하세요.
+        - generic "지도 확대 축소" [ref=e160]:
+          - button "지도 확대" [ref=e161] [cursor=pointer]:
+            - img [ref=e163]
+          - button "지도 축소" [ref=e165] [cursor=pointer]:
+            - img [ref=e167]
+          - button "지도 원래 크기" [ref=e168] [cursor=pointer]:
+            - img [ref=e170]
