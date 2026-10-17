@@ -728,6 +728,10 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #clinicianSidebar .location-hero .origin-summary-row{min-height:0;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
 .location-hero .origin-summary{font-size:.9375rem;font-weight:700}
 .location-hero .auto-summary-caption{margin-top:2px}
+.sidebar-back-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;min-height:44px;padding:0 12px;border:1px solid var(--sep);border-radius:12px;background:var(--surface);color:var(--label);font:600 .875rem var(--font);cursor:pointer}
+.sidebar-back-button .ic{transform:rotate(180deg)}
+#clinicianSidebar #resultPanel .panel-hd{align-items:center;flex-wrap:nowrap;gap:10px;padding:2px 2px 12px}
+#clinicianSidebar #resultPanel .hd-txt{flex:1 1 auto}
 #clinicianSidebar .disease-picker,
 #clinicianSidebar .compact-disclosure,
 #clinicianSidebar .auto-summary-row,
@@ -1189,19 +1193,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       </div>
       <p class="origin-status" id="originStatus" aria-live="polite">현재 위치를 확인하고 있습니다.</p>
     </div>
-    <div class="sidebar-nav-row">
-      <nav class="sidebar-tabs" id="sidebarTabs" aria-label="사이드 패널 선택">
-        <span class="sidebar-tab-thumb" aria-hidden="true"></span>
-        <button class="sidebar-tab" id="sidebarInputTab" type="button" aria-controls="patientPanel" aria-pressed="true">환자 입력</button>
-        <button class="sidebar-tab" id="sidebarResultsTab" type="button" aria-controls="resultPanel" aria-pressed="false">병원 후보 <span class="sidebar-count" id="sidebarResultCount" hidden></span></button>
-      </nav>
-      <button class="demo-badge" id="demoBadge" type="button" aria-expanded="false" aria-controls="demoPopover">데이터 안내</button>
-      <div class="demo-popover" id="demoPopover" hidden>
-        <p>기관 목록·기관 좌표·진료과와 응급실 운영 필드는 NEDIS에서 조회합니다. 가용 응급실 병상은 별도 NEDIS 응답에 있는 기관만 표시합니다.</p>
-        <p>필요 처치 능력, 전체 병상 기준, 최근 수용 이력은 전국 API에서 확인되지 않아 점수와 수용 여부를 임의로 만들지 않습니다. 기존 점수 산식은 유지하지만 필요한 실제 입력값이 없어 전국 결과에는 점수를 표시하지 않습니다.</p>
-        <p id="bedSyncMeta">실시간 병상 정보 연결 대기 중</p>
-      </div>
-    </div>
     <div class="sidebar-action-footer" id="patientActionFooter">
       <button type="button" class="btn-primary" id="searchBtn"><span class="bi" data-ic="search" data-s="18"></span><span class="spin"></span><span id="searchTxt">병원 찾기</span></button>
     </div>
@@ -1307,6 +1298,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 
     <section class="panel sidebar-pane" id="resultPanel" aria-labelledby="h-res" role="region" hidden>
       <div class="panel-hd">
+        <button type="button" class="sidebar-back-button" id="backToPatientBtn" aria-controls="patientPanel"><span data-ic="chevron" data-s="17" aria-hidden="true"></span>뒤로가기</button>
         <div class="hd-txt">
           <h2 id="h-res">응급실 병원 후보</h2>
           <p id="recommendationMeta" hidden>후보의 진료 조건을 확인한 뒤 실제 도로 경로를 계산합니다.</p>
@@ -2321,9 +2313,6 @@ function selectClinicianPanel(panel,{scroll=false}={}){
   const showResults=panel==='results';
   $('patientPanel').hidden=showResults;
   $('resultPanel').hidden=!showResults;
-  $('sidebarInputTab').setAttribute('aria-pressed',String(!showResults));
-  $('sidebarResultsTab').setAttribute('aria-pressed',String(showResults));
-  $('sidebarTabs').dataset.active=showResults?'results':'patient';
   $('clinicianSidebar').dataset.active=showResults?'results':'patient';
   if(showResults) $('resultPanel').scrollTop=0;
   else $('patientPanel').scrollTop=0;
@@ -3012,9 +3001,6 @@ function selectHospitalCard(id,{focusMap=true}={}){
 }
 
 function renderResults(){
-  const count=$('sidebarResultCount');
-  count.textContent=Math.min(5,state.ranked.length);
-  count.hidden=!state.ranked.length;
   const active=state.ranked.find(h=>h.id===state.activeHospitalId)||state.ranked[0];
   if(active) state.activeHospitalId=active.id;
   const compact=state.ranked.filter(h=>h.id!==active?.id).slice(0,4);
@@ -3329,12 +3315,7 @@ function onDiseaseChanged(){
 }
 document.querySelector('[data-role="public"]').addEventListener('click',()=>selectRole('public'));
 document.querySelector('[data-role="clinician"]').addEventListener('click',()=>selectRole('clinician'));
-$('sidebarInputTab').addEventListener('click',()=>selectClinicianPanel('patient'));
-$('sidebarResultsTab').addEventListener('click',()=>selectClinicianPanel('results'));
-$('demoBadge').addEventListener('click',()=>{
-  const open=$('demoPopover').hidden;
-  $('demoPopover').hidden=!open; $('demoBadge').setAttribute('aria-expanded',String(open));
-});
+$('backToPatientBtn').addEventListener('click',()=>selectClinicianPanel('patient',{scroll:true}));
 $('toggleClinicalOptions').addEventListener('click',()=>{
   const open=$('clinicalOptions').hidden;
   $('clinicalOptions').hidden=!open; $('toggleClinicalOptions').setAttribute('aria-expanded',String(open));
