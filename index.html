@@ -2756,7 +2756,8 @@ function updateOriginSummary(){
     el.coordTxt.textContent='위치 또는 주소를 지정해 주세요';
     return;
   }
-  $('originSummary').textContent=`위치 · ${state.originLabel||'지도에서 선택'}`;
+  const originLabel=state.originLabel||'지도에서 선택';
+  $('originSummary').textContent=originLabel==='위치'?'위치':`위치 · ${originLabel}`;
   el.coordTxt.textContent=state.originAreaLabel||state.originLabel||'위치';
 }
 
