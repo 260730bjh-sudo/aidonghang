@@ -1,0 +1,166 @@
+- generic:
+  - text: ›
+  - main [ref=e34]:
+    - complementary "의료진 정보 패널" [ref=e35]:
+      - generic "사이드바 높이 조절" [ref=e36]
+      - generic [ref=e38]:
+        - img [ref=e40]
+        - generic [ref=e43]:
+          - generic [ref=e44]: 위치 · 로딩 중
+          - generic [ref=e45]: 현재 위치를 확인하고 있습니다
+      - region "환자 입력" [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e49]:
+            - heading "환자 입력" [level=2] [ref=e50]
+            - paragraph [ref=e51]: 의료진 판단 보조용 · 실제 환자 식별정보는 입력하지 마세요
+          - generic [ref=e52]:
+            - generic [ref=e53]: 질환명 또는 증상 검색
+            - generic [ref=e54]:
+              - img [ref=e56]
+              - searchbox "질환명 또는 증상 검색" [ref=e59]
+            - generic "자주 선택하는 응급 상태" [ref=e60]:
+              - button "심정지" [ref=e61] [cursor=pointer]
+              - button "STEMI" [ref=e62] [cursor=pointer]
+              - button "뇌졸중" [ref=e63] [cursor=pointer]
+              - button "중증 외상" [ref=e64] [cursor=pointer]
+              - button "호흡곤란" [ref=e65] [cursor=pointer]
+              - button "의식저하" [ref=e66] [cursor=pointer]
+          - group [ref=e67]:
+            - generic "전체 분류에서 찾기 ›" [ref=e68] [cursor=pointer]
+            - option "심장 · 심정지 (심실세동/무맥성 VT/무수축)"
+            - option "심장 · 심장눌림증 (심낭압전)"
+            - option "심장 · 고도 서맥·완전방실차단 + 쇼크"
+            - option "심장 · ST분절상승 심근경색 (STEMI)" [selected]
+            - option "심장 · 불안정형 협심증 / 비ST상승 심근경색"
+            - option "심장 · 급성 대동맥박리"
+            - option "혈관 · 급성 사지동맥 폐색"
+            - option "심장 · 급성 심부전 · 폐부종"
+            - option "심장 · 심방세동 (빠른 심실반응)"
+            - option "심장 · 발작성 상심실성 빈맥 (PSVT)"
+        - group [ref=e69]:
+          - generic "자동 판정 요약 KTAS 2 긴급 · 순환기내과 · 골든타임 90분 ›" [active] [ref=e70] [cursor=pointer]:
+            - generic [ref=e71]: 자동 판정 요약
+            - generic [ref=e72]: KTAS 2 긴급 · 순환기내과 · 골든타임 90분
+            - text: ›
+          - generic [ref=e73]:
+            - generic [ref=e74]:
+              - generic [ref=e75]:
+                - generic [ref=e76]: KTAS 등급
+                - radiogroup "KTAS 등급" [ref=e77]:
+                  - radio "KTAS 1 소생" [ref=e79] [cursor=pointer]:
+                    - generic [ref=e80]: "1"
+                    - generic [ref=e82]: 소생
+                  - radio "KTAS 2 긴급" [checked] [ref=e83] [cursor=pointer]:
+                    - generic [ref=e84]: "2"
+                    - generic [ref=e86]: 긴급
+                  - radio "KTAS 3 응급" [ref=e87] [cursor=pointer]:
+                    - generic [ref=e88]: "3"
+                    - generic [ref=e90]: 응급
+                  - radio "KTAS 4 준응급" [ref=e91] [cursor=pointer]:
+                    - generic [ref=e92]: "4"
+                    - generic [ref=e94]: 준응급
+                  - radio "KTAS 5 비응급" [ref=e95] [cursor=pointer]:
+                    - generic [ref=e96]: "5"
+                    - generic [ref=e98]: 비응급
+              - generic [ref=e99]:
+                - generic [ref=e100]: 필요 진료과
+                - generic [ref=e101]:
+                  - combobox "필요 진료과" [ref=e102] [cursor=pointer]:
+                    - option "순환기내과" [selected]
+                    - option "호흡기내과"
+                    - option "신경과"
+                    - option "신경외과"
+                    - option "외과"
+                    - option "정형외과"
+                    - option "성형외과"
+                    - option "산부인과"
+                    - option "소아청소년과"
+                    - option "안과"
+                    - option "이비인후과"
+                    - option "비뇨의학과"
+                    - option "피부과"
+                    - option "치과"
+                    - option "정신건강의학과"
+                    - option "혈액·종양내과"
+                    - option "영상의학과"
+                    - option "기타 진료과"
+                  - generic:
+                    - img
+            - heading "질환 참고 정보" [level=3] [ref=e103]
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - generic [ref=e106]: KTAS 2 · 긴급
+                - heading "ST분절상승 심근경색 (STEMI)" [level=3] [ref=e107]
+              - generic [ref=e108]:
+                - generic [ref=e109]: 심장
+                - generic [ref=e110]: 필요 진료과 순환기내과
+                - generic [ref=e111]: 중증응급 재관류중재술
+                - generic [ref=e112]:
+                  - img [ref=e113]
+                  - text: 권장 진료 15분 이내
+              - generic [ref=e116]:
+                - generic [ref=e117]:
+                  - term [ref=e118]: 주요 증상 · 소견
+                  - definition [ref=e119]: 30분 이상 조이는 흉통, 식은땀, 방사통
+                - generic [ref=e120]:
+                  - term [ref=e121]: 심각성 (왜 위험한가)
+                  - definition [ref=e122]: 심근 괴사 진행, 치명적 부정맥·심인성 쇼크
+                - generic [ref=e123]:
+                  - term [ref=e124]: 필요한 치료 · 처치
+                  - definition [ref=e125]: 도착 10분 내 심전도, 항혈소판제(아스피린+P2Y12), 항응고, 응급 관상동맥중재술(PCI)
+                - generic [ref=e126]:
+                  - term [ref=e127]: 골든타임
+                  - definition [ref=e128]:
+                    - strong [ref=e129]: 1.5시간
+                    - text: 90분
+                    - generic [ref=e130]: 원문 · Door-to-Balloon 90분 이내
+        - text: ›
+      - button "위치 확인 중" [disabled] [ref=e132]:
+        - img [ref=e134]
+        - generic [ref=e137]: 위치 확인 중
+    - region "전국 응급의료기관 지도" [ref=e139]:
+      - generic [ref=e141]:
+        - application "전국 응급의료기관 지도. 위치 변경 모드에서만 지도를 눌러 위치를 지정할 수 있습니다." [ref=e142]:
+          - generic [ref=e143]:
+            - generic:
+              - img [ref=e145]
+              - generic:
+                - button "68개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e147] [cursor=pointer]: "68"
+                - button "77개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e149] [cursor=pointer]: "77"
+                - button "217개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e151] [cursor=pointer]: "217"
+                - button "61개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e153] [cursor=pointer]: "61"
+                - button "4개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e155] [cursor=pointer]: "4"
+                - button "13개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e157] [cursor=pointer]: "13"
+                - button "18개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e159] [cursor=pointer]: "18"
+                - button "46개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e161] [cursor=pointer]: "46"
+                - button "12개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e163] [cursor=pointer]: "12"
+                - button "4개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e165] [cursor=pointer]: "4"
+                - button "4개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e167] [cursor=pointer]: "4"
+                - button "울릉군보건의료원, 가용" [ref=e169] [cursor=pointer]:
+                  - generic [ref=e170]: "5"
+                - button "3개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e172] [cursor=pointer]: "3"
+                - button "인천광역시의료원백령병원, 가용" [ref=e174] [cursor=pointer]:
+                  - generic [ref=e175]: "4"
+                - button "학교법인울산공업학원울산대학교병원, 가용" [ref=e177] [cursor=pointer]:
+                  - generic [ref=e178]: "8"
+          - generic [ref=e179]:
+            - generic [ref=e182]: 128km
+            - link "Kakao 맵으로 이동(새창열림)" [ref=e184] [cursor=pointer]:
+              - /url: http://map.kakao.com/
+              - img "Kakao 맵으로 이동(새창열림)" [ref=e185]
+        - group "지도 빠른 도구" [ref=e186]:
+          - button "홈 화면으로 돌아가기" [ref=e187] [cursor=pointer]:
+            - img [ref=e189]
+          - button "실시간 교통 레이어 끄기" [pressed] [ref=e192] [cursor=pointer]:
+            - img [ref=e194]
+        - generic:
+          - generic:
+            - img
+          - generic: 지도 이동만으로 위치나 결과는 바뀌지 않습니다. ‘이 지역 검색’을 눌러 범위를 적용하세요.
+        - generic "지도 확대 축소" [ref=e196]:
+          - button "지도 확대" [ref=e197] [cursor=pointer]:
+            - img [ref=e199]
+          - button "지도 축소" [ref=e201] [cursor=pointer]:
+            - img [ref=e203]
+          - button "지도 원래 크기" [ref=e204] [cursor=pointer]:
+            - img [ref=e206]

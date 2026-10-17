@@ -738,7 +738,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #clinicianSidebar .origin-summary-row{border:0;border-radius:0;background:transparent;box-shadow:none}
 #clinicianSidebar .disease-picker{margin-bottom:0;padding:0}
 #clinicianSidebar .compact-disclosure{margin:0 0 14px;padding:6px 0;border-top:1px solid var(--sep);border-bottom:1px solid var(--sep)}
-#clinicianSidebar .compact-disclosure#allCategories{margin:14px 0 0;padding:10px 0 0;border:0;border-top:1px solid var(--sep)}
+#clinicianSidebar .compact-disclosure#allCategories{margin:14px 0 0;padding:0;border:0}
 #clinicianSidebar .auto-summary-row,
 #clinicianSidebar .origin-summary-row{min-height:64px;margin:0 0 12px;padding:12px 2px 16px;border-bottom:1px solid var(--sep)}
 #clinicianSidebar .search-range-status{background:transparent}
@@ -751,13 +751,24 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #clinicianSidebar .compact-disclosure#allCategories>.field+.field{margin-top:12px}
 #clinicianSidebar .clinical-options,
 #clinicianSidebar .origin-options{margin:0 0 12px;padding:8px 2px 16px;border:0;border-radius:0;border-bottom:1px solid var(--sep);background:transparent;box-shadow:none}
-#clinicianSidebar .patient-input-card{margin:0 0 14px;padding:0 0 16px;border:0;border-bottom:1px solid var(--sep);border-radius:0;background:transparent;box-shadow:none}
+#clinicianSidebar .patient-input-card{margin:0 0 16px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 #clinicianSidebar .patient-input-card .panel-hd{padding:2px 2px 14px}
 #clinicianSidebar .patient-input-card .disease-picker{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-#clinicianSidebar .patient-input-card .compact-disclosure#allCategories{margin:14px 0 0;padding-top:10px;border:0;border-top:1px solid var(--sep);border-radius:0;background:transparent;box-shadow:none}
+#clinicianSidebar .patient-input-card .compact-disclosure#allCategories{margin:14px 0 0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 #clinicianSidebar .patient-input-card #allCategories>summary{min-height:44px;padding:0 2px}
 #clinicianSidebar .patient-input-card #allCategories>.field{margin:12px 0 0}
 #clinicianSidebar .patient-input-card #allCategories>.field+.field{margin-top:14px}
+#clinicianSidebar .clinical-overview{margin:0 0 16px;padding:0;border:0;border-top:1px solid var(--sep);border-bottom:1px solid var(--sep);background:transparent;box-shadow:none}
+#clinicianSidebar .clinical-overview>summary{position:relative;display:grid;gap:4px;min-height:68px;padding:12px 30px 12px 2px;list-style:none}
+#clinicianSidebar .clinical-overview>summary::-webkit-details-marker{display:none}
+#clinicianSidebar .clinical-overview>summary::after{position:absolute;right:4px;top:50%;margin-top:-.65rem}
+#clinicianSidebar .clinical-overview[open]>summary{border-bottom:1px solid var(--sep)}
+.clinical-overview-title{color:var(--label-2);font-size:.8125rem;font-weight:650}
+#clinicianSidebar .clinical-overview .auto-summary{font-size:.875rem}
+.clinical-overview-content{display:grid;gap:12px;padding:12px 2px 16px}
+#clinicianSidebar .clinical-overview .clinical-options{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.clinical-reference-title{margin:0;color:var(--label);font-size:.8125rem;font-weight:650}
+#clinicianSidebar .clinical-overview .dx{margin:0;padding:0;background:transparent}
 .sidebar-pane .banner{margin:0 0 8px;padding:10px 12px}
 .sidebar-pane .banner strong{font-size:.9375rem}
 .sidebar-pane .banner p{font-size:.75rem}
@@ -1232,20 +1243,26 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       </details>
     </div>
 
-    <div class="auto-summary-row">
-      <div><div class="auto-summary" id="autoSummary"></div><div class="auto-summary-caption">자동 판정 요약</div></div>
-      <button type="button" class="quiet-action" id="toggleClinicalOptions" aria-expanded="false">변경</button>
-    </div>
-    <div class="clinical-options" id="clinicalOptions" hidden>
-      <div class="field">
-        <span class="lbl" id="ktasLbl">KTAS 등급</span>
-        <div class="seg still" id="ktasSeg" role="radiogroup" aria-labelledby="ktasLbl"><span class="seg-thumb"></span></div>
+    <details class="clinical-overview compact-disclosure" id="clinicalOverview">
+      <summary>
+        <span class="clinical-overview-title">자동 판정 요약</span>
+        <span class="auto-summary" id="autoSummary"></span>
+      </summary>
+      <div class="clinical-overview-content">
+        <div class="clinical-options" id="clinicalOptions">
+          <div class="field">
+            <span class="lbl" id="ktasLbl">KTAS 등급</span>
+            <div class="seg still" id="ktasSeg" role="radiogroup" aria-labelledby="ktasLbl"><span class="seg-thumb"></span></div>
+          </div>
+          <div class="field f-dept">
+            <label class="lbl" for="dept">필요 진료과</label>
+            <div class="select"><select id="dept"></select><span data-ic="updown" data-s="14"></span></div>
+          </div>
+        </div>
+        <h3 class="clinical-reference-title">질환 참고 정보</h3>
+        <div class="dx" id="dxStrip"></div>
       </div>
-      <div class="field f-dept">
-        <label class="lbl" for="dept">필요 진료과</label>
-        <div class="select"><select id="dept"></select><span data-ic="updown" data-s="14"></span></div>
-      </div>
-    </div>
+    </details>
 
     <details class="compact-disclosure" id="handoverBox" hidden>
       <summary>일반인 화면에서 전달된 요약</summary>
@@ -1256,11 +1273,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
         <button class="mode-switch" type="button" id="printClinicalReportBtn">인계 보고서 인쇄</button>
         <button class="mode-switch" type="button" id="clearHandoverBtn">전달 정보 지우기</button>
       </div>
-    </details>
-
-    <details class="compact-disclosure" id="diseaseReference">
-      <summary>질환 참고 정보</summary>
-      <div class="dx" id="dxStrip"></div>
     </details>
 
   </section>
@@ -3313,10 +3325,6 @@ function onDiseaseChanged(){
 document.querySelector('[data-role="public"]').addEventListener('click',()=>selectRole('public'));
 document.querySelector('[data-role="clinician"]').addEventListener('click',()=>selectRole('clinician'));
 $('backToPatientBtn').addEventListener('click',()=>selectClinicianPanel('patient',{scroll:true}));
-$('toggleClinicalOptions').addEventListener('click',()=>{
-  const open=$('clinicalOptions').hidden;
-  $('clinicalOptions').hidden=!open; $('toggleClinicalOptions').setAttribute('aria-expanded',String(open));
-});
 $('pickOriginOnMap').addEventListener('click',()=>{
   state.pickOriginMode=!state.pickOriginMode;
   $('pickOriginOnMap').setAttribute('aria-pressed',String(state.pickOriginMode));
