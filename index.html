@@ -723,6 +723,11 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .compact-disclosure#handoverBox .handover-meta,.compact-disclosure#handoverBox .handover-text,.compact-disclosure#handoverBox .handover-actions{margin:8px 12px}
 .compact-disclosure#handoverBox .handover-text{font-size:.8125rem;line-height:1.4}
 .compact-disclosure#handoverBox .handover-actions button{min-height:44px}
+.location-hero{display:flex;align-items:center;gap:11px;flex:none;margin:0 2px;padding:12px 14px;border:1px solid var(--sep);border-radius:22px;background:var(--surface);box-shadow:0 3px 12px rgba(0,0,0,.07)}
+.location-hero-icon{width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:14px;background:var(--blue-soft);color:var(--blue-text)}
+#clinicianSidebar .location-hero .origin-summary-row{min-height:0;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
+.location-hero .origin-summary{font-size:.9375rem;font-weight:700}
+.location-hero .auto-summary-caption{margin-top:2px}
 #clinicianSidebar .disease-picker,
 #clinicianSidebar .compact-disclosure,
 #clinicianSidebar .auto-summary-row,
@@ -1171,6 +1176,19 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 <main class="wrap" id="clinicianApp" hidden>
   <aside class="clinician-sidebar" id="clinicianSidebar" aria-label="의료진 정보 패널">
     <div class="sheet-drag" id="sheetDragHandle" aria-label="사이드바 높이 조절"><span></span></div>
+    <div class="location-hero">
+      <span class="location-hero-icon" data-ic="pin" data-s="19" aria-hidden="true"></span>
+      <div class="origin-summary-row">
+        <div class="origin-summary" id="originSummary">위치 · 로딩 중</div>
+        <div class="auto-summary-caption" id="coordTxt">현재 위치를 확인하고 있습니다</div>
+      </div>
+    </div>
+    <div class="origin-options" id="originOptions" hidden>
+      <div class="origin-location-actions">
+        <button type="button" class="public-secondary" id="pickOriginOnMap">지도에서 위치 선택</button>
+      </div>
+      <p class="origin-status" id="originStatus" aria-live="polite">현재 위치를 확인하고 있습니다.</p>
+    </div>
     <div class="sidebar-nav-row">
       <nav class="sidebar-tabs" id="sidebarTabs" aria-label="사이드 패널 선택">
         <span class="sidebar-tab-thumb" aria-hidden="true"></span>
@@ -1236,16 +1254,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
         <label class="lbl" for="dept">필요 진료과</label>
         <div class="select"><select id="dept"></select><span data-ic="updown" data-s="14"></span></div>
       </div>
-    </div>
-
-    <div class="origin-summary-row">
-      <div><div class="origin-summary" id="originSummary">위치 · 로딩 중</div><div class="auto-summary-caption" id="coordTxt">현재 위치를 확인하고 있습니다</div></div>
-    </div>
-    <div class="origin-options" id="originOptions" hidden>
-      <div class="origin-location-actions">
-        <button type="button" class="public-secondary" id="pickOriginOnMap">지도에서 위치 선택</button>
-      </div>
-      <p class="origin-status" id="originStatus" aria-live="polite">현재 위치를 확인하고 있습니다.</p>
     </div>
 
     <details class="compact-disclosure" id="handoverBox" hidden>
