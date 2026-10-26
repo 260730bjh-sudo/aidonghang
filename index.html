@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light dark"><title>SAVIOR 응급 이송 안내</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"><script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script><style>:root{color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:16px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light dark"><title>SAVIOR 응급 이송 안내</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"><style>:root{color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:16px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <style>
 /* Layout: system-gray ground, grouped panels — ① 입력(전체 폭) → ② 지도(넓게) + ③ 추천(좁게) 나란히, 모바일은 한 줄 */
 :root{
@@ -4329,7 +4329,6 @@ $('usePublicMapLocation').addEventListener('click',async()=>{
   publicMapSelection=coords;publicLocationLabel=label;publicReportDraft.location=label;publicReportDraft.locationVerified=true;
   $('publicLocationStatus').textContent=`현재 위치: ${label}`;$('publicMapPicker').hidden=true;$('publicManualLocation').hidden=true;$('publicManualLocationToggle').hidden=true;updatePublicSmsLinks();
 });
-$('publicSharedReportBack').addEventListener('click',()=>{sharedPublicReport=null;openPublicHome();requestPublicLocation();});
 $('publicStepContent').addEventListener('change',event=>{
   if(event.target.id==='publicOnset'&&event.target.value){
     publicReportDraft.onset=event.target.value;publicReportDraft.onsetMode='exact';
