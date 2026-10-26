@@ -207,6 +207,9 @@ b{font-weight:650}
 #map .kakao-cluster:hover,#map .kakao-cluster:focus-visible{transform:scale(1.08);outline:3px solid #2864dc66}
 #map .kakao-me{width:18px;height:18px;border:3px solid #fff;border-radius:50%;background:#007aff;box-shadow:0 0 0 8px #007aff33,0 2px 6px #0005}
 #map .kakao-patient-dot{width:18px;height:18px;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 7px rgba(0,0,0,.12),0 2px 6px #0006}
+#map .kakao-patient-dot{position:relative;cursor:pointer}
+#map .kakao-patient-dot::after{content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + 12px);z-index:2;width:max-content;max-width:220px;padding:7px 9px;border:1px solid var(--material-edge);border-radius:8px;background:var(--material-solid);box-shadow:var(--shadow-float);color:var(--label);font:600 12px/1.3 var(--font);white-space:nowrap;opacity:0;pointer-events:none;transform:translate(-50%,4px);transition:opacity .14s ease,transform .14s ease}
+#map .kakao-patient-dot:hover::after,#map .kakao-patient-dot:focus-visible::after{opacity:1;transform:translate(-50%,0)}
 #map .kakao-patient-dot.severity-critical{background:#E53935;box-shadow:0 0 0 7px #E5393533,0 2px 6px #0006}
 #map .kakao-patient-dot.severity-caution{background:#FF9500;box-shadow:0 0 0 7px #FF950033,0 2px 6px #0006}
 #map .kakao-patient-dot.severity-reported{background:#34C759;box-shadow:0 0 0 7px #34C75933,0 2px 6px #0006}
@@ -1028,9 +1031,10 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .public-font-controls button,.public-tool-button{min-width:48px;min-height:48px;padding:0 10px;border:1px solid var(--sep);border-radius:9px;background:var(--surface);color:var(--label);font-weight:700;cursor:pointer}
 .public-font-controls button[aria-pressed="true"],#publicApp .public-tool-button[aria-pressed="true"]{outline:3px solid var(--blue);outline-offset:1px}
 #publicApp .public-location-strip{display:flex;align-items:center;gap:10px;min-height:58px;margin:0 0 14px;padding:8px 12px;border:1px solid var(--sep);border-radius:14px;background:var(--surface);color:var(--label)}
+#publicApp .public-location-actions{display:flex;gap:6px;flex:none}
 .public-location-icon{font-size:22px!important}
 #publicApp #publicLocationStatus{flex:1;min-width:0;margin:0;font-weight:700;overflow-wrap:anywhere}
-#publicApp .public-location-edit{min-height:48px;padding:0 12px;border:1px solid var(--sep);border-radius:10px;background:var(--surface);color:var(--label);font-weight:700;cursor:pointer}
+#publicApp .public-location-edit{min-height:44px;padding:0 9px;border:1px solid var(--sep);border-radius:10px;background:var(--surface);color:var(--label);font-size:.76em;font-weight:700;cursor:pointer}
 #publicApp .public-primary{background:#B42318;color:#fff}
 #publicApp .public-secondary{border:2px solid var(--sep);background:var(--surface);color:var(--label)}
 #publicApp .public-manual-location{display:grid;gap:10px;margin:0 0 14px;padding:14px;border:2px solid var(--blue);border-radius:14px;background:var(--surface)}
@@ -1149,7 +1153,9 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
   #publicApp .report-action{min-height:76px;padding-inline:2px}
   #publicApp .summary-report-action{min-height:72px;padding:7px 4px}
   #publicApp .public-location-strip{align-items:flex-start;flex-wrap:wrap}
-  #publicApp .public-location-edit{width:100%}
+  #publicApp .public-location-strip{flex-wrap:wrap}
+  #publicApp .public-location-actions{width:100%;padding-left:32px}
+  #publicApp .public-location-edit{flex:1}
 }
 @media(prefers-reduced-motion:reduce){
   #publicApp .cpr-flash-surface{display:none!important;transition:none!important}
@@ -1209,7 +1215,10 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     <section class="public-location-strip" aria-label="환자 위치">
       <span class="public-location-icon" aria-hidden="true">📍</span>
       <p id="publicLocationStatus" aria-live="polite">현재 위치 확인 중…</p>
-      <button type="button" class="public-location-edit" id="publicManualLocationToggle" hidden>위치 직접 입력</button>
+      <div class="public-location-actions">
+        <button type="button" class="public-location-edit" id="publicLocationRetry">위치 다시 확인</button>
+        <button type="button" class="public-location-edit" id="publicManualLocationToggle">위치 직접 입력</button>
+      </div>
     </section>
     <section class="public-manual-location" id="publicManualLocation" hidden aria-labelledby="publicManualLocationTitle">
       <h2 id="publicManualLocationTitle">환자 위치 입력</h2>
@@ -1293,13 +1302,14 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       <h2 id="handoverTitle" tabindex="-1">전달할 정보가 준비됐어요</h2>
       <p>아래 버튼으로 신고 내용을 직접 전달하세요.</p>
       <div class="summary-actions">
-        <a class="summary-report-action call" href="tel:119"><span aria-hidden="true">📞</span>119 전화</a>
-        <a class="summary-report-action sms" id="summarySmsLink" href="sms:119?body="><span aria-hidden="true">💬</span>119 문자신고</a>
-        <button type="button" class="summary-report-action share" data-share-report><span aria-hidden="true">📤</span>구급대에 정보 보내기</button>
+        <a class="summary-report-action call" href="tel:119">119 전화</a>
+        <a class="summary-report-action sms" id="summarySmsLink" href="sms:119?body=">119 문자신고</a>
+        <button type="button" class="summary-report-action share" data-share-report>구급대에 정보 보내기</button>
         <button type="button" class="summary-report-action copy" id="copyHandoverBtn">요약 복사</button>
       </div>
       <ul id="handoverSummaryList" class="public-summary-list"></ul>
       <section class="public-care-summary" id="publicCareSummary"></section>
+      <button type="button" class="public-secondary" id="startNewPublicReport">새 환자 신고 작성</button>
       <details class="public-summary-details">
         <summary>자세히 보기</summary>
         <p>공유 자료는 서버 메모리에 최대 60분 보관되고, 재시작 시 삭제됩니다.</p>
@@ -1323,9 +1333,9 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     </section>
   </div>
   <nav class="public-call-dock" aria-label="긴급 신고">
-    <a class="report-action call" id="publicCallLink" href="tel:119"><span aria-hidden="true">📞</span><strong>119 전화</strong></a>
-    <a class="report-action sms" id="publicSmsLink" href="sms:119?body="><span aria-hidden="true">💬</span><strong>119 문자신고</strong></a>
-    <button type="button" class="report-action share" id="publicShareButton"><span aria-hidden="true">📤</span><strong>구급대에 정보 보내기</strong></button>
+    <a class="report-action call" id="publicCallLink" href="tel:119"><strong>119 전화</strong></a>
+    <a class="report-action sms" id="publicSmsLink" href="sms:119?body="><strong>119 문자신고</strong></a>
+    <button type="button" class="report-action share" id="publicShareButton"><strong>구급대에 정보 보내기</strong></button>
     <details class="report-disclaimer"><summary aria-label="신고·위치 공유 안내 보기">ⓘ</summary><p>이 앱은 진단이나 119 신고를 대신하지 않습니다. 확인한 위치와 응답 분류는 모든 방문자가 의료진 지도에서 최대 60분 볼 수 있으며, 실제 119로 자동 전송되지 않습니다.</p></details>
   </nav>
   <dialog class="share-code-dialog" id="shareCodeDialog" aria-labelledby="shareCodeTitle">
@@ -2375,7 +2385,7 @@ function KakaoMap(container){
       meOverlay=new kakao.maps.CustomOverlay({position:point(pos),content:dot,yAnchor:.5,zIndex:30});
       meOverlay.setMap(map);
     },
-    renderPatientReports(reports){
+    renderPatientReports(reports,onSelect){
       clear(patientReportOverlays);
       (reports||[]).forEach(report=>{
         const coords=report.locationCoordinates;
@@ -2383,8 +2393,14 @@ function KakaoMap(container){
         const severity=['critical','caution','reported','unknown'].includes(report.severity)?report.severity:'unknown';
         const dot=document.createElement('div');
         dot.className=`kakao-patient-dot severity-${severity}`;
-        dot.setAttribute('role','img');
-        dot.setAttribute('aria-label',`환자 신고 위치 · ${publicSeverityLabel(severity)} · ${new Date(report.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}`);
+        const condition=String(report.patientSummary?.situation||publicSeverityLabel(severity)).slice(0,28);
+        const createdAt=Date.parse(report.createdAt),elapsed=Number.isFinite(createdAt)?Math.max(0,Math.floor((Date.now()-createdAt)/60_000)):0;
+        const tooltip=`${condition} · ${elapsed<1?'방금 전':`${elapsed}분 전`}`;
+        dot.dataset.tooltip=tooltip;
+        dot.setAttribute('role','button');dot.tabIndex=0;
+        dot.setAttribute('aria-label',`환자 신고 위치 · ${tooltip} · 선택하면 경로를 찾습니다`);
+        dot.addEventListener('click',event=>{event.stopPropagation();onSelect?.(report);});
+        dot.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();onSelect?.(report);}});
         const overlay=new kakao.maps.CustomOverlay({position:point(coords),content:dot,yAnchor:.5,zIndex:50});
         overlay.setMap(map);patientReportOverlays.push(overlay);
       });
@@ -2620,7 +2636,7 @@ const PUBLIC_WIZARD_STEPS=[
   {key:'other',title:'추가로 전할 내용',help:'선택 사항입니다.'}
 ];
 let publicWizardStep=0, publicSummaryVisible=false, publicFastMode=false;
-let publicUX2=true,publicUrgentReason=null, publicMapInstance=null, publicMapMarker=null, publicMapSelection=null,publicLocationRequested=false,publicLocationLabel='',sharedPublicReport=null,publicSharePending=null,publicAdvanceTimer=null,publicStepHistory=[],publicStepPlan=[];
+let publicUX2=true,publicUrgentReason=null, publicMapInstance=null, publicMapMarker=null, publicMapSelection=null,publicLocationRequested=false,publicLocationRequestId=0,publicLocationTimeout=null,publicLocationLabel='',sharedPublicReport=null,publicSharePending=null,publicAdvanceTimer=null,publicStepHistory=[],publicStepPlan=[],publicStepLocationTimeout=null;
 let cprTimer=null,cprAudioContext=null,cprCountValue=0,cprSensesEnabled=true,cprFlashEnabled=!matchMedia('(prefers-reduced-motion: reduce)').matches;
 const publicReportDraft={location:'',locationVerified:false,situation:'',situationKey:'',consciousness:'',breathing:'',bleeding:'',onset:'',onsetMode:'',onsetAt:'',onsetSelectedAt:'',other:'',actions:[],reportId:'',reportExpiresAt:''};
 function legacyActivePublicSteps(){
@@ -2913,24 +2929,35 @@ async function lookupPublicLocationLabel(coords){
   }catch{return '현재 위치';}
 }
 function requestPublicLocation(){
-  if(publicLocationRequested||sharedPublicReport) return;
+  if(sharedPublicReport) return;
+  const requestId=++publicLocationRequestId;
+  if(publicLocationTimeout) clearTimeout(publicLocationTimeout);
   publicLocationRequested=true;
-  $('publicLocationStatus').textContent='📍 현재 위치 확인 중…';
-  $('publicManualLocationToggle').hidden=true;
+  $('publicLocationStatus').textContent='현재 위치 확인 중…';
+  $('publicLocationRetry').disabled=true;
   if(!navigator.geolocation){
-    $('publicLocationStatus').textContent='위치를 확인하지 못했습니다.';
-    $('publicManualLocationToggle').hidden=false;return;
+    $('publicLocationStatus').textContent='현재 위치를 확인할 수 없습니다. 다시 시도하거나 직접 입력해 주세요.';
+    publicLocationRequested=false;$('publicLocationRetry').disabled=false;return;
   }
+  publicLocationTimeout=setTimeout(()=>{
+    if(requestId!==publicLocationRequestId) return;
+    publicLocationRequested=false;$('publicLocationRetry').disabled=false;
+    $('publicLocationStatus').textContent='위치 응답이 늦습니다. 다시 시도하거나 위치를 직접 입력해 주세요.';
+  },10_000);
   navigator.geolocation.getCurrentPosition(async position=>{
+    if(requestId!==publicLocationRequestId) return;
+    clearTimeout(publicLocationTimeout);publicLocationTimeout=null;publicLocationRequested=false;$('publicLocationRetry').disabled=false;
     const coords={lat:position.coords.latitude,lng:position.coords.longitude};
     setPublicLocation(coords,'위치 확인됨');
     const label=await lookupPublicLocationLabel(coords);
-    setPublicLocation(coords,label);
+    if(requestId===publicLocationRequestId) setPublicLocation(coords,label);
   },()=>{
+    if(requestId!==publicLocationRequestId) return;
+    clearTimeout(publicLocationTimeout);publicLocationTimeout=null;publicLocationRequested=false;$('publicLocationRetry').disabled=false;
     publicMapSelection=null;publicReportDraft.location='';publicReportDraft.locationVerified=false;
-    $('publicLocationStatus').textContent='위치를 확인하지 못했습니다.';
-    $('publicManualLocationToggle').hidden=false;updatePublicSmsLinks();
-  },{enableHighAccuracy:false,timeout:8000,maximumAge:300000});
+    $('publicLocationStatus').textContent='위치를 확인하지 못했습니다. 다시 시도하거나 직접 입력해 주세요.';
+    updatePublicSmsLinks();
+  },{enableHighAccuracy:false,timeout:10000,maximumAge:300000});
 }
 function messageFor119(data=publicHandover()){
   const coords=data.locationCoordinates||publicMapSelection;
@@ -3272,11 +3299,22 @@ function setPatientReportsOnMap(reports){
     const coords=report?.locationCoordinates;
     return coords&&Number.isFinite(coords.lat)&&Number.isFinite(coords.lng)&&Math.abs(coords.lat)<=90&&Math.abs(coords.lng)<=180;
   });
-  MAP?.renderPatientReports?.(state.patientReports);
+  MAP?.renderPatientReports?.(state.patientReports,selectPatientReport);
   const legend=$('patientReportLegend');
   if(!legend) return;
   legend.hidden=!state.patientReports.length;
   $('patientReportLegendCount').textContent=`환자 신고 ${state.patientReports.length}건 · 최근 60분`;
+}
+function selectPatientReport(report){
+  const destination=report?.locationCoordinates;
+  if(!destination||!Number.isFinite(destination.lat)||!Number.isFinite(destination.lng)) return;
+  if(!state.origin){
+    $('originOptions').hidden=false;
+    $('originStatus').textContent='환자 위치로 가는 길을 찾으려면 먼저 현재 위치를 확인하거나 지도에서 출발지를 선택해 주세요.';
+    toast('출발 위치를 확인한 뒤 환자 핑을 다시 선택해 주세요.','warn');
+    return;
+  }
+  requestDirectionsToPoint(destination,{label:'환자 위치'});
 }
 async function refreshSharedPatientReports({focusLatest=false}={}){
   if(document.body.dataset.mode!=='clinician') return;
@@ -3681,7 +3719,7 @@ function applyAvailableScores(candidates){
   candidates.sort((a,b)=>b.score-a.score||Number(b.liveDeptVerified===true)-Number(a.liveDeptVerified===true)||a.eta-b.eta);
 }
 
-async function requestDirections(h){
+async function requestDirectionsToPoint(destination,{label='목적지'}={}){
   if(!state.origin) return;
   routeController?.abort();
   const requestId=++state.routeRequestId;
@@ -3691,7 +3729,7 @@ async function requestDirections(h){
   MAP.clearRoute();
   const query=new URLSearchParams({
     origin:`${origin.lng},${origin.lat}`,
-    destination:`${h.lng},${h.lat}`
+    destination:`${destination.lng},${destination.lat}`
   });
   try{
     const response=await fetch(`/api/directions?${query}`,{cache:'no-store',signal});
@@ -3699,15 +3737,18 @@ async function requestDirections(h){
     if(requestId!==state.routeRequestId) return;
     if(!response.ok) throw new Error(data.error||`길찾기 요청 실패 (${response.status})`);
     if(!Array.isArray(data.path)||data.path.length<2) throw new Error('표시할 경로 좌표가 없습니다.');
-    h.routePath=data.path;h.routeFetchedAt=Date.now();h.routeOriginKey=`${origin.lat.toFixed(5)},${origin.lng.toFixed(5)}`;
-    MAP.drawRoute(origin,h,{path:data.path});
+    MAP.drawRoute(origin,destination,{path:data.path});
+    if(Number.isFinite(data.duration)&&Number.isFinite(data.distance)){
+      toast(`${label}까지 자동차 경로를 찾았습니다 · 약 ${Math.max(1,Math.round(data.duration/60))}분 · ${(data.distance/1000).toFixed(1)}km`,'ok');
+    }else toast(`${label}까지 자동차 경로를 지도에 표시했습니다.`,'ok');
   }catch(error){
     if(requestId!==state.routeRequestId) return;
     if(error.name==='AbortError') return;
     MAP.clearRoute();
-    toast('카카오모빌리티 경로 조회에 실패했습니다.','warn');
+    toast(error.message||'자동차 경로를 찾지 못했습니다.','warn');
   }
 }
+function requestDirections(h){return requestDirectionsToPoint(h,{label:'선택 병원'});}
 
 function setSearching(on){
   el.searchBtn.disabled=on||!state.origin||!state.dxNo; el.searchBtn.classList.toggle('busy',on);
@@ -4015,7 +4056,11 @@ $('transferActiveBtn').addEventListener('click',()=>{
 });
 installSheetDrag();
 $('openFirstAidBtn').addEventListener('click',openPublicFirstAid);
+$('publicLocationRetry').addEventListener('click',requestPublicLocation);
 $('publicManualLocationToggle').addEventListener('click',()=>{
+  publicLocationRequestId++;publicLocationRequested=false;
+  if(publicLocationTimeout){clearTimeout(publicLocationTimeout);publicLocationTimeout=null;}
+  $('publicLocationRetry').disabled=false;
   $('publicManualLocation').hidden=!$('publicManualLocation').hidden;
   if(!$('publicManualLocation').hidden) $('publicLocation').focus();
 });
@@ -4028,6 +4073,7 @@ $('publicStatusChoices').addEventListener('click',event=>{
 });
 $('publicStatusChoices').addEventListener('keydown',handleRadioArrowKeys);
 $('publicBackHome').addEventListener('click',openPublicHome);
+$('startNewPublicReport').addEventListener('click',()=>startPublicQuestions(publicReportDraft.situationKey||'other'));
 $('firstAidBackHome').addEventListener('click',openPublicHome);
 $('sharedReportBack').addEventListener('click',()=>{sharedPublicReport=null;openPublicHome();requestPublicLocation();});
 $('publicStepContent').addEventListener('input',event=>{
@@ -4070,8 +4116,10 @@ $('publicStepContent').addEventListener('click',event=>{
   const locButton=event.target.closest('#publicUseLocation');
   if(locButton){
     if(!navigator.geolocation){ $('publicLocationStatus').textContent='현재 위치를 확인할 수 없습니다. 주소를 적거나 건너뛰세요.'; return; }
+    if(publicStepLocationTimeout) clearTimeout(publicStepLocationTimeout);
     locButton.disabled=true; $('publicLocationStatus').textContent='현재 위치를 확인 중…';
     navigator.geolocation.getCurrentPosition(position=>{
+      if(publicStepLocationTimeout) clearTimeout(publicStepLocationTimeout);publicStepLocationTimeout=null;
       const {latitude,longitude}=position.coords;
       const value=`현재 위치 좌표 ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
       publicReportDraft.location=value; $('publicLocation').value=value;
@@ -4082,9 +4130,15 @@ $('publicStepContent').addEventListener('click',event=>{
       $('publicLocationStatus').textContent='환자가 있는 위치인지 확인해 주세요. 119로 자동 전송되지 않습니다.';
       locButton.disabled=false;
     },()=>{
+      if(publicStepLocationTimeout) clearTimeout(publicStepLocationTimeout);publicStepLocationTimeout=null;
       $('publicLocationStatus').textContent='위치 권한을 확인하지 못했습니다. 주소를 적거나 건너뛰세요.';
       locButton.disabled=false;
     },{enableHighAccuracy:false,timeout:8000,maximumAge:60000});
+    publicStepLocationTimeout=setTimeout(()=>{
+      if(!locButton.isConnected||!locButton.disabled) return;
+      $('publicLocationStatus').textContent='위치 응답이 늦습니다. 주소를 입력하거나 지도를 선택해 주세요.';
+      locButton.disabled=false;publicStepLocationTimeout=null;
+    },10_000);
     return;
   }
   if(event.target.closest('#togglePublicAddress')){ $('publicAddressForm').hidden=!$('publicAddressForm').hidden; return; }
