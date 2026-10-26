@@ -152,23 +152,33 @@ b{font-weight:650}
 .btn-primary.busy .spin{display:block}.btn-primary.busy .bi{display:none}
 
 /* ── 질환 정보 ── */
-.dx{margin:0 20px 20px;padding:18px;border-radius:var(--r-card);background:var(--surface-2);display:grid;gap:12px}
-.dx-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.dx-name{margin:0;font:700 22px/1.25 var(--font-display);letter-spacing:-.024em;text-wrap:balance;min-width:0}
-.ktas-chip{font:700 12px/1 var(--font);padding:7px 10px;border-radius:999px;color:var(--on-tint);white-space:nowrap}
-.ktas-chip.k1{background:var(--k1)}.ktas-chip.k2{background:var(--k2)}.ktas-chip.k3{background:var(--k3);color:var(--k3-ink)}
-.ktas-chip.k4{background:var(--k4)}.ktas-chip.k5{background:var(--fill);color:var(--label)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:5px;font:600 12px/1 var(--font);padding:7px 10px;border-radius:999px;background:var(--surface);color:var(--label-2)}
-.chip.red{background:var(--red-soft);color:var(--red-text)}
-.chip.time{margin-left:auto;color:var(--label)}
-.dx-grid{margin:4px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 20px}
-.dx-grid>div{min-width:0}
-.dx-grid dt{font-size:12px;font-weight:600;color:var(--label-2);margin-bottom:3px}
-.dx-grid dd{margin:0;font-size:14px;line-height:1.55}
-.gt-cell strong{font:700 22px/1.2 var(--font-display);letter-spacing:-.02em;color:var(--red-text);font-variant-numeric:tabular-nums}
-.gt-cell span{margin-left:6px;font-size:13px;color:var(--label-2);font-variant-numeric:tabular-nums}
-.gt-cell small{display:block;margin-top:4px;font-size:12px;color:var(--label-2);line-height:1.45}
+.dx{display:grid;gap:14px;min-width:0}
+.dx-card-head{display:flex;align-items:center;gap:11px;min-width:0}
+.ktas-tile{width:56px;height:56px;flex:none;display:grid;align-content:center;justify-items:center;gap:0;border-radius:17px;background:var(--red);color:#fff}
+.ktas-tile span{font:700 10px/1 var(--font);letter-spacing:.04em}
+.ktas-tile strong{font:800 25px/.98 var(--font-display);letter-spacing:-.04em}
+.dx-title-copy{flex:1;min-width:0}
+.dx-name{margin:0;font:700 18px/1.23 var(--font-display);letter-spacing:-.024em;text-wrap:balance}
+.dx-meta{margin-top:4px;color:var(--label-2);font:500 11.5px/1.4 var(--font)}
+.dx-meta-severe{color:var(--red-text);font-weight:650}
+.clinical-edit-button{flex:none;align-self:flex-start;min-height:38px;margin:0;padding:0 13px;border:0;border-radius:999px;background:var(--surface-2);color:var(--label);font:600 .8125rem var(--font);cursor:pointer}
+.dx-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.dx-metric{display:grid;align-content:center;gap:4px;min-height:64px;padding:10px 13px;border-radius:16px;background:var(--surface-2)}
+.dx-metric span{color:var(--label-2);font-size:11px;font-weight:600;line-height:1.25}
+.dx-metric strong{color:var(--label);font:750 17px/1.2 var(--font-display);letter-spacing:-.02em;overflow-wrap:anywhere}
+.dx-metric.urgent{background:var(--red-soft)}
+.dx-metric.urgent span,.dx-metric.urgent strong{color:var(--red-text)}
+.dx-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;padding:3px;border-radius:14px;background:var(--surface-2)}
+.dx-tab{min-width:0;min-height:40px;padding:0 5px;border:0;border-radius:11px;background:transparent;color:var(--label-2);font:600 .8125rem var(--font);cursor:pointer}
+.dx-tab[aria-selected="true"]{background:var(--surface);color:var(--label);box-shadow:0 1px 3px rgba(18,24,34,.13)}
+.dx-tab-panel{min-height:116px;padding:4px 2px 2px;color:var(--label);font-size:.875rem;line-height:1.55}
+.dx-bullets{display:grid;gap:11px;margin:0;padding:2px 0;list-style:none}
+.dx-bullets li{position:relative;padding-left:17px}
+.dx-bullets li::before{position:absolute;top:.57em;left:0;width:8px;height:8px;border-radius:50%;background:var(--red);content:""}
+.dx-evidence-text{display:grid;gap:9px}
+.dx-evidence-text p{margin:0}
+.dx-source-link{width:fit-content;color:var(--blue-text);font-size:.75rem;text-decoration:underline;text-underline-offset:2px}
+.dx-evidence-note{color:var(--label-2);font-size:.6875rem;line-height:1.4}
 
 /* ── 지도 · 결과 ── */
 .cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:20px;align-items:start}
@@ -236,7 +246,8 @@ b{font-weight:650}
 @keyframes halo{0%,100%{transform:scale(.7);opacity:.26}50%{transform:scale(1.15);opacity:.08}}
 
 /* 결과 */
-#resultList{padding:10px 16px 16px;display:grid;gap:12px}
+#resultList{min-width:0;grid-template-columns:minmax(0,1fr);padding:10px 16px 16px;display:grid;gap:12px}
+#resultList>*{min-width:0;max-width:100%}
 .empty{padding:40px 16px 46px;text-align:center;color:var(--label-2);font-size:14px;line-height:1.7}
 .ill{width:64px;height:64px;margin:0 auto 14px;border-radius:20px;background:var(--red-soft);color:var(--red);display:grid;place-items:center}
 .card{position:relative;border-radius:var(--r-card);background:var(--surface-2);padding:16px;display:grid;gap:12px;transition:opacity .3s}
@@ -271,9 +282,6 @@ b{font-weight:650}
 .stats dd.ok{color:var(--green-text)}.stats dd.bad{color:var(--red-text)}
 .stats dd.t-flow{color:var(--green-text)}.stats dd.t-ok{color:var(--t-ok-text)}.stats dd.t-slow{color:var(--orange-text)}.stats dd.t-jam{color:var(--red-text)}
 .sim{font-size:10px;font-weight:600;color:var(--orange-text);background:var(--orange-soft);padding:1px 5px;border-radius:4px;margin-left:3px}
-.gt{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:11px;font:600 13px/1.4 var(--font)}
-.gt.good{background:var(--green-soft);color:var(--green-text)}.gt.near{background:var(--orange-soft);color:var(--orange-text)}
-.gt.over{background:var(--red-soft);color:var(--red-text)}.gt.none{background:var(--fill-2);color:var(--label-2)}
 .breakdown{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--label-2)}
 .breakdown b{color:var(--label);font-variant-numeric:tabular-nums}
 .restr{font-size:12px;font-weight:500;color:var(--orange-text)}
@@ -311,13 +319,6 @@ b{font-weight:650}
 .banner p{margin:3px 0 0;font-size:12.5px;line-height:1.5;color:var(--label-2)}
 .route-link{display:inline-flex;align-items:center;gap:3px;margin-top:8px;font:600 13px/1.2 var(--font);color:var(--brand);text-decoration:none}
 .route-link:hover{text-decoration:underline}
-.route-summary{margin:12px 16px 0;padding:14px 16px;border-radius:14px;background:var(--blue-soft);color:var(--blue-text)}
-.route-summary-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.route-summary-head strong{font:700 15px/1.35 var(--font)}
-.route-summary-head span{flex:none;font-size:11px;font-weight:700;padding:4px 7px;border-radius:999px;background:var(--surface);color:var(--blue-text)}
-.route-summary p{margin:5px 0 0;font-size:13px;line-height:1.5;color:var(--label)}
-.route-summary small{display:block;margin-top:4px;color:var(--label-2);font-size:11px}
-.route-guides{display:grid;gap:5px;margin:10px 0 0;padding-left:20px;color:var(--label);font-size:12px;line-height:1.45}
 
 .excluded{margin:0 16px 16px;border-radius:14px;background:var(--surface-2);overflow:hidden}
 .excluded summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;font:600 13px/1.35 var(--font);color:var(--label-2)}
@@ -343,7 +344,6 @@ b{font-weight:650}
 @media (max-width:980px){
   .cols{grid-template-columns:minmax(0,1fr)}
   .f-dx,.f-ktas,.f-go{grid-column:1/-1}.f-dept,.f-loc{grid-column:span 6}
-  .dx-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .seg.grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (max-width:640px){
@@ -353,7 +353,6 @@ b{font-weight:650}
   .lbl.ghost{display:none}
   .panel-hd{padding:16px 16px 4px}
   .dx{margin:0 12px 12px;padding:16px}
-  .dx-grid{grid-template-columns:minmax(0,1fr)}
   .seg.grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .chip.time{margin-left:0}
   .map-wrap{margin:10px}
@@ -475,14 +474,16 @@ b{font-weight:650}
 @media(max-width:460px){
   .role-gate{padding-inline:16px}
   .public-shell{width:min(100% - 24px,1020px);padding-top:20px}
- .public-card{padding:17px}
- .public-two{grid-template-columns:minmax(0,1fr)}
+  .public-card{padding:17px}
+  .public-two{grid-template-columns:minmax(0,1fr)}
   .mode-bar{padding-inline:12px}
+  #clinicianApp .dx-card-head{gap:9px}
+  #clinicianApp .ktas-tile{width:50px;height:54px}
+  #clinicianApp .clinical-edit-button{min-height:36px;padding-inline:11px}
 }
 @media(min-width:981px){
   #clinicianApp .form{grid-template-columns:minmax(0,1fr);gap:12px;padding:12px 16px 16px}
   #clinicianApp .form>.field{grid-column:1/-1}
-  #clinicianApp .dx-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   #clinicianApp .clinical-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding-inline:16px}
    #clinicianApp .handover-box{margin-inline:12px}
 }
@@ -500,13 +501,15 @@ b{font-weight:650}
 .demo-badge{flex:none;min-height:44px;padding:0 9px;border:0;border-radius:11px;background:var(--fill);color:var(--label-2);font:600 .75rem var(--font);cursor:pointer;white-space:nowrap}
 .demo-popover{position:absolute;z-index:100;top:calc(100% + 8px);right:0;width:min(290px,calc(100vw - 40px));padding:12px 14px;border-radius:12px;background:var(--surface);color:var(--label-2);box-shadow:var(--shadow-float);font-size:.8125rem;line-height:1.45}
 .sidebar-pane{width:100%}
+#clinicianSidebar #resultList{padding-inline:0}
 body[data-mode="clinician"]{overflow:hidden}
 #clinicianApp.wrap{position:fixed;inset:0;z-index:40;display:block;width:100%;height:100vh;height:100dvh;max-width:none;margin:0;padding:0;overflow:hidden;background:transparent}
 #clinicianApp>.foot-note{display:none}
 #clinicianApp .cols{display:contents}
-#clinicianSidebar{position:absolute;top:12px;right:12px;bottom:auto;z-index:60;display:flex;flex-direction:column;gap:8px;width:min(400px,calc(100vw - 24px));height:calc(100dvh - 24px);max-height:none;min-height:0;padding:12px;overflow:hidden;border:1px solid var(--material-edge);border-radius:20px;background:var(--material);box-shadow:0 2px 8px rgba(0,0,0,.10),0 8px 24px rgba(0,0,0,.08)}
+#clinicianSidebar{position:absolute;top:auto;right:24px;bottom:24px;z-index:60;display:flex;flex-direction:column;gap:8px;width:min(400px,calc(100vw - 48px));height:30dvh;max-height:calc(100dvh - 48px);min-height:0;padding:12px;overflow:hidden;border:1px solid var(--material-edge);border-radius:20px;background:var(--material);box-shadow:0 2px 8px rgba(0,0,0,.10),0 8px 24px rgba(0,0,0,.08);transition:height .35s cubic-bezier(.22,1.12,.36,1)}
+#clinicianSidebar[data-expanded="true"]{height:60dvh}
 #clinicianSidebar .sidebar-tabs{flex:none;box-shadow:none}
-#clinicianSidebar .sidebar-pane{flex:1 1 0;height:0;min-height:0;padding:2px 1px 12px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;border:0;border-radius:0;background:transparent;box-shadow:none}
+#clinicianSidebar .sidebar-pane{flex:1 1 0;height:0;min-height:0;padding:2px 0 12px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;border:0;border-radius:0;background:transparent;box-shadow:none}
 #clinicianSidebar .panel-hd{padding:4px 2px 12px}
 #clinicianSidebar .panel-hd h2{font-size:1.0625rem;line-height:1.2;letter-spacing:-.02em}
 #clinicianSidebar .panel-hd p{margin-top:4px;font-size:.8125rem;line-height:1.4;letter-spacing:0}
@@ -518,18 +521,19 @@ body[data-mode="clinician"]{overflow:hidden}
 #clinicianApp .map-wrap #mapBox{position:absolute;inset:0;width:100%;height:100%;max-width:none;min-height:0;aspect-ratio:auto;border-radius:0}
 #clinicianApp .map-wrap #map{height:100%;min-height:0}
 #clinicianApp .map-actions{position:absolute;top:12px;left:12px;z-index:40;display:flex;align-items:center;gap:3px;padding:4px;border-radius:12px}
-#clinicianApp .map-action{width:44px;height:44px;border:0;border-radius:9px;display:grid;place-items:center;background:transparent;color:var(--label);cursor:pointer;transition:background-color .15s,color .15s}
+#clinicianApp .map-action{width:44px;height:44px;border:0;border-radius:12px;display:grid;place-items:center;background:transparent;color:var(--label);cursor:pointer;transition:background-color .15s,color .15s}
 #clinicianApp .map-action:hover{background:var(--fill);color:var(--brand)}
 #clinicianApp .map-action:focus-visible{outline:2.5px solid var(--blue);outline-offset:1px}
 #clinicianApp #roadBtn[aria-pressed="true"]{background:transparent;color:var(--brand)}
 #clinicianApp .map-hint{top:62px;left:12px}
 #clinicianApp .map-zoom{top:auto;right:auto;bottom:28px;left:12px;border-radius:12px}
 @media(max-width:760px){
-  #clinicianSidebar{top:auto;left:12px;right:12px;bottom:12px;width:auto;height:min(58dvh,520px);padding:10px;border-radius:18px}
+  #clinicianSidebar{top:auto;left:12px;right:12px;bottom:12px;width:auto;height:30dvh;padding:10px;border-radius:18px}
+  #clinicianApp .location-hero{top:16px;right:16px}
   #clinicianApp .map-panel>.panel-hd{top:10px;left:10px}
   #clinicianApp .map-actions{top:10px;left:10px}
   #clinicianApp .map-hint{top:60px;left:10px}
-  #clinicianApp .map-zoom{top:auto;left:10px;right:auto;bottom:calc(min(58dvh,520px) + 36px);border-radius:12px}
+  #clinicianApp .map-zoom{top:auto;left:10px;right:auto;bottom:calc(30dvh + 36px);border-radius:12px}
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard Variable",Pretendard,system-ui,sans-serif;letter-spacing:0}
 button:not([disabled]){touch-action:manipulation}
@@ -573,6 +577,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .dx-no-match{padding:14px 10px;color:var(--label-2);font-size:.875rem}
 .quick-dx{display:flex;flex-wrap:wrap;gap:6px}
 .quick-dx-chip{min-height:44px;padding:0 11px;border:1px solid var(--sep);border-radius:999px;background:var(--surface);color:var(--label);font:600 .8125rem var(--font);cursor:pointer;white-space:nowrap}
+.quick-dx-chip[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft);color:var(--blue-text)}
 .quick-dx-chip:active{background:var(--brand-soft);color:var(--brand)}
 .compact-disclosure{margin:0 0 8px;border-radius:12px;background:var(--surface);overflow:hidden}
 .compact-disclosure>summary{display:flex;align-items:center;justify-content:space-between;min-height:46px;padding:0 12px;color:var(--label);font-size:.875rem;font-weight:600;cursor:pointer;list-style:none}
@@ -581,14 +586,14 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .compact-disclosure[open]>summary::after{transform:rotate(-90deg)}
 .compact-disclosure::details-content{block-size:0;overflow:clip;transition:block-size .35s cubic-bezier(.2,.9,.25,1),content-visibility .35s allow-discrete}
 .compact-disclosure[open]::details-content{block-size:auto}
-.compact-disclosure .dx{margin:0;padding:12px;border-radius:0;background:var(--surface-2)}
-.compact-disclosure .dx-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.compact-disclosure .dx-grid dt{font-size:.75rem}
-.compact-disclosure .dx-grid dd{font-size:.8125rem;line-height:1.45}
-.compact-disclosure .dx-name{font-size:1rem}
-.compact-disclosure .chips{gap:5px}
-.compact-disclosure .chip{font-size:.75rem;padding:6px 8px}
 .category-disease-select{margin-top:10px}
+.disease-search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch;gap:8px}
+.category-toggle-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:52px;padding:0 10px;border:1px solid var(--sep);border-radius:12px;background:var(--surface);color:var(--label);font:600 .8125rem var(--font);white-space:nowrap;cursor:pointer}
+.category-toggle-button[aria-expanded="true"]{border-color:var(--blue);background:var(--blue-soft);color:var(--blue-text)}
+.category-toggle-button .ic{transition:transform .2s ease}
+.category-toggle-button[aria-expanded="true"] .ic{transform:rotate(90deg)}
+.category-fields{display:grid;gap:12px;margin-top:12px;padding:0 2px}
+#categoryFields[hidden]{display:none}
 .auto-summary-row,.origin-summary-row{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:58px;margin:0 0 8px;padding:8px 10px;border-radius:12px;background:var(--surface)}
 .auto-summary,.origin-summary{color:var(--label);font-size:.875rem;font-weight:650;line-height:1.3;font-variant-numeric:tabular-nums}
 .auto-summary-caption{margin-top:3px;color:var(--label-2);font-size:.75rem;line-height:1.3}
@@ -613,60 +618,61 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .sidebar-pane .banner strong{font-size:.9375rem}
 .sidebar-pane .banner p{font-size:.75rem}
 .sidebar-pane .excluded{margin:8px 0 0}
-.sidebar-pane .route-summary{margin:8px 0;padding:12px;background:var(--surface)}
-.sidebar-pane .route-guides{font-size:.8125rem}
-.primary-hospital-card{padding:14px;border:1px solid var(--sep);border-radius:16px;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.recommendation-primary,.secondary-hospitals,.primary-hospital-card{width:100%;min-width:0;max-width:100%}
+.primary-hospital-card{padding:14px;border:1px solid var(--sep);border-radius:16px;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
 .primary-hospital-card.result-fade{animation:result-fade .18s ease-out both}
 @keyframes result-fade{from{opacity:0}to{opacity:1}}
 .primary-hospital-title{display:flex;align-items:center;gap:8px;min-width:0}
 .primary-rank{flex:none;padding:4px 7px;border-radius:7px;background:var(--blue-soft);color:var(--blue-text);font-size:.75rem;font-weight:700}
-.primary-hospital-title h3{overflow:hidden;margin:0;color:var(--label);font-size:1.0625rem;font-weight:650;letter-spacing:-.02em;text-overflow:ellipsis;white-space:nowrap}
-.arrival-summary{display:flex;align-items:center;gap:12px;margin-top:10px}
+.primary-score-chip{flex:none;margin-left:auto;padding:5px 8px;border-radius:999px;background:var(--blue-soft);color:var(--blue-text);font-size:.6875rem;font-weight:700;white-space:nowrap}
+.primary-hospital-title h3{flex:1;min-width:0;overflow:hidden;margin:0;color:var(--label);font-size:1.0625rem;font-weight:650;letter-spacing:-.02em;text-overflow:ellipsis;white-space:nowrap}
+.arrival-summary{display:flex;align-items:center;gap:12px;min-width:0;margin-top:10px}
 .arrival-time{display:flex;align-items:baseline;gap:3px;color:var(--label);font-variant-numeric:tabular-nums}
 .arrival-time strong{font-size:2.5rem;font-weight:750;line-height:1;letter-spacing:-.04em}
 .arrival-time span{font-size:1rem;font-weight:600}
-.arrival-meta{display:grid;gap:4px;color:var(--label-2);font-size:.8125rem;line-height:1.25}
+.arrival-meta{display:grid;gap:4px;min-width:0;color:var(--label-2);font-size:.8125rem;line-height:1.25;overflow-wrap:anywhere}
 .arrival-meta strong{color:var(--green-text);font-size:.875rem;font-weight:650}
 .capacity-summary{display:grid;gap:7px;margin-top:12px}
-.capacity-state,.dept-state{display:flex;align-items:center;gap:8px;min-height:27px;color:var(--label);font-size:.875rem}
+.capacity-state,.dept-state{display:flex;align-items:center;gap:8px;min-width:0;min-height:27px;color:var(--label);font-size:.875rem}
+.capacity-state span,.dept-state span,.dept-state strong{min-width:0;overflow-wrap:anywhere}
 .capacity-state>b{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:650}
 .bed-dot{width:11px;height:11px;flex:none;border-radius:50%;background:var(--gray)}
 .bed-dot.s-free{background:var(--green)}.bed-dot.s-busy{background:var(--orange)}.bed-dot.s-full{background:var(--red)}.bed-dot.s-off{background:var(--gray)}
 .bed-dot.s-unknown{background:var(--gray)}
 .dept-state span{color:var(--label-2)}.dept-state strong{margin-left:auto;color:var(--green-text);font-size:.8125rem;font-weight:650}
-.primary-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:8px;margin-top:12px}
+.primary-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:8px;min-width:0;margin-top:12px}
 .primary-actions .btn-confirm,.primary-actions .btn-route{min-width:0;height:46px;border-radius:11px;font-size:.875rem}
 .primary-actions .btn-confirm,.primary-actions .r1 .btn-confirm{background:var(--brand);color:#fff;box-shadow:none}
 .primary-actions .btn-route{padding:0 8px;background:var(--fill);color:var(--brand)}
-.hospital-details{margin-top:10px;border-top:1px solid var(--sep)}
+.hospital-details{min-width:0;margin-top:10px;border-top:1px solid var(--sep)}
 .hospital-details>summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;color:var(--brand);font-size:.8125rem;font-weight:600;cursor:pointer;list-style:none}
 .hospital-details>summary::-webkit-details-marker{display:none}
 .hospital-details>summary::after{content:'›';font-size:1.2rem;transform:rotate(90deg);transition:transform .3s cubic-bezier(.2,.9,.25,1)}
 .hospital-details[open]>summary::after{transform:rotate(-90deg)}
 .hospital-details::details-content{block-size:0;overflow:clip;transition:block-size .35s cubic-bezier(.2,.9,.25,1),content-visibility .35s allow-discrete}
 .hospital-details[open]::details-content{block-size:auto}
-.hospital-detail-content{display:grid;gap:10px;padding-bottom:4px}
+.hospital-detail-content{display:grid;gap:10px;min-width:0;max-width:100%;padding-bottom:4px}
 .detail-score{display:grid;grid-template-columns:1fr auto;align-items:center;gap:7px;color:var(--label-2);font-size:.8125rem}
 .detail-score strong{color:var(--label);font-size:.9375rem;font-variant-numeric:tabular-nums}
 .detail-score .meter{grid-column:1/-1;width:100%}
-.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 12px;margin:0}
+.score-scope{grid-column:1/-1;color:var(--label-2);font-size:.6875rem;line-height:1.4}
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 12px;min-width:0;max-width:100%;margin:0}
 .detail-grid>div{min-width:0}
 .detail-grid dt{color:var(--label-2);font-size:.75rem}
-.detail-grid dd{margin:3px 0 0;color:var(--label);font-size:.8125rem;font-weight:600;font-variant-numeric:tabular-nums}
-.score-breakdown{display:grid;gap:4px;color:var(--label);font-size:.8125rem}
-.score-breakdown>span{font-weight:650}
-.score-breakdown small{color:var(--label-2);font-size:.75rem;line-height:1.4}
+.detail-grid dd{margin:3px 0 0;color:var(--label);font-size:.8125rem;font-weight:600;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .primary-hospital-card .restr{display:grid;gap:3px;margin:0;color:var(--orange-text);font-size:.75rem;line-height:1.4}
 .primary-hospital-card .restr strong{font-weight:650}
 .treatment-warning{display:grid;gap:4px;margin:0 0 10px;padding:12px;border:1px solid var(--orange);border-radius:12px;background:var(--orange-soft);color:var(--orange-text);font-size:.8125rem;line-height:1.45}
 .treatment-warning strong{font-weight:700}
 .secondary-hospitals{display:grid;gap:4px;margin-top:8px}
-.secondary-hospital-row{display:grid;grid-template-columns:26px minmax(0,1fr) auto 11px 18px;align-items:center;gap:8px;width:100%;min-height:54px;padding:0 10px;border:0;border-radius:12px;background:var(--surface);color:var(--label);text-align:left;cursor:pointer}
+.secondary-hospital-row{display:grid;grid-template-columns:max-content minmax(0,1fr) auto 11px;align-items:center;gap:8px;width:100%;min-height:54px;padding:0 10px;border:0;border-radius:12px;background:var(--surface);color:var(--label);text-align:left;cursor:pointer}
 .secondary-hospital-row:hover,.secondary-hospital-row[aria-pressed="true"]{background:var(--fill)}
-.secondary-rank{font-size:.75rem;font-weight:650;color:var(--label-2);font-variant-numeric:tabular-nums}
+.secondary-rank{display:flex;align-items:center;gap:2px;font-size:.75rem;font-weight:650;color:var(--label-2);font-variant-numeric:tabular-nums}
+.secondary-rank .ic{color:var(--label-3)}
 .secondary-hospital-row strong{overflow:hidden;font-size:.875rem;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
+.secondary-meta{display:flex;align-items:center;gap:8px;white-space:nowrap}
 .secondary-eta{font-size:.8125rem;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
-.secondary-hospital-row>.ic{color:var(--label-3)}
+.secondary-score{color:var(--blue-text);font-size:.6875rem;font-weight:700;white-space:nowrap}
 .recommendation-skeleton{display:flex;align-items:center;gap:10px;height:68px;margin-bottom:8px;padding:12px;border:1px solid var(--sep);border-radius:14px;background:var(--surface)}
 .recommendation-skeleton>span{width:28px;height:28px;flex:none;border-radius:9px;background:var(--fill)}
 .recommendation-skeleton>div{display:grid;flex:1;gap:8px}
@@ -712,22 +718,12 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .compact-disclosure[open]>summary::after{transform:rotate(-90deg)}
 .compact-disclosure::details-content{block-size:0;overflow:clip;transition:block-size .35s cubic-bezier(.2,.9,.25,1),content-visibility .35s allow-discrete}
 .compact-disclosure[open]::details-content{block-size:auto}
-.compact-disclosure .dx{margin:0;padding:12px;border-radius:0;background:var(--surface-2)}
-.compact-disclosure .dx-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.compact-disclosure .dx-grid dt{font-size:.75rem}
-.compact-disclosure .dx-grid dd{font-size:.8125rem;line-height:1.45}
-.compact-disclosure .dx-name{font-size:1rem}
-.compact-disclosure .chips{gap:5px}
-.compact-disclosure .chip{font-size:.75rem;padding:6px 8px}
-.category-disease-select{margin-top:10px}
 .compact-disclosure#handoverBox .handover-meta,.compact-disclosure#handoverBox .handover-text,.compact-disclosure#handoverBox .handover-actions{margin:8px 12px}
 .compact-disclosure#handoverBox .handover-text{font-size:.8125rem;line-height:1.4}
 .compact-disclosure#handoverBox .handover-actions button{min-height:44px}
-.location-hero{display:flex;align-items:center;gap:11px;flex:none;margin:0 2px;padding:12px 14px;border:1px solid var(--sep);border-radius:22px;background:var(--surface);box-shadow:0 3px 12px rgba(0,0,0,.07)}
-.location-hero-icon{width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:14px;background:var(--blue-soft);color:var(--blue-text)}
-#clinicianSidebar .location-hero .origin-summary-row{min-height:0;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
-.location-hero .origin-summary{font-size:.9375rem;font-weight:700}
-.location-hero .auto-summary-caption{margin-top:2px}
+.location-hero{position:absolute;top:24px;right:24px;z-index:55;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--label)}
+.location-hero .origin-summary{font-size:.875rem;font-weight:600;line-height:1.4;text-align:right}
+.location-hero #coordTxt{display:none}
 .sidebar-back-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;min-height:44px;margin-left:auto;padding:0 12px;border:1px solid var(--sep);border-radius:12px;background:var(--surface);color:var(--label);font:600 .875rem var(--font);cursor:pointer}
 .sidebar-back-button .ic{transform:rotate(180deg)}
 #clinicianSidebar #resultPanel .panel-hd{align-items:center;flex-wrap:nowrap;gap:10px;padding:2px 2px 12px}
@@ -738,38 +734,26 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #clinicianSidebar .origin-summary-row{border:0;border-radius:0;background:transparent;box-shadow:none}
 #clinicianSidebar .disease-picker{margin-bottom:0;padding:0}
 #clinicianSidebar .compact-disclosure{margin:0 0 14px;padding:6px 0;border-top:1px solid var(--sep);border-bottom:1px solid var(--sep)}
-#clinicianSidebar .compact-disclosure#allCategories{margin:14px 0 0;padding:0;border:0}
 #clinicianSidebar .auto-summary-row,
 #clinicianSidebar .origin-summary-row{min-height:64px;margin:0 0 12px;padding:12px 2px 16px;border-bottom:1px solid var(--sep)}
 #clinicianSidebar .search-range-status{background:transparent}
 #clinicianSidebar .card,
 #clinicianSidebar .excluded{background:var(--surface)}
-#clinicianSidebar .compact-disclosure .dx{background:var(--surface)}
 #clinicianSidebar .compact-disclosure>summary{padding-inline:2px}
-#clinicianSidebar .compact-disclosure#allCategories[open]>summary{border-bottom:1px solid var(--sep)}
-#clinicianSidebar .compact-disclosure#allCategories>.field{margin:10px 0 0}
-#clinicianSidebar .compact-disclosure#allCategories>.field+.field{margin-top:12px}
 #clinicianSidebar .clinical-options,
 #clinicianSidebar .origin-options{margin:0 0 12px;padding:8px 2px 16px;border:0;border-radius:0;border-bottom:1px solid var(--sep);background:transparent;box-shadow:none}
 #clinicianSidebar .patient-input-card{margin:0 0 16px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-#clinicianSidebar .patient-input-card .panel-hd{padding:2px 2px 14px}
+#clinicianSidebar .patient-input-card .panel-hd{padding:2px 2px 12px}
 #clinicianSidebar .patient-input-card .disease-picker{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-#clinicianSidebar .patient-input-card .compact-disclosure#allCategories{margin:14px 0 0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-#clinicianSidebar .patient-input-card #allCategories>summary{min-height:44px;padding:0 2px}
-#clinicianSidebar .patient-input-card #allCategories>.field{margin:12px 0 0}
-#clinicianSidebar .patient-input-card #allCategories>.field+.field{margin-top:14px}
-#clinicianSidebar .clinical-overview{margin:0 0 16px;padding:0;border:0;background:transparent}
+#clinicianSidebar .clinical-overview{margin:0 0 16px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 .clinical-overview-content{display:grid;gap:10px;padding:0}
 #clinicianSidebar .clinical-overview .clinical-options{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-#clinicianSidebar .clinical-overview .dx{margin:0;padding:0;background:transparent}
+#clinicianSidebar .clinical-overview .dx{margin:0;padding:18px;border:1px solid var(--sep);border-radius:22px;background:var(--surface);box-shadow:0 6px 18px rgba(24,32,46,.09);gap:16px}
 #clinicalOptions[hidden]{display:none}
-.clinical-edit-button{justify-self:start;min-height:34px;margin-top:2px;padding:0 10px;border:1px solid var(--sep);border-radius:9px;background:var(--surface);color:var(--label-2);font:600 .75rem var(--font);cursor:pointer}
 .sidebar-pane .banner{margin:0 0 8px;padding:10px 12px}
 .sidebar-pane .banner strong{font-size:.9375rem}
 .sidebar-pane .banner p{font-size:.75rem}
 .sidebar-pane .excluded{margin:8px 0 0}
-.sidebar-pane .route-summary{margin:8px 0;padding:12px;background:var(--surface)}
-.sidebar-pane .route-guides{font-size:.8125rem}
 .primary-hospital-card{padding:14px;border:1px solid var(--sep);border-radius:16px;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.06)}
 .primary-hospital-card.result-fade{animation:result-fade .18s ease-out both}
 @keyframes result-fade{from{opacity:0}to{opacity:1}}
@@ -807,13 +791,10 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .detail-grid>div{min-width:0}
 .detail-grid dt{color:var(--label-2);font-size:.75rem}
 .detail-grid dd{margin:3px 0 0;color:var(--label);font-size:.8125rem;font-weight:600;font-variant-numeric:tabular-nums}
-.score-breakdown{display:grid;gap:4px;color:var(--label);font-size:.8125rem}
-.score-breakdown>span{font-weight:650}
-.score-breakdown small{color:var(--label-2);font-size:.75rem;line-height:1.4}
 .primary-hospital-card .restr{display:grid;gap:3px;margin:0;color:var(--orange-text);font-size:.75rem;line-height:1.4}
 .primary-hospital-card .restr strong{font-weight:650}
 .secondary-hospitals{display:grid;gap:4px;margin-top:8px}
-.secondary-hospital-row{display:grid;grid-template-columns:26px minmax(0,1fr) auto 11px 18px;align-items:center;gap:8px;width:100%;min-height:54px;padding:0 10px;border:0;border-radius:12px;background:var(--surface);color:var(--label);text-align:left;cursor:pointer}
+.secondary-hospital-row{display:grid;grid-template-columns:max-content minmax(0,1fr) auto 11px;align-items:center;gap:8px;width:100%;min-height:54px;padding:0 10px;border:0;border-radius:12px;background:var(--surface);color:var(--label);text-align:left;cursor:pointer}
 .secondary-hospital-row:hover,.secondary-hospital-row[aria-pressed="true"]{background:var(--fill)}
 .secondary-rank{font-size:.75rem;font-weight:650;color:var(--label-2);font-variant-numeric:tabular-nums}
 .secondary-hospital-row strong{overflow:hidden;font-size:.875rem;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
@@ -996,9 +977,9 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
   .gate-emergency{color:#FF6961}
 }
 @media(max-width:767px){
-  #clinicianSidebar{top:auto;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));width:auto;height:56dvh;min-height:210px;max-height:calc(100dvh - env(safe-area-inset-top) - 16px);padding:4px 10px;border-radius:20px;transition:height .35s cubic-bezier(.22,1.12,.36,1)}
-  #clinicianSidebar[data-sheet-state="collapsed"]{height:210px}
-  #clinicianSidebar[data-sheet-state="half"]{height:56dvh}
+  #clinicianSidebar{top:auto;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));width:auto;height:30dvh;min-height:210px;max-height:calc(100dvh - env(safe-area-inset-top) - 16px);padding:4px 10px;border-radius:20px;transition:height .35s cubic-bezier(.22,1.12,.36,1)}
+  #clinicianSidebar[data-sheet-state="collapsed"]{height:30dvh}
+  #clinicianSidebar[data-sheet-state="half"]{height:60dvh}
   #clinicianSidebar[data-sheet-state="full"]{height:calc(100dvh - env(safe-area-inset-top) - 16px)}
   #clinicianSidebar[data-dragging="true"]{transition:none}
   .sheet-drag{display:grid;place-items:center;height:44px;flex:none;touch-action:none;cursor:grab}
@@ -1184,15 +1165,12 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 </header>
 
 <main class="wrap" id="clinicianApp" hidden>
+  <div class="location-hero" aria-live="polite">
+    <div class="origin-summary" id="originSummary">위치 확인 중</div>
+    <div id="coordTxt" hidden></div>
+  </div>
   <aside class="clinician-sidebar" id="clinicianSidebar" aria-label="의료진 정보 패널">
     <div class="sheet-drag" id="sheetDragHandle" aria-label="사이드바 높이 조절"><span></span></div>
-    <div class="location-hero">
-      <span class="location-hero-icon" data-ic="pin" data-s="19" aria-hidden="true"></span>
-      <div class="origin-summary-row">
-        <div class="origin-summary" id="originSummary">위치 · 로딩 중</div>
-        <div class="auto-summary-caption" id="coordTxt">현재 위치를 확인하고 있습니다</div>
-      </div>
-    </div>
     <div class="origin-options" id="originOptions" hidden>
       <div class="origin-location-actions">
         <button type="button" class="public-secondary" id="pickOriginOnMap">지도에서 위치 선택</button>
@@ -1207,41 +1185,40 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     </div>
   </aside>
   <section class="panel sidebar-pane" id="patientPanel" role="region" aria-labelledby="h-input">
-    <div class="patient-input-card">
+      <div class="patient-input-card">
       <div class="panel-hd">
         <div class="hd-txt">
           <h2 id="h-input">환자 입력</h2>
-          <p>의료진 판단 보조용 · 실제 환자 식별정보는 입력하지 마세요</p>
         </div>
       </div>
 
       <div class="disease-picker">
-        <label class="sr-only" for="dxSearch">질환명 또는 증상 검색</label>
-        <div class="dx-search-wrap">
-          <span data-ic="search" data-s="19"></span>
-          <input id="dxSearch" type="search" autocomplete="off" placeholder="질환·증상 검색 (예: 흉통, STEMI)" aria-controls="dxSuggestions" aria-expanded="false">
-          <div class="dx-suggestions" id="dxSuggestions" role="listbox" hidden></div>
+        <div class="disease-search-row">
+          <div class="dx-search-wrap">
+            <label class="sr-only" for="dxSearch">질환명 또는 증상 검색</label>
+            <span data-ic="search" data-s="19"></span>
+            <input id="dxSearch" type="search" autocomplete="off" placeholder="질환·증상 검색 (예: 흉통, STEMI)" aria-controls="dxSuggestions" aria-expanded="false">
+            <div class="dx-suggestions" id="dxSuggestions" role="listbox" hidden></div>
+          </div>
+          <button type="button" class="category-toggle-button" id="toggleCategories" aria-controls="categoryFields" aria-expanded="false" aria-label="전체 분류에서 찾기">전체 분류<span data-ic="chevron" data-s="15" aria-hidden="true"></span></button>
         </div>
         <div class="quick-dx" id="quickDx" aria-label="자주 선택하는 응급 상태"></div>
+        <div class="category-fields" id="categoryFields" hidden>
+          <div class="field">
+            <label class="lbl" for="categorySelect">부위</label>
+            <div class="select"><select id="categorySelect"></select><span data-ic="updown" data-s="14"></span></div>
+          </div>
+          <div class="field category-disease-select">
+            <label class="lbl" for="dx">세부 질환 · 상태 <em id="subCount" hidden></em></label>
+            <div class="select"><select id="dx"></select><span data-ic="updown" data-s="14"></span></div>
+          </div>
+        </div>
       </div>
-
-      <details class="compact-disclosure" id="allCategories">
-        <summary>전체 분류에서 찾기</summary>
-        <div class="field">
-          <span class="lbl" id="catLbl">부위 · 대분류</span>
-          <div class="seg grid still" id="catSeg" role="radiogroup" aria-labelledby="catLbl"><span class="seg-thumb"></span></div>
-        </div>
-        <div class="field category-disease-select">
-          <label class="lbl" for="dx">세부 질환 · 상태 <em id="subCount" hidden></em></label>
-          <div class="select"><select id="dx"></select><span data-ic="updown" data-s="14"></span></div>
-        </div>
-      </details>
     </div>
 
-    <section class="clinical-overview" id="clinicalOverview" aria-label="선택한 질환 정보">
+    <section class="clinical-overview" id="clinicalOverview" aria-label="선택한 질환 정보" hidden>
       <div class="clinical-overview-content">
         <div class="dx" id="dxStrip"></div>
-        <button type="button" class="clinical-edit-button" id="editClinicalButton" aria-controls="clinicalOptions" aria-expanded="false">수정하기</button>
         <div class="clinical-options" id="clinicalOptions" hidden>
           <div class="field">
             <span class="lbl" id="ktasLbl">KTAS 등급</span>
@@ -1305,7 +1282,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
           <h2 id="h-res">응급실 병원 후보</h2>
           <p id="recommendationMeta" hidden>후보의 진료 조건을 확인한 뒤 실제 도로 경로를 계산합니다.</p>
         </div>
-        <button type="button" class="sidebar-back-button" id="backToPatientBtn" aria-controls="patientPanel"><span data-ic="chevron" data-s="17" aria-hidden="true"></span>뒤로가기</button>
+        <button type="button" class="sidebar-back-button" id="backToPatientBtn" aria-label="환자 입력으로 돌아가기" aria-controls="patientPanel"><span data-ic="chevron" data-s="17" aria-hidden="true"></span></button>
       </div>
       <div class="search-range-status" id="searchRangeStatus" aria-live="polite">
         <span id="searchRangeText">위치를 지정한 뒤 병원을 찾으세요.</span>
@@ -1322,12 +1299,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       <div id="resultList" aria-live="polite">
           <div class="empty">위치를 지정한 뒤 병원 찾기를 누르세요. 확인 가능한 치료 조건을 먼저 검사하고, 확인된 후보에만 자동차 경로를 요청합니다.</div>
       </div>
-      <div class="route-summary" id="routeSummary" hidden aria-live="polite">
-        <div class="route-summary-head"><strong id="routeTitle">경로 조회 준비</strong><span>카카오모빌리티</span></div>
-        <p id="routeDetails"></p>
-        <small>일반 자동차 길찾기 기준 예상시간 · 구급차 우선통행을 반영한 시간은 아닙니다.</small>
-        <ol class="route-guides" id="routeGuides"></ol>
-      </div>
       <details class="excluded" id="excludedBox" hidden>
         <summary><span id="excludedSum"></span><span data-ic="chevron" data-s="16"></span></summary>
         <div id="excludedList"></div>
@@ -1335,7 +1306,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     </section>
   </div>
 
-  <footer class="foot-note"><b>데이터 안내</b> · 전국 기관·좌표·진료과와 제공되는 응급실 가용 병상은 NEDIS 자료이며, 도로 거리·시간은 Kakao Mobility 자동차 경로입니다. 병원 수용·필요 처치 가능 여부는 보장하지 않습니다. 전체 병상·수용 이력·일부 처치 역량은 실제 자료에서 확인되지 않아 점수는 계산하지 않습니다. 직선거리는 검색 반경에만 쓰며 이동시간으로 표시하지 않습니다. 도서 지역에서 자동차 경로가 없으면 이동시간을 추정하지 않습니다.</footer>
+  <footer class="foot-note"><b>데이터 안내</b> · 전국 기관·진료과·가용 병상은 NEDIS 자료, 이동시간은 Kakao Mobility 실제 자동차 경로입니다. 부분 점수는 확인된 가용 병상 수와 이동시간만 반영하며, 전체 병상 비율·수용 이력은 자료가 없어 제외합니다. 병원 수용·필요 처치 가능 여부는 보장하지 않습니다. 직선거리는 검색 반경에만 쓰며 이동시간으로 표시하지 않습니다.</footer>
 </main>
 
 <section class="report-print" id="reportPrint" aria-hidden="true" hidden></section>
@@ -1345,7 +1316,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 <script>
 /* ═══════════════════════════════════════════════════════════════════════════
    [1] 질환 데이터 — 응급실_중증도별_질환_치료_정리.xlsx / '전체목록' 시트 132건
-   [연번, KTAS, 신체계통, 질환·상태, 주요증상, 심각성, 치료·처치, 골든타임, 진료과오버라이드, 중증응급질환키]
+   [연번, KTAS, 신체계통, 질환·상태, 주요증상, 심각성, 치료·처치, 원본 시간 문구(미검증), 진료과오버라이드, 중증응급질환키]
    ═══════════════════════════════════════════════════════════════════════════ */
 const DX_RAW = [
 [1,1,'심장','심정지 (심실세동/무맥성 VT/무수축)','무반응, 무맥, 무호흡 또는 헐떡호흡','4~6분 내 비가역적 뇌손상, 즉시 사망','즉시 흉부압박(CPR), 제세동, 에피네프린 IV, 기도확보 및 환기, 소생 후 목표체온조절','즉시 (0분) / 제세동 1분 지연마다 생존율 7~10% 감소','',''],
@@ -1499,24 +1470,31 @@ const KTAS_NAME = {1:'소생 (Resuscitation)',2:'긴급 (Emergent)',3:'응급 (U
 const KTAS_TIME = {1:'즉시 (대기 0분)',2:'15분 이내',3:'30분 이내',4:'1시간 이내',5:'2시간 이내'};
 
 const DISEASES = DX_RAW.map(r => ({
-  no:r[0], ktas:r[1], sys:r[2], name:r[3], sx:r[4], risk:r[5], tx:r[6], gtText:r[7],
+  no:r[0], ktas:r[1], sys:r[2], name:r[3], sx:r[4], risk:r[5], tx:r[6],
   dept: r[8] || SYSTEM_DEPT[r[2]] || '기타 진료과', severe: r[9] || ''
 }));
 
-/** 골든타임 문자열 → 분 (판단 불가 시 null) */
-function goldenMin(s){
-  if(!s) return null;
-  if(/^\s*즉시/.test(s)) return 0;
-  let best = null, m;
-  const re = /(\d+(?:\.\d+)?)\s*(시간|분)/g;
-  while((m = re.exec(s))){
-    const v = parseFloat(m[1]) * (m[2] === '시간' ? 60 : 1);
-    if(v > 0 && (best === null || v < best)) best = v;
-  }
-  if(best === null && /즉시/.test(s)) return 0;
-  return best;
-}
-DISEASES.forEach(d => { d.gtm = goldenMin(d.gtText); });
+// Only show treatment windows that are tied to a cited guideline; never parse the workbook's free-text time column.
+const TIME_GUIDANCE = {
+  1:{badge:'즉시 CPR·제세동',text:'성인 심정지에서는 심폐소생술과 제세동을 지체 없이 시작합니다. 모든 환자에 적용되는 단일 분 단위 마감시간은 없습니다.',source:'AHA 2025 Adult Basic Life Support Guideline',url:'https://pubmed.ncbi.nlm.nih.gov/41122888/'},
+  4:{badge:'즉시 에피네프린',text:'아나필락시스가 의심되면 근육주사 에피네프린을 즉시 투여합니다. 별도의 분 단위 마감시간은 정해져 있지 않습니다.',source:'WAO Anaphylaxis Guidance 2020',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/'},
+  9:{badge:'CT 1시간 이내',text:'두부 손상에서 성인은 초기 GCS 12 이하, 16세 미만은 GCS 14 미만 등 위험 기준에 해당하면 머리 CT를 1시간 이내 시행합니다. 이 질환 선택은 GCS 8 이하를 뜻합니다.',source:'NICE NG232, 1.5.8·1.5.10',url:'https://www.nice.org.uk/guidance/ng232/chapter/recommendations'},
+  10:{badge:'5분 이상 지속',text:'성인·소아 전신 경련이 5분 이상 지속되면 응급 상태로 보고 소생 및 응급 치료를 시작합니다.',source:'NICE NG217, 7.1.1–7.1.3',url:'https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures'},
+  19:{badge:'PCI 120분',text:'STEMI에서 증상 시작 12시간 이내이고, PCI가 혈전용해 가능 시점부터 120분 안에 가능하면 PCI를 우선 고려합니다. 그보다 늦어질 경우 12시간 이내 혈전용해를 권고합니다.',source:'NICE NG185, 1.1.6·1.1.19',url:'https://www.nice.org.uk/guidance/ng185/chapter/recommendations'},
+  20:{badge:'불안정 즉시 · 고위험 72시간',text:'불안정 협심증·NSTEMI는 상태가 불안정하면 즉시 관상동맥 조영술을 시행하고, 중간 이상 위험군은 첫 입원 후 72시간 이내 시행을 고려합니다.',source:'NICE NG185, 1.2.12–1.2.13',url:'https://www.nice.org.uk/guidance/ng185/chapter/recommendations'},
+  21:{badge:'혈전용해 4.5시간',text:'16세 이상 급성 허혈성 뇌졸중의 정맥 혈전용해는 증상 시작 4.5시간 이내입니다. 혈전제거술은 가능한 빨리 시행하며, 영상에서 적합성이 확인된 일부 환자는 6–24시간까지 고려합니다.',source:'NICE NG128, 1.4.1·1.4.5–1.4.8',url:'https://www.nice.org.uk/guidance/ng128/chapter/recommendations'},
+  22:{badge:'발병 6시간 이내 (일부)',text:'성인 급성 뇌내출혈 중 일부 환자는 발병 6시간 이내이고 수축기 혈압이 150–220mmHg일 때 빠른 혈압 강하를 고려합니다. 모든 뇌출혈에 적용되는 기준은 아닙니다.',source:'NICE NG128, 1.5.4–1.5.7',url:'https://www.nice.org.uk/guidance/ng128/chapter/recommendations'},
+  25:{badge:'쇼크·고위험 1시간',text:'성인 패혈성 쇼크 또는 패혈증 가능성이 높은 경우 항균제를 즉시, 이상적으로 인지 후 1시간 이내 투여합니다. 쇼크가 없는 의심 사례는 빠르게 평가하고, 감염 우려가 지속되면 인지 후 3시간 이내 투여를 제안합니다.',source:'Surviving Sepsis Campaign 2021, recommendations 12–14',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/'},
+  28:{badge:'불안정 즉시 · 그 외 24시간',text:'16세 이상 불안정한 중증 상부 위장관 출혈은 소생술 후 즉시 내시경을 시행하고, 그 외 환자는 입원 후 24시간 이내 내시경을 시행합니다.',source:'NICE CG141, 1.3.1–1.3.2',url:'https://www.nice.org.uk/guidance/cg141/chapter/Recommendations'},
+  30:{badge:'시간 지연 최소화',text:'소아(1–18세) 관찰연구에서 응급실 도착 후 염전 해소가 10분 늦어질 때 고환절제 오즈가 6% 증가했습니다. 이는 관찰연구 결과이며 안전한 지연 허용시간이나 단일 마감시간은 아닙니다.',source:'Shields et al., J Pediatr Urol 2026, PMID 41549042',url:'https://pubmed.ncbi.nlm.nih.gov/41549042/'},
+  36:{badge:'병원 도착 후 1시간',text:'세균성 수막염 의심 시 병원 도착 후 1시간 이내 항생제를 시작합니다. 검사를 위해 치료를 임상적으로 유의하게 늦추지 않습니다.',source:'NICE NG240, 1.4.1',url:'https://www.nice.org.uk/guidance/ng240/chapter/recommendations'},
+  42:{badge:'항생제 1시간 이내',text:'개방성 장골·발꿈치·중족골 골절은 정맥 예방 항생제를 가능한 빨리, 이상적으로 손상 후 1시간 이내 투여합니다. 골반 골절에는 이 기준을 그대로 적용하지 않습니다.',source:'BOAST 4: Open Fractures, standard 2',url:'https://www.boa.ac.uk/resource/boast-4-pdf.html'},
+  49:{badge:'즉시 에피네프린',text:'아나필락시스는 근육주사 에피네프린을 즉시 투여합니다. 별도의 분 단위 마감시간은 정해져 있지 않습니다.',source:'WAO Anaphylaxis Guidance 2020',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/'},
+  52:{badge:'중등도 조기 배액',text:'급성 담관염은 중증도에 따라 다릅니다. 중등도는 조기 담도 배액, 중증은 초기 소생 후 가능한 한 빨리 배액합니다. 지침은 모든 환자에게 공통인 고정 시간 숫자를 정하지 않습니다.',source:'Tokyo Guidelines 2018, PMID 28941329',url:'https://doi.org/10.1002/jhbp.509'},
+  64:{badge:'증상 시작 후 24시간',text:'일과성 허혈발작 의심 환자는 증상 시작 후 24시간 이내 전문의 평가와 검사를 받아야 합니다.',source:'NICE NG128, 1.1.4–1.1.5',url:'https://www.nice.org.uk/guidance/ng128/chapter/recommendations'},
+  67:{badge:'조건 충족 시 CT 8시간',text:'성인 두부 손상 뒤 의식소실 또는 기억상실이 있고 항응고제·일부 항혈소판제를 복용한다면 CT를 고려합니다: 손상 후 8시간 이내, 8시간이 지나 내원했다면 내원 후 1시간 이내입니다.',source:'NICE NG232, 1.5.9·1.5.13',url:'https://www.nice.org.uk/guidance/ng232/chapter/recommendations'},
+  79:{badge:'응급 제거 · 2시간 이내',text:'소아 식도 단추형 전지는 증상이 없어도 응급 제거가 필요합니다. NASPGHAN 권고를 인용한 논문은 2시간 이내 제거를 제시합니다.',source:'Lee, Clin Endosc 2018;51:129–136, citing NASPGHAN',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC5903088/'}
+};
 
 /* 부위 · 대분류 — 신체계통 26개를 구급 현장에서 고르기 쉬운 12개 묶음으로 */
 const CATEGORIES = [
@@ -1563,8 +1541,6 @@ const ROADS = [
 ].map(r => ({ ...r, pts: r.path.map(p => ({lat:p[0], lng:p[1]})) }));
 
 const TRAFFIC_PRESET = { normal:{label:'평시',mult:1.00}, rush:{label:'출퇴근 러시',mult:0.62}, night:{label:'심야',mult:1.45} };
-const AMBULANCE_FACTOR = 1.40;   // 구급차 우선통행 보정
-const LOCAL_ROAD_SPEED = 32;     // 이면도로 기본 통행속도(km/h)
 
 function trafficTier(v){
   if(v >= 40) return {key:'flow', label:'원활'};
@@ -1582,45 +1558,15 @@ function distanceKm(a,b){
   const h=Math.sin(dLat/2)**2 + Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLng/2)**2;
   return 2*R*Math.asin(Math.sqrt(h));
 }
-function segDistKm(p,a,b){
-  const k=111.32, kx=k*Math.cos(p.lat*Math.PI/180);
-  const px=(p.lng-a.lng)*kx, py=(p.lat-a.lat)*k;
-  const bx=(b.lng-a.lng)*kx, by=(b.lat-a.lat)*k;
-  const len=bx*bx+by*by;
-  let t = len === 0 ? 0 : (px*bx+py*by)/len;
-  t = Math.max(0, Math.min(1, t));
-  const dx=px-bx*t, dy=py-by*t;
-  return Math.sqrt(dx*dx+dy*dy);
-}
-/** 출발지 → 병원 직선 경로 1.5km 이내 간선도로들의 평균 통행속도를 이동시간에 반영 */
-function corridorTraffic(a,b){
-  const mult = TRAFFIC_PRESET[state.traffic].mult * AMBULANCE_FACTOR;
-  const N = 14, speeds = [], used = new Set();
-  for(let i=0;i<=N;i++){
-    const p = {lat:a.lat+(b.lat-a.lat)*i/N, lng:a.lng+(b.lng-a.lng)*i/N};
-    let best=null, bd=Infinity;
-    for(const r of ROADS){
-      for(let j=0;j<r.pts.length-1;j++){
-        const d = segDistKm(p, r.pts[j], r.pts[j+1]);
-        if(d < bd){ bd = d; best = r; }
-      }
-    }
-    if(best && bd < 1.5){ speeds.push(best.speed * mult); used.add(best.name); }
-  }
-  const base = LOCAL_ROAD_SPEED * mult;
-  const avg = speeds.length ? (speeds.reduce((s,v)=>s+v,0) + base*(N+1-speeds.length)) / (N+1) : base;
-  return { speed: Math.max(8, Math.min(75, avg)), roads: [...used] };
-}
-const DISPATCH_PREP = 2;   // 출동 준비 2분
-
 /* ═══════════════════════════════════════════════════════════════════════════
-   [5] 추천 점수 — 병상 여유율 · 최근 수용률 · 교통 반영 이동시간 가중합
-   KTAS 가 위급할수록 이동시간 비중↓ 수용 가능성 비중↑
+   [5] 확인정보 기반 부분 점수 — 실시간 가용 병상 수 · 실제 자동차 이동시간
+   기존 KTAS 가중치 중 확인 가능한 요소만 사용; 전체 병상 비율·수용 이력은 제외
    ═══════════════════════════════════════════════════════════════════════════ */
 const WEIGHTS = {
   1:{bed:.45,accept:.35,time:.20}, 2:{bed:.42,accept:.30,time:.28}, 3:{bed:.38,accept:.25,time:.37},
   4:{bed:.33,accept:.20,time:.47}, 5:{bed:.30,accept:.17,time:.53}
 };
+// When totals or acceptance history are missing, keep bed/time proportions and renormalize only verified components.
 const MAX_ETA = 35;
 function bedStatus(h){
   if(h.emergencyOpen===false) return 'off';
@@ -1644,6 +1590,23 @@ function formatNedisTime(value){
   if(!/^\d{14}$/.test(String(value||''))) return value||'';
   return `${value.slice(0,4)}-${value.slice(4,6)}-${value.slice(6,8)} ${value.slice(8,10)}:${value.slice(10,12)}`;
 }
+function displayHospitalName(name){
+  const original=String(name||'').trim();
+  let display=original.match(/~~\s*([^~]+?)\s*~~/u)?.[1]?.trim()||original;
+  display=display.replace(/\s*\([^)]*(?:재단|법인)[^)]*\)\s*$/u,'').trim();
+  if(display.startsWith('학교법인')){
+    const foundation=display.match(/^학교법인.*?(?:학원|재단)\s*/u);
+    display=foundation?display.slice(foundation[0].length):display.replace(/^학교법인\)?\s*/u,'').replace(/^.*?대학/u,'');
+  }
+  display=display.replace(/^.*(?:의료재단|재단)\s*/u,'')
+    .replace(/^(?:의료법인|재단법인)\s*/u,'')
+    .replace(/^(?:\(의\)|의\))\s*/u,'')
+    .replace(/^한국원자력의학원(?=원자력병원)/u,'')
+    .replace(/^\s*[-–—]+\s*/u,'')
+    .replace(/\s*[-–—]{1,2}\s*(?:재단|학원|법인|학교법인|의료법인).*$/u,'')
+    .trim();
+  return display||original;
+}
 async function syncFacilityDirectory({force=false,signal}={}){
   if(!force&&HOSPITALS.length&&Date.now()-state.facilityFetchedAt<30*60_000) return true;
   if(directoryRequest) return directoryRequest;
@@ -1656,7 +1619,7 @@ async function syncFacilityDirectory({force=false,signal}={}){
       const facilities=(data.facilities||[]).filter(item=>item.hospitalCode&&Number.isFinite(item.latitude)&&Number.isFinite(item.longitude));
       if(!facilities.length) throw new Error('좌표가 확인된 NEDIS 기관이 없습니다. 임의 위치로 대체하지 않습니다.');
       HOSPITALS=facilities.map(item=>({
-        ...item,id:item.hospitalCode,name:item.hospitalName,lat:item.latitude,lng:item.longitude,
+        ...item,id:item.hospitalCode,name:displayHospitalName(item.hospitalName),lat:item.latitude,lng:item.longitude,
         totalBeds:null,availBeds:null,liveAvailableBeds:null,liveBedMatched:false,liveBedUpdatedAt:'',
         liveBedLabel:'정보 미확인',status:'unknown',score:null,parts:null
       }));
@@ -1768,37 +1731,6 @@ function verifyTreatmentEligibility(hospital){
   if(!hospital.liveBedMatched||!Number.isInteger(hospital.liveAvailableBeds)) return {eligible:false,reason:'실시간 병상 정보 미확인'};
   if(hospital.liveAvailableBeds<=0) return {eligible:false,reason:'실시간 가용 병상 0'};
   return {eligible:true,reason:'',departmentVerified:department.verified,warning:state.severe?`필요 처치 ${state.severe} 역량은 확인되지 않음`:''};
-}
-
-function evaluate(h, origin, dept, ktas, severe){
-  const w = WEIGHTS[ktas];
-  const dist = distanceKm(origin, h);
-  const tr = corridorTraffic(origin, h);
-  const eta = Math.max(DISPATCH_PREP+1, Math.round(dist / tr.speed * 60 + DISPATCH_PREP));
-  const bedRate = h.totalBeds > 0 ? h.availBeds / h.totalBeds : 0;
-  const accepted = h.history.filter(Boolean).length;
-  const acceptRate = h.history.length ? accepted / h.history.length : 0;
-  const timeScore = Math.max(0, 1 - eta / MAX_ETA);
-  const parts = {
-    bed:    +(w.bed    * bedRate    * 100).toFixed(1),
-    accept: +(w.accept * acceptRate * 100).toFixed(1),
-    time:   +(w.time   * timeScore  * 100).toFixed(1)
-  };
-  const score = +(parts.bed + parts.accept + parts.time).toFixed(1);
-  let excluded = false, reason = '';
-  if(h.restrDept.includes('응급실'))               { excluded = true; reason = '응급실 진료 불가'; }
-  else if(h.restrDept.includes(dept))               { excluded = true; reason = dept + ' 진료 제한'; }
-  else if(severe && h.restrSevere.includes(severe)) { excluded = true; reason = severe + ' 불가'; }
-  else if(h.availBeds <= 0)                         { excluded = true; reason = '가용 병상 0'; }
-  return { ...h, dist, eta, speed:tr.speed, roads:tr.roads, bedRate, accepted, acceptRate,
-           parts, score, excluded, reason, status: bedStatus(h) };
-}
-function rank(origin, dept, ktas, severe){
-  const all = HOSPITALS.map(h => evaluate(h, origin, dept, ktas, severe));
-  return {
-    candidates: all.filter(h => !h.excluded).sort((a,b) => b.score - a.score),
-    excluded:   all.filter(h =>  h.excluded).sort((a,b) => a.eta - b.eta)
-  };
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -2145,7 +2077,7 @@ function KakaoMap(container){
   const map=new kakao.maps.Map(container,{center:new kakao.maps.LatLng(center.lat,center.lng),level:13});
   const koreaBounds=new kakao.maps.LatLngBounds(new kakao.maps.LatLng(33.0,124.4),new kakao.maps.LatLng(38.7,132.0));
   let clickCb=null, viewportCb=null, markerCb=null, hospitalOverlays=[], clusterOverlays=[], routeLines=[], meOverlay=null, trafficVisible=false;
-  let hospitalList=[],markerRanks=new Map(),renderFrame=0;
+  let hospitalList=[],markerRanks=new Map(),renderFrame=0,nationalLevel=null;
   const point=p=>new kakao.maps.LatLng(p.lat,p.lng);
   const clear=list=>{ list.forEach(item=>item.setMap(null)); list.length=0; };
   function getBounds(){
@@ -2208,10 +2140,13 @@ function KakaoMap(container){
     relayout(){ const c=map.getCenter(); map.relayout(); map.setCenter(c); },
     zoomIn(){ map.setLevel(Math.max(1,map.getLevel()-1)); },
     zoomOut(){ map.setLevel(Math.min(14,map.getLevel()+1)); },
-    reset(){ map.relayout(); map.setBounds(koreaBounds,40); },
+    reset(){
+      map.relayout();map.setBounds(koreaBounds,0);nationalLevel=map.getLevel();
+      if(state.origin){map.setLevel(Math.max(1,nationalLevel-6));map.setCenter(point(state.origin));}
+    },
     focus(pos){
       const target=point(pos);
-      map.setLevel(Math.min(map.getLevel(),8),{anchor:target,animate:!reduceMotion.matches});
+      map.setLevel(Math.min(map.getLevel(),Math.max(1,(nationalLevel??map.getLevel())-6)),{anchor:target,animate:!reduceMotion.matches});
       if(reduceMotion.matches) map.setCenter(target); else map.panTo(target);
     },
     renderRoads(show){
@@ -2286,7 +2221,7 @@ document.querySelectorAll('[data-ic]').forEach(e => e.insertAdjacentHTML('afterb
    ═══════════════════════════════════════════════════════════════════════════ */
 const state = {
   origin:null,originAreaLabel:'',originLookupId:0,
-  cat:'heart', dxNo:19, ktas:2, dept:'순환기내과', severe:'재관류중재술',
+  cat:'heart', dxNo:null, ktas:null, dept:'', severe:null,
   activeHospitalId:null,
   traffic:'rush', showRoads:true,
   ranked:[], excluded:[], confirmed:null, searching:false, animateCards:false, routeRequestId:0,
@@ -2297,7 +2232,7 @@ const state = {
 };
 const $ = id => document.getElementById(id);
 const el = {
-  catSeg:$('catSeg'), subCount:$('subCount'), dx:$('dx'), dxSearch:$('dxSearch'), dxSuggestions:$('dxSuggestions'), ktasSeg:$('ktasSeg'), dept:$('dept'),
+  categorySelect:$('categorySelect'), subCount:$('subCount'), dx:$('dx'), dxSearch:$('dxSearch'), dxSuggestions:$('dxSuggestions'), ktasSeg:$('ktasSeg'), dept:$('dept'),
   coordTxt:$('coordTxt'), dxStrip:$('dxStrip'),
   searchBtn:$('searchBtn'), searchTxt:$('searchTxt'), roadBtn:$('roadBtn'),
   list:$('resultList'), banner:$('confirmBanner'), cbTitle:$('cbTitle'), cbSub:$('cbSub'), cbRoute:$('cbRoute'),
@@ -2330,6 +2265,15 @@ function selectClinicianPanel(panel,{scroll=false}={}){
 function updateSidebarFooter(){
   const button=$('transferActiveBtn');
   if(!button||button.hidden) return;
+  if(state.confirmed){
+    const hospital=state.ranked.find(h=>h.id===state.confirmed);
+    const phone=emergencyPhoneNumber(hospital);
+    button.disabled=!phone;
+    button.innerHTML=phone?`${ic('phone',18)}전화하기`:'응급실 전화번호 확인 불가';
+    button.setAttribute('aria-label',phone?`${hospital.name} 응급실 전화하기`:'응급실 전화번호 정보가 없습니다');
+    return;
+  }
+  button.removeAttribute('aria-label');
   const hospital=state.ranked.find(h=>h.id===state.activeHospitalId)||state.ranked[0];
   if(state.searching){ button.textContent='경로 반영 중…'; button.disabled=true; return; }
   if(!state.routeScoreAvailable||!hospital){
@@ -2341,12 +2285,22 @@ function updateSidebarFooter(){
   button.disabled=confirmed;
   button.textContent=confirmed?(state.severe?'문의 후보 선택됨':'이송 후보 선택됨'):`${hospital.name} ${state.severe?'문의 후보':'이송 후보'} · ${hospital.eta}분`;
 }
+function emergencyPhoneNumber(hospital){
+  const raw=String(hospital?.emergencyPhone||hospital?.phone||'').trim();
+  const digits=raw.replace(/\D/g,'');
+  return digits.length>=7?`${raw.startsWith('+')?'+':''}${digits}`:'';
+}
+function expandClinicianSidebar(){
+  const sidebar=$('clinicianSidebar');
+  if(innerWidth<768) sidebar.dataset.sheetState='half';
+  else sidebar.dataset.expanded='true';
+}
 function installSheetDrag(){
   const sidebar=$('clinicianSidebar'), handle=$('sheetDragHandle');
   let drag=null;
   const stops=()=>{
     const max=Math.max(210,innerHeight-24-12);
-    return [210,Math.max(230,Math.min(max,innerHeight*.56)),max];
+    return [Math.max(210,innerHeight*.3),Math.max(230,Math.min(max,innerHeight*.6)),max];
   };
   handle.addEventListener('pointerdown',event=>{
     if(innerWidth>=768) return;
@@ -2410,7 +2364,9 @@ function selectRole(role){
   document.body.dataset.mode=role;
   if(role==='clinician'){
     showHandover(); selectClinicianPanel('patient');
-    if(innerWidth<768){ $('clinicianSidebar').dataset.sheetState='half'; $('clinicianSidebar').removeAttribute('data-dragging'); $('clinicianSidebar').style.height=''; }
+    $('clinicianSidebar').removeAttribute('data-expanded');
+    $('clinicianSidebar').style.height='';
+    if(innerWidth<768){ $('clinicianSidebar').dataset.sheetState='collapsed'; $('clinicianSidebar').removeAttribute('data-dragging'); }
     syncFacilityDirectory().then(loaded=>{if(loaded) syncLiveBeds();});
     requestCurrentOrigin({automatic:true});
     if(!liveBedTimer) liveBedTimer=setInterval(()=>{
@@ -2709,7 +2665,7 @@ function segKeys(seg){
 function fillSub(key){
   const c=CATEGORIES.find(x=>x.key===key), items=catItems(key);
   const multi=new Set(items.map(d=>d.sys)).size>1;
-  let html='';
+  let html='<option value="" disabled selected>질환·상태를 선택해 주세요</option>';
   for(let k=1;k<=5;k++){
     const g=items.filter(d=>d.ktas===k); if(!g.length) continue;
     html+=`<optgroup label="KTAS ${k} · ${KTAS_NAME[k].split(' ')[0]} — ${KTAS_TIME[k]}">`
@@ -2720,9 +2676,7 @@ function fillSub(key){
   return items;
 }
 function buildSelects(){
-  el.catSeg.insertAdjacentHTML('beforeend', CATEGORIES.map(c =>
-    `<button type="button" id="cat-${c.key}" role="radio" aria-checked="false" data-v="${c.key}">
-       <span class="cat-name">${c.label}</span></button>`).join(''));
+  el.categorySelect.innerHTML=CATEGORIES.map(c=>`<option value="${c.key}">${c.label}</option>`).join('');
   el.dept.innerHTML=ALL_DEPTS.map(d=>`<option value="${d}">${d}</option>`).join('');
   el.ktasSeg.insertAdjacentHTML('beforeend',[1,2,3,4,5].map(k =>
     `<button type="button" id="ktas-${k}" role="radio" aria-checked="false" data-v="${k}" aria-label="KTAS ${k} ${KTAS_NAME[k].split(' ')[0]}">
@@ -2734,14 +2688,20 @@ const QUICK_DISEASES=[
   {label:'STEMI',match:d=>d.no===19},
   {label:'뇌졸중',match:d=>d.no===21},
   {label:'중증 외상',match:d=>d.no===5},
-  {label:'호흡곤란',match:d=>d.no===26},
-  {label:'의식저하',match:d=>d.no===9}
+  {label:'호흡곤란',match:d=>d.no===26}
 ];
 function buildQuickDiseases(){
   $('quickDx').innerHTML=QUICK_DISEASES.map(item=>{
     const disease=DISEASES.find(item.match);
-    return disease?`<button type="button" class="quick-dx-chip" data-dx-no="${disease.no}">${item.label}</button>`:'';
+    return disease?`<button type="button" class="quick-dx-chip" data-dx-no="${disease.no}" aria-pressed="false">${item.label}</button>`:'';
   }).join('');
+}
+function updateQuickDiseaseSelection(){
+  $('quickDx').querySelectorAll('[data-dx-no]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.dxNo)===state.dxNo)));
+}
+function setCategoryFields(open){
+  $('categoryFields').hidden=!open;
+  $('toggleCategories').setAttribute('aria-expanded',String(open));
 }
 function renderDiseaseSuggestions(){
   const input=$('dxSearch'), list=$('dxSuggestions'), query=input.value.trim().toLocaleLowerCase('ko');
@@ -2752,19 +2712,20 @@ function renderDiseaseSuggestions(){
 }
 function selectDisease(no){
   const disease=DISEASES.find(d=>d.no===Number(no)); if(!disease) return;
+  expandClinicianSidebar();
   const category=catOf(disease);
-  state.cat=category.key; setSeg(el.catSeg,state.cat); fillSub(state.cat); el.dx.value=String(disease.no);
+  state.cat=category.key;el.categorySelect.value=state.cat;fillSub(state.cat);el.dx.value=String(disease.no);
+  setCategoryFields(false);
   applyDisease(disease.no,true); $('dxSearch').value=''; $('dxSuggestions').hidden=true; $('dxSearch').setAttribute('aria-expanded','false');
   onDiseaseChanged();
 }
 function updateOriginSummary(){
   if(!state.origin){
-    $('originSummary').textContent='위치 · 로딩 중';
+    $('originSummary').textContent='위치 확인 중';
     el.coordTxt.textContent='현재 위치를 확인하고 있습니다';
     return;
   }
-  const originLabel=state.originLabel||'지도에서 선택';
-  $('originSummary').textContent=originLabel==='위치'?'위치':`위치 · ${originLabel}`;
+  $('originSummary').textContent=state.originAreaLabel||'위치 확인 중';
   el.coordTxt.textContent=state.originAreaLabel||state.originLabel||'위치';
 }
 
@@ -2786,38 +2747,60 @@ async function lookupOriginArea(pos,lookupId){
 
 function flash(node){ node.classList.remove('flash'); void node.offsetWidth; node.classList.add('flash'); }
 
+function renderDiseaseTabContent(d,timeGuidance,tab){
+  const content={
+    symptoms:d.sx,
+    risk:d.risk,
+    treatment:d.tx
+  }[tab];
+  if(content){
+    const items=content.split(/[,，;；]/).map(item=>item.trim()).filter(Boolean);
+    return `<ul class="dx-bullets">${items.map(item=>`<li>${escapeHTML(item)}</li>`).join('')}</ul>`;
+  }
+  if(!timeGuidance) return '<div class="dx-evidence-text"><p>현재 검증된 시간 기준을 등록하지 않았습니다.</p></div>';
+  return `<div class="dx-evidence-text"><p>${escapeHTML(timeGuidance.text)}</p><a class="dx-source-link" href="${escapeHTML(timeGuidance.url)}" target="_blank" rel="noopener noreferrer">출처: ${escapeHTML(timeGuidance.source)}</a><small class="dx-evidence-note">처치별 기준이며, 병원 이동시간과 직접 비교하는 수치는 아닙니다.</small></div>`;
+}
+
 function applyDisease(no, quiet){
   const d=DISEASES.find(x=>x.no===+no); if(!d) return;
   state.dxNo=d.no; state.ktas=d.ktas; state.dept=d.dept; state.severe=d.severe;
+  updateQuickDiseaseSelection();
   setSeg(el.ktasSeg, d.ktas); el.dept.value=d.dept;
+  $('clinicalOverview').hidden=false;
+  $('clinicalOptions').hidden=true;
   if(!quiet){ flash(el.ktasSeg); flash(el.dept); }
-
-  const gtMain = d.gtm===null ? '수치 기준 없음' : d.gtm===0 ? '즉시' : d.gtm>=60 ? `${(d.gtm/60).toFixed(d.gtm%60?1:0)}시간` : `${d.gtm}분`;
-  const gtSub  = d.gtm===0 ? '<span>0분</span>' : d.gtm>=60 ? `<span>${d.gtm}분</span>` : '';
+  const timeGuidance=TIME_GUIDANCE[d.no];
+  const alias=d.name.match(/\s*\(([^()]+)\)\s*$/);
+  const title=alias?d.name.slice(0,alias.index).trim():d.name;
+  const metaName=alias?alias[1]:d.sys;
   el.dxStrip.innerHTML = `
-    <div class="dx-title">
-      <span class="ktas-chip k${d.ktas}">KTAS ${d.ktas} · ${KTAS_NAME[d.ktas].split(' ')[0]}</span>
-      <h3 class="dx-name">${d.name}</h3>
+    <div class="dx-card-head">
+      <div class="ktas-tile"><span>KTAS</span><strong>${d.ktas}</strong></div>
+      <div class="dx-title-copy">
+        <h3 class="dx-name">${escapeHTML(title)}</h3>
+        <p class="dx-meta">${escapeHTML(metaName)} · ${escapeHTML(d.dept)}${d.severe?` · <strong class="dx-meta-severe">${escapeHTML(d.severe)}</strong>`:''}</p>
+      </div>
+      <button type="button" class="clinical-edit-button" id="editClinicalButton" aria-controls="clinicalOptions" aria-expanded="false">수정</button>
     </div>
-    <div class="chips">
-      <span class="chip">${d.sys}</span>
-      <span class="chip">필요 진료과 ${d.dept}</span>
-      ${d.severe ? `<span class="chip red">중증응급 ${d.severe}</span>` : ''}
-      <span class="chip time">${ic('clock',14)}권장 진료 ${KTAS_TIME[d.ktas]}</span>
+    <div class="dx-metrics">
+      <div class="dx-metric"><span>권장 진료</span><strong>${KTAS_TIME[d.ktas]}</strong></div>
+      <div class="dx-metric urgent"><span>골든타임</span><strong>${escapeHTML(timeGuidance?.badge||'근거 확인 중')}</strong></div>
     </div>
-    <dl class="dx-grid">
-      <div><dt>주요 증상 · 소견</dt><dd>${d.sx}</dd></div>
-      <div><dt>심각성 (왜 위험한가)</dt><dd>${d.risk}</dd></div>
-      <div><dt>필요한 치료 · 처치</dt><dd>${d.tx}</dd></div>
-      <div class="gt-cell"><dt>골든타임</dt><dd><strong>${gtMain}</strong>${gtSub}<small>원문 · ${d.gtText}</small></dd></div>
-    </dl>`;
+    <div class="dx-tabs" role="tablist" aria-label="질환 정보">
+      <button type="button" class="dx-tab" role="tab" id="dxTabSymptoms" aria-controls="dxInfoPanel" aria-selected="true" data-info-tab="symptoms">증상</button>
+      <button type="button" class="dx-tab" role="tab" id="dxTabRisk" aria-controls="dxInfoPanel" aria-selected="false" data-info-tab="risk">위험</button>
+      <button type="button" class="dx-tab" role="tab" id="dxTabTreatment" aria-controls="dxInfoPanel" aria-selected="false" data-info-tab="treatment">처치</button>
+      <button type="button" class="dx-tab" role="tab" id="dxTabEvidence" aria-controls="dxInfoPanel" aria-selected="false" data-info-tab="evidence">근거</button>
+    </div>
+    <div class="dx-tab-panel" id="dxInfoPanel" role="tabpanel" aria-labelledby="dxTabSymptoms">${renderDiseaseTabContent(d,timeGuidance,'symptoms')}</div>`;
+  $('editClinicalButton').setAttribute('aria-expanded','false');
 }
 
 /* ── 환자 위치와 검색 범위는 별도로 관리합니다. ── */
 function setOrigin(pos,label='지도에서 선택'){
   if(!pos||!Number.isFinite(pos.lat)||!Number.isFinite(pos.lng)) return false;
   if(pos.lat<KOREA_SERVICE_BOUNDS.south||pos.lat>KOREA_SERVICE_BOUNDS.north||pos.lng<KOREA_SERVICE_BOUNDS.west||pos.lng>KOREA_SERVICE_BOUNDS.east){
-    $('originSummary').textContent='위치 · 확인 불가';
+    $('originSummary').textContent='위치 확인 불가';
     el.coordTxt.textContent='서비스 가능 지역 안에서 위치를 확인해 주세요';
     $('originStatus').textContent='선택 위치가 NEDIS 전국 기관 조회 범위 밖입니다. 대한민국 안의 위치를 선택해 주세요.';
     return false;
@@ -2832,10 +2815,10 @@ function setOrigin(pos,label='지도에서 선택'){
   return true;
 }
 function requestCurrentOrigin({automatic=false}={}){
-  $('originSummary').textContent='위치 · 로딩 중';
+  $('originSummary').textContent='위치 확인 중';
   el.coordTxt.textContent='현재 위치를 확인하고 있습니다';
   if(!navigator.geolocation){
-    $('originSummary').textContent='위치 · 확인 불가';
+    $('originSummary').textContent='위치 확인 불가';
     el.coordTxt.textContent='지도에서 위치를 선택해 주세요';
     $('originStatus').textContent='이 브라우저에서 위치를 확인할 수 없습니다. 지도에서 위치를 선택해 주세요.';
     $('originOptions').hidden=false;
@@ -2857,7 +2840,7 @@ function requestCurrentOrigin({automatic=false}={}){
     $('originStatus').textContent='현재 위치를 따라가고 있습니다. 병원 찾기를 눌러 검색하세요.';
     afterOriginChange();setSearching(false);
   },()=>{
-    $('originSummary').textContent='위치 · 확인 불가';
+    $('originSummary').textContent='위치 확인 불가';
     el.coordTxt.textContent='지도에서 위치를 선택해 주세요';
     $('originStatus').textContent=automatic?'위치를 확인하지 못했습니다. 지도에서 위치를 지정해 주세요.':'위치 권한을 확인하지 못했습니다. 지도에서 위치를 선택해 주세요.';
     $('originOptions').hidden=false;
@@ -2868,7 +2851,7 @@ function afterOriginChange(){
   cancelSearchRequests();
   state.ranked=[]; state.excluded=[]; state.activeHospitalId=null; state.confirmed=null;
   state.routeScoreAvailable=false; state.routeScoreFailed=false; state.routeFailures=0;state.searchRadiusIndex=0;
-  $('routeSummary').hidden=true; el.banner.hidden=true;
+  el.banner.hidden=true;
   el.list.innerHTML='<div class="empty">위치가 변경되었습니다. 병원 찾기를 눌러 다시 검색하세요.</div>';
   updateSearchScopeLabel();
   updateSearchRangeStatus('위치가 변경되었습니다. 검색 버튼을 눌러 다시 찾으세요.');
@@ -2894,72 +2877,59 @@ function refreshMarkers(rankIds){
 }
 
 /* ── 카드 ── */
-function goldenBadge(h){
-  const d=DISEASES.find(x=>x.no===state.dxNo);
-  if(!d || d.gtm===null) return `<div class="gt none">${ic('clock',17)}<span>골든타임 <b>${d?d.gtText:'-'}</b> · 예상 도착 ${h.eta}분</span></div>`;
-  if(d.gtm===0) return `<div class="gt near">${ic('clock',17)}<span><b>즉시 이송 대상</b> · 예상 도착 ${h.eta}분 · 최단시간 우선</span></div>`;
-  const ratio=h.eta/d.gtm;
-  if(ratio<=0.7) return `<div class="gt good">${ic('check',17,2.4)}<span>골든타임 ${d.gtm}분 · 도착 ${h.eta}분 · 여유 ${d.gtm-h.eta}분</span></div>`;
-  if(ratio<=1)   return `<div class="gt near">${ic('warn',17)}<span>골든타임 ${d.gtm}분 · 도착 ${h.eta}분 · 임박 (${d.gtm-h.eta}분 남음)</span></div>`;
-  return `<div class="gt over">${ic('alert',17)}<span>골든타임 ${d.gtm}분 <b>초과</b> · 도착 ${h.eta}분 (+${h.eta-d.gtm}분)</span></div>`;
-}
-function goldenSummary(h){
-  const disease=DISEASES.find(d=>d.no===state.dxNo);
-  if(!disease||disease.gtm===null) return '골든타임 기준 없음';
-  if(disease.gtm===0) return `즉시 이송 · 도착 ${h.eta}분`;
-  const remaining=disease.gtm-h.eta;
-  return remaining>=0?`${remaining}분 여유`:`골든타임 ${Math.abs(remaining)}분 초과`;
-}
 function cardHTML(h){
   const rank=state.ranked.findIndex(item=>item.id===h.id)+1;
   const confirmed=state.confirmed===h.id;
   const disabled=state.confirmed&& !confirmed;
   const scoreAvailable=Number.isFinite(h.score)&&h.parts;
   const beds=liveBedInfo(h);
-  const hospitalPhone=(h.emergencyPhone||h.phone||'').replace(/[^\d+]/g,'');
+  const hospitalPhone=emergencyPhoneNumber(h);
   return `<article class="primary-hospital-card${state.animateCards?' result-fade':''}${confirmed?' confirmed':''}" data-id="${h.id}">
     <div class="primary-hospital-title">
-      <span class="primary-rank">${rank}순위 후보</span>
+      <span class="primary-rank">${rank}위</span>
       <h3>${escapeHTML(h.name)}</h3>
+      ${scoreAvailable?`<span class="primary-score-chip">${Math.round(h.score)}점</span>`:''}
     </div>
     <div class="arrival-summary">
       <div class="arrival-time"><strong>${h.eta}</strong><span>분</span></div>
-      <div class="arrival-meta"><span>예상 도착 · ${h.dist.toFixed(1)}km</span><strong>${goldenSummary(h)}</strong></div>
+      <div class="arrival-meta"><span>예상 도착 · ${h.dist.toFixed(1)}km</span></div>
     </div>
     <div class="capacity-summary">
       <div class="capacity-state"><i class="bed-dot s-${beds.status}"></i><span>${beds.label}</span><b>${beds.count===null?'—':`${beds.count}개`}</b></div>
       <div class="dept-state"><span>${escapeHTML(state.dept)}</span><strong>${h.liveDeptVerified===false?'관련 진료과만 확인':'진료과 확인됨'}</strong></div>
     </div>
     <div class="primary-actions">
-      <button type="button" class="btn-confirm" data-act="confirm" data-id="${h.id}" ${disabled||confirmed?'disabled':''}>${confirmed?ic('check',17,2.4)+'후보 선택됨':state.severe?'문의 후보로 선택':'후보 선택'}</button>
+      <button type="button" class="btn-confirm" data-act="confirm" data-id="${h.id}" ${disabled||confirmed?'disabled':''}>${confirmed?ic('check',17,2.4)+'후보 선택됨':'선택하기'}</button>
       <button type="button" class="btn-route" data-act="route" data-id="${h.id}" ${disabled?'disabled':''}>${ic('route',17)}경로 보기</button>
     </div>
     <details class="hospital-details">
       <summary>상세 정보</summary>
       <div class="hospital-detail-content">
-        <div class="detail-score"><span>임상 점수</span><strong>${scoreAvailable?`${h.score.toFixed(1)}점`:'산출 불가'}</strong>${scoreAvailable?`<div class="meter" role="img" aria-label="추천 점수 ${h.score.toFixed(1)}점"><i style="width:${Math.min(100,h.score)}%"></i></div>`:''}</div>
+        <div class="detail-score"><span>확인정보 기반 부분 점수</span><strong>${scoreAvailable?`${h.score.toFixed(1)}점`:'산출 대기'}</strong>${scoreAvailable?`<div class="meter" role="img" aria-label="확인정보 기반 부분 점수 ${h.score.toFixed(1)}점"><i style="width:${Math.min(100,h.score)}%"></i></div><small class="score-scope">KTAS ${state.ktas} 가중치로 실시간 가용 병상 수와 실제 경로시간만 반영했습니다. 전체 병상 비율·수용 이력은 제외했습니다.</small>`:''}</div>
         <dl class="detail-grid">
-          <div><dt>최근 수용 이력</dt><dd>실제 정보 미제공</dd></div>
+          <div><dt>가용 병상 반영</dt><dd>${scoreAvailable?`${h.parts.bed.toFixed(1)}점 · ${beds.count??'—'}개 / 전국 최대 ${h.parts.bedMax}개`:beds.count===null?'정보 없음':`${beds.count}개`}</dd></div>
+          <div><dt>이동시간 반영</dt><dd>${scoreAvailable?`${h.parts.time.toFixed(1)}점 · ${h.eta}분`:Number.isFinite(h.eta)?`${h.eta}분`: '정보 없음'}</dd></div>
+          <div><dt>최근 수용 이력</dt><dd>실제 정보 미제공 · 점수 제외</dd></div>
           <div><dt>자동차 경로 평균속도</dt><dd>${Number.isFinite(h.speed)?`${h.speed.toFixed(1)} km/h`:'정보 없음'}</dd></div>
           <div><dt>실시간 가용 병상</dt><dd>${beds.count===null?'정보 없음':`${beds.count}개`}</dd></div>
           <div><dt>병상 출처 · 갱신</dt><dd>${beds.matched?`NEDIS · ${escapeHTML(formatNedisTime(beds.updatedAt)||'시간 미제공')}`:'NEDIS · 정보 미확인'}</dd></div>
           <div><dt>NEDIS 응급실 운영 필드</dt><dd>${h.emergencyOpen===true?'운영 신고 확인':h.emergencyOpen===false?'운영 불가로 확인':'정보 미확인'}</dd></div>
           <div><dt>진료과 상세 조회</dt><dd>${h.detailRetrievedAt?new Date(h.detailRetrievedAt).toLocaleString('ko-KR'):'조회 시각 없음'}</dd></div>
-          <div><dt>전체 병상 기준</dt><dd>실제 정보 미제공</dd></div>
+          <div><dt>전체 병상 기준</dt><dd>실제 정보 미제공 · 비율 산출 제외</dd></div>
           <div><dt>진료과</dt><dd>${(h.departments||[]).map(escapeHTML).join(' · ')||'정보 미확인'}</dd></div>
           <div><dt>응급실 전화</dt><dd>${hospitalPhone?`<a href="tel:${hospitalPhone}">${escapeHTML(h.emergencyPhone||h.phone)}</a>`:'정보 미제공'}</dd></div>
           <div><dt>기관 주소</dt><dd>${escapeHTML(h.address||'정보 미제공')}</dd></div>
           <div><dt>거리 · 예상 도착</dt><dd>${h.dist.toFixed(1)}km · ${h.eta}분</dd></div>
         </dl>
-        <div class="score-breakdown"><span>점수 상태</span><div>${scoreAvailable?`병상 ${h.parts.bed} · 수용 이력 ${h.parts.accept} · 이동 ${h.parts.time}`:'기존 산식은 유지했으나 전국 실제 총 병상·수용 이력 자료가 없어 점수를 계산하지 않았습니다.'}</div></div>
       </div>
     </details>
   </article>`;
 }
 function hospitalRowHTML(h){
   const rank=state.ranked.findIndex(item=>item.id===h.id)+1;
+  const score=Number.isFinite(h.score)?`<span class="secondary-score" aria-label="부분 점수 ${Math.round(h.score)}점">${Math.round(h.score)}점</span>`:'';
   return `<button type="button" class="secondary-hospital-row" data-act="select" data-id="${h.id}" aria-pressed="${state.activeHospitalId===h.id}">
-    <span class="secondary-rank">${rank}</span><strong>${escapeHTML(h.name)}</strong><span class="secondary-eta">${h.eta}분</span><i class="bed-dot s-${h.status}" aria-label="${STATUS_LABEL[h.status]}"></i>${ic('chevron',17)}
+    <span class="secondary-rank">${rank}${ic('chevron',14)}</span><strong>${escapeHTML(h.name)}</strong><span class="secondary-meta">${score}<span class="secondary-eta">${h.eta}분</span></span><i class="bed-dot s-${h.status}" aria-label="${STATUS_LABEL[h.status]}"></i>
   </button>`;
 }
 function noCandidateMessage(){
@@ -2983,12 +2953,12 @@ function selectHospitalCard(id,{focusMap=true}={}){
   if(state.activeHospitalId===id){
     selectClinicianPanel('results');
     if(focusMap) MAP.focus?.(hospital);
-    if(hospital.routeDetailsOriginKey!==`${state.origin.lat.toFixed(5)},${state.origin.lng.toFixed(5)}`||!hospital.routeDetailsFetchedAt||Date.now()-hospital.routeDetailsFetchedAt>60_000) requestDirections(hospital);
+    if(hospital.routeOriginKey!==`${state.origin.lat.toFixed(5)},${state.origin.lng.toFixed(5)}`||!hospital.routeFetchedAt||Date.now()-hospital.routeFetchedAt>60_000) requestDirections(hospital);
     return;
   }
   state.activeHospitalId=id;
   state.confirmed=null; el.banner.hidden=true;
-  $('routeSummary').hidden=true; MAP.clearRoute();
+  MAP.clearRoute();
   selectClinicianPanel('results');
   renderResults(false);
   if(focusMap) MAP.focus?.(hospital);
@@ -3010,46 +2980,21 @@ function renderResults(){
   updateSidebarFooter();
   refreshMarkers(state.ranked.slice(0,5).map(h=>h.id));
 }
-function recompute(){
-  const r=rank(state.origin, state.dept, state.ktas, state.severe);
-  state.ranked=r.candidates; state.excluded=r.excluded;
-}
-
-function applyRealtimeScores(candidates,routes){
-  const byId=new Map((routes||[]).map(route=>[route.id,route]));
-  const scored=candidates.filter(h=>{
-    const route=byId.get(h.id);
-    return route&&!route.error&&Number.isFinite(route.distance)&&Number.isFinite(route.duration);
+function applyAvailableScores(candidates){
+  const maxLiveBeds=HOSPITALS.reduce((max,h)=>h.liveBedMatched&&Number.isInteger(h.liveAvailableBeds)?Math.max(max,h.liveAvailableBeds):max,0);
+  const weights=WEIGHTS[state.ktas],knownWeight=weights.bed+weights.time;
+  candidates.forEach(h=>{
+    const bedCount=Number.isInteger(h.liveAvailableBeds)?h.liveAvailableBeds:null;
+    const bedRatio=bedCount!==null&&maxLiveBeds>0?bedCount/maxLiveBeds:null;
+    const travelMinutes=Number.isFinite(h.routeDurationSeconds)?h.routeDurationSeconds/60:h.eta;
+    const timeRatio=Number.isFinite(travelMinutes)?Math.max(0,1-travelMinutes/MAX_ETA):null;
+    const bed=bedRatio===null?0:weights.bed/knownWeight*bedRatio*100;
+    const time=timeRatio===null?0:weights.time/knownWeight*timeRatio*100;
+    h.parts={bed:+bed.toFixed(1),accept:null,time:+time.toFixed(1),bedCount,bedMax:maxLiveBeds,travelMinutes,bedWeightPct:Math.round(weights.bed/knownWeight*100),timeWeightPct:Math.round(weights.time/knownWeight*100)};
+    h.score=+(bed+time).toFixed(1);
+    h.scoreScope='현재 NEDIS 가용 병상 수 + 실제 자동차 경로시간';
   });
-  const failed=candidates.filter(h=>!scored.includes(h));
-  if(!scored.length){
-    state.ranked=[]; state.routeScoreFailed=true; state.routeScoreAvailable=false; state.routeFailures=failed.length;
-    state.excluded=[...state.excluded,...failed.map(h=>({...h,reason:'실시간 경로 조회 실패'}))];
-    return false;
-  }
-  const durations=scored.map(h=>byId.get(h.id).duration), distances=scored.map(h=>byId.get(h.id).distance);
-  const minDuration=Math.min(...durations), maxDuration=Math.max(...durations);
-  const minDistance=Math.min(...distances), maxDistance=Math.max(...distances);
-  const w=WEIGHTS[state.ktas];
-  const relative=(value,min,max)=>max===min?1:1-(value-min)/(max-min);
-  scored.forEach(h=>{
-    const route=byId.get(h.id);
-    const timeScore=relative(route.duration,minDuration,maxDuration);
-    const distanceScore=relative(route.distance,minDistance,maxDistance);
-    const travelScore=timeScore*.8+distanceScore*.2;
-    h.dist=route.distance/1000;
-    h.eta=Math.max(1,Math.round(route.duration/60));
-    h.speed=route.duration>0?h.dist/(route.duration/3600):0;
-    h.routeScored=true;
-    h.parts.time=+(w.time*travelScore*100).toFixed(1);
-    h.score=+(h.parts.bed+h.parts.accept+h.parts.time).toFixed(1);
-  });
-  state.ranked=scored.sort((a,b)=>b.score-a.score);
-  state.excluded=[...state.excluded,...failed.map(h=>({...h,reason:'실시간 경로 조회 실패'}))];
-  state.routeScoreAvailable=true; state.routeScoreFailed=false; state.routeFailures=failed.length;
-  const checkedAt=new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
-  $('recommendationMeta').textContent=`KTAS ${state.ktas} 경로 가중치 ${Math.round(w.time*100)}% · 시간 80% / 거리 20% · ${checkedAt}${failed.length?` · 경로 실패 ${failed.length}곳 제외`:''}`;
-  return true;
+  candidates.sort((a,b)=>b.score-a.score||Number(b.liveDeptVerified===true)-Number(a.liveDeptVerified===true)||a.eta-b.eta);
 }
 
 async function requestDirections(h){
@@ -3059,12 +3004,6 @@ async function requestDirections(h){
   routeController=new AbortController();
   const {signal}=routeController;
   const origin={...state.origin};
-  const summary=$('routeSummary');
-  summary.hidden=false;
-  $('routeTitle').textContent=`${h.name} 경로 조회 중`;
-  $('routeDetails').textContent='카카오모빌리티에서 자동차 경로를 확인하고 있습니다.';
-  $('routeGuides').replaceChildren();
-  requestAnimationFrame(()=>summary.scrollIntoView({behavior:reduceMotion.matches?'auto':'smooth',block:'nearest'}));
   MAP.clearRoute();
   const query=new URLSearchParams({
     origin:`${origin.lng},${origin.lat}`,
@@ -3076,29 +3015,19 @@ async function requestDirections(h){
     if(requestId!==state.routeRequestId) return;
     if(!response.ok) throw new Error(data.error||`길찾기 요청 실패 (${response.status})`);
     if(!Array.isArray(data.path)||data.path.length<2) throw new Error('표시할 경로 좌표가 없습니다.');
-    h.routePath=data.path;h.routeDetailsFetchedAt=Date.now();h.routeDetailsOriginKey=`${origin.lat.toFixed(5)},${origin.lng.toFixed(5)}`;
+    h.routePath=data.path;h.routeFetchedAt=Date.now();h.routeOriginKey=`${origin.lat.toFixed(5)},${origin.lng.toFixed(5)}`;
     MAP.drawRoute(origin,h,{path:data.path});
-    const km=(data.distance/1000).toFixed(1), minutes=Math.max(1,Math.round(data.duration/60));
-    const fare=data.fare||{};
-    const fareText=[Number.isFinite(fare.toll)?`통행료 ${fare.toll.toLocaleString('ko-KR')}원`:null,Number.isFinite(fare.taxi)?`택시 기준 ${fare.taxi.toLocaleString('ko-KR')}원`:null].filter(Boolean).join(' · ');
-    $('routeTitle').textContent=`현재 선택 위치 → ${h.name}`;
-    $('routeDetails').textContent=`${km}km · 예상 ${minutes}분${fareText?` · ${fareText}`:''}`;
-    $('routeGuides').innerHTML=(data.guides||[]).slice(0,6).map(text=>`<li>${escapeHTML(text)}</li>`).join('');
-    summary.scrollIntoView({behavior:reduceMotion.matches?'auto':'smooth',block:'nearest'});
-    toast(`${h.name}까지 실제 길찾기 경로를 표시했습니다 · ${km}km · ${minutes}분`,'ok');
   }catch(error){
     if(requestId!==state.routeRequestId) return;
     if(error.name==='AbortError') return;
     MAP.clearRoute();
-    $('routeTitle').textContent=`${h.name} 이동시간 확인 불가`;
-    $('routeDetails').textContent=`${error.message||'자동차 경로를 찾지 못했습니다.'} · 직선거리로 시간을 추정하지 않습니다.`;
     toast('카카오모빌리티 경로 조회에 실패했습니다.','warn');
   }
 }
 
 function setSearching(on){
-  el.searchBtn.disabled=on||!state.origin; el.searchBtn.classList.toggle('busy',on);
-  el.searchTxt.textContent=on?'조건·경로 확인 중…':state.origin?'병원 찾기':'위치 확인 중';
+  el.searchBtn.disabled=on||!state.origin||!state.dxNo; el.searchBtn.classList.toggle('busy',on);
+  el.searchTxt.textContent=on?'조건·경로 확인 중…':!state.dxNo?'질환 선택':state.origin?'병원 찾기':'위치 확인 중';
   updateSidebarFooter();
 }
 function setRoadBtn(on){
@@ -3144,6 +3073,7 @@ async function requestCandidateRoutes(candidates,signal){
     }
     h.dist=route.distance/1000;
     h.eta=Math.max(1,Math.round(route.duration/60));
+    h.routeDurationSeconds=route.duration;
     h.speed=route.duration>0?h.dist/(route.duration/3600):null;
     h.routeScored=true; h.score=null; h.parts=null;
     h.routeUpdatedAt=new Date().toISOString();
@@ -3154,6 +3084,7 @@ async function requestCandidateRoutes(candidates,signal){
 }
 async function runSearch({radiusIndex=state.searchRadiusIndex,area=state.searchAreaBounds}={}){
   if(state.searching) return;
+  if(!state.dxNo){toast('먼저 질환이나 증상을 선택해 주세요.','warn');return;}
   if(!state.origin){
     $('originOptions').hidden=false; $('originStatus').textContent='위치를 먼저 지정해야 반경 검색을 할 수 있습니다.';
     toast('먼저 위치를 지정해 주세요.','warn'); return;
@@ -3167,7 +3098,7 @@ async function runSearch({radiusIndex=state.searchRadiusIndex,area=state.searchA
   state.routeScoreAvailable=false;state.routeScoreFailed=false;state.routeFailures=0;
   state.searchRadiusIndex=Math.max(0,Math.min(SEARCH_RADII_KM.length-1,radiusIndex));
   state.searchAreaBounds=area||null;state.searchStats={checked:0,deptMismatch:0,bedUnknown:0,bedZero:0,operationUnknown:0,severeUnknown:0,detailErrors:0};
-  el.banner.hidden=true;$('routeSummary').hidden=true;MAP.clearRoute();
+  el.banner.hidden=true;MAP.clearRoute();
   setSearching(true);state.dept=el.dept.value;el.exBox.hidden=true;state.excluded=[];state.ranked=[];
   $('recommendationMeta').textContent='NEDIS 기관·병상 정보를 확인하는 중';
   updateSearchScopeLabel();
@@ -3240,6 +3171,7 @@ async function runSearch({radiusIndex=state.searchRadiusIndex,area=state.searchA
       }
     }
     state.searchRadiusIndex=finalRadiusIndex;
+    applyAvailableScores(state.ranked);
     state.activeHospitalId=state.ranked[0]?.id||null;
     state.routeScoreAvailable=state.ranked.length>0;
     state.routeScoreFailed=state.ranked.length===0&&state.routeFailures>0;
@@ -3252,7 +3184,7 @@ async function runSearch({radiusIndex=state.searchRadiusIndex,area=state.searchA
       {showExpand:nextAvailable}
     );
     const bedStamp=formatNedisTime(state.liveBedsUpdatedAt)||new Date(state.liveBedsFetchedAt).toLocaleString('ko-KR');
-    $('recommendationMeta').textContent=`${state.severe?'진료과·병상 확인 기준 문의 후보':'확인된 치료 조건 후보'}의 실제 자동차 경로 시간순 · NEDIS 병상 갱신 ${bedStamp} · 임상 점수 미산출`;
+    $('recommendationMeta').textContent=`${state.severe?'진료과·병상 확인 기준 문의 후보':'확인된 치료 조건 후보'} · 가용 병상·실제 경로 부분 점수 · 정확 진료과 동점 우선 · 수용 이력 제외 · NEDIS 병상 갱신 ${bedStamp}`;
     selectClinicianPanel('results',{scroll:true});
     if(state.ranked.length) toast(`${state.ranked.length}곳의 실제 경로를 확인했습니다. 구급차 시간이나 병원 수용 확정은 아닙니다.`,'ok');
     else if(lastBatchError) toast(lastBatchError,'warn');
@@ -3299,21 +3231,54 @@ function softRerank(msg){
 
 /* ── 이벤트 ── */
 function onDiseaseChanged(){
+  if(!state.dxNo){
+    if(state.ranked.length||state.searching){
+      cancelSearchRequests();state.ranked=[];state.excluded=[];state.confirmed=null;
+      state.routeScoreAvailable=false;state.routeScoreFailed=false;
+      el.banner.hidden=true;
+      renderResults();selectClinicianPanel('patient');
+    }
+    setSearching(false);
+    return;
+  }
   if(state.ranked.length||state.searching){
     state.confirmed=null; el.banner.hidden=true;
     restartLiveSearch();
     toast(`질환 변경 · KTAS ${state.ktas} / ${state.dept} 기준 재계산`);
   }
+  setSearching(state.searching);
 }
 document.querySelector('[data-role="public"]').addEventListener('click',()=>selectRole('public'));
 document.querySelector('[data-role="clinician"]').addEventListener('click',()=>selectRole('clinician'));
 $('backToPatientBtn').addEventListener('click',()=>selectClinicianPanel('patient',{scroll:true}));
-$('editClinicalButton').addEventListener('click',()=>{
-  const options=$('clinicalOptions');
-  const open=options.hidden;
-  options.hidden=!open;
-  $('editClinicalButton').setAttribute('aria-expanded',String(open));
+el.dxStrip.addEventListener('click',event=>{
+  const editButton=event.target.closest('#editClinicalButton');
+  if(editButton){
+    const options=$('clinicalOptions');
+    const open=options.hidden;
+    options.hidden=!open;
+    editButton.setAttribute('aria-expanded',String(open));
+    return;
+  }
+  const tab=event.target.closest('[data-info-tab]');
+  if(!tab) return;
+  el.dxStrip.querySelectorAll('[data-info-tab]').forEach(button=>button.setAttribute('aria-selected',String(button===tab)));
+  const disease=DISEASES.find(item=>item.no===state.dxNo);
+  if(!disease) return;
+  $('dxInfoPanel').setAttribute('aria-labelledby',tab.id);
+  $('dxInfoPanel').innerHTML=renderDiseaseTabContent(disease,TIME_GUIDANCE[disease.no],tab.dataset.infoTab);
 });
+el.dxStrip.addEventListener('keydown',event=>{
+  const tabs=[...el.dxStrip.querySelectorAll('[data-info-tab]')];
+  const current=event.target.closest('[data-info-tab]');
+  if(!current||!['ArrowLeft','ArrowRight'].includes(event.key)) return;
+  event.preventDefault();
+  const step=event.key==='ArrowRight'?1:-1;
+  const next=tabs[(tabs.indexOf(current)+step+tabs.length)%tabs.length];
+  next.focus();next.click();
+});
+$('toggleCategories').addEventListener('click',()=>{expandClinicianSidebar();setCategoryFields($('categoryFields').hidden);});
+$('dxSearch').addEventListener('focus',expandClinicianSidebar);
 $('pickOriginOnMap').addEventListener('click',()=>{
   state.pickOriginMode=!state.pickOriginMode;
   $('pickOriginOnMap').setAttribute('aria-pressed',String(state.pickOriginMode));
@@ -3358,6 +3323,13 @@ function returnToRoleGate(){
 $('homeButton').addEventListener('click',returnToRoleGate);
 $('sidebarHomeButton').addEventListener('click',returnToRoleGate);
 $('transferActiveBtn').addEventListener('click',()=>{
+  if(state.confirmed){
+    const hospital=state.ranked.find(h=>h.id===state.confirmed);
+    const phone=emergencyPhoneNumber(hospital);
+    if(phone) window.location.href=`tel:${phone}`;
+    else toast('응급실 전화번호 정보를 확인할 수 없습니다.','warn');
+    return;
+  }
   if(state.routeScoreFailed){ restartLiveSearch(); return; }
   if(!state.routeScoreAvailable||!state.activeHospitalId) return;
   confirmHospital(state.activeHospitalId);
@@ -3528,14 +3500,16 @@ $('clearHandoverBtn').addEventListener('click',()=>{
   sessionStorage.removeItem(HANDOVER_KEY);
   showHandover(); toast('이 탭의 전달 정보를 지웠습니다.');
 });
-el.dx.addEventListener('change', () => { $('dxSearch').value=''; applyDisease(el.dx.value); onDiseaseChanged(); });
-el.catSeg.addEventListener('click', e => {
-  const b=e.target.closest('button[data-v]'); if(!b || b.dataset.v===state.cat) return;
-  state.cat=b.dataset.v; setSeg(el.catSeg, state.cat);
-  const items=fillSub(state.cat);
-  el.dx.value=items[0].no;                 // 그 부위에서 가장 위급한 항목부터
+el.dx.addEventListener('change', () => { expandClinicianSidebar(); $('dxSearch').value=''; setCategoryFields(false); applyDisease(el.dx.value); onDiseaseChanged(); });
+el.categorySelect.addEventListener('change',()=>{
+  state.cat=el.categorySelect.value;
+  fillSub(state.cat);el.dx.value='';
   $('dxSearch').value=''; $('dxSuggestions').hidden=true;
-  applyDisease(items[0].no); flash(el.dx);
+  state.dxNo=null;state.ktas=null;state.dept='';state.severe=null;
+  updateQuickDiseaseSelection();
+  setSeg(el.ktasSeg,null);el.dept.value='';
+  $('clinicalOverview').hidden=true;$('clinicalOptions').hidden=true;$('editClinicalButton')?.setAttribute('aria-expanded','false');
+  el.dxStrip.replaceChildren();
   onDiseaseChanged();
 });
 el.ktasSeg.addEventListener('click', e => {
@@ -3544,7 +3518,7 @@ el.ktasSeg.addEventListener('click', e => {
   state.ktas=v; setSeg(el.ktasSeg, v); softRerank('KTAS 등급 수동 변경');
 });
 el.dept.addEventListener('change', () => { state.dept=el.dept.value; softRerank('진료과 수동 변경'); });
-segKeys(el.catSeg); segKeys(el.ktasSeg);
+segKeys(el.ktasSeg);
 el.searchBtn.addEventListener('click', runSearch);
 el.roadBtn.addEventListener('click', () => {
   state.showRoads=!state.showRoads; setRoadBtn(state.showRoads);
@@ -3570,16 +3544,15 @@ $('zoomOut').addEventListener('click', () => MAP.zoomOut());
 $('zoomReset').addEventListener('click', () => MAP.reset());
 const bar=$('bar');
 addEventListener('scroll', () => bar.classList.toggle('scrolled', scrollY>4), {passive:true});
-const SEGS=[el.catSeg, el.ktasSeg];
+const SEGS=[el.ktasSeg];
 const thumbRO=new ResizeObserver(() => SEGS.forEach(placeThumb));
 SEGS.forEach(s => thumbRO.observe(s));
 
 /* ── 부팅 ── */
 buildSelects();
 buildQuickDiseases();
-state.cat=catOf(DISEASES.find(d=>d.no===state.dxNo)).key;
-setSeg(el.catSeg, state.cat); fillSub(state.cat); el.dx.value=state.dxNo;
-applyDisease(state.dxNo, true);
+el.categorySelect.value=state.cat;fillSub(state.cat);el.dx.value='';
+setSeg(el.ktasSeg,null);el.dept.value='';
 if(window.kakao?.maps){
   MAP = KakaoMap($('map'));
 }else{

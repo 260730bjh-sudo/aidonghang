@@ -1,0 +1,52 @@
+- generic [ref=e4]:
+  - generic [ref=e5]:
+    - link "1" [ref=e6] [cursor=pointer]:
+      - /url: "#t1"
+    - generic [ref=e7]: STEMI 카드 리디자인 — 정보 위계 재정렬 · 시간 중심 · 레이어드
+  - generic [ref=e9]:
+    - generic [ref=e10]:
+      - link "1c" [ref=e11] [cursor=pointer]:
+        - /url: "#1c"
+      - text: Layered — 라이트 머티리얼 + 세그먼트로 한 번에 하나
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - generic [ref=e15]: KTAS
+          - generic [ref=e16]: "2"
+        - generic [ref=e17]:
+          - heading "ST분절상승 심근경색" [level=2] [ref=e18]
+          - generic [ref=e19]: STEMI · 순환기내과 · 재관류중재술
+        - button "수정" [ref=e20] [cursor=pointer]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: 권장 진료
+          - generic [ref=e24]: 15분 이내
+        - generic [ref=e25]:
+          - generic [ref=e26]: 골든타임
+          - generic [ref=e27]: PCI 120분
+      - generic [ref=e28]:
+        - button "증상" [ref=e30] [cursor=pointer]
+        - button "위험" [ref=e31] [cursor=pointer]
+        - button "처치" [ref=e32] [cursor=pointer]
+        - button "근거" [ref=e33] [cursor=pointer]
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]: ●
+          - generic [ref=e38]: 30분 이상 지속되는 조이는 흉통
+        - generic [ref=e39]:
+          - generic [ref=e40]: ●
+          - generic [ref=e41]: 식은땀
+        - generic [ref=e42]:
+          - generic [ref=e43]: ●
+          - generic [ref=e44]: 팔·턱·등으로 퍼지는 방사통
+  - paragraph [ref=e45]:
+    - text: "Try next: \""
+    - link "1a" [ref=e46] [cursor=pointer]:
+      - /url: "#1a"
+    - text: 구조에
+    - link "1b" [ref=e47] [cursor=pointer]:
+      - /url: "#1b"
+    - text: 슬라이더 넣기" · "
+    - link "1c" [ref=e48] [cursor=pointer]:
+      - /url: "#1c"
+    - text: 다크 모드 토글" · "KTAS 1~5 레벨별 색상 시스템"
