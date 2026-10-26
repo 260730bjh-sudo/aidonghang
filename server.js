@@ -406,11 +406,12 @@ async function readJsonBody(req){
 
 function pruneSharedPatientReports(){
   const now=Date.now();
-  for(const [code,report] of sharedPatientReports){
-    if(report.expiresAt<=now) sharedPatientReports.delete(code);
+  for(const [id,report] of sharedPatientReports){
+    if(report.expiresAt<=now) sharedPatientReports.delete(id);
   }
   while(sharedPatientReports.size>=500) sharedPatientReports.delete(sharedPatientReports.keys().next().value);
 }
+setInterval(pruneSharedPatientReports,60_000).unref();
 
 async function sharedPatientReport(req,res){
   if(req.method==='POST'){
@@ -423,24 +424,15 @@ async function sharedPatientReport(req,res){
       return sendJson(res,400,{error:'공유할 위치 또는 응답 분류가 올바르지 않습니다.'});
     }
     pruneSharedPatientReports();
-    const accessCode=randomBytes(16).toString('hex').toUpperCase();
+    const id=randomBytes(12).toString('hex');
     const createdAt=new Date().toISOString(),expiresAt=Date.now()+SHARED_REPORT_TTL_MS;
-    sharedPatientReports.set(accessCode,{locationCoordinates:{lat,lng},severity,createdAt,expiresAt});
-    return sendJson(res,201,{accessCode,expiresAt:new Date(expiresAt).toISOString()});
+    sharedPatientReports.set(id,{id,locationCoordinates:{lat,lng},severity,createdAt,expiresAt});
+    return sendJson(res,201,{id,expiresAt:new Date(expiresAt).toISOString()});
   }
-  const accessCode=String(req.headers.authorization||'').replace(/^Bearer\s+/i,'').trim().toUpperCase();
-  if(!/^[A-F0-9]{32}$/.test(accessCode)) return sendJson(res,401,{error:'공유 코드를 확인해 주세요.'});
-  const report=sharedPatientReports.get(accessCode);
-  if(!report||report.expiresAt<=Date.now()){
-    sharedPatientReports.delete(accessCode);
-    return sendJson(res,404,{error:'신고가 만료되었거나 공유 코드를 찾을 수 없습니다.'});
-  }
-  if(req.method==='DELETE'){
-    sharedPatientReports.delete(accessCode);
-    return sendJson(res,200,{deleted:true});
-  }
-  if(req.method!=='GET') return sendJson(res,405,{error:'GET, POST, DELETE 요청만 지원합니다.'});
-  return sendJson(res,200,{report:{locationCoordinates:report.locationCoordinates,severity:report.severity,createdAt:report.createdAt,expiresAt:new Date(report.expiresAt).toISOString()}});
+  if(req.method!=='GET') return sendJson(res,405,{error:'GET, POST 요청만 지원합니다.'});
+  pruneSharedPatientReports();
+  const reports=[...sharedPatientReports.values()].sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
+  return sendJson(res,200,{reports});
 }
 
 async function computeDirectionsSummaries(origin,items,apiKey){
