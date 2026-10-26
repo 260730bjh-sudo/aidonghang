@@ -1,0 +1,88 @@
+- generic:
+  - text: ›
+  - main [ref=e34]:
+    - generic [ref=e36]: 위치 확인 불가
+    - complementary "의료진 정보 패널" [ref=e37]:
+      - generic [ref=e38]:
+        - button "지도에서 위치 선택" [ref=e40] [cursor=pointer]
+        - paragraph [ref=e41]: 위치를 확인하지 못했습니다. 지도에서 위치를 지정해 주세요.
+      - text: ›
+      - region "응급실 병원 후보" [ref=e42]:
+        - generic [ref=e43]:
+          - heading "응급실 병원 후보" [level=2] [ref=e45]
+          - button "환자 입력으로 돌아가기" [ref=e46] [cursor=pointer]:
+            - img [ref=e48]
+        - generic [ref=e51]: 위치를 지정한 뒤 병원을 찾으세요.
+        - generic [ref=e53]: 위치를 지정한 뒤 병원 찾기를 누르세요. 확인 가능한 치료 조건을 먼저 검사하고, 확인된 후보에만 자동차 경로를 요청합니다.
+      - button "테스트병원 응급실 전화하기" [active] [ref=e55] [cursor=pointer]:
+        - img [ref=e56]
+        - text: 전화하기
+    - region "전국 응급의료기관 지도" [ref=e59]:
+      - generic [ref=e61]:
+        - application "전국 응급의료기관 지도. 위치 변경 모드에서만 지도를 눌러 위치를 지정할 수 있습니다." [ref=e62]:
+          - generic [ref=e63]:
+            - generic:
+              - img [ref=e65]
+              - generic:
+                - button "59개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e67] [cursor=pointer]: "59"
+                - button "126개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e69] [cursor=pointer]: "126"
+                - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e71] [cursor=pointer]: "2"
+                - button "65개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e73] [cursor=pointer]: "65"
+                - button "34개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e75] [cursor=pointer]: "34"
+                - button "31개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e77] [cursor=pointer]: "31"
+                - button "5개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e79] [cursor=pointer]: "5"
+                - button "9개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e81] [cursor=pointer]: "9"
+                - button "7개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e83] [cursor=pointer]: "7"
+                - button "3개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e85] [cursor=pointer]: "3"
+                - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e87] [cursor=pointer]: "2"
+                - button "7개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e89] [cursor=pointer]: "7"
+                - button "11개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e91] [cursor=pointer]: "11"
+                - button "6개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e93] [cursor=pointer]: "6"
+                - button "26개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e95] [cursor=pointer]: "26"
+                - button "11개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e97] [cursor=pointer]: "11"
+                - button "8개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e99] [cursor=pointer]: "8"
+                - button "고신대학교복음병원, 정보 미확인" [ref=e101] [cursor=pointer]:
+                  - generic [ref=e102]: —
+                - button "15개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e104] [cursor=pointer]: "15"
+                - button "22개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e106] [cursor=pointer]: "22"
+                - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e108] [cursor=pointer]: "2"
+                - button "16개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e110] [cursor=pointer]: "16"
+                - button "14개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e112] [cursor=pointer]: "14"
+                - button "15개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e114] [cursor=pointer]: "15"
+                - button "8개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e116] [cursor=pointer]: "8"
+                - button "4개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e118] [cursor=pointer]: "4"
+                - button "3개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e120] [cursor=pointer]: "3"
+                - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e122] [cursor=pointer]: "2"
+                - button "3개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e124] [cursor=pointer]: "3"
+                - button "3개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e126] [cursor=pointer]: "3"
+                - button "울릉군보건의료원, 정보 미확인" [ref=e128] [cursor=pointer]:
+                  - generic [ref=e129]: —
+                - button "5개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e131] [cursor=pointer]: "5"
+                - button "2개 응급의료기관 묶음, 확대해 개별 병원 보기" [ref=e133] [cursor=pointer]: "2"
+                - button "인천광역시의료원백령병원, 정보 미확인" [ref=e135] [cursor=pointer]:
+                  - generic [ref=e136]: —
+                - button "제주특별자치도서귀포의료원, 정보 미확인" [ref=e138] [cursor=pointer]:
+                  - generic [ref=e139]: —
+                - button "철원병원, 정보 미확인" [ref=e141] [cursor=pointer]:
+                  - generic [ref=e142]: —
+          - generic [ref=e143]:
+            - generic [ref=e146]: 64km
+            - link "Kakao 맵으로 이동(새창열림)" [ref=e148] [cursor=pointer]:
+              - /url: http://map.kakao.com/
+              - img "Kakao 맵으로 이동(새창열림)" [ref=e149]
+        - group "지도 빠른 도구" [ref=e150]:
+          - button "홈 화면으로 돌아가기" [ref=e151] [cursor=pointer]:
+            - img [ref=e153]
+          - button "실시간 교통 레이어 끄기" [pressed] [ref=e156] [cursor=pointer]:
+            - img [ref=e158]
+        - generic:
+          - generic:
+            - img
+          - generic: 지도 이동만으로 위치나 결과는 바뀌지 않습니다. ‘이 지역 검색’을 눌러 범위를 적용하세요.
+        - generic "지도 확대 축소" [ref=e160]:
+          - button "지도 확대" [ref=e161] [cursor=pointer]:
+            - img [ref=e163]
+          - button "지도 축소" [ref=e165] [cursor=pointer]:
+            - img [ref=e167]
+          - button "지도 원래 크기" [ref=e168] [cursor=pointer]:
+            - img [ref=e170]
