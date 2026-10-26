@@ -1382,11 +1382,11 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 
     <section class="public-handover-result" id="publicResult" hidden aria-labelledby="handoverTitle">
       <h2 id="handoverTitle" tabindex="-1">전달할 정보가 준비됐어요</h2>
-      <p>아래 버튼으로 신고 내용을 직접 전달하세요.</p>
+      <p>신고를 완료하면 의료진 화면의 지도에 환자 위치가 표시됩니다.</p>
       <div class="summary-actions">
         <a class="summary-report-action call" href="tel:119">119 전화</a>
         <a class="summary-report-action sms" id="summarySmsLink" href="sms:119?body=">119 문자신고</a>
-        <button type="button" class="summary-report-action share" data-share-report>구급대에 정보 보내기</button>
+        <button type="button" class="summary-report-action share" data-share-report>신고 완료하기</button>
         <button type="button" class="summary-report-action copy" id="copyHandoverBtn">요약 복사</button>
       </div>
       <ul id="handoverSummaryList" class="public-summary-list"></ul>
@@ -1417,7 +1417,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
   <nav class="public-call-dock" aria-label="긴급 신고">
     <a class="report-action call" id="publicCallLink" href="tel:119"><strong>119 전화</strong></a>
     <a class="report-action sms" id="publicSmsLink" href="sms:119?body="><strong>119 문자신고</strong></a>
-    <button type="button" class="report-action share" id="publicShareButton"><strong>구급대에 정보 보내기</strong></button>
+    <button type="button" class="report-action share" id="publicShareButton"><strong>신고 완료하기</strong></button>
     <details class="report-disclaimer"><summary aria-label="신고·위치 공유 안내 보기">ⓘ</summary><p>이 앱은 진단이나 119 신고를 대신하지 않습니다. 확인한 위치와 응답 분류는 모든 방문자가 의료진 지도에서 최대 60분 볼 수 있으며, 실제 119로 자동 전송되지 않습니다.</p></details>
   </nav>
   <dialog class="share-code-dialog" id="shareCodeDialog" aria-labelledby="shareCodeTitle">
@@ -3241,6 +3241,7 @@ function openPublicHome(){
 }
 function resetPublicDraftForSituation(situationKey){
   const location=publicReportDraft.location,locationVerified=publicReportDraft.locationVerified,coordinates=publicMapSelection;
+  setPublicReportActionState('ready');
   Object.assign(publicReportDraft,{location,locationVerified,consciousness:'',breathing:'',bleeding:'',onset:'',onsetMode:'',onsetAt:'',onsetSelectedAt:'',other:'',actions:[],reportId:'',reportExpiresAt:''});
   publicMapSelection=coordinates;publicReportDraft.situationKey=situationKey;
   publicReportDraft.situation=({cardiac:'반응 없음 · 심정지 의심',breathing:'숨쉬기 어려움',bleeding:'심한 출혈',trauma:'다치거나 외상',other:'그 외 증상'})[situationKey]||'그 외 증상';
@@ -3286,26 +3287,34 @@ async function savePublicManualLocation(){
   }catch(error){$('publicLocationStatus').textContent=error.message||'주소를 확인하지 못했습니다.';}
   finally{button.disabled=false;button.textContent='위치 저장';}
 }
-async function generateShareCode(){
-  if(sharedPublicReport?.id){await showReportShareDialog(sharedPublicReport.id,sharedPublicReport.expiresAt);return;}
-  if(publicSharePending) return publicSharePending;
-  const coords=await resolvePublicLocationCoordinates();
-  if(!coords){$('publicManualLocation').hidden=false;$('publicManualLocationToggle').hidden=false;$('publicLocationStatus').textContent='위치를 입력하거나 지도에서 골라 주세요.';$('publicLocation').focus();return;}
-  const data=publicHandover();data.locationCoordinates=coords;
-  if(!data.reportId){
+async function submitPublicReport(){
+  if(sharedPublicReport?.id){toast('전달받은 정보는 신고 완료 처리할 수 없습니다.','warn');return;}
+  if(publicReportDraft.reportId){toast('이미 신고가 접수되어 의료진 화면에 표시 중입니다. 새 신고는 처음 화면에서 시작해 주세요.','ok');return;}
+  if(publicSharePending) return;
+  setPublicReportActionState('pending');
+  publicSharePending=(async()=>{
+    const coords=await resolvePublicLocationCoordinates();
+    if(!coords){$('publicManualLocation').hidden=false;$('publicManualLocationToggle').hidden=false;$('publicLocationStatus').textContent='위치를 입력하거나 지도에서 골라 주세요.';$('publicLocation').focus();return null;}
+    const data=publicHandover();data.locationCoordinates=coords;
     const patientSummary={locationLabel:data.location,situation:data.symptoms,consciousness:data.consciousness,breathing:data.breathing,bleeding:data.bleeding,onset:data.onset,actions:data.actions};
-    publicSharePending=(async()=>{
-      const response=await fetch('/api/shared-reports',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({locationCoordinates:coords,severity:data.severity,patientSummary})});
-      const payload=await response.json();if(!response.ok) throw new Error(payload.error||'정보를 등록하지 못했습니다.');
-      publicReportDraft.reportId=payload.id;publicReportDraft.reportExpiresAt=payload.expiresAt;
-      data.reportId=payload.id;data.reportExpiresAt=payload.expiresAt;
-      try{sessionStorage.setItem(HANDOVER_KEY,JSON.stringify(data));}catch{}
-      return payload;
-    })().catch(error=>{toast(error.message||'정보를 등록하지 못했습니다.','warn');return null;}).finally(()=>{publicSharePending=null;});
-    const payload=await publicSharePending;if(!payload) return;
-  }
-  const reportId=publicReportDraft.reportId||data.reportId,url=new URL(location.pathname,location.origin);
-  await showReportShareDialog(reportId,publicReportDraft.reportExpiresAt||data.reportExpiresAt);
+    const response=await fetch('/api/shared-reports',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({locationCoordinates:coords,severity:data.severity,patientSummary})});
+    const payload=await response.json();if(!response.ok) throw new Error(payload.error||'신고를 접수하지 못했습니다.');
+    publicReportDraft.reportId=payload.id;publicReportDraft.reportExpiresAt=payload.expiresAt;
+    data.reportId=payload.id;data.reportExpiresAt=payload.expiresAt;
+    try{sessionStorage.setItem(HANDOVER_KEY,JSON.stringify(data));}catch{}
+    return payload;
+  })().catch(error=>{toast(error.message||'신고를 접수하지 못했습니다.','warn');return null;}).finally(()=>{publicSharePending=null;});
+  const payload=await publicSharePending;
+  if(!payload){setPublicReportActionState('ready');return;}
+  setPublicReportActionState('done');
+  toast('신고가 접수됐습니다. 의료진 화면의 지도에 곧 표시됩니다.','ok');
+}
+function setPublicReportActionState(status){
+  const label={ready:'신고 완료하기',pending:'신고 중…',done:'신고 접수 완료'}[status];
+  document.querySelectorAll('[data-share-report],#publicShareButton').forEach(button=>{
+    button.disabled=status!=='ready';
+    (button.querySelector('strong')||button).textContent=label;
+  });
 }
 async function showReportShareDialog(reportId,expiresAt){
   const url=new URL(location.pathname,location.origin);
@@ -3426,7 +3435,7 @@ async function refreshSharedPatientReports({focusLatest=false}={}){
 function startSharedReportPolling(){
   stopSharedReportPolling();
   refreshSharedPatientReports({focusLatest:true});
-  sharedReportTimer=setInterval(()=>refreshSharedPatientReports(),10_000);
+  sharedReportTimer=setInterval(()=>refreshSharedPatientReports(),2_000);
 }
 function stopSharedReportPolling(){
   if(sharedReportTimer){clearInterval(sharedReportTimer);sharedReportTimer=null;}
@@ -4286,11 +4295,11 @@ $('publicStepBack').addEventListener('click',()=>{
   else openPublicHome();
 });
 $('publicEditReportBtn').addEventListener('click',()=>{
-  publicSummaryVisible=false;sharedPublicReport=null;publicReportDraft.reportId='';publicReportDraft.reportExpiresAt='';publicStepPlan=PUBLIC_WIZARD_STEPS.map(step=>step.key);publicStepHistory=['other'];renderPublicStep();
+  publicSummaryVisible=false;sharedPublicReport=null;publicReportDraft.reportId='';publicReportDraft.reportExpiresAt='';setPublicReportActionState('ready');publicStepPlan=PUBLIC_WIZARD_STEPS.map(step=>step.key);publicStepHistory=['other'];renderPublicStep();
 });
 $('copyHandoverBtn').addEventListener('click',()=>copyText(handoverText(publicHandover())));
-document.querySelectorAll('[data-share-report]').forEach(button=>button.addEventListener('click',generateShareCode));
-$('publicShareButton').addEventListener('click',generateShareCode);
+document.querySelectorAll('[data-share-report]').forEach(button=>button.addEventListener('click',submitPublicReport));
+$('publicShareButton').addEventListener('click',submitPublicReport);
 $('copyShareCode').addEventListener('click',async()=>{
   const code=$('shareCodeValue').textContent;
   try{await navigator.clipboard.writeText(code);$('shareCodeStatus').textContent='코드를 복사했습니다.';}
