@@ -382,7 +382,7 @@ b{font-weight:650}
 .gate-title-break{display:none}
 .role-grid{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:0}
 .role-card{min-width:0;min-height:230px;padding:28px 22px;border:1px solid #E5E3DC;border-radius:20px;background:#fff;color:#1D1D1F;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;transition:transform .18s,border-color .18s,box-shadow .18s}
-.role-card:hover{transform:translateY(-3px);border-color:#C8C6BF;box-shadow:0 8px 22px rgba(0,0,0,.08)}
+@media (hover:hover) and (pointer:fine){.role-card:hover{transform:translateY(-3px);border-color:#C8C6BF;box-shadow:0 8px 22px rgba(0,0,0,.08)}}
 .role-card:active{transform:scale(.97);transition-duration:100ms}
 .role-icon{width:48px;height:48px;border-radius:14px;background:#F2F2F7;color:#1D1D1F;display:grid;place-items:center}
 .role-copy{display:grid;gap:6px}
@@ -1161,6 +1161,88 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
   #publicApp .cpr-flash-surface{display:none!important;transition:none!important}
   #publicApp *,#publicApp *::before,#publicApp *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
+/* ── 추가 모션 (savior-animation-patch v2) ── */
+
+/* 토큰: 살짝 튕기는 스프링 곡선 + 로딩 광택 색 */
+:root{--ease-spring:cubic-bezier(.34,1.56,.64,1);--sheen:rgba(255,255,255,.6)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sheen:rgba(255,255,255,.08)}}
+:root[data-theme="dark"]{--sheen:rgba(255,255,255,.08)}
+
+/* 공용 키프레임 */
+@keyframes reveal{from{opacity:0;transform:translateY(-6px)}}
+@keyframes choice-pop{0%{transform:scale(.94)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes row-in{from{opacity:0;transform:translateX(18px)}}
+
+/* [A] 검색 로딩 — 스켈레톤 위로 빛이 훑고 지나감 + 순차 등장 */
+@keyframes skel-sweep{to{transform:translateX(100%)}}
+.recommendation-skeleton{position:relative;overflow:hidden;animation:reveal 260ms var(--ease) backwards}
+.recommendation-skeleton::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,var(--sheen) 50%,transparent 80%);transform:translateX(-100%);animation:skel-sweep 1.15s ease-in-out infinite}
+.recommendation-skeleton:nth-child(2),.recommendation-skeleton:nth-child(2)::after{animation-delay:90ms}
+.recommendation-skeleton:nth-child(3),.recommendation-skeleton:nth-child(3)::after{animation-delay:180ms}
+
+/* [B] 환자 입력 ↔ 병원 후보 패널 — 방향성 있는 슬라이드 + 살짝 튕김 */
+@keyframes pane-in-r{from{opacity:0;transform:translateX(26px) scale(.98)}}
+@keyframes pane-in-l{from{opacity:0;transform:translateX(-26px) scale(.98)}}
+#clinicianSidebar[data-active="results"] #resultPanel{animation:pane-in-r 320ms var(--ease-spring) backwards}
+#clinicianSidebar[data-active="patient"] #patientPanel{animation:pane-in-l 320ms var(--ease-spring) backwards}
+
+/* [C] 추천 결과 — 1순위 카드 팝 + 점수칩·도착시간 순차 + 2~5순위 행 스태거 */
+@keyframes card-pop{from{opacity:0;transform:translateY(12px) scale(.95)}}
+@keyframes chip-pop{from{opacity:0;transform:scale(.5)}}
+@keyframes eta-in{from{opacity:0;transform:translateY(10px)}}
+.primary-hospital-card.result-fade{animation:card-pop 400ms var(--ease-spring) backwards}
+.primary-hospital-card.result-fade .primary-score-chip{animation:chip-pop 420ms var(--ease-spring) 180ms backwards}
+.primary-hospital-card.result-fade .arrival-time strong{animation:eta-in 320ms var(--ease) 120ms backwards}
+.recommendation-primary:has(.result-fade)+.secondary-hospitals .secondary-hospital-row{animation:row-in 300ms var(--ease) backwards}
+.recommendation-primary:has(.result-fade)+.secondary-hospitals .secondary-hospital-row:nth-child(1){animation-delay:120ms}
+.recommendation-primary:has(.result-fade)+.secondary-hospitals .secondary-hospital-row:nth-child(2){animation-delay:170ms}
+.recommendation-primary:has(.result-fade)+.secondary-hospitals .secondary-hospital-row:nth-child(3){animation-delay:220ms}
+.recommendation-primary:has(.result-fade)+.secondary-hospitals .secondary-hospital-row:nth-child(4){animation-delay:270ms}
+/* 상세 정보 펼칠 때 점수 막대가 차오름 */
+.hospital-details[open] .detail-score .meter i{transform-origin:left;animation:grow 700ms var(--ease) 80ms backwards}
+
+/* [D] 이송 후보 선택 — 버튼 팝 + 카드 테두리 초록 펄스 1회 + 배너 체크 회전 팝 */
+@keyframes confirm-glow{0%{box-shadow:inset 0 0 0 0 var(--green)}30%{box-shadow:inset 0 0 0 3px var(--green)}100%{box-shadow:inset 0 0 0 1.5px var(--green-soft)}}
+@keyframes check-pop{from{opacity:0;transform:scale(.3) rotate(-35deg)}}
+.primary-hospital-card.confirmed{animation:confirm-glow 900ms ease-out forwards}
+.primary-hospital-card.confirmed .btn-confirm{animation:choice-pop 450ms var(--ease)}
+.banner:not([hidden])>.ic{animation:check-pop 520ms var(--ease-spring) 120ms backwards}
+
+/* [E] 질환 선택 — KTAS 타일 회전 팝 + 지표 카드 순차 + 옵션 펼침 */
+@keyframes tile-pop{from{opacity:0;transform:scale(.6) rotate(-12deg)}}
+#clinicalOverview,#clinicalOptions,#categoryFields{animation:reveal 220ms var(--ease) backwards}
+.dx .ktas-tile{animation:tile-pop 480ms var(--ease-spring) backwards}
+.dx .dx-title-copy{animation:reveal 260ms var(--ease) 60ms backwards}
+.dx .dx-metric{animation:reveal 280ms var(--ease) 120ms backwards}
+.dx .dx-metric:nth-child(2){animation-delay:180ms}
+.quick-dx-chip[aria-pressed="true"]{animation:choice-pop 320ms var(--ease)}
+
+/* [F] 일반인 — 다음은 오른쪽에서, 이전은 왼쪽에서 + 선택지 팝 */
+@keyframes step-fwd{from{opacity:0;transform:translateX(30px) scale(.98)}}
+@keyframes step-back{from{opacity:0;transform:translateX(-30px) scale(.98)}}
+.public-question-card.step-in[data-dir="fwd"]{animation:step-fwd 320ms var(--ease-spring) backwards}
+.public-question-card.step-in[data-dir="back"]{animation:step-back 320ms var(--ease-spring) backwards}
+.public-option[aria-pressed="true"],.public-option[aria-checked="true"]{animation:choice-pop 300ms var(--ease)}
+
+/* [G] 119 긴급 카드 — 튕기며 등장 (반복 없음, 1회만) */
+@keyframes urgent-in{from{opacity:0;transform:scale(.92) translateY(8px)}}
+.public-urgent-card{animation:urgent-in 340ms var(--ease-spring) backwards}
+.public-urgent-card .urgent-inline-call{animation:choice-pop 420ms var(--ease) 200ms}
+
+/* [H] 119 전달 요약 — 카드 등장 + 항목이 한 줄씩 순차 등장 */
+@keyframes sum-in{from{opacity:0;transform:translateY(10px)}}
+.public-handover-result{animation:sum-in 260ms var(--ease) backwards}
+.public-handover-result li{animation:row-in 280ms var(--ease) backwards}
+.public-handover-result li:nth-child(1){animation-delay:80ms}
+.public-handover-result li:nth-child(2){animation-delay:120ms}
+.public-handover-result li:nth-child(3){animation-delay:160ms}
+.public-handover-result li:nth-child(4){animation-delay:200ms}
+.public-handover-result li:nth-child(5){animation-delay:240ms}
+.public-handover-result li:nth-child(6){animation-delay:280ms}
+.public-handover-result li:nth-child(7){animation-delay:320ms}
+
+/* 동작 줄이기: 기존 전역 규칙이 재생시간을 0으로 만듦. 지연도 없애서 빈 화면 순간을 막음 */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-delay:0s!important}}
 </style>
 
 <section class="role-gate" id="roleGate" aria-labelledby="gateTitle">
@@ -3011,6 +3093,11 @@ function renderPublicStep(){
   $('publicStepContent').querySelectorAll('[data-report-field]').forEach(field=>{field.value=publicReportDraft[field.dataset.reportField]||'';});
   $('publicStepContent').querySelectorAll('[role="radiogroup"]').forEach(initPublicRadioGroup);
   updatePublicSmsLinks();requestAnimationFrame(()=>$('publicStepTitle').focus());
+  const qc=$('publicQuestionCard');
+  const prevStep=qc.dataset.step===undefined?-1:Number(qc.dataset.step);
+  qc.dataset.dir=publicWizardStep>=prevStep?'fwd':'back';
+  qc.dataset.step=String(publicWizardStep);
+  qc.classList.remove('step-in'); void qc.offsetWidth; qc.classList.add('step-in');
 }
 function initPublicRadioGroup(group){
   const radios=[...group.querySelectorAll('[role="radio"]')],selected=radios.find(radio=>radio.getAttribute('aria-checked')==='true');
@@ -3164,7 +3251,9 @@ function resetPublicDraftForSituation(situationKey){
 function startPublicQuestions(situationKey='other'){
   stopCPRMetronome();resetPublicDraftForSituation(situationKey);
   publicStepPlan=activePublicSteps().map(step=>step.key);publicStepHistory=publicStepPlan.length?[publicStepPlan[0]]:[];
-  publicWizardStep=0;publicSummaryVisible=false;updatePublicSmsLinks();renderPublicStep();
+  publicWizardStep=0;publicSummaryVisible=false;
+  delete $('publicQuestionCard').dataset.step;
+  updatePublicSmsLinks();renderPublicStep();
 }
 function continuePublicQuestions(){
   stopCPRMetronome();publicStepPlan=activePublicSteps().map(step=>step.key);publicStepHistory=publicStepPlan.length?[publicStepPlan[0]]:[];
@@ -3682,7 +3771,7 @@ function selectHospitalCard(id,{focusMap=true}={}){
   state.confirmed=null; el.banner.hidden=true;
   MAP.clearRoute();
   selectClinicianPanel('results');
-  renderResults(false);
+  state.animateCards=true;renderResults(false);state.animateCards=false;
   if(focusMap) MAP.focus?.(hospital);
   requestDirections(hospital);
 }
