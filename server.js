@@ -1,6 +1,7 @@
 const http = require('node:http');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const {randomBytes}=require('node:crypto');
 
 const root = __dirname;
 const port = Number(process.env.PORT || 3000);
@@ -17,6 +18,8 @@ const facilityDetailsCache=new Map();
 const geocodeCache=new Map();
 const reverseGeocodeCache=new Map();
 const routeSummaryCache=new Map();
+const sharedPatientReports=new Map();
+const SHARED_REPORT_TTL_MS=60*60_000;
 
 function sendJson(res,status,payload){
   res.writeHead(status,{'content-type':'application/json; charset=utf-8','cache-control':'no-store'});
@@ -401,6 +404,45 @@ async function readJsonBody(req){
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
 }
 
+function pruneSharedPatientReports(){
+  const now=Date.now();
+  for(const [code,report] of sharedPatientReports){
+    if(report.expiresAt<=now) sharedPatientReports.delete(code);
+  }
+  while(sharedPatientReports.size>=500) sharedPatientReports.delete(sharedPatientReports.keys().next().value);
+}
+
+async function sharedPatientReport(req,res){
+  if(req.method==='POST'){
+    let body;
+    try{body=await readJsonBody(req);}catch(error){return sendJson(res,400,{error:error.message||'요청 내용을 읽지 못했습니다.'});}
+    const coords=body?.locationCoordinates;
+    const lat=Number(coords?.lat),lng=Number(coords?.lng);
+    const severity=String(body?.severity||'');
+    if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat<33||lat>39.7||lng<124||lng>132||!['critical','caution','reported','unknown'].includes(severity)){
+      return sendJson(res,400,{error:'공유할 위치 또는 응답 분류가 올바르지 않습니다.'});
+    }
+    pruneSharedPatientReports();
+    const accessCode=randomBytes(16).toString('hex').toUpperCase();
+    const createdAt=new Date().toISOString(),expiresAt=Date.now()+SHARED_REPORT_TTL_MS;
+    sharedPatientReports.set(accessCode,{locationCoordinates:{lat,lng},severity,createdAt,expiresAt});
+    return sendJson(res,201,{accessCode,expiresAt:new Date(expiresAt).toISOString()});
+  }
+  const accessCode=String(req.headers.authorization||'').replace(/^Bearer\s+/i,'').trim().toUpperCase();
+  if(!/^[A-F0-9]{32}$/.test(accessCode)) return sendJson(res,401,{error:'공유 코드를 확인해 주세요.'});
+  const report=sharedPatientReports.get(accessCode);
+  if(!report||report.expiresAt<=Date.now()){
+    sharedPatientReports.delete(accessCode);
+    return sendJson(res,404,{error:'신고가 만료되었거나 공유 코드를 찾을 수 없습니다.'});
+  }
+  if(req.method==='DELETE'){
+    sharedPatientReports.delete(accessCode);
+    return sendJson(res,200,{deleted:true});
+  }
+  if(req.method!=='GET') return sendJson(res,405,{error:'GET, POST, DELETE 요청만 지원합니다.'});
+  return sendJson(res,200,{report:{locationCoordinates:report.locationCoordinates,severity:report.severity,createdAt:report.createdAt,expiresAt:new Date(report.expiresAt).toISOString()}});
+}
+
 async function computeDirectionsSummaries(origin,items,apiKey){
   let response;
   try{
@@ -463,6 +505,10 @@ async function directionsSummaries(req,res){
 
 const server=http.createServer(async(req,res)=>{
   const url=new URL(req.url,'http://localhost');
+  if(url.pathname==='/api/shared-reports'){
+    await sharedPatientReport(req,res);
+    return;
+  }
   if(url.pathname==='/api/directions'){
     await directions(url,req,res);
     return;
