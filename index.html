@@ -1,6 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
- <title>SAVIOR 응급 이송 매칭</title>
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light dark"><title>SAVIOR 응급 이송 안내</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"><script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script><style>:root{color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:16px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <style>
 /* Layout: system-gray ground, grouped panels — ① 입력(전체 폭) → ② 지도(넓게) + ③ 추천(좁게) 나란히, 모바일은 한 줄 */
 :root{
@@ -1017,6 +1015,146 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
  #reportPrint h1{font-size:22px}
  #reportPrint pre{white-space:pre-wrap;font:13px/1.6 sans-serif}
 }
+
+/* Public emergency flow: large, high-contrast controls with safe-area dock. */
+#publicApp{--public-base-size:18px;min-height:100svh;overflow-x:hidden;font-size:var(--public-base-size)}
+#publicApp[data-font-size="large"]{--public-base-size:20px}
+#publicApp[data-font-size="larger"]{--public-base-size:22px}
+#publicApp .public-shell{width:min(100% - 28px,680px);padding:14px 0 calc(126px + env(safe-area-inset-bottom));}
+#publicApp .public-head{display:grid;gap:14px;margin:0 0 14px}
+#publicApp .public-head>div:first-child{display:grid;gap:6px}
+#publicApp .public-access-tools{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.public-font-controls{display:flex;gap:4px;padding:4px;border:1px solid var(--sep);border-radius:12px;background:var(--surface)}
+.public-font-controls button,.public-tool-button{min-width:48px;min-height:48px;padding:0 10px;border:1px solid var(--sep);border-radius:9px;background:var(--surface);color:var(--label);font-weight:700;cursor:pointer}
+.public-font-controls button[aria-pressed="true"],#publicApp .public-tool-button[aria-pressed="true"]{outline:3px solid var(--blue);outline-offset:1px}
+#publicApp .public-location-strip{display:flex;align-items:center;gap:10px;min-height:58px;margin:0 0 14px;padding:8px 12px;border:1px solid var(--sep);border-radius:14px;background:var(--surface);color:var(--label)}
+.public-location-icon{font-size:22px!important}
+#publicApp #publicLocationStatus{flex:1;min-width:0;margin:0;font-weight:700;overflow-wrap:anywhere}
+#publicApp .public-location-edit{min-height:48px;padding:0 12px;border:1px solid var(--sep);border-radius:10px;background:var(--surface);color:var(--label);font-weight:700;cursor:pointer}
+#publicApp .public-primary{background:#B42318;color:#fff}
+#publicApp .public-secondary{border:2px solid var(--sep);background:var(--surface);color:var(--label)}
+#publicApp .public-manual-location{display:grid;gap:10px;margin:0 0 14px;padding:14px;border:2px solid var(--blue);border-radius:14px;background:var(--surface)}
+#publicApp .public-manual-location h2{margin:0;font-size:1.45em}
+#publicApp .public-manual-location label{font-weight:700}
+#publicApp .public-manual-location input{min-height:56px;padding:10px;border:2px solid var(--sep);border-radius:10px;background:var(--surface);color:var(--label)}
+.public-location-edit-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#publicApp .public-status-grid{gap:10px}
+#publicApp .public-status-card{position:relative;min-height:176px;padding:14px 10px;border:2px solid var(--sep);background:var(--surface);color:var(--label);box-shadow:none}
+#publicApp .public-status-card.is-urgent{border-color:#B42318}
+#publicApp .public-status-card:focus-visible,#publicApp .public-option:focus-visible,#publicApp .report-action:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+#publicApp .public-status-icon{width:60px;height:60px;border-radius:15px}
+#publicApp .public-status-icon svg{width:42px;height:42px}
+#publicApp .public-status-copy{display:grid;justify-items:center;gap:6px;min-width:0}
+#publicApp .public-status-card strong{line-height:1.15;text-wrap:balance}
+.urgent-badge{display:inline-flex;align-items:center;min-height:32px;padding:3px 9px;border-radius:8px;background:#B42318;color:#fff;font-size:.95em;font-weight:800}
+#publicApp .public-home-secondary{margin-top:12px}
+#publicApp .public-home-secondary button{min-height:56px;padding:0 14px;border:2px solid var(--sep);background:var(--surface);color:var(--label);font-weight:700}
+#publicApp .public-home-note{margin:12px 0;color:var(--label-2)}
+#publicApp .public-call-dock{grid-template-columns:1fr 1fr 1.2fr;align-items:stretch;gap:7px;padding:9px 10px calc(9px + env(safe-area-inset-bottom));border-top:2px solid var(--sep);background:var(--surface)}
+#publicApp .report-action{display:grid;align-content:center;justify-items:center;gap:2px;min-width:0;min-height:76px;padding:6px 4px;border:2px solid transparent;border-radius:12px;text-align:center;text-decoration:none;font-weight:800;line-height:1.08;cursor:pointer}
+#publicApp .report-action>span{font-size:24px!important;line-height:1}
+#publicApp .report-action.call{background:#B42318;color:#fff}
+#publicApp .report-action.sms{background:#174EA6;color:#fff}
+#publicApp .report-action.share{border-color:#4B5563;background:var(--surface);color:var(--label)}
+#publicApp .report-disclaimer{position:absolute;right:12px;top:-54px}
+#publicApp .report-disclaimer>summary{display:grid;place-items:center;width:48px;height:48px;border:2px solid var(--sep);border-radius:50%;background:var(--surface);color:var(--label);font-weight:800;cursor:pointer;list-style:none}
+#publicApp .report-disclaimer>summary::-webkit-details-marker{display:none}
+#publicApp .report-disclaimer>p{position:absolute;right:0;bottom:54px;width:min(320px,calc(100vw - 32px));margin:0;padding:14px;border:2px solid var(--sep);border-radius:12px;background:var(--surface);color:var(--label);box-shadow:var(--shadow-float)}
+#publicApp .public-view-toolbar{justify-content:flex-start;min-height:56px}
+.public-view-back-group{display:flex;align-items:center;gap:8px}
+#publicApp .public-back{min-height:48px;padding:0 12px;border:2px solid var(--sep);background:var(--surface);color:var(--label);font-weight:700}
+#publicApp .public-home-back{width:48px;padding:0;justify-content:center}
+#publicApp .public-progress{display:flex;align-items:center;gap:8px;margin-left:auto}
+.progress-dot{width:13px;height:13px;border:2px solid var(--label-2);border-radius:50%;background:transparent}
+.progress-dot.done{background:var(--blue);border-color:var(--blue)}
+.progress-dot.current{outline:3px solid var(--blue-soft);outline-offset:2px;background:var(--blue)}
+#publicApp .public-question-card,#publicApp .public-firstaid-card,#publicApp .public-handover-result,#publicApp .public-shared-report{padding:18px;border:2px solid var(--sep);background:var(--surface);color:var(--label);box-shadow:none}
+#publicApp .public-question-card h2,#publicApp .public-firstaid-card h2,#publicApp .public-handover-result h2,#publicApp .public-shared-report h1,#publicApp .public-urgent-card h2,#publicApp .public-cpr-mode h2{margin:0 0 10px;font-size:max(28px,1.6em);line-height:1.12;color:var(--label)}
+#publicApp .public-question-card>p{margin:0 0 16px;color:var(--label)}
+#publicApp .public-options{gap:10px}
+#publicApp .public-option{display:grid;grid-template-columns:56px minmax(0,1fr);align-items:center;gap:12px;min-height:76px;padding:12px;border:2px solid var(--sep);border-radius:13px;background:var(--surface);color:var(--label);font-weight:700;text-align:left}
+#publicApp .public-option[aria-checked="true"]{border-color:var(--blue);background:var(--blue-soft);color:var(--label)}
+#publicApp .public-option-icon{width:52px;height:52px;border-radius:12px;background:var(--surface-2);color:var(--label)}
+#publicApp .public-option strong{line-height:1.15}
+#publicApp .public-option:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+#publicApp .public-field{gap:8px;margin:0}
+#publicApp .public-field input,#publicApp .public-field textarea{min-height:56px;border:2px solid var(--sep);background:var(--surface);color:var(--label);font-size:1em}
+#publicApp .public-field textarea{min-height:100px}
+#publicApp .public-step-continue{width:100%;min-height:64px;margin-top:12px;border:0;border-radius:12px;background:#174EA6;color:#fff;font-weight:800;cursor:pointer}
+#publicApp .public-onset-options{gap:9px}
+#publicApp .public-onset-option{min-height:78px}
+#publicApp .public-urgent-card{gap:14px;margin:0;padding:18px;border:3px solid #B42318;background:#FDE8E7;color:#5F1411}
+#publicApp .public-urgent-card h2{color:#7A1714}
+#publicApp .public-urgent-card>p{margin:0;color:#5F1411}
+#publicApp .public-urgent-card .public-firstaid-steps{gap:7px}
+.urgent-illustration{display:grid;place-items:center;width:76px;height:76px;border-radius:20px;background:#B42318;color:#fff}
+.urgent-illustration .ic{width:48px;height:48px}
+#publicApp .public-cpr-mode{position:fixed;inset:env(safe-area-inset-top) 0 calc(100px + env(safe-area-inset-bottom)) 0;z-index:85;display:grid;align-content:center;justify-items:center;gap:14px;min-height:0;padding:18px 14px 24px;border:0;border-top:4px solid #B42318;border-radius:0;background:var(--surface);color:var(--label);text-align:center;overflow:auto}
+#publicApp .public-cpr-mode[hidden]{display:none!important}
+#publicApp .public-cpr-mode h2{max-width:16ch;text-wrap:balance}
+#publicApp .cpr-tempo{margin:0;font-size:1.25em;color:var(--label)}
+#publicApp .cpr-count-card{display:grid;justify-items:center;gap:4px}
+#publicApp #cprCount{font-size:clamp(48px,15vw,72px);font-weight:850;line-height:1;font-variant-numeric:tabular-nums}
+#publicApp .cpr-aed-reminder{margin:0;padding:12px;border-radius:10px;background:var(--blue-soft);color:var(--label);font-weight:750}
+#publicApp .cpr-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+#publicApp .cpr-controls button{min-height:60px;padding:8px 10px;border:2px solid var(--sep);border-radius:11px;background:var(--surface);color:var(--label);font-weight:750}
+#publicApp .cpr-controls .public-primary{border:0;background:#B42318;color:#fff}
+.cpr-flash-surface{position:fixed;inset:0;z-index:85;pointer-events:none;opacity:0;background:rgba(255,255,255,.28);transition:opacity .08s linear}
+#publicApp.cpr-flash .cpr-flash-surface{opacity:1}
+#publicApp .public-firstaid-steps{gap:8px}
+#publicApp .public-firstaid-steps li{min-height:60px;padding:12px 12px 12px 48px;background:var(--surface-2);color:var(--label)}
+#publicApp .public-firstaid-steps li::before{width:28px;height:28px;background:#174EA6;color:#fff;font-weight:800}
+#publicApp .public-firstaid-steps strong,#publicApp .public-firstaid-steps span{color:var(--label)}
+#publicApp .public-aed-tools{background:var(--surface-2);color:var(--label)}
+#publicApp .public-aed-tools .aed-link{min-height:56px;background:#174EA6;color:#fff}
+#publicApp .public-handover-result{margin-top:0}
+#publicApp .summary-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+#publicApp .summary-report-action{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:64px;padding:8px;border:2px solid var(--sep);border-radius:12px;background:var(--surface);color:var(--label);font-weight:800;text-align:center;text-decoration:none;cursor:pointer}
+#publicApp .summary-report-action.call{background:#B42318;color:#fff}
+#publicApp .summary-report-action.sms{background:#174EA6;color:#fff}
+#publicApp .summary-report-action.share{background:var(--surface);color:var(--label)}
+#publicApp .summary-report-action.copy{grid-column:1/-1;background:var(--surface);color:var(--label)}
+#publicApp .public-summary-list{display:grid;gap:0;margin:10px 0 0;padding:0;list-style:none}
+#publicApp .public-summary-list li{display:grid;grid-template-columns:minmax(110px,.75fr) minmax(0,1.25fr);gap:10px;padding:12px 0;border-top:1px solid var(--sep);overflow-wrap:anywhere}
+#publicApp .public-summary-list li strong{color:var(--label);font-weight:800}
+#publicApp .public-summary-list li span{color:var(--label)}
+#publicApp .public-care-summary{margin-top:14px;padding-top:12px;border-top:2px solid var(--sep)}
+#publicApp .public-care-summary h3{margin:0 0 8px;font-size:1.2em}
+#publicApp .public-shared-expiry{margin:0 0 12px;color:var(--label)}
+#publicApp .public-location-note{color:var(--label);line-height:1.4}
+#publicApp .public-summary-details>summary{min-height:56px;color:var(--label);font-weight:750}
+#publicApp .public-manual-location[hidden],#publicApp .public-location-edit[hidden],#publicApp .public-shared-report[hidden],#publicApp .public-cpr-mode[hidden]{display:none!important}
+#publicApp :where(p,li,small,label,summary,button,input,textarea,a,span,output){font-size:max(18px,1em)!important;line-height:1.35}
+#publicApp :where(button,a.report-action,.summary-report-action){font-size:max(20px,1.1em)!important}
+#publicApp :where(h1,h2){font-size:max(28px,1.55em)!important;line-height:1.12}
+#publicApp h3{font-size:max(24px,1.35em)!important;line-height:1.2}
+#publicApp .public-firstaid-steps li::before{font-size:18px}
+#publicApp :focus-visible{outline:3px solid #0B57D0;outline-offset:3px}
+.share-code-dialog{width:min(100% - 28px,440px);max-height:calc(100dvh - 32px);padding:20px;border:2px solid var(--sep);border-radius:18px;background:var(--surface);color:var(--label);text-align:center}
+.share-code-dialog::backdrop{background:rgba(0,0,0,.68)}
+.share-dialog-close{display:flex;justify-content:flex-end;margin-bottom:8px}
+.share-dialog-close button{min-width:48px;min-height:48px;border:2px solid var(--sep);border-radius:10px;background:var(--surface);color:var(--label);font-weight:700}
+.share-code-dialog h2{margin:0 0 8px;font-size:28px}
+.share-code-help,.share-code-caveat,.share-code-expiry,.share-code-status{margin:8px 0;color:var(--label);font-size:18px}
+.share-code-value{display:block;margin:12px 0;padding:12px 8px;border:2px solid var(--sep);border-radius:10px;background:var(--surface-2);color:var(--label);font:800 clamp(22px,6vw,30px)/1.2 var(--mono);overflow-wrap:anywhere;user-select:all}
+#shareCodeQR{display:block;width:min(220px,60vw);height:auto;margin:12px auto;border:8px solid #fff;background:#fff;image-rendering:pixelated}
+.share-copy-button{min-height:64px;width:100%;background:#174EA6;color:#fff;font-size:20px}
+@media(max-width:420px){
+  #publicApp .public-shell{width:calc(100% - 24px);padding-top:12px}
+  #publicApp .public-status-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  #publicApp .public-status-card{min-height:186px;padding:10px 8px}
+  #publicApp .public-status-icon{width:48px;height:48px}
+  #publicApp .public-status-icon svg{width:36px;height:36px}
+  #publicApp .public-call-dock{gap:5px;padding-inline:6px}
+  #publicApp .report-action{min-height:76px;padding-inline:2px}
+  #publicApp .summary-report-action{min-height:72px;padding:7px 4px}
+  #publicApp .public-location-strip{align-items:flex-start;flex-wrap:wrap}
+  #publicApp .public-location-edit{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  #publicApp .cpr-flash-surface{display:none!important;transition:none!important}
+  #publicApp *,#publicApp *::before,#publicApp *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
 </style>
 
 <section class="role-gate" id="roleGate" aria-labelledby="gateTitle">
@@ -1054,113 +1192,153 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     <header class="public-head">
       <div>
         <p class="public-kicker">SAVIOR · 일반인용</p>
-        <h1 class="public-title">응급상황인가요?</h1>
-        <p class="public-intro">위급하거나 판단이 어렵다면 먼저 119에 전화하세요.</p>
+        <h1 class="public-title" id="publicTitle">어떤 도움이 필요하세요?</h1>
+        <p class="public-intro">위급하면 아래 119 버튼을 누르세요.</p>
+      </div>
+      <div class="public-access-tools">
+        <div class="public-font-controls" role="group" aria-label="글자 크기">
+          <button type="button" data-font-level="normal" aria-label="글자 크기 보통">가</button>
+          <button type="button" data-font-level="large" aria-label="글자 크기 크게">가+</button>
+          <button type="button" data-font-level="larger" aria-label="글자 크기 아주 크게">가++</button>
+        </div>
+        <button type="button" id="publicThemeToggle" class="public-tool-button" aria-pressed="false">다크 모드</button>
+        <button type="button" id="publicReadAloud" class="public-tool-button">소리로 듣기</button>
       </div>
     </header>
 
+    <section class="public-location-strip" aria-label="환자 위치">
+      <span class="public-location-icon" aria-hidden="true">📍</span>
+      <p id="publicLocationStatus" aria-live="polite">현재 위치 확인 중…</p>
+      <button type="button" class="public-location-edit" id="publicManualLocationToggle" hidden>위치 직접 입력</button>
+    </section>
+    <section class="public-manual-location" id="publicManualLocation" hidden aria-labelledby="publicManualLocationTitle">
+      <h2 id="publicManualLocationTitle">환자 위치 입력</h2>
+      <label for="publicLocation">주소 또는 가까운 장소</label>
+      <input id="publicLocation" type="text" autocomplete="street-address" placeholder="예: 대전 서구 둔산동">
+      <div class="public-location-edit-actions">
+        <button type="button" class="public-secondary" id="openPublicMap">지도에서 선택</button>
+        <button type="button" class="public-primary" id="savePublicAddress">위치 저장</button>
+      </div>
+      <section class="public-map-picker" id="publicMapPicker" hidden aria-label="지도에서 발생 위치 선택">
+        <div class="public-map-toolbar"><strong>지도를 탭해 위치 선택</strong><span id="publicMapCoords">위치 미선택</span></div>
+        <div class="public-map-canvas" id="publicMapCanvas" role="application" aria-label="환자 위치 선택 지도"></div>
+        <button type="button" class="public-secondary" id="usePublicMapLocation" disabled>선택 위치 사용</button>
+      </section>
+    </section>
+
     <section class="public-home-view" id="publicHomeView">
-      <div class="public-status-grid" id="publicStatusChoices" aria-label="환자 상태 선택">
-        <button class="public-status-card is-urgent" type="button" data-public-status="cardiac"><span class="public-status-icon" data-ic="heart" data-s="32"></span><span><strong>반응 없음 / 심정지 의심</strong><small>즉시 119에 전화하세요</small></span></button>
-        <button class="public-status-card is-urgent" type="button" data-public-status="breathing"><span class="public-status-icon" data-ic="lungs" data-s="32"></span><span><strong>숨쉬기 어려움 / 호흡 이상</strong><small>즉시 119에 전화하세요</small></span></button>
-        <button class="public-status-card is-urgent" type="button" data-public-status="bleeding"><span class="public-status-icon" data-ic="drop" data-s="32"></span><span><strong>심한 출혈</strong><small>즉시 119에 전화하세요</small></span></button>
-        <button class="public-status-card" type="button" data-public-status="trauma"><span class="public-status-icon" data-ic="bandage" data-s="32"></span><span><strong>다치거나 외상</strong><small>환자 상태를 차례로 확인합니다</small></span></button>
-        <button class="public-status-card" type="button" data-public-status="other"><span class="public-status-icon" data-ic="info" data-s="32"></span><span><strong>그 외 증상</strong><small>환자 상태를 차례로 확인합니다</small></span></button>
+      <h2 class="public-section-title" id="publicStatusLabel">환자 상태를 골라주세요</h2>
+      <div class="public-status-grid" id="publicStatusChoices" role="radiogroup" aria-labelledby="publicStatusLabel">
+        <button class="public-status-card is-urgent" type="button" role="radio" aria-checked="false" data-public-status="cardiac"><span class="public-status-icon" data-ic="heart" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><b class="urgent-badge">긴급</b><strong>반응 없음 · 심정지 의심</strong><small>누르자마자 CPR 안내</small></span></button>
+        <button class="public-status-card is-urgent" type="button" role="radio" aria-checked="false" data-public-status="breathing"><span class="public-status-icon" data-ic="lungs" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><b class="urgent-badge">긴급</b><strong>숨쉬기 어려움</strong><small>바로 호흡 안내</small></span></button>
+        <button class="public-status-card is-urgent" type="button" role="radio" aria-checked="false" data-public-status="bleeding"><span class="public-status-icon" data-ic="drop" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><b class="urgent-badge">긴급</b><strong>심한 출혈</strong><small>바로 출혈 안내</small></span></button>
+        <button class="public-status-card" type="button" role="radio" aria-checked="false" data-public-status="trauma"><span class="public-status-icon" data-ic="bandage" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><strong>다치거나 외상</strong><small>짧게 상태 확인</small></span></button>
+        <button class="public-status-card" type="button" role="radio" aria-checked="false" data-public-status="other"><span class="public-status-icon" data-ic="info" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><strong>그 외 증상</strong><small>짧게 상태 확인</small></span></button>
       </div>
       <div class="public-home-secondary">
-        <button class="public-secondary" id="openHandoverBtn" type="button">신고하며 전달할 정보</button>
-        <button class="public-secondary" id="openFirstAidBtn" type="button">응급처치 안내</button>
+        <button class="public-secondary" id="openFirstAidBtn" type="button">도움 기다리는 동안</button>
       </div>
-      <p class="public-home-note">선택지는 상태를 정리하기 위한 것이며 진단이 아닙니다. 답변하지 않고도 아래 119 버튼을 누를 수 있습니다.</p>
+      <p class="public-home-note">진단이나 119 신고를 대신하지 않습니다.</p>
     </section>
 
     <section class="public-handover-view" id="publicHandoverWizard" hidden aria-labelledby="publicStepTitle">
       <div class="public-view-toolbar">
-        <button class="public-back" id="publicBackHome" type="button"><span data-ic="chevron" data-s="17"></span>처음</button>
-        <span class="public-step-count" id="publicStepCount"></span>
+        <div class="public-view-back-group">
+          <button class="public-back" id="publicStepBack" type="button"><span aria-hidden="true">←</span> 이전</button>
+          <button class="public-back public-home-back" id="publicBackHome" type="button"><span data-ic="home" data-s="20" aria-hidden="true"></span><span class="sr-only">처음 화면으로</span></button>
+        </div>
+        <div class="public-progress" id="publicProgressDots" role="progressbar" aria-label="설문 진행"></div>
       </div>
       <div class="public-question-card" id="publicQuestionCard">
-        <h2 id="publicStepTitle"></h2>
+        <h2 id="publicStepTitle" tabindex="-1"></h2>
         <p id="publicStepHelp"></p>
-        <div id="publicStepContent"></div>
+        <div id="publicStepContent" aria-live="polite"></div>
       </div>
-      <section class="public-map-picker" id="publicMapPicker" hidden aria-label="지도에서 발생 위치 선택">
-        <div class="public-map-toolbar"><strong>지도를 탭해 위치 선택</strong><span id="publicMapCoords">위치 미선택</span></div>
-        <p class="public-location-note">지도로 고른 위치는 지도 서비스에 전달될 수 있습니다. 주소 입력이나 건너뛰기도 가능합니다.</p>
-        <div class="public-map-canvas" id="publicMapCanvas" role="application" aria-label="위치 선택 지도"></div>
-        <button type="button" class="public-secondary" id="usePublicMapLocation" disabled>선택 위치 사용</button>
-      </section>
-      <section class="public-urgent-card" id="publicUrgentView" hidden aria-live="assertive">
-        <h2>지금 119에 전화하세요</h2>
-        <a class="urgent-inline-call" href="tel:119"><span data-ic="phone" data-s="20"></span>119 전화하기</a>
-        <p id="publicUrgentMessage"></p>
-        <ol id="publicUrgentGuidance"></ol>
-        <strong>119 상담원의 안내를 우선 따라 주세요.</strong>
-      </section>
-      <div class="public-step-actions" id="publicStepActions">
-        <button class="public-secondary" id="publicStepBack" type="button">이전</button>
-        <button class="public-secondary" id="publicStepSkip" type="button">건너뛰기</button>
-        <button class="public-primary" id="publicStepNext" type="button">다음</button>
+    </section>
+
+    <section class="public-urgent-view" id="publicUrgentView" hidden aria-labelledby="publicUrgentTitle">
+      <article class="public-urgent-card">
+        <span class="urgent-badge">긴급</span>
+        <span id="urgentIllustration" class="urgent-illustration" aria-hidden="true"></span>
+        <h2 id="publicUrgentTitle" tabindex="-1"></h2>
+        <ol id="publicUrgentGuidance" class="public-firstaid-steps"></ol>
+        <p id="publicUrgentMessage" aria-live="polite"></p>
+        <button type="button" class="public-secondary" id="urgentMoreInfo">정보 더 입력하기</button>
+      </article>
+    </section>
+
+    <section class="public-cpr-mode" id="publicCPRMode" hidden aria-labelledby="cprTitle">
+      <span class="urgent-badge">긴급 · 심정지 의심</span>
+      <h2 id="cprTitle" tabindex="-1">가슴 가운데를 세게, 빠르게 누르세요</h2>
+      <p class="cpr-tempo">분당 <strong>110회</strong></p>
+      <div class="cpr-count-card"><strong id="cprCount" aria-live="off">0</strong><span>압박 박자</span></div>
+      <div class="cpr-flash-surface" id="cprFlashSurface" aria-hidden="true"></div>
+      <p class="cpr-aed-reminder">AED를 가져오도록 주변에 요청하세요.</p>
+      <div class="cpr-controls">
+        <button type="button" class="public-primary" id="cprRhythmToggle" aria-pressed="true">리듬 끄기</button>
+        <button type="button" class="public-secondary" id="cprSenseToggle" aria-pressed="true">소리·진동 켜짐</button>
+        <button type="button" class="public-secondary" id="cprFlashToggle" aria-pressed="true">화면 신호 켜짐</button>
+        <button type="button" class="public-secondary" id="cprMoreInfo">추가 정보 입력</button>
       </div>
-      <section class="public-handover-result" id="publicResult" hidden aria-labelledby="handoverTitle">
-        <h2 id="handoverTitle">119에 전달할 정보가 정리됐습니다</h2>
-        <p>119에 전달할 환자 상태 요약입니다. 확인하지 않은 항목은 정상으로 간주하지 않습니다.</p>
-        <ul id="handoverSummaryList"></ul>
-        <details class="public-summary-details">
-          <summary>자세히 보기</summary>
-          <p>119 전화는 아래 전화 버튼을 눌러 직접 연결해 주세요. 이 앱은 신고 내용을 자동 전송하거나 접수 여부를 확인하지 않습니다.</p>
-          <p class="public-location-note">위치를 확인해 의료진 화면으로 열면 환자 좌표와 응답 분류가 모든 방문자가 볼 수 있는 의료진 지도에 60분간 표시됩니다. 이름·증상 설명은 공유하지 않습니다. 임시 자료이며 서버 재시작 시 삭제되고, 실제 의료진·병원·119로 자동 전달되지 않습니다.</p>
-          <div class="handover-actions">
-            <button class="public-secondary" id="publicEditReportBtn" type="button">입력 수정</button>
-            <button class="public-secondary" id="copyHandoverBtn" type="button">요약 복사</button>
-            <button class="handover-btn" id="sendHandoverBtn" type="button">의료진 화면에서 열기</button>
-          </div>
-          <section class="handover-firstaid">
-            <h3>119 통화 후 구급대가 올 때까지</h3>
-            <ol class="public-firstaid-steps">
-              <li><strong>119 상담원의 지시를 따르세요</strong><span>위치, 환자 수, 반응·호흡 상태와 시행한 조치를 전달합니다. 신고자 연락처도 말해 주세요.</span></li>
-              <li><strong>반응과 호흡을 계속 살피세요</strong><span>반응이 없고 정상 호흡이 아니면 119 상담원에게 알리고 안내를 따릅니다.</span></li>
-              <li><strong>성인 심정지가 의심되고 CPR을 할 수 있다면</strong><span>첨부 매뉴얼은 가슴압박 30회와 인공호흡 2회를 반복하고, 분당 100~120회·깊이 약 5~6cm로 압박하도록 안내합니다. 인공호흡을 할 수 없거나 원치 않으면 가슴압박만 계속하며 119 지시를 우선합니다.</span></li>
-              <li><strong>AED가 도착하면 음성 안내를 따르세요</strong><span>분석·충격 중에는 모두 환자에게서 떨어지고, 안내에 따라 CPR을 다시 시작합니다.</span></li>
-            </ol>
-            <p class="public-location-note">소아·영아 등 상황별 처치는 119 상담원의 안내를 따르세요.</p>
-            <p class="public-location-note">참고: 첨부 응급처치 매뉴얼 3, 33~38쪽</p>
-            <div class="source-links"><a href="https://www.kacpr.org/" target="_blank" rel="noopener noreferrer">대한심폐소생협회</a></div>
-          </section>
-        </details>
-      </section>
+    </section>
+
+    <section class="public-shared-report" id="publicSharedReportView" hidden aria-labelledby="sharedReportTitle">
+      <button type="button" class="public-back" id="sharedReportBack"><span aria-hidden="true">←</span> 처음</button>
+      <h1 id="sharedReportTitle" tabindex="-1">환자 전달 정보</h1>
+      <p class="public-shared-expiry" id="sharedReportExpiry"></p>
+      <ul id="sharedReportSummary" class="public-summary-list"></ul>
+    </section>
+
+    <section class="public-handover-result" id="publicResult" hidden aria-labelledby="handoverTitle">
+      <h2 id="handoverTitle" tabindex="-1">전달할 정보가 준비됐어요</h2>
+      <p>아래 버튼으로 신고 내용을 직접 전달하세요.</p>
+      <div class="summary-actions">
+        <a class="summary-report-action call" href="tel:119"><span aria-hidden="true">📞</span>119 전화</a>
+        <a class="summary-report-action sms" id="summarySmsLink" href="sms:119?body="><span aria-hidden="true">💬</span>119 문자신고</a>
+        <button type="button" class="summary-report-action share" data-share-report><span aria-hidden="true">📤</span>구급대에 정보 보내기</button>
+        <button type="button" class="summary-report-action copy" id="copyHandoverBtn">요약 복사</button>
+      </div>
+      <ul id="handoverSummaryList" class="public-summary-list"></ul>
+      <section class="public-care-summary" id="publicCareSummary"></section>
+      <details class="public-summary-details">
+        <summary>자세히 보기</summary>
+        <p>공유 자료는 서버 메모리에 최대 60분 보관되고, 재시작 시 삭제됩니다.</p>
+        <p class="public-location-note">위치·상황·반응·호흡·출혈·시작 시각·선택 조치는 모든 방문자가 볼 수 있습니다. 이름과 자유 입력 메모는 공유하지 않습니다.</p>
+        <button type="button" class="public-secondary" id="publicEditReportBtn">입력 수정</button>
+      </details>
     </section>
 
     <section class="public-firstaid-view" id="publicFirstAidView" hidden aria-labelledby="firstAidTitle">
-      <div class="public-view-toolbar">
-        <button class="public-back" id="firstAidBackHome" type="button"><span data-ic="chevron" data-s="17"></span>처음</button>
-      </div>
+      <div class="public-view-toolbar"><button class="public-back" id="firstAidBackHome" type="button"><span data-ic="home" data-s="20" aria-hidden="true"></span><span class="sr-only">처음 화면으로</span></button></div>
       <section class="public-firstaid-card">
-        <h2 id="firstAidTitle">도움을 기다리는 동안</h2>
-        <p class="firstaid-priority">119 상담원의 안내를 우선 따라 주세요.</p>
-        <ol class="public-firstaid-steps">
-          <li><strong>주변 안전을 확인하세요</strong><span>자신과 환자가 추가로 위험해지지 않는지 먼저 살핍니다.</span></li>
-          <li><strong>119에 전화하고 스피커폰으로 전환하세요</strong><span>위치, 환자 수, 반응·호흡 상태와 연락처를 설명하고 안내요원의 지시를 따릅니다.</span></li>
-          <li><strong>성인 심정지가 의심되고 CPR을 할 수 있다면</strong><span>매뉴얼은 가슴압박 30회와 인공호흡 2회를 반복하고, 분당 100~120회·깊이 약 5~6cm로 압박하도록 안내합니다. 인공호흡을 할 수 없거나 원치 않으면 가슴압박만 계속합니다.</span></li>
-          <li><strong>AED가 있으면 음성 안내를 따르세요</strong><span>전원을 켜고 패드를 그림에 따라 붙입니다. 분석·충격 중에는 환자에게서 떨어지고, 안내가 끝나면 CPR을 다시 시작합니다.</span></li>
-          <li><strong>구급대가 도착하면 시행한 조치를 알리세요</strong><span>환자 상태 변화와 그동안의 처치를 전달합니다.</span></li>
-        </ol>
-        <p class="public-location-note">소아·영아 등 상황별 처치는 119 상담원의 안내를 우선 따르세요.</p>
+        <span class="urgent-badge" id="firstAidSeverityBadge" hidden>긴급</span>
+        <h2 id="firstAidTitle" tabindex="-1">도움을 기다리는 동안</h2>
+        <ol id="publicFirstAidSteps" class="public-firstaid-steps"></ol>
         <div class="public-aed-tools">
           <h3>주변 AED 찾기</h3>
-          <p>위치 권한을 허용하면 현재 위치를 넣은 지도 검색 링크를 준비합니다. 위치는 119에 자동 전송되지 않습니다.</p>
-          <button class="public-secondary" id="locateAedBtn" type="button">현재 위치 확인</button>
-          <p class="public-location-note" id="aedLocationNote">위치 권한은 선택 사항입니다.</p>
-          <a class="aed-link" id="aedSearchLink" href="https://www.google.com/maps/search/?api=1&query=AED+near+me" target="_blank" rel="noopener noreferrer">지도에서 AED 찾기</a>
-        </div>
-        <div class="source-links">
-          <a href="https://www.nfa.go.kr" target="_blank" rel="noopener noreferrer">소방청 응급안내</a>
-          <a href="https://www.kacpr.org/" target="_blank" rel="noopener noreferrer">대한심폐소생협회</a>
+          <button class="public-secondary" id="locateAedBtn" type="button">현재 위치 주변 AED 찾기</button>
+          <a class="aed-link" id="aedSearchLink" href="https://www.google.com/maps/search/?api=1&query=AED+near+me" target="_blank" rel="noopener noreferrer">AED 지도 열기</a>
         </div>
       </section>
     </section>
   </div>
-  <div class="public-call-dock"><a class="sos-call" id="publicCallLink" href="tel:119" aria-label="119 전화하기"><span data-ic="phone" data-s="21"></span><span id="publicCallLabel">119 전화하기</span></a><small>버튼을 누르면 전화 앱이 열립니다. 입력 내용은 자동 전달되지 않습니다.</small></div>
+  <nav class="public-call-dock" aria-label="긴급 신고">
+    <a class="report-action call" id="publicCallLink" href="tel:119"><span aria-hidden="true">📞</span><strong>119 전화</strong></a>
+    <a class="report-action sms" id="publicSmsLink" href="sms:119?body="><span aria-hidden="true">💬</span><strong>119 문자신고</strong></a>
+    <button type="button" class="report-action share" id="publicShareButton"><span aria-hidden="true">📤</span><strong>구급대에 정보 보내기</strong></button>
+    <details class="report-disclaimer"><summary aria-label="신고·위치 공유 안내 보기">ⓘ</summary><p>이 앱은 진단이나 119 신고를 대신하지 않습니다. 확인한 위치와 응답 분류는 모든 방문자가 의료진 지도에서 최대 60분 볼 수 있으며, 실제 119로 자동 전송되지 않습니다.</p></details>
+  </nav>
+  <dialog class="share-code-dialog" id="shareCodeDialog" aria-labelledby="shareCodeTitle">
+    <form method="dialog" class="share-dialog-close"><button type="submit" aria-label="공유 코드 닫기">닫기</button></form>
+    <h2 id="shareCodeTitle">구급대에 보여줄 코드</h2>
+    <p class="share-code-help">구급대원이 이 코드로 환자 정보를 볼 수 있어요.</p>
+    <p class="share-code-caveat">코드 또는 QR을 구급대원에게 보여주세요.</p>
+    <canvas id="shareCodeQR" aria-label="환자 정보 공유 QR 코드"></canvas>
+    <output id="shareCodeValue" class="share-code-value" aria-live="polite"></output>
+    <p id="shareCodeExpiry" class="share-code-expiry"></p>
+    <button type="button" class="public-primary share-copy-button" id="copyShareCode">코드 복사</button>
+    <p id="shareCodeStatus" class="share-code-status" aria-live="polite"></p>
+  </dialog>
 </main>
 
 <header class="bar" id="bar" hidden>
@@ -2404,7 +2582,7 @@ const HANDOVER_KEY = 'savior-handover-v1';
 function escapeHTML(value){
   return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-function selectRole(role){
+function selectRole(role,{skipPublicLocation=false}={}){
   if(role!=='clinician') stopSharedReportPolling();
   if(role!=='clinician'&&originWatchId!==null){navigator.geolocation?.clearWatch(originWatchId);originWatchId=null;}
   $('roleGate').hidden=true;
@@ -2415,6 +2593,10 @@ function selectRole(role){
   $('modeBar').dataset.mode=role;
   $('modeLabel').textContent=role==='public'?'SAVIOR · 일반인용 안내':'의료진용 화면 · 판단 보조';
   document.body.dataset.mode=role;
+  if(role==='public'){
+    openPublicHome();
+    if(!skipPublicLocation) requestPublicLocation();
+  }
   if(role==='clinician'){
     showHandover(); selectClinicianPanel('patient');
     setPatientReportsOnMap([]);state.sharedReportSignature='';startSharedReportPolling();
@@ -2431,23 +2613,23 @@ function selectRole(role){
   requestAnimationFrame(()=>{ if(role==='clinician' && MAP){ MAP.relayout?.(); MAP.reset(); if(state.patientReports.length>1) MAP.fitPoints?.(state.patientReports.map(report=>report.locationCoordinates)); else if(state.patientReports.length) MAP.focus?.(state.patientReports[0].locationCoordinates); refreshMarkers(state.ranked.slice(0,5).map(h=>h.id)); } });
 }
 const PUBLIC_WIZARD_STEPS=[
-  {key:'consciousness',title:'환자가 반응하나요?',help:'말을 걸었을 때나 어깨를 가볍게 두드렸을 때를 기준으로 합니다.'},
-  {key:'breathing',title:'정상 호흡을 하나요?',help:'헐떡이거나 숨을 쉬는지 확인하기 어렵다면 모르겠어요를 선택하세요.'},
-  {key:'bleeding',title:'심한 출혈이 있나요?',help:'잘 모르겠다면 모르겠어요를 선택하고 언제든 119에 전화하세요.'},
-  {key:'situation',title:'주요 증상은 무엇인가요?',help:'가장 가까운 상황을 고르거나 짧게 적어 주세요. 질환을 진단하지 않습니다.'},
-  {key:'onset',title:'증상은 언제 시작됐나요?',help:'정확한 시각을 모르면 모르겠어요를 누르세요.'},
-  {key:'other',title:'기타 정보',help:'위치는 선택 사항입니다. 권한을 허용하지 않아도 계속할 수 있습니다.'}
+  {key:'consciousness',title:'환자가 반응하나요?',help:'말을 걸고 어깨를 가볍게 두드려 확인하세요.'},
+  {key:'breathing',title:'정상 호흡을 하나요?',help:'헐떡임은 정상 호흡이 아닐 수 있어요.'},
+  {key:'bleeding',title:'심한 출혈이 있나요?',help:'잘 모르겠으면 모르겠어요를 누르세요.'},
+  {key:'onset',title:'언제 시작됐나요?',help:'가장 가까운 시간을 고르세요.'},
+  {key:'other',title:'추가로 전할 내용',help:'선택 사항입니다.'}
 ];
 let publicWizardStep=0, publicSummaryVisible=false, publicFastMode=false;
-let publicUrgentReason=null, publicMapInstance=null, publicMapMarker=null, publicMapSelection=null;
-const publicReportDraft={location:'',locationVerified:false,situation:'',consciousness:'',breathing:'',bleeding:'',onset:'',onsetMode:'',onsetAt:'',onsetSelectedAt:'',other:'',actions:[]};
-function activePublicSteps(){
-  return publicFastMode?PUBLIC_WIZARD_STEPS.filter(step=>!['situation','onset'].includes(step.key)):PUBLIC_WIZARD_STEPS;
+let publicUX2=true,publicUrgentReason=null, publicMapInstance=null, publicMapMarker=null, publicMapSelection=null,publicLocationRequested=false,publicLocationLabel='',sharedPublicReport=null,publicSharePending=null,publicAdvanceTimer=null,publicStepHistory=[],publicStepPlan=[];
+let cprTimer=null,cprAudioContext=null,cprCountValue=0,cprSensesEnabled=true,cprFlashEnabled=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+const publicReportDraft={location:'',locationVerified:false,situation:'',situationKey:'',consciousness:'',breathing:'',bleeding:'',onset:'',onsetMode:'',onsetAt:'',onsetSelectedAt:'',other:'',actions:[],reportId:'',reportExpiresAt:''};
+function legacyActivePublicSteps(){
+  return PUBLIC_WIZARD_STEPS.filter(step=>!publicReportDraft[step.key]);
 }
 function publicSeverityLevel(data){
   const situation=String(data.situation||'');
-  if(data.consciousness==='no'||data.breathing==='abnormal'||data.bleeding==='yes'||/심정지|호흡 이상|심한 출혈/u.test(situation)) return 'critical';
-  if(data.consciousness==='unsure'||data.breathing==='unsure'||data.bleeding==='unsure'||/다치|외상/u.test(situation)) return 'caution';
+  if(data.consciousness==='no'||data.breathing==='abnormal'||data.bleeding==='yes'||['cardiac','breathing','bleeding'].includes(data.situationKey)||/심정지|호흡 이상|심한 출혈/u.test(situation)) return 'critical';
+  if(data.consciousness==='unsure'||data.breathing==='unsure'||data.bleeding==='unsure'||data.situationKey==='trauma'||/다치|외상/u.test(situation)) return 'caution';
   if(data.consciousness==='yes'&&data.breathing==='normal'&&data.bleeding==='no') return 'reported';
   return 'unknown';
 }
@@ -2466,10 +2648,11 @@ function publicHandover(){
     :'미입력';
   return {
     createdAt:new Date().toISOString(),
-    location:publicReportDraft.location.trim()?`${publicReportDraft.location.trim()} (${publicReportDraft.locationVerified?'환자 위치 확인':'환자 위치 미확인'})`:'미입력',
-    locationCoordinates:publicReportDraft.locationVerified&&publicMapSelection?{lat:publicMapSelection.lat,lng:publicMapSelection.lng}:null,
-    severity:publicSeverityLevel(publicReportDraft),
-    reportId:'',reportExpiresAt:'',
+      location:publicReportDraft.location.trim()||'미입력',
+      locationCoordinates:publicReportDraft.locationVerified&&publicMapSelection?{lat:publicMapSelection.lat,lng:publicMapSelection.lng}:null,
+      severity:publicSeverityLevel(publicReportDraft),situationKey:publicReportDraft.situationKey||'other',
+      reportId:'',reportExpiresAt:'',
+      situationKey:publicReportDraft.situationKey||'other',
     symptoms:publicReportDraft.situation.trim()||'미입력',
     onset,
     onsetMode:publicReportDraft.onsetMode||'unanswered',
@@ -2539,6 +2722,7 @@ function capturePublicStep(){
   });
   publicReportDraft.actions=[...$('publicStepContent').querySelectorAll('[data-report-action]:checked')].map(input=>input.value);
 }
+/* Legacy step handlers retained here only as a reference for the replaced public flow.
 function renderPublicStep(){
   const steps=activePublicSteps();
   const step=steps[publicWizardStep];
@@ -2665,6 +2849,7 @@ function openPublicFirstAid(){
   $('publicCallLabel').textContent='119 전화하기';
   window.scrollTo({top:0,behavior:'auto'});
 }
+*/
 function openPublicLocationMap(){
   if(!window.kakao?.maps){
     $('publicLocationStatus').textContent='지도를 열 수 없습니다. 주소를 직접 입력하거나 건너뛰세요.';
@@ -2686,6 +2871,390 @@ function openPublicLocationMap(){
     });
   }
   requestAnimationFrame(()=>publicMapInstance.relayout());
+}
+function activePublicSteps(){
+  return PUBLIC_WIZARD_STEPS.filter(step=>!publicReportDraft[step.key]);
+}
+function hidePublicViews(){
+  ['publicHomeView','publicHandoverWizard','publicUrgentView','publicCPRMode','publicResult','publicFirstAidView','publicSharedReportView'].forEach(id=>$(id).hidden=true);
+  $('publicManualLocation').hidden=true;
+}
+function publicHandover(){
+  const onset=publicReportDraft.onsetMode==='unknown'?'미확인':publicReportDraft.onsetMode==='relative'?publicReportDraft.onset:publicReportDraft.onsetMode==='exact'?publicReportDraft.onset.replace('T',' '):'미입력';
+  return {
+    createdAt:new Date().toISOString(),location:publicReportDraft.location||'미입력',
+    locationCoordinates:publicReportDraft.locationVerified&&publicMapSelection?{...publicMapSelection}:null,
+    locationVerified:publicReportDraft.locationVerified,severity:publicSeverityLevel(publicReportDraft),
+    situationKey:publicReportDraft.situationKey||'other',symptoms:publicReportDraft.situation||'미입력',
+    onset,onsetMode:publicReportDraft.onsetMode||'unanswered',onsetAt:publicReportDraft.onsetAt||null,
+    consciousness:({yes:'반응 있음',no:'반응 없음',unsure:'모르겠음'})[publicReportDraft.consciousness]||'미입력',
+    breathing:({normal:'정상 호흡으로 보임',abnormal:'정상 호흡이 아님',unsure:'모르겠음'})[publicReportDraft.breathing]||'미입력',
+    bleeding:({yes:'심한 출혈 있음',no:'심한 출혈 없음',unsure:'모르겠음'})[publicReportDraft.bleeding]||'미입력',
+    other:publicReportDraft.other.trim()||'미입력',actions:publicReportDraft.actions.join(', ')||'미입력',
+    reportId:publicReportDraft.reportId||'',reportExpiresAt:publicReportDraft.reportExpiresAt||''
+  };
+}
+function setPublicLocation(coords,label){
+  publicMapSelection={lat:Number(coords.lat),lng:Number(coords.lng)};
+  publicLocationLabel=String(label||'현재 위치').trim();
+  publicReportDraft.location=publicLocationLabel;
+  publicReportDraft.locationVerified=true;
+  $('publicLocationStatus').textContent=`📍 현재 위치: ${publicLocationLabel}`;
+  $('publicManualLocationToggle').hidden=true;
+  $('publicManualLocation').hidden=true;
+  updatePublicSmsLinks();
+}
+async function lookupPublicLocationLabel(coords){
+  try{
+    const params=new URLSearchParams({lat:String(coords.lat),lng:String(coords.lng)});
+    const response=await fetch(`/api/reverse-geocode?${params}`,{cache:'no-store',signal:AbortSignal.timeout(8000)});
+    const data=await response.json();
+    return response.ok?data.label||'현재 위치':'현재 위치';
+  }catch{return '현재 위치';}
+}
+function requestPublicLocation(){
+  if(publicLocationRequested||sharedPublicReport) return;
+  publicLocationRequested=true;
+  $('publicLocationStatus').textContent='📍 현재 위치 확인 중…';
+  $('publicManualLocationToggle').hidden=true;
+  if(!navigator.geolocation){
+    $('publicLocationStatus').textContent='위치를 확인하지 못했습니다.';
+    $('publicManualLocationToggle').hidden=false;return;
+  }
+  navigator.geolocation.getCurrentPosition(async position=>{
+    const coords={lat:position.coords.latitude,lng:position.coords.longitude};
+    setPublicLocation(coords,'위치 확인됨');
+    const label=await lookupPublicLocationLabel(coords);
+    setPublicLocation(coords,label);
+  },()=>{
+    publicMapSelection=null;publicReportDraft.location='';publicReportDraft.locationVerified=false;
+    $('publicLocationStatus').textContent='위치를 확인하지 못했습니다.';
+    $('publicManualLocationToggle').hidden=false;updatePublicSmsLinks();
+  },{enableHighAccuracy:false,timeout:8000,maximumAge:300000});
+}
+function messageFor119(data=publicHandover()){
+  const coords=data.locationCoordinates||publicMapSelection;
+  const coordinateText=coords?`${Number(coords.lat).toFixed(5)}, ${Number(coords.lng).toFixed(5)}`:'미확인';
+  return [
+    '응급환자 정보',
+    `위치: ${data.location||'미확인'}`,
+    `좌표: ${coordinateText}`,
+    `상황: ${data.situation||data.symptoms||'미확인'}`,
+    `반응: ${data.consciousness||'미확인'}`,
+    `호흡: ${data.breathing||'미확인'}`,
+    `출혈: ${data.bleeding||'미확인'}`,
+    `시작: ${data.onset||'미확인'}`,
+    `조치: ${data.actions||'미입력'}`
+  ].join('\n');
+}
+function updatePublicSmsLinks(){
+  const data=sharedPublicReport?.patientSummary?{
+    ...sharedPublicReport.patientSummary,
+    location:sharedPublicReport.patientSummary.locationLabel,
+    locationCoordinates:sharedPublicReport.locationCoordinates
+  }:publicHandover();
+  const href=`sms:119?body=${encodeURIComponent(messageFor119(data))}`;
+  ['publicSmsLink','summarySmsLink'].forEach(id=>{const link=$(id);if(link) link.href=href;});
+}
+function renderPublicStep(){
+  if(!publicStepHistory.length){showPublicSummary();return;}
+  const steps=publicStepPlan.map(key=>PUBLIC_WIZARD_STEPS.find(step=>step.key===key)).filter(Boolean);
+  const step=PUBLIC_WIZARD_STEPS.find(item=>item.key===publicStepHistory.at(-1));
+  if(!step){showPublicSummary();return;}
+  publicWizardStep=Math.max(0,steps.findIndex(item=>item.key===step.key));
+  $('publicStepTitle').textContent=step.title;$('publicStepHelp').textContent=step.help;
+  const progress=$('publicProgressDots');
+  progress.setAttribute('aria-valuemin','1');progress.setAttribute('aria-valuemax',String(steps.length));
+  progress.setAttribute('aria-valuenow',String(publicWizardStep+1));progress.setAttribute('aria-valuetext',`질문 ${publicWizardStep+1} / ${steps.length}`);
+  progress.innerHTML=steps.map((_,index)=>`<span class="progress-dot${index<publicWizardStep?' done':''}${index===publicWizardStep?' current':''}" aria-hidden="true"></span>`).join('');
+  hidePublicViews();$('publicHandoverWizard').hidden=false;
+  const choicesFor=(field,choices)=>`<div class="public-options" role="radiogroup" aria-labelledby="publicStepTitle">${choices.map(([value,label,icon])=>`<button type="button" class="public-option" role="radio" data-report-choice="${field}" data-value="${value}" aria-checked="${publicReportDraft[field]===value}"><span class="public-option-icon" aria-hidden="true">${ic(icon,40,1.8)}</span><span><strong>${label}</strong></span></button>`).join('')}</div>`;
+  if(step.key==='consciousness'){
+    $('publicStepContent').innerHTML=choicesFor('consciousness',[['yes','반응 있음','person'],['no','반응 없음','cross'],['unsure','모르겠어요','info']]);
+  }else if(step.key==='breathing'){
+    $('publicStepContent').innerHTML=choicesFor('breathing',[['normal','정상 호흡','lungs'],['abnormal','호흡 이상','warn'],['unsure','모르겠어요','info']]);
+  }else if(step.key==='bleeding'){
+    $('publicStepContent').innerHTML=choicesFor('bleeding',[['yes','심한 출혈 있음','drop'],['no','심한 출혈 없음','check'],['unsure','모르겠어요','info']]);
+  }else if(step.key==='onset'){
+    const options=[['now','방금'],['10m','약 10분 전'],['30m','약 30분 전'],['unknown','모르겠어요']];
+    $('publicStepContent').innerHTML=`<div class="public-onset-options" role="radiogroup" aria-labelledby="publicStepTitle">${options.map(([value,label])=>`<button type="button" class="public-option public-onset-option" role="radio" data-onset-choice="${value}" aria-checked="${publicReportDraft.onsetMode===value||publicReportDraft.onset===label}"><span class="public-option-icon" aria-hidden="true">${ic(value==='unknown'?'info':'clock',34,1.8)}</span><span><strong>${label}</strong></span></button>`).join('')}</div>`;
+  }else{
+    $('publicStepContent').innerHTML=`<div class="public-field"><label for="publicOtherInfo">응급대에 알릴 내용 (선택)</label><textarea id="publicOtherInfo" data-report-field="other" maxlength="300" placeholder="없으면 비워 두세요">${escapeHTML(publicReportDraft.other)}</textarea></div><button type="button" class="public-secondary public-other-unknown" id="publicOtherUnknown">모르겠어요</button><button type="button" class="public-step-continue" id="publicStepFinish">요약 보기</button>`;
+  }
+  $('publicStepContent').querySelectorAll('[data-report-field]').forEach(field=>{field.value=publicReportDraft[field.dataset.reportField]||'';});
+  $('publicStepContent').querySelectorAll('[role="radiogroup"]').forEach(initPublicRadioGroup);
+  updatePublicSmsLinks();requestAnimationFrame(()=>$('publicStepTitle').focus());
+}
+function initPublicRadioGroup(group){
+  const radios=[...group.querySelectorAll('[role="radio"]')],selected=radios.find(radio=>radio.getAttribute('aria-checked')==='true');
+  radios.forEach(radio=>radio.tabIndex=radio===selected||(!selected&&radio===radios[0])?0:-1);
+}
+function handleRadioArrowKeys(event){
+  if(!['ArrowDown','ArrowRight','ArrowUp','ArrowLeft'].includes(event.key)) return;
+  const current=event.target.closest('[role="radio"]');
+  if(!current) return;
+  const group=current.closest('[role="radiogroup"]'),radios=[...group.querySelectorAll('[role="radio"]')];
+  const direction=['ArrowDown','ArrowRight'].includes(event.key)?1:-1;
+  const next=radios[(radios.indexOf(current)+direction+radios.length)%radios.length];
+  event.preventDefault();next.focus();next.click();
+}
+function advancePublicStep(){
+  if(publicAdvanceTimer){clearTimeout(publicAdvanceTimer);publicAdvanceTimer=null;}
+  const current=publicStepHistory.at(-1),index=publicStepPlan.indexOf(current);
+  if(index<0||index>=publicStepPlan.length-1){showPublicSummary();return;}
+  publicStepHistory.push(publicStepPlan[index+1]);renderPublicStep();
+}
+function schedulePublicAdvance(){
+  if(publicAdvanceTimer) clearTimeout(publicAdvanceTimer);
+  publicAdvanceTimer=setTimeout(()=>{publicAdvanceTimer=null;advancePublicStep();},300);
+}
+function handlePublicQuestionClick(event){
+  const choice=event.target.closest('[data-report-choice]');
+  if(choice){
+    const {reportChoice,value}=choice.dataset;
+    publicReportDraft[reportChoice]=value;
+    $('publicStepContent').querySelectorAll(`[data-report-choice="${reportChoice}"]`).forEach(button=>{
+      button.setAttribute('aria-checked',String(button===choice));
+      button.tabIndex=button===choice?0:-1;
+    });
+    if(reportChoice==='consciousness'&&value==='no'){enterCPRMode();return;}
+    if(reportChoice==='consciousness'&&value==='unsure'){showPublicUrgent('unsure');return;}
+    if(reportChoice==='breathing'&&value!=='normal'){showPublicUrgent(value==='abnormal'?'breathing':'unsure');return;}
+    if(reportChoice==='bleeding'&&value!=='no'){showPublicUrgent(value==='yes'?'bleeding':'unsure');return;}
+    updatePublicSmsLinks();schedulePublicAdvance();return;
+  }
+  const onset=event.target.closest('[data-onset-choice]');
+  if(onset){
+    const value=onset.dataset.onsetChoice,now=new Date(),offsets={now:0,'10m':600_000,'30m':1_800_000};
+    publicReportDraft.onsetMode=value==='unknown'?'unknown':'relative';
+    publicReportDraft.onset=value==='unknown'?'미확인':onset.querySelector('strong').textContent;
+    publicReportDraft.onsetAt=value==='unknown'?'':new Date(now.getTime()-offsets[value]).toISOString();
+    publicReportDraft.onsetSelectedAt=value==='unknown'?'':now.toISOString();
+    $('publicStepContent').querySelectorAll('[data-onset-choice]').forEach(button=>{
+      button.setAttribute('aria-checked',String(button===onset));button.tabIndex=button===onset?0:-1;
+    });
+    updatePublicSmsLinks();schedulePublicAdvance();return;
+  }
+  if(event.target.closest('#showExactOnset')){$('exactOnsetWrap').hidden=false;$('publicOnset').focus();return;}
+  if(event.target.closest('#publicOtherUnknown')){publicReportDraft.other='';showPublicSummary();return;}
+  if(event.target.closest('#publicStepFinish')){capturePublicStep();showPublicSummary();}
+}
+function handleRadioArrowKeys(event){
+  const current=event.target.closest('[role="radio"]');
+  if(!current||!['ArrowDown','ArrowRight','ArrowUp','ArrowLeft'].includes(event.key)) return;
+  const group=current.closest('[role="radiogroup"]'),items=[...group.querySelectorAll('[role="radio"]')];
+  const direction=['ArrowDown','ArrowRight'].includes(event.key)?1:-1;
+  const next=items[(items.indexOf(current)+direction+items.length)%items.length];
+  event.preventDefault();next.focus();next.click();
+}
+function handlePublicQuestionClick(event){
+  const onsetChoice=event.target.closest('[data-onset-choice]');
+  if(onsetChoice){
+    const value=onsetChoice.dataset.onsetChoice,now=new Date(),offsets={now:0,'10m':600_000,'30m':1_800_000};
+    publicReportDraft.onsetMode=value==='unknown'?'unknown':'relative';
+    publicReportDraft.onset=value==='unknown'?'미확인':onsetChoice.querySelector('strong').textContent;
+    publicReportDraft.onsetAt=value==='unknown'?'':new Date(now.getTime()-offsets[value]).toISOString();
+    publicReportDraft.onsetSelectedAt=value==='unknown'?'':now.toISOString();
+    $('publicStepContent').querySelectorAll('[data-onset-choice]').forEach(button=>button.setAttribute('aria-checked',String(button===onsetChoice)));
+    updatePublicSmsLinks();schedulePublicAdvance();return;
+  }
+  if(event.target.closest('#showExactOnset')){$('exactOnsetWrap').hidden=false;$('publicOnset').focus();return;}
+  if(event.target.closest('#publicOtherUnknown')){publicReportDraft.other='';showPublicSummary();return;}
+  if(event.target.closest('#publicStepFinish')){capturePublicStep();showPublicSummary();return;}
+  const choice=event.target.closest('[data-report-choice]');
+  if(!choice) return;
+  const field=choice.dataset.reportChoice,value=choice.dataset.value;
+  publicReportDraft[field]=value;
+  $('publicStepContent').querySelectorAll(`[data-report-choice="${field}"]`).forEach(button=>{
+    button.setAttribute('aria-checked',String(button===choice));button.tabIndex=button===choice?0:-1;
+  });
+  if(field==='consciousness'&&value==='no'){enterCPRMode();return;}
+  if(field==='consciousness'&&value==='unsure'){showPublicUrgent('unsure');return;}
+  if(field==='breathing'&&value!=='normal'){showPublicUrgent(value==='abnormal'?'breathing':'unsure');return;}
+  if(field==='bleeding'&&value!=='no'){showPublicUrgent(value==='yes'?'bleeding':'unsure');return;}
+  updatePublicSmsLinks();schedulePublicAdvance();
+}
+function summaryCareSteps(key){return careStepsForSituation(key);}
+function showPublicSummary(){
+  capturePublicStep();
+  const data=publicHandover();
+  $('handoverSummaryList').innerHTML=publicSummaryRows(data).map(([label,value])=>`<li><strong>${escapeHTML(label)}</strong><span>${escapeHTML(value)}</span></li>`).join('');
+  renderCareSteps($('publicCareSummary'),summaryCareSteps(data.situationKey));
+  hidePublicViews();$('publicResult').hidden=false;publicSummaryVisible=true;
+  updatePublicSmsLinks();requestAnimationFrame(()=>$('handoverTitle').focus());
+}
+function showPublicUrgent(kind){
+  const details={
+    breathing:{title:'숨쉬기 어려워요',message:'지금 119에 전화하고 상담원 안내를 따르세요.',key:'breathing',icon:'lungs'},
+    bleeding:{title:'심한 출혈이 있어요',message:'지금 119에 전화해 출혈 부위를 알리세요.',key:'bleeding',icon:'drop'},
+    unsure:{title:'상태를 판단하기 어려워요',message:'모르겠으면 지금 119에 전화해 안내를 받으세요.',key:publicReportDraft.situationKey||'other',icon:'info'}
+  }[kind]||{title:'응급상황이 의심돼요',message:'지금 119에 전화하고 상담원 안내를 따르세요.',key:publicReportDraft.situationKey||'other'};
+  hidePublicViews();$('publicUrgentView').hidden=false;
+  $('publicUrgentTitle').textContent=details.title;$('publicUrgentMessage').textContent=details.message;
+  $('urgentIllustration').innerHTML=ic(details.icon||'warn',56,1.8);
+  renderCareSteps($('publicUrgentGuidance'),summaryCareSteps(details.key));
+  updatePublicSmsLinks();requestAnimationFrame(()=>$('publicUrgentTitle').focus());
+}
+function cprTick(){
+  cprCountValue++;$('cprCount').textContent=String(cprCountValue);
+  if(cprSensesEnabled){
+    try{
+      const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+      if(AudioContextClass){cprAudioContext ||= new AudioContextClass();cprAudioContext.resume?.();const oscillator=cprAudioContext.createOscillator(),gain=cprAudioContext.createGain();oscillator.frequency.value=880;gain.gain.value=.06;oscillator.connect(gain);gain.connect(cprAudioContext.destination);oscillator.start();oscillator.stop(cprAudioContext.currentTime+.07);}
+    }catch{}
+    navigator.vibrate?.(35);
+  }
+  if(cprFlashEnabled&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    $('publicApp').classList.add('cpr-flash');setTimeout(()=>$('publicApp').classList.remove('cpr-flash'),100);
+  }
+}
+function startCPRMetronome(){
+  stopCPRMetronome();cprCountValue=0;$('cprCount').textContent='0';cprTick();cprTimer=setInterval(cprTick,60000/110);
+  $('cprRhythmToggle').textContent='리듬 끄기';$('cprRhythmToggle').setAttribute('aria-pressed','true');
+}
+function stopCPRMetronome(){if(cprTimer){clearInterval(cprTimer);cprTimer=null;}navigator.vibrate?.(0);$('publicApp')?.classList.remove('cpr-flash');}
+function enterCPRMode(){
+  resetPublicDraftForSituation('cardiac');publicReportDraft.consciousness='no';
+  publicReportDraft.reportId='';publicReportDraft.reportExpiresAt='';sharedPublicReport=null;
+  hidePublicViews();$('publicCPRMode').hidden=false;updatePublicSmsLinks();startCPRMetronome();
+  requestAnimationFrame(()=>$('cprTitle').focus());
+}
+function openPublicHome(){
+  stopCPRMetronome();hidePublicViews();$('publicHomeView').hidden=false;publicSummaryVisible=false;
+  $('publicLocationStrip').hidden=false;
+  $('publicStatusChoices').querySelectorAll('[data-public-status]').forEach((button,index)=>{button.setAttribute('aria-checked','false');button.tabIndex=index===0?0:-1;});
+  requestAnimationFrame(()=>$('publicStatusLabel').focus());
+}
+function resetPublicDraftForSituation(situationKey){
+  const location=publicReportDraft.location,locationVerified=publicReportDraft.locationVerified,coordinates=publicMapSelection;
+  Object.assign(publicReportDraft,{location,locationVerified,consciousness:'',breathing:'',bleeding:'',onset:'',onsetMode:'',onsetAt:'',onsetSelectedAt:'',other:'',actions:[],reportId:'',reportExpiresAt:''});
+  publicMapSelection=coordinates;publicReportDraft.situationKey=situationKey;
+  publicReportDraft.situation=({cardiac:'반응 없음 · 심정지 의심',breathing:'숨쉬기 어려움',bleeding:'심한 출혈',trauma:'다치거나 외상',other:'그 외 증상'})[situationKey]||'그 외 증상';
+  if(situationKey==='cardiac') publicReportDraft.consciousness='no';
+  if(situationKey==='breathing') publicReportDraft.breathing='abnormal';
+  if(situationKey==='bleeding') publicReportDraft.bleeding='yes';
+}
+function startPublicQuestions(situationKey='other'){
+  stopCPRMetronome();resetPublicDraftForSituation(situationKey);
+  publicStepPlan=activePublicSteps().map(step=>step.key);publicStepHistory=publicStepPlan.length?[publicStepPlan[0]]:[];
+  publicWizardStep=0;publicSummaryVisible=false;updatePublicSmsLinks();renderPublicStep();
+}
+function continuePublicQuestions(){
+  stopCPRMetronome();publicStepPlan=activePublicSteps().map(step=>step.key);publicStepHistory=publicStepPlan.length?[publicStepPlan[0]]:[];
+  publicWizardStep=0;renderPublicStep();
+}
+function selectPublicStatus(status){
+  $('publicStatusChoices').querySelectorAll('[data-public-status]').forEach(button=>{const selected=button.dataset.publicStatus===status;button.setAttribute('aria-checked',String(selected));button.tabIndex=selected?0:-1;});
+  if(status==='cardiac'){enterCPRMode();return;}
+  startPublicQuestions(status);
+  if(status==='breathing'||status==='bleeding') showPublicUrgent(status);
+  else renderPublicStep();
+}
+function openPublicFirstAid(){
+  stopCPRMetronome();hidePublicViews();$('publicFirstAidView').hidden=false;
+  const key=publicReportDraft.situationKey||'other';
+  $('firstAidSeverityBadge').hidden=!['cardiac','breathing','bleeding'].includes(key);
+  renderCareSteps($('publicFirstAidSteps'),summaryCareSteps(key));requestAnimationFrame(()=>$('firstAidTitle').focus());
+}
+async function savePublicManualLocation(){
+  const address=$('publicLocation').value.trim();
+  if(!address){$('publicLocation').focus();return;}
+  const button=$('savePublicAddress');button.disabled=true;button.textContent='위치 확인 중…';
+  try{
+    const params=new URLSearchParams({address}),response=await fetch(`/api/geocode?${params}`,{cache:'no-store',signal:AbortSignal.timeout(9000)}),data=await response.json(),result=data.results?.[0];
+    if(!response.ok||!result) throw new Error('주소를 찾지 못했습니다. 지도에서 위치를 선택해 주세요.');
+    const coords={lat:Number(result.latitude),lng:Number(result.longitude)};
+    const reverse=await lookupPublicLocationLabel(coords);
+    publicLocationLabel=address;publicMapSelection=coords;publicReportDraft.location=address;publicReportDraft.locationVerified=true;
+    $('publicLocationStatus').textContent=`현재 위치: ${reverse||address}`;$('publicManualLocation').hidden=true;$('publicManualLocationToggle').hidden=true;updatePublicSmsLinks();
+  }catch(error){$('publicLocationStatus').textContent=error.message||'주소를 확인하지 못했습니다.';}
+  finally{button.disabled=false;button.textContent='위치 저장';}
+}
+async function generateShareCode(){
+  if(sharedPublicReport?.id){await showReportShareDialog(sharedPublicReport.id,sharedPublicReport.expiresAt);return;}
+  if(publicSharePending) return publicSharePending;
+  const coords=await resolvePublicLocationCoordinates();
+  if(!coords){$('publicManualLocation').hidden=false;$('publicManualLocationToggle').hidden=false;$('publicLocationStatus').textContent='위치를 입력하거나 지도에서 골라 주세요.';$('publicLocation').focus();return;}
+  const data=publicHandover();data.locationCoordinates=coords;
+  if(!data.reportId){
+    const patientSummary={locationLabel:data.location,situation:data.symptoms,consciousness:data.consciousness,breathing:data.breathing,bleeding:data.bleeding,onset:data.onset,actions:data.actions};
+    publicSharePending=(async()=>{
+      const response=await fetch('/api/shared-reports',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({locationCoordinates:coords,severity:data.severity,patientSummary})});
+      const payload=await response.json();if(!response.ok) throw new Error(payload.error||'정보를 등록하지 못했습니다.');
+      publicReportDraft.reportId=payload.id;publicReportDraft.reportExpiresAt=payload.expiresAt;
+      data.reportId=payload.id;data.reportExpiresAt=payload.expiresAt;
+      try{sessionStorage.setItem(HANDOVER_KEY,JSON.stringify(data));}catch{}
+      return payload;
+    })().catch(error=>{toast(error.message||'정보를 등록하지 못했습니다.','warn');return null;}).finally(()=>{publicSharePending=null;});
+    const payload=await publicSharePending;if(!payload) return;
+  }
+  const reportId=publicReportDraft.reportId||data.reportId,url=new URL(location.pathname,location.origin);
+  await showReportShareDialog(reportId,publicReportDraft.reportExpiresAt||data.reportExpiresAt);
+}
+async function showReportShareDialog(reportId,expiresAt){
+  const url=new URL(location.pathname,location.origin);
+  url.searchParams.set('report',reportId);
+  $('shareCodeValue').textContent=reportId;
+  $('shareCodeExpiry').textContent=`${new Date(expiresAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}까지 유효`;
+  $('shareCodeStatus').textContent='';
+  if(window.QRCode?.toCanvas){
+    try{await QRCode.toCanvas($('shareCodeQR'),url.toString(),{width:220,margin:1,errorCorrectionLevel:'M'});}
+    catch{$('shareCodeStatus').textContent='QR을 만들지 못했습니다. 코드를 복사해 주세요.';}
+  }else $('shareCodeStatus').textContent='QR을 불러오지 못했습니다. 코드를 복사해 주세요.';
+  if(!$('shareCodeDialog').open) $('shareCodeDialog').showModal();
+  $('copyShareCode').focus();
+}
+async function openSharedReport(reportId){
+  if(!/^[a-f0-9]{24}$/i.test(reportId)) return;
+  try{
+    const params=new URLSearchParams({id:reportId}),response=await fetch(`/api/shared-reports?${params}`,{cache:'no-store'}),data=await response.json();
+    if(!response.ok||!data.report) throw new Error(data.error||'공유 정보를 찾지 못했습니다.');
+    sharedPublicReport=data.report;selectRole('public',{skipPublicLocation:true});hidePublicViews();$('publicLocationStrip').hidden=true;$('publicSharedReportView').hidden=false;
+    const report=data.report,summary=report.patientSummary||{};
+    const rows=[['응답 분류',publicSeverityLabel(report.severity)],['위치',summary.locationLabel||`${report.locationCoordinates.lat.toFixed(5)}, ${report.locationCoordinates.lng.toFixed(5)}`],['상황',summary.situation],['반응',summary.consciousness],['호흡',summary.breathing],['출혈',summary.bleeding],['시작',summary.onset],['응급처치',summary.actions]].filter(([,value])=>value);
+    $('sharedReportSummary').innerHTML=rows.map(([label,value])=>`<li><strong>${escapeHTML(label)}</strong><span>${escapeHTML(value)}</span></li>`).join('');
+    $('sharedReportExpiry').textContent=`${new Date(report.expiresAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}까지 임시 보관`;
+    updatePublicSmsLinks();requestAnimationFrame(()=>$('sharedReportTitle').focus());
+  }catch(error){selectRole('public',{skipPublicLocation:true});hidePublicViews();$('publicLocationStrip').hidden=true;$('publicSharedReportView').hidden=false;$('sharedReportTitle').textContent='정보를 찾을 수 없습니다';$('sharedReportExpiry').textContent=error.message||'코드가 만료되었거나 올바르지 않습니다.';$('sharedReportSummary').replaceChildren();}
+}
+const PUBLIC_PREFERENCES_KEY='savior-public-preferences-v1';
+function savePublicPreferences(preferences){try{localStorage.setItem(PUBLIC_PREFERENCES_KEY,JSON.stringify(preferences));}catch{}}
+function readPublicPreferences(){try{return JSON.parse(localStorage.getItem(PUBLIC_PREFERENCES_KEY)||'{}')||{};}catch{return{};}}
+function setPublicFontSize(size,save=true){
+  if(!['normal','large','larger'].includes(size)) size='normal';
+  $('publicApp').dataset.fontSize=size;
+  document.querySelectorAll('[data-font-level]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.fontLevel===size)));
+  if(save) savePublicPreferences({...readPublicPreferences(),fontSize:size});
+}
+function setPublicTheme(theme,save=true){
+  if(!['auto','light','dark'].includes(theme)) theme='auto';
+  if(theme==='auto') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.dataset.theme=theme;
+  const isDark=theme==='dark'||(theme==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);
+  $('publicThemeToggle').setAttribute('aria-pressed',String(isDark));
+  $('publicThemeToggle').textContent=isDark?'밝은 화면':'다크 모드';
+  if(save) savePublicPreferences({...readPublicPreferences(),theme});
+}
+function applyPublicPreferences(){
+  const preferences=readPublicPreferences();
+  setPublicFontSize(preferences.fontSize||'normal',false);
+  setPublicTheme(preferences.theme||'auto',false);
+}
+function togglePublicTheme(){
+  const current=document.documentElement.dataset.theme||'auto';
+  const isDark=current==='dark'||(current==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);
+  setPublicTheme(isDark?'light':'dark');
+}
+function speakCurrentPublicScreen(){
+  const button=$('publicReadAloud'),synth=window.speechSynthesis;
+  if(!synth){toast('이 기기에서는 음성 읽기를 사용할 수 없습니다.','warn');return;}
+  if(synth.speaking){synth.cancel();button.setAttribute('aria-pressed','false');button.textContent='소리로 듣기';return;}
+  const active=['cprTitle','publicUrgentTitle','publicStepTitle','handoverTitle','sharedReportTitle','firstAidTitle','publicStatusLabel'].map(id=>$(id)).find(element=>element&&!element.closest('[hidden]'));
+  if(!active) return;
+  const extra=active.id==='cprTitle'?document.querySelector('.cpr-aed-reminder')?.textContent||'':'';
+  const utterance=new SpeechSynthesisUtterance(`${active.textContent}. ${extra}`);
+  utterance.lang='ko-KR';utterance.onend=()=>{button.setAttribute('aria-pressed','false');button.textContent='소리로 듣기';};
+  button.setAttribute('aria-pressed','true');button.textContent='읽기 중지';synth.speak(utterance);
 }
 function showHandover(){
   const data=storedHandover();
@@ -3431,6 +4000,7 @@ $('quickDx').addEventListener('click',event=>{
 });
 function returnToRoleGate(){
   stopSharedReportPolling();
+  stopCPRMetronome();window.speechSynthesis?.cancel?.();
   if(originWatchId!==null){navigator.geolocation?.clearWatch(originWatchId);originWatchId=null;}
   $('publicApp').hidden=true; $('clinicianApp').hidden=true; $('bar').hidden=true;
   $('modeBar').hidden=true; $('roleGate').hidden=false; document.body.removeAttribute('data-mode');
@@ -3444,14 +4014,22 @@ $('transferActiveBtn').addEventListener('click',()=>{
   confirmHospital(state.activeHospitalId);
 });
 installSheetDrag();
-$('openHandoverBtn').addEventListener('click',openPublicHandover);
 $('openFirstAidBtn').addEventListener('click',openPublicFirstAid);
+$('publicManualLocationToggle').addEventListener('click',()=>{
+  $('publicManualLocation').hidden=!$('publicManualLocation').hidden;
+  if(!$('publicManualLocation').hidden) $('publicLocation').focus();
+});
+$('savePublicAddress').addEventListener('click',savePublicManualLocation);
+$('publicLocation').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();savePublicManualLocation();}});
+$('openPublicMap').addEventListener('click',openPublicLocationMap);
 $('publicStatusChoices').addEventListener('click',event=>{
   const button=event.target.closest('[data-public-status]');
   if(button) selectPublicStatus(button.dataset.publicStatus);
 });
+$('publicStatusChoices').addEventListener('keydown',handleRadioArrowKeys);
 $('publicBackHome').addEventListener('click',openPublicHome);
 $('firstAidBackHome').addEventListener('click',openPublicHome);
+$('sharedReportBack').addEventListener('click',()=>{sharedPublicReport=null;openPublicHome();requestPublicLocation();});
 $('publicStepContent').addEventListener('input',event=>{
   const field=event.target.closest('[data-report-field]');
   if(!field) return;
@@ -3462,8 +4040,12 @@ $('publicStepContent').addEventListener('input',event=>{
     publicReportDraft.onsetAt=field.value&&!Number.isNaN(onsetAt.getTime())?onsetAt.toISOString():'';
     publicReportDraft.onsetSelectedAt='';
   }else publicReportDraft[field.dataset.reportField]=field.value;
+  updatePublicSmsLinks();
+  if(field.dataset.reportField==='onset'&&field.value) schedulePublicAdvance();
 });
+$('publicStepContent').addEventListener('keydown',handleRadioArrowKeys);
 $('publicStepContent').addEventListener('click',event=>{
+  if(publicUX2){handlePublicQuestionClick(event);return;}
   const onsetChoice=event.target.closest('[data-onset-choice]');
   if(onsetChoice){
     const value=onsetChoice.dataset.onsetChoice, selectedAt=new Date();
@@ -3554,38 +4136,69 @@ $('publicStepContent').addEventListener('click',event=>{
     $('publicStepContent').querySelectorAll('[data-situation-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button===situation)));
   }
 });
-$('usePublicMapLocation').addEventListener('click',()=>{
-  if(!publicMapSelection) return;
-  const value=`지도 선택 좌표 ${publicMapSelection.lat.toFixed(5)}, ${publicMapSelection.lng.toFixed(5)}`;
-  publicReportDraft.location=value; publicReportDraft.locationVerified=false;
-  $('publicLocation').value=value;
-  $('publicLocationVerify').hidden=false; $('confirmPublicLocation').disabled=false;
-  $('publicLocationStatus').textContent='지도에서 고른 곳이 환자 위치인지 확인해 주세요.';
-  $('publicMapPicker').hidden=true;
-});
 $('publicStepBack').addEventListener('click',()=>{
-  if(publicSummaryVisible){ publicSummaryVisible=false; publicWizardStep=activePublicSteps().length-1; renderPublicStep(); return; }
-  if(publicWizardStep>0){ capturePublicStep(); publicWizardStep--; renderPublicStep(); }
+  if(publicAdvanceTimer){clearTimeout(publicAdvanceTimer);publicAdvanceTimer=null;}
+  capturePublicStep();
+  if(publicStepHistory.length>1){publicStepHistory.pop();renderPublicStep();}
   else openPublicHome();
 });
-$('publicStepSkip').addEventListener('click',()=>{
-  const steps=activePublicSteps(), step=steps[publicWizardStep];
-  if(step.key==='other'){publicMapSelection=null;publicReportDraft.location='';publicReportDraft.locationVerified=false;if(publicMapMarker){publicMapMarker.setMap(null);publicMapMarker=null;}}
-  if(step.key==='onset'){
-    publicReportDraft.onset=''; publicReportDraft.onsetMode=''; publicReportDraft.onsetAt=''; publicReportDraft.onsetSelectedAt='';
-  }else publicReportDraft[step.key]='';
-  if(publicWizardStep===steps.length-1) showPublicSummary();
-  else{ publicWizardStep++; renderPublicStep(); }
-});
-$('publicStepNext').addEventListener('click',()=>{
-  capturePublicStep();
-  if(publicWizardStep===activePublicSteps().length-1) showPublicSummary();
-  else{ publicWizardStep++; renderPublicStep(); }
-});
 $('publicEditReportBtn').addEventListener('click',()=>{
-  publicSummaryVisible=false; publicWizardStep=0; renderPublicStep();
+  publicSummaryVisible=false;sharedPublicReport=null;publicReportDraft.reportId='';publicReportDraft.reportExpiresAt='';publicStepPlan=PUBLIC_WIZARD_STEPS.map(step=>step.key);publicStepHistory=['other'];renderPublicStep();
 });
 $('copyHandoverBtn').addEventListener('click',()=>copyText(handoverText(publicHandover())));
+document.querySelectorAll('[data-share-report]').forEach(button=>button.addEventListener('click',generateShareCode));
+$('publicShareButton').addEventListener('click',generateShareCode);
+$('copyShareCode').addEventListener('click',async()=>{
+  const code=$('shareCodeValue').textContent;
+  try{await navigator.clipboard.writeText(code);$('shareCodeStatus').textContent='코드를 복사했습니다.';}
+  catch{const input=document.createElement('textarea');input.value=code;input.setAttribute('readonly','');input.style.position='fixed';input.style.opacity='0';document.body.append(input);input.select();const copied=document.execCommand('copy');input.remove();$('shareCodeStatus').textContent=copied?'코드를 복사했습니다.':'코드를 길게 눌러 복사해 주세요.';}
+});
+$('cprRhythmToggle').addEventListener('click',()=>{
+  if(cprTimer){stopCPRMetronome();$('cprRhythmToggle').textContent='리듬 켜기';$('cprRhythmToggle').setAttribute('aria-pressed','false');}
+  else startCPRMetronome();
+});
+$('cprSenseToggle').addEventListener('click',()=>{
+  cprSensesEnabled=!cprSensesEnabled;$('cprSenseToggle').setAttribute('aria-pressed',String(cprSensesEnabled));
+  $('cprSenseToggle').textContent=cprSensesEnabled?'소리·진동 끄기':'소리·진동 켜기';if(!cprSensesEnabled) navigator.vibrate?.(0);
+});
+$('cprFlashToggle').addEventListener('click',()=>{
+  cprFlashEnabled=!cprFlashEnabled;$('cprFlashToggle').setAttribute('aria-pressed',String(cprFlashEnabled));
+  $('cprFlashToggle').textContent=cprFlashEnabled?'화면 신호 끄기':'화면 신호 켜기';
+});
+if(!cprFlashEnabled){$('cprFlashToggle').disabled=true;$('cprFlashToggle').setAttribute('aria-pressed','false');$('cprFlashToggle').textContent='화면 신호 꺼짐 (움직임 최소화)';}
+$('cprMoreInfo').addEventListener('click',()=>startPublicQuestions('cardiac'));
+$('urgentMoreInfo').addEventListener('click',()=>continuePublicQuestions());
+document.querySelectorAll('[data-font-level]').forEach(button=>button.addEventListener('click',()=>setPublicFontSize(button.dataset.fontLevel)));
+$('publicThemeToggle').addEventListener('click',togglePublicTheme);
+$('publicReadAloud').addEventListener('click',speakCurrentPublicScreen);
+$('usePublicMapLocation').addEventListener('click',async()=>{
+  if(!publicMapSelection) return;
+  const coords={...publicMapSelection},label=await lookupPublicLocationLabel(coords);
+  publicMapSelection=coords;publicLocationLabel=label;publicReportDraft.location=label;publicReportDraft.locationVerified=true;
+  $('publicLocationStatus').textContent=`현재 위치: ${label}`;$('publicMapPicker').hidden=true;$('publicManualLocation').hidden=true;$('publicManualLocationToggle').hidden=true;updatePublicSmsLinks();
+});
+$('publicSharedReportBack').addEventListener('click',()=>{sharedPublicReport=null;openPublicHome();requestPublicLocation();});
+$('publicStepContent').addEventListener('change',event=>{
+  if(event.target.id==='publicOnset'&&event.target.value){
+    publicReportDraft.onset=event.target.value;publicReportDraft.onsetMode='exact';
+    const date=new Date(event.target.value);publicReportDraft.onsetAt=Number.isNaN(date.getTime())?'':date.toISOString();
+    updatePublicSmsLinks();schedulePublicAdvance();
+  }
+});
+$('publicStatusChoices').querySelectorAll('[role="radio"]').forEach((radio,index)=>radio.tabIndex=index===0?0:-1);
+applyPublicPreferences();updatePublicSmsLinks();
+function speakCurrentPublicScreen(){
+  const synth=window.speechSynthesis,button=$('publicReadAloud');
+  if(!synth){toast('이 기기에서는 음성 읽기를 사용할 수 없습니다.','warn');return;}
+  if(synth.speaking){synth.cancel();button.setAttribute('aria-pressed','false');button.textContent='소리로 듣기';return;}
+  const heading=['cprTitle','publicUrgentTitle','sharedReportTitle','handoverTitle','publicStepTitle','firstAidTitle','publicStatusLabel','publicTitle']
+    .map(id=>$(id)).find(item=>item&&!item.closest('[hidden]'));
+  if(!heading) return;
+  const extra=document.querySelector('#publicCPRMode:not([hidden]) .cpr-aed-reminder')?.textContent||'';
+  const utterance=new SpeechSynthesisUtterance(`${heading.textContent}. ${extra}`);utterance.lang='ko-KR';
+  utterance.onend=()=>{button.setAttribute('aria-pressed','false');button.textContent='소리로 듣기';};
+  button.setAttribute('aria-pressed','true');button.textContent='읽기 중지';synth.speak(utterance);
+}
 async function resolvePublicLocationCoordinates(){
   if(!publicReportDraft.locationVerified) return null;
   if(publicMapSelection&&Number.isFinite(publicMapSelection.lat)&&Number.isFinite(publicMapSelection.lng)) return {...publicMapSelection};
@@ -3600,25 +4213,6 @@ async function resolvePublicLocationCoordinates(){
     return {lat:Number(result.latitude),lng:Number(result.longitude)};
   }catch{return null;}
 }
-async function saveHandoverAndOpenClinical(){
-  capturePublicStep();
-  const button=$('sendHandoverBtn'),originalText=button.textContent;
-  button.disabled=true;button.textContent=publicReportDraft.locationVerified?'위치 확인 중…':'의료진 화면 여는 중…';
-  const data=publicHandover();
-  data.locationCoordinates=await resolvePublicLocationCoordinates();
-  if(data.locationCoordinates){
-    try{
-      const response=await fetch('/api/shared-reports',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({locationCoordinates:data.locationCoordinates,severity:data.severity})});
-      const payload=await response.json();
-      if(!response.ok) throw new Error(payload.error||'의료진 지도에 신고를 등록하지 못했습니다.');
-      data.reportId=payload.id;data.reportExpiresAt=payload.expiresAt;
-    }catch(error){toast(error.message||'의료진 지도에 신고를 등록하지 못했습니다. 같은 브라우저 화면에서만 볼 수 있습니다.','warn');}
-  }
-  try{ sessionStorage.setItem(HANDOVER_KEY,JSON.stringify(data)); }
-  catch{ button.disabled=false;button.textContent=originalText;toast('이 브라우저에서 세션 저장을 사용할 수 없습니다. 요약 복사 기능을 이용해 주세요.','warn'); return; }
-  selectRole('clinician');
-}
-$('sendHandoverBtn').addEventListener('click',saveHandoverAndOpenClinical);
 $('locateAedBtn').addEventListener('click',()=>{
   if(!navigator.geolocation){ toast('이 브라우저에서는 현재 위치를 확인할 수 없습니다.','warn'); return; }
   $('locateAedBtn').disabled=true; $('locateAedBtn').textContent='현재 위치 확인 중…';
@@ -3720,5 +4314,7 @@ MAP.renderRoads(state.showRoads);
 updateOriginSummary();updateSearchScopeLabel();setSearching(false);
 refreshMarkers([]);
 requestAnimationFrame(() => requestAnimationFrame(() => SEGS.forEach(s => s.classList.remove('still'))));
+const sharedReportCode=new URLSearchParams(location.search).get('report');
+if(sharedReportCode) openSharedReport(sharedReportCode);
 </script>
 </body></html>

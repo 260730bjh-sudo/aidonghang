@@ -426,11 +426,28 @@ async function sharedPatientReport(req,res){
     pruneSharedPatientReports();
     const id=randomBytes(12).toString('hex');
     const createdAt=new Date().toISOString(),expiresAt=Date.now()+SHARED_REPORT_TTL_MS;
-    sharedPatientReports.set(id,{id,locationCoordinates:{lat,lng},severity,createdAt,expiresAt});
+    const source=body?.patientSummary||{};
+    const clean=(value,max)=>String(value||'').replace(/[<>\r\n]/g,' ').replace(/\s+/g,' ').trim().slice(0,max);
+    const patientSummary={
+      locationLabel:clean(source.locationLabel,120),
+      situation:clean(source.situation,80),
+      consciousness:clean(source.consciousness,40),
+      breathing:clean(source.breathing,40),
+      bleeding:clean(source.bleeding,40),
+      onset:clean(source.onset,40),
+      actions:clean(source.actions,100)
+    };
+    sharedPatientReports.set(id,{id,locationCoordinates:{lat,lng},severity,patientSummary,createdAt,expiresAt});
     return sendJson(res,201,{id,expiresAt:new Date(expiresAt).toISOString()});
   }
   if(req.method!=='GET') return sendJson(res,405,{error:'GET, POST 요청만 지원합니다.'});
   pruneSharedPatientReports();
+  const reportId=new URL(req.url,'http://localhost').searchParams.get('id');
+  if(reportId){
+    if(!/^[a-f0-9]{24}$/i.test(reportId)) return sendJson(res,400,{error:'신고 코드 형식이 올바르지 않습니다.'});
+    const report=sharedPatientReports.get(reportId);
+    return report?sendJson(res,200,{report}):sendJson(res,404,{error:'신고 코드가 만료되었거나 없습니다.'});
+  }
   const reports=[...sharedPatientReports.values()].sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
   return sendJson(res,200,{reports});
 }
