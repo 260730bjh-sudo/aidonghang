@@ -208,6 +208,11 @@ b{font-weight:650}
 #map .kakao-cluster{min-width:44px;height:44px;padding:0 10px;border:3px solid #fff;border-radius:999px;background:#2864dc;color:#fff;font:750 14px var(--font);box-shadow:0 2px 9px #0005;cursor:pointer}
 #map .kakao-cluster:hover,#map .kakao-cluster:focus-visible{transform:scale(1.08);outline:3px solid #2864dc66}
 #map .kakao-me{width:18px;height:18px;border:3px solid #fff;border-radius:50%;background:#007aff;box-shadow:0 0 0 8px #007aff33,0 2px 6px #0005}
+#map .kakao-patient-dot{width:18px;height:18px;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 7px rgba(0,0,0,.12),0 2px 6px #0006}
+#map .kakao-patient-dot.severity-critical{background:#E53935;box-shadow:0 0 0 7px #E5393533,0 2px 6px #0006}
+#map .kakao-patient-dot.severity-caution{background:#FF9500;box-shadow:0 0 0 7px #FF950033,0 2px 6px #0006}
+#map .kakao-patient-dot.severity-reported{background:#34C759;box-shadow:0 0 0 7px #34C75933,0 2px 6px #0006}
+#map .kakao-patient-dot.severity-unknown{background:#8E8E93;box-shadow:0 0 0 7px #8E8E9333,0 2px 6px #0006}
 .map-error{position:absolute;inset:0;z-index:3;display:grid;place-items:center;margin:0;padding:24px;background:#f2f2f7;color:#7f211d;text-align:center;font-weight:700}
 #mapBox.dragging #map{cursor:grabbing}
 .mat{background:var(--material);color:var(--label);box-shadow:0 2px 8px rgba(0,0,0,.10),0 8px 24px rgba(0,0,0,.08),inset 0 0 0 1px var(--material-edge)}
@@ -521,6 +526,13 @@ body[data-mode="clinician"]{overflow:hidden}
 #clinicianApp .map-wrap #mapBox{position:absolute;inset:0;width:100%;height:100%;max-width:none;min-height:0;aspect-ratio:auto;border-radius:0}
 #clinicianApp .map-wrap #map{height:100%;min-height:0}
 #clinicianApp .map-actions{position:absolute;top:12px;left:12px;z-index:40;display:flex;align-items:center;gap:3px;padding:4px;border-radius:12px}
+#clinicianApp .patient-report-legend{position:absolute;top:68px;left:12px;z-index:40;display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--material-edge);border-radius:12px;background:var(--material);box-shadow:0 2px 8px rgba(0,0,0,.1);color:var(--label);font-size:.75rem;font-weight:650}
+.patient-report-legend[hidden]{display:none!important}
+.patient-report-legend-dot{width:11px;height:11px;flex:none;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px #0005}
+.patient-report-legend-dot.severity-critical{background:#E53935}
+.patient-report-legend-dot.severity-caution{background:#FF9500}
+.patient-report-legend-dot.severity-reported{background:#34C759}
+.patient-report-legend-dot.severity-unknown{background:#8E8E93}
 #clinicianApp .map-action{width:44px;height:44px;border:0;border-radius:12px;display:grid;place-items:center;background:transparent;color:var(--label);cursor:pointer;transition:background-color .15s,color .15s}
 #clinicianApp .map-action:hover{background:var(--fill);color:var(--brand)}
 #clinicianApp .map-action:focus-visible{outline:2.5px solid var(--blue);outline-offset:1px}
@@ -532,6 +544,7 @@ body[data-mode="clinician"]{overflow:hidden}
   #clinicianApp .location-hero{top:16px;right:16px}
   #clinicianApp .map-panel>.panel-hd{top:10px;left:10px}
   #clinicianApp .map-actions{top:10px;left:10px}
+  #clinicianApp .patient-report-legend{top:64px;left:10px}
   #clinicianApp .map-hint{top:60px;left:10px}
   #clinicianApp .map-zoom{top:auto;left:10px;right:auto;bottom:calc(30dvh + 36px);border-radius:12px}
 }
@@ -1263,6 +1276,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
             <button type="button" class="map-action" id="sidebarHomeButton" aria-label="홈 화면으로 돌아가기" title="홈 화면으로 돌아가기"><span data-ic="home" data-s="19"></span></button>
             <button type="button" class="map-action" id="roadBtn" aria-label="실시간 교통 레이어 끄기" title="실시간 교통 레이어 끄기" aria-pressed="true"><span data-ic="road" data-s="19"></span></button>
           </div>
+          <div class="patient-report-legend" id="patientReportLegend" hidden aria-live="polite"><span class="patient-report-legend-dot" id="patientReportLegendDot"></span><span id="patientReportLegendText"></span></div>
           <div class="map-hint mat"><span data-ic="pin" data-s="14"></span><span id="mapHintText">지도 이동 후 ‘이 지역 검색’을 눌러 범위를 제한하세요</span></div>
           <div class="map-zoom mat" aria-label="지도 확대 축소">
             <button type="button" id="zoomIn" aria-label="지도 확대"><span data-ic="plus" data-s="18"></span></button>
@@ -2078,7 +2092,7 @@ function KakaoMap(container){
   const center={lat:36.35,lng:127.75};
   const map=new kakao.maps.Map(container,{center:new kakao.maps.LatLng(center.lat,center.lng),level:13});
   const koreaBounds=new kakao.maps.LatLngBounds(new kakao.maps.LatLng(33.0,124.4),new kakao.maps.LatLng(38.7,132.0));
-  let clickCb=null, viewportCb=null, markerCb=null, hospitalOverlays=[], clusterOverlays=[], routeLines=[], meOverlay=null, trafficVisible=false;
+  let clickCb=null, viewportCb=null, markerCb=null, hospitalOverlays=[], clusterOverlays=[], routeLines=[], meOverlay=null, patientReportOverlay=null, trafficVisible=false;
   let hospitalList=[],markerRanks=new Map(),renderFrame=0,nationalLevel=null;
   const point=p=>new kakao.maps.LatLng(p.lat,p.lng);
   const clear=list=>{ list.forEach(item=>item.setMap(null)); list.length=0; };
@@ -2168,6 +2182,19 @@ function KakaoMap(container){
       meOverlay=new kakao.maps.CustomOverlay({position:point(pos),content:dot,yAnchor:.5,zIndex:30});
       meOverlay.setMap(map);
     },
+    renderPatientReport(report){
+      if(patientReportOverlay) patientReportOverlay.setMap(null);
+      patientReportOverlay=null;
+      const coords=report?.locationCoordinates;
+      if(!coords||!Number.isFinite(coords.lat)||!Number.isFinite(coords.lng)) return;
+      const severity=['critical','caution','reported','unknown'].includes(report.severity)?report.severity:'unknown';
+      const dot=document.createElement('div');
+      dot.className=`kakao-patient-dot severity-${severity}`;
+      dot.setAttribute('role','img');
+      dot.setAttribute('aria-label',`일반인 입력 환자 위치 · ${publicSeverityLabel(severity)}`);
+      patientReportOverlay=new kakao.maps.CustomOverlay({position:point(coords),content:dot,yAnchor:.5,zIndex:50});
+      patientReportOverlay.setMap(map);
+    },
     drawRoute(from,to,opt={}){
       clear(routeLines);
       const routePoints=Array.isArray(opt.path)&&opt.path.length>1?opt.path:null;
@@ -2222,7 +2249,7 @@ document.querySelectorAll('[data-ic]').forEach(e => e.insertAdjacentHTML('afterb
    [8] 앱 상태 · UI
    ═══════════════════════════════════════════════════════════════════════════ */
 const state = {
-  origin:null,originAreaLabel:'',originLookupId:0,
+  origin:null,originAreaLabel:'',originLookupId:0,patientReport:null,
   cat:'heart', dxNo:null, ktas:null, dept:'', severe:null,
   activeHospitalId:null,
   traffic:'rush', showRoads:true,
@@ -2373,6 +2400,7 @@ function selectRole(role){
   document.body.dataset.mode=role;
   if(role==='clinician'){
     showHandover(); selectClinicianPanel('patient');
+    setPatientReportOnMap(storedHandover());
     $('clinicianSidebar').removeAttribute('data-expanded');
     $('clinicianSidebar').style.height='';
     if(innerWidth<768){ $('clinicianSidebar').dataset.sheetState='collapsed'; $('clinicianSidebar').removeAttribute('data-dragging'); }
@@ -2383,7 +2411,7 @@ function selectRole(role){
     },180_000);
   }
   window.scrollTo({top:0,behavior:reduceMotion.matches?'auto':'smooth'});
-  requestAnimationFrame(()=>{ if(role==='clinician' && MAP){ MAP.relayout?.(); MAP.reset(); refreshMarkers(state.ranked.slice(0,5).map(h=>h.id)); } });
+  requestAnimationFrame(()=>{ if(role==='clinician' && MAP){ MAP.relayout?.(); MAP.reset(); if(state.patientReport?.locationCoordinates) MAP.focus?.(state.patientReport.locationCoordinates); refreshMarkers(state.ranked.slice(0,5).map(h=>h.id)); } });
 }
 const PUBLIC_WIZARD_STEPS=[
   {key:'consciousness',title:'환자가 반응하나요?',help:'말을 걸었을 때나 어깨를 가볍게 두드렸을 때를 기준으로 합니다.'},
@@ -2399,6 +2427,16 @@ const publicReportDraft={location:'',locationVerified:false,situation:'',conscio
 function activePublicSteps(){
   return publicFastMode?PUBLIC_WIZARD_STEPS.filter(step=>!['situation','onset'].includes(step.key)):PUBLIC_WIZARD_STEPS;
 }
+function publicSeverityLevel(data){
+  const situation=String(data.situation||'');
+  if(data.consciousness==='no'||data.breathing==='abnormal'||data.bleeding==='yes'||/심정지|호흡 이상|심한 출혈/u.test(situation)) return 'critical';
+  if(data.consciousness==='unsure'||data.breathing==='unsure'||data.bleeding==='unsure'||/다치|외상/u.test(situation)) return 'caution';
+  if(data.consciousness==='yes'&&data.breathing==='normal'&&data.bleeding==='no') return 'reported';
+  return 'unknown';
+}
+function publicSeverityLabel(level){
+  return ({critical:'119 우선 응답',caution:'확인 필요 응답',reported:'위급 항목 없음',unknown:'응답 정보 부족'})[level]||'응답 정보 부족';
+}
 function publicHandover(){
   const labels={
     consciousness:{yes:'반응 있음',no:'반응 없음',unsure:'모르겠음'},
@@ -2412,6 +2450,8 @@ function publicHandover(){
   return {
     createdAt:new Date().toISOString(),
     location:publicReportDraft.location.trim()?`${publicReportDraft.location.trim()} (${publicReportDraft.locationVerified?'환자 위치 확인':'환자 위치 미확인'})`:'미입력',
+    locationCoordinates:publicReportDraft.locationVerified&&publicMapSelection?{lat:publicMapSelection.lat,lng:publicMapSelection.lng}:null,
+    severity:publicSeverityLevel(publicReportDraft),
     symptoms:publicReportDraft.situation.trim()||'미입력',
     onset,
     onsetMode:publicReportDraft.onsetMode||'unanswered',
@@ -2429,6 +2469,7 @@ function handoverText(data){
     'SAVIOR 환자 상태 전달 요약',
     `기록 시각: ${new Date(data.createdAt).toLocaleString('ko-KR')}`,
     `발생 위치: ${data.location}`,
+    `응답 기반 분류: ${publicSeverityLabel(data.severity)} (진단 아님)`,
     `발생 상황·증상: ${data.symptoms}`,
     `환자 반응: ${data.consciousness}`,
     `호흡: ${data.breathing}`,
@@ -2450,7 +2491,7 @@ function publicSummaryRows(data){
   if(missing.length) extras.push(`미확인: ${missing.join(', ')}`);
   const unknown=value=>value==='미입력'?'미확인':value;
   return [
-    ['위치',unknown(data.location)],['상황',unknown(data.symptoms)],
+    ['위치',unknown(data.location)],['응답 분류',publicSeverityLabel(data.severity)],['상황',unknown(data.symptoms)],
     ['반응',unknown(data.consciousness)],['호흡',unknown(data.breathing)],
     ['심한 출혈',unknown(data.bleeding)],['그 외 정보',extras.join(' · ')||'미확인']
   ];
@@ -2470,7 +2511,10 @@ function capturePublicStep(){
     }else if(input.dataset.reportField==='situation'){
       if(value) publicReportDraft.situation=value;
     }else{
-      if(input.dataset.reportField==='location'&&value!==publicReportDraft.location) publicReportDraft.locationVerified=false;
+      if(input.dataset.reportField==='location'&&value!==publicReportDraft.location){
+        publicReportDraft.locationVerified=false;publicMapSelection=null;
+        if(publicMapMarker){publicMapMarker.setMap(null);publicMapMarker=null;}
+      }
       publicReportDraft[input.dataset.reportField]=value;
     }
   });
@@ -2577,6 +2621,8 @@ function openPublicHome(){
 function startPublicQuestions(situation='',fast=false){
   Object.keys(publicReportDraft).forEach(key=>publicReportDraft[key]=Array.isArray(publicReportDraft[key])?[]:'');
   publicReportDraft.locationVerified=false;
+  publicMapSelection=null;
+  if(publicMapMarker){publicMapMarker.setMap(null);publicMapMarker=null;}
   publicReportDraft.situation=situation;
   publicFastMode=fast;
   publicWizardStep=0; publicSummaryVisible=false;
@@ -2623,13 +2669,28 @@ function openPublicLocationMap(){
   requestAnimationFrame(()=>publicMapInstance.relayout());
 }
 function showHandover(){
-  let data;
-  try{ data=JSON.parse(sessionStorage.getItem(HANDOVER_KEY)||'null'); }catch{ data=null; }
+  const data=storedHandover();
   const box=$('handoverBox');
   box.hidden=!data;
   if(!data) return;
   $('handoverMeta').textContent=`일반인 화면 작성 · ${new Date(data.createdAt).toLocaleString('ko-KR')} · 이 탭의 세션에만 보관`;
   $('handoverText').textContent=handoverText(data);
+}
+function storedHandover(){
+  try{return JSON.parse(sessionStorage.getItem(HANDOVER_KEY)||'null');}catch{return null;}
+}
+function setPatientReportOnMap(report){
+  const coords=report?.locationCoordinates;
+  state.patientReport=coords&&Number.isFinite(coords.lat)&&Number.isFinite(coords.lng)&&Math.abs(coords.lat)<=90&&Math.abs(coords.lng)<=180?report:null;
+  MAP?.renderPatientReport?.(state.patientReport);
+  const legend=$('patientReportLegend'),dot=$('patientReportLegendDot');
+  if(!legend||!dot) return;
+  legend.hidden=!state.patientReport;
+  if(state.patientReport){
+    const severity=['critical','caution','reported','unknown'].includes(state.patientReport.severity)?state.patientReport.severity:'unknown';
+    dot.className=`patient-report-legend-dot severity-${severity}`;
+    $('patientReportLegendText').textContent=`환자 신고 · ${publicSeverityLabel(severity)}`;
+  }
 }
 async function copyText(text){
   try{ await navigator.clipboard.writeText(text); toast('요약을 복사했습니다.','ok'); }
@@ -2820,7 +2881,7 @@ function setOrigin(pos,label='지도에서 선택'){
   const lookupId=++state.originLookupId;
   updateOriginSummary();
   lookupOriginArea(pos,lookupId);
-  MAP?.renderMe(pos);MAP?.focus?.(pos);
+  MAP?.renderMe(pos);MAP?.focus?.(label==='위치'&&state.patientReport?.locationCoordinates?state.patientReport.locationCoordinates:pos);
   return true;
 }
 function requestCurrentOrigin({automatic=false}={}){
@@ -3402,12 +3463,19 @@ $('publicStepContent').addEventListener('click',event=>{
   if(event.target.closest('#savePublicAddress')){
     const input=$('publicLocation'), value=input.value.trim();
     if(!value){ input.focus(); toast('환자 위치를 입력하거나 건너뛰어 주세요.','warn'); return; }
-    publicReportDraft.location=value; publicReportDraft.locationVerified=false;
+    publicReportDraft.location=value; publicReportDraft.locationVerified=false;publicMapSelection=null;
+    if(publicMapMarker){publicMapMarker.setMap(null);publicMapMarker=null;}
     $('publicLocationVerify').hidden=false; $('confirmPublicLocation').disabled=false;
     $('publicLocationStatus').textContent='입력한 곳이 환자 위치인지 확인해 주세요.';
     return;
   }
   if(event.target.closest('#confirmPublicLocation')){
+    const value=$('publicLocation')?.value.trim()||publicReportDraft.location.trim();
+    if(!value){toast('환자 위치를 입력하거나 지도에서 선택해 주세요.','warn');return;}
+    if(value!==publicReportDraft.location){
+      publicReportDraft.location=value;publicMapSelection=null;
+      if(publicMapMarker){publicMapMarker.setMap(null);publicMapMarker=null;}
+    }
     publicReportDraft.locationVerified=true;
     $('publicLocationStatus').textContent='환자 위치를 확인했습니다. 119에 직접 전달해 주세요.';
     $('confirmPublicLocation').disabled=true;
@@ -3456,6 +3524,7 @@ $('publicStepBack').addEventListener('click',()=>{
 });
 $('publicStepSkip').addEventListener('click',()=>{
   const steps=activePublicSteps(), step=steps[publicWizardStep];
+  if(step.key==='other'){publicMapSelection=null;publicReportDraft.location='';publicReportDraft.locationVerified=false;if(publicMapMarker){publicMapMarker.setMap(null);publicMapMarker=null;}}
   if(step.key==='onset'){
     publicReportDraft.onset=''; publicReportDraft.onsetMode=''; publicReportDraft.onsetAt=''; publicReportDraft.onsetSelectedAt='';
   }else publicReportDraft[step.key]='';
@@ -3471,9 +3540,28 @@ $('publicEditReportBtn').addEventListener('click',()=>{
   publicSummaryVisible=false; publicWizardStep=0; renderPublicStep();
 });
 $('copyHandoverBtn').addEventListener('click',()=>copyText(handoverText(publicHandover())));
-function saveHandoverAndOpenClinical(){
-  try{ sessionStorage.setItem(HANDOVER_KEY,JSON.stringify(publicHandover())); }
-  catch{ toast('이 브라우저에서 세션 저장을 사용할 수 없습니다. 요약 복사 기능을 이용해 주세요.','warn'); return; }
+async function resolvePublicLocationCoordinates(){
+  if(!publicReportDraft.locationVerified) return null;
+  if(publicMapSelection&&Number.isFinite(publicMapSelection.lat)&&Number.isFinite(publicMapSelection.lng)) return {...publicMapSelection};
+  const address=publicReportDraft.location.trim();
+  if(!address) return null;
+  try{
+    const params=new URLSearchParams({address});
+    const response=await fetch(`/api/geocode?${params}`,{cache:'no-store',signal:AbortSignal.timeout(9000)});
+    const data=await response.json();
+    const result=data.results?.[0];
+    if(!response.ok||!result) return null;
+    return {lat:Number(result.latitude),lng:Number(result.longitude)};
+  }catch{return null;}
+}
+async function saveHandoverAndOpenClinical(){
+  capturePublicStep();
+  const button=$('sendHandoverBtn'),originalText=button.textContent;
+  button.disabled=true;button.textContent=publicReportDraft.locationVerified?'위치 확인 중…':'의료진 화면 여는 중…';
+  const data=publicHandover();
+  data.locationCoordinates=await resolvePublicLocationCoordinates();
+  try{ sessionStorage.setItem(HANDOVER_KEY,JSON.stringify(data)); }
+  catch{ button.disabled=false;button.textContent=originalText;toast('이 브라우저에서 세션 저장을 사용할 수 없습니다. 요약 복사 기능을 이용해 주세요.','warn'); return; }
   selectRole('clinician');
 }
 $('sendHandoverBtn').addEventListener('click',saveHandoverAndOpenClinical);
@@ -3500,6 +3588,7 @@ $('printClinicalReportBtn').addEventListener('click',()=>{
 addEventListener('afterprint',()=>$('reportPrint').hidden=true);
 $('clearHandoverBtn').addEventListener('click',()=>{
   sessionStorage.removeItem(HANDOVER_KEY);
+  setPatientReportOnMap(null);
   showHandover(); toast('이 탭의 전달 정보를 지웠습니다.');
 });
 el.dx.addEventListener('change', () => { expandClinicianSidebar(); $('dxSearch').value=''; setCategoryFields(false); applyDisease(el.dx.value); onDiseaseChanged(); });
@@ -3560,7 +3649,7 @@ if(window.kakao?.maps){
 }else{
   $('mapError').hidden=false;
   $('mapEngineTag').textContent='Kakao 지도 SDK를 불러오지 못했습니다.';
-  MAP={onClick(){},onViewportChange(){},getBounds(){return null;},renderRoads(){},renderMarkers(){},renderMe(){},drawRoute(){},clearRoute(){},zoomIn(){},zoomOut(){},reset(){},relayout(){},focus(){}};
+  MAP={onClick(){},onViewportChange(){},getBounds(){return null;},renderRoads(){},renderMarkers(){},renderMe(){},renderPatientReport(){},drawRoute(){},clearRoute(){},zoomIn(){},zoomOut(){},reset(){},relayout(){},focus(){}};
 }
 MAP.onClick(pos => {
   if(!state.pickOriginMode) return;
