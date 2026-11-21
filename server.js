@@ -13,6 +13,7 @@ const publicFiles = new Map([
   ['/__preview-bridge.js','__preview-bridge.js']
 ]);
 const bedCache=new Map();
+const severeCapacityCache=new Map();
 let facilityCache={expiresAt:0,payload:null,pending:null};
 const facilityDetailsCache=new Map();
 const geocodeCache=new Map();
@@ -20,10 +21,16 @@ const reverseGeocodeCache=new Map();
 const routeSummaryCache=new Map();
 const sharedPatientReports=new Map();
 const SHARED_REPORT_TTL_MS=60*60_000;
+const hospitalNotices=new Map();
+const HOSPITAL_NOTICE_TTL_MS=60*60_000;
 
 function sendJson(res,status,payload){
   res.writeHead(status,{'content-type':'application/json; charset=utf-8','cache-control':'no-store'});
   res.end(JSON.stringify(payload));
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 }
 
 function parsePoint(value){
@@ -51,6 +58,13 @@ function assertNedisSuccess(xml){
   if(code&&!['00','0','0000'].includes(code)) throw new Error(xmlValue(xml,'resultMsg')||`NEDIS 응답 오류 (${code})`);
 }
 
+function safeNedisResultMsg(value){
+  return String(value||'NEDIS 요청에 실패했습니다.')
+    .replace(/https?:\/\/[^\s"'<>]+/gi,'NEDIS endpoint')
+    .replace(/(serviceKey\s*[=:]\s*)[^&\s"'<>]+/gi,'$1[redacted]')
+    .slice(0,300);
+}
+
 function uniqueByHospitalCode(records){
   return [...new Map(records.map(record=>[record.hospitalCode,record])).values()];
 }
@@ -63,13 +77,16 @@ function parseYesNo(value){
 
 function parseBedRecords(xml){
   return [...xml.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/gi)].map(([,item])=>{
-    const raw=xmlValue(item,'hvec').replace(/,/g,'');
-    const availableBeds=/^\d+$/.test(raw)?Number(raw):null;
+    const rawBeds=xmlValue(item,'hvec');
+    const normalizedBeds=rawBeds.replace(/,/g,'');
+    const parsedBeds=/^[+-]?\d+$/.test(normalizedBeds)?Number(normalizedBeds):null;
+    const availableBeds=Number.isInteger(parsedBeds)?Math.max(0,parsedBeds):null;
     const latitude=Number(xmlValue(item,'wgs84Lat'));
     const longitude=Number(xmlValue(item,'wgs84Lon'));
     return {
       hospitalCode:xmlValue(item,'hpid'),
       hospitalName:xmlValue(item,'dutyName'),
+      rawBeds,
       availableBeds,
       updatedAt:xmlValue(item,'hvidate'),
       latitude:Number.isFinite(latitude)&&latitude!==0?latitude:null,
@@ -119,6 +136,59 @@ async function loadBedData(){
     cache.pending=null;
     throw error;
   });
+  return cache.pending;
+}
+
+function parseSevereCapacityRecords(xml){
+  const fields=[1,2,3,4,5,6,7,8,9,10,11,25].map(number=>`MKioskTy${number}`);
+  return [...xml.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/gi)].map(([,item])=>{
+    const values=Object.fromEntries(fields.map(field=>{
+      const value=xmlValue(item,field).toUpperCase();
+      return [field,value==='Y'||value==='N'?value:null];
+    }));
+    return {hpid:xmlValue(item,'hpid'),dutyName:xmlValue(item,'dutyName'),...values};
+  }).filter(item=>item.hpid&&item.dutyName);
+}
+
+async function loadSevereCapacity(stage1,stage2){
+  const cacheKey=`${stage1}|${stage2}`;
+  let cache=severeCapacityCache.get(cacheKey);
+  if(cache?.payload&&Date.now()<cache.expiresAt) return cache.payload;
+  if(cache?.pending) return cache.pending;
+  cache={expiresAt:0,payload:null,pending:null};
+  severeCapacityCache.set(cacheKey,cache);
+  const serviceKey=process.env.NEDIS_SERVICE_KEY;
+  if(!serviceKey) throw Object.assign(new Error('서버 NEDIS 키 미설정'),{resultCode:'SERVER_CONFIG',resultMsg:'NEDIS 서비스 키를 사용할 수 없습니다.'});
+  let normalizedKey=serviceKey;
+  try{normalizedKey=decodeURIComponent(serviceKey);}catch{}
+  cache.pending=(async()=>{
+    const hospitals=[];
+    let totalCount=0;
+    const pageSize=1000;
+    for(let pageNo=1;pageNo<=20;pageNo++){
+      const params=new URLSearchParams({serviceKey:normalizedKey,STAGE1:stage1,STAGE2:stage2,pageNo:String(pageNo),numOfRows:String(pageSize)});
+      const response=await fetch(`${NEDIS_ROOT}/getSrsillDissAceptncPosblInfoInqire?${params}`,{
+        headers:{Accept:'application/xml,text/xml'},signal:AbortSignal.timeout(20000)
+      });
+      const xml=await response.text();
+      const resultCode=xmlValue(xml,'resultCode');
+      const resultMsg=xmlValue(xml,'resultMsg')||xmlValue(xml,'resultMag');
+      if(!response.ok||resultCode&&!['00','0','0000'].includes(resultCode)){
+        throw Object.assign(new Error('NEDIS severe-capacity request failed'),{
+          resultCode:resultCode||String(response.status),resultMsg:safeNedisResultMsg(resultMsg)
+        });
+      }
+      if(pageNo===1) totalCount=Number(xmlValue(xml,'totalCount'))||0;
+      const page=parseSevereCapacityRecords(xml);
+      hospitals.push(...page);
+      if(!page.length||hospitals.length>=totalCount||page.length<pageSize) break;
+    }
+    const uniqueHospitals=[...new Map(hospitals.map(hospital=>[hospital.hpid,hospital])).values()];
+    if(totalCount>uniqueHospitals.length) throw Object.assign(new Error('NEDIS response incomplete'),{resultCode:'INCOMPLETE',resultMsg:'NEDIS 응답을 끝까지 가져오지 못했습니다.'});
+    const payload={hospitals:uniqueHospitals};
+    cache.expiresAt=Date.now()+5*60_000;cache.payload=payload;cache.pending=null;
+    return payload;
+  })().catch(error=>{cache.pending=null;throw error;});
   return cache.pending;
 }
 
@@ -305,6 +375,15 @@ async function hospitalBeds(req,res){
   }
 }
 
+async function severeCapacity(req,res,url){
+  if(req.method!=='GET') return sendJson(res,405,{resultCode:'METHOD_NOT_ALLOWED',resultMsg:'GET 요청만 지원합니다.'});
+  const stage1=url.searchParams.get('STAGE1')?.trim()||'';
+  const stage2=url.searchParams.get('STAGE2')?.trim()||'';
+  if(!stage1||stage1.length>16||stage2.length>60) return sendJson(res,400,{resultCode:'INVALID_REGION',resultMsg:'STAGE1과 STAGE2 지역값을 확인해 주세요.'});
+  try{return sendJson(res,200,await loadSevereCapacity(stage1,stage2));}
+  catch(error){return sendJson(res,error.resultCode==='SERVER_CONFIG'?503:502,{resultCode:error.resultCode||'UPSTREAM_ERROR',resultMsg:safeNedisResultMsg(error.resultMsg)});}
+}
+
 async function fetchSingleSummary(origin,destination,apiKey){
   const params=new URLSearchParams({
     origin:`${origin.lng},${origin.lat}`,
@@ -411,7 +490,42 @@ function pruneSharedPatientReports(){
   }
   while(sharedPatientReports.size>=500) sharedPatientReports.delete(sharedPatientReports.keys().next().value);
 }
+function pruneHospitalNotices(){
+  const now=Date.now();
+  for(const [id,notice] of hospitalNotices){if(notice.expiresAt<=now) hospitalNotices.delete(id);}
+  while(hospitalNotices.size>=500) hospitalNotices.delete(hospitalNotices.keys().next().value);
+}
 setInterval(pruneSharedPatientReports,60_000).unref();
+setInterval(pruneHospitalNotices,60_000).unref();
+
+async function hospitalNoticeApi(req,res){
+  if(req.method!=='POST') return sendJson(res,405,{error:'POST 요청만 지원합니다.'});
+  let body;
+  try{body=await readJsonBody(req);}catch(error){return sendJson(res,400,{error:error.message||'요청 내용을 읽지 못했습니다.'});}
+  const clean=(value,max)=>String(value||'').replace(/[<>\r\n]/g,' ').replace(/\s+/g,' ').trim().slice(0,max);
+  const hospitalCode=clean(body?.hospitalCode,12),hospitalName=clean(body?.hospitalName,120);
+  const disease=clean(body?.disease,120),severity=clean(body?.severity,80),etaMinutes=Number(body?.etaMinutes);
+  if(!/^[A-Z0-9]{6,12}$/i.test(hospitalCode)||!hospitalName||!disease||!severity||!Number.isInteger(etaMinutes)||etaMinutes<0||etaMinutes>600){
+    return sendJson(res,400,{error:'병원·질환·중증도·도착 예상 정보가 올바르지 않습니다.'});
+  }
+  pruneHospitalNotices();
+  const id=randomBytes(18).toString('hex'),createdAt=new Date().toISOString(),expiresAt=Date.now()+HOSPITAL_NOTICE_TTL_MS;
+  hospitalNotices.set(id,{hospitalName,disease,severity,etaMinutes,createdAt,expiresAt});
+  return sendJson(res,201,{url:`/hospital-notice/${id}`,expiresAt:new Date(expiresAt).toISOString()});
+}
+
+function hospitalNoticePage(req,res,url){
+  pruneHospitalNotices();
+  const match=url.pathname.match(/^\/hospital-notice\/([a-f0-9]{36})$/i);
+  const notice=match&&hospitalNotices.get(match[1]);
+  if(!notice){res.writeHead(404,{'content-type':'text/html; charset=utf-8','cache-control':'no-store','referrer-policy':'no-referrer'});return res.end('<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>안내 정보 만료</title><body><main><h1>안내 링크가 만료되었거나 없습니다.</h1><p>보낸 구급대원에게 최신 정보를 다시 요청해 주세요.</p></main></body></html>');}
+  const fields=[['선택 병원',notice.hospitalName],['질환·상태',notice.disease],['중증도',notice.severity],['예상 도착','약 '+notice.etaMinutes+'분']];
+  const rows=fields.map(([label,value])=>`<div class="row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('');
+  const expiry=new Date(notice.expiresAt).toLocaleString('ko-KR',{hour12:false});
+  const html=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><title>병원 사전 전달 정보</title><style>*{box-sizing:border-box}body{margin:0;padding:24px;background:#f3f6fa;color:#172033;font:16px/1.55 system-ui,-apple-system,"Noto Sans KR",sans-serif}.card{max-width:560px;margin:8vh auto;padding:28px;border-radius:20px;background:#fff;box-shadow:0 8px 32px #182b441c}h1{margin:0 0 8px;font-size:24px}.notice{margin:0 0 22px;color:#8b3d00;font-weight:700}.row{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:14px 0;border-top:1px solid #e6eaf0}dt{color:#667085}dd{margin:0;font-weight:700}footer{margin-top:22px;padding:14px;border-radius:12px;background:#fff4e5;color:#754200;font-size:14px}.expiry{margin-top:16px;color:#667085;font-size:13px}@media(max-width:480px){body{padding:12px}.card{margin:4vh auto;padding:20px}.row{grid-template-columns:100px 1fr}}</style></head><body><main class="card"><h1>병원 사전 전달 정보</h1><p class="notice">이송 전 참고용이며 병원 수용이 확정된 것은 아닙니다.</p><dl>${rows}</dl><footer>119 상황실 지시와 병원 확인을 우선해 주세요. 이 정보는 의료진 판단을 대신하지 않습니다.</footer><p class="expiry">링크 만료: ${escapeHtml(expiry)}</p></main></body></html>`;
+  res.writeHead(200,{'content-type':'text/html; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'});
+  res.end(html);
+}
 
 async function sharedPatientReport(req,res){
   if(req.method==='POST'){
@@ -514,6 +628,14 @@ async function directionsSummaries(req,res){
 
 const server=http.createServer(async(req,res)=>{
   const url=new URL(req.url,'http://localhost');
+  if(url.pathname==='/api/hospital-notices'){
+    await hospitalNoticeApi(req,res);
+    return;
+  }
+  if(url.pathname.startsWith('/hospital-notice/')){
+    hospitalNoticePage(req,res,url);
+    return;
+  }
   if(url.pathname==='/api/shared-reports'){
     await sharedPatientReport(req,res);
     return;
@@ -528,6 +650,10 @@ const server=http.createServer(async(req,res)=>{
   }
   if(url.pathname==='/api/hospital-beds'){
     await hospitalBeds(req,res);
+    return;
+  }
+  if(url.pathname==='/api/severe-capacity'){
+    await severeCapacity(req,res,url);
     return;
   }
   if(url.pathname==='/api/hospital-directory'){

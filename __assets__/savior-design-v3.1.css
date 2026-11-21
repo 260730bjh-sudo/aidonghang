@@ -1,0 +1,303 @@
+/* =====================================================================
+   SAVIOR Design v3.1  (캔버스 리디자인 반영)
+   - 2D 평면, 그림자 최소, Pretendard
+   - 곡률 4단계: 캡슐 999 / 사이드바 40 / 카드 24 / 안쪽 12
+   - 레이아웃과 JS 동작은 건드리지 않고 겉모습만 바꿈
+   - 다크 모드는 기존 변수 체계를 그대로 따름
+   ===================================================================== */
+
+:root{
+  --bg:#F5F4EF; --surface:#FFFFFF; --surface-2:#F5F4EF;
+  --label:#1C1C1E; --label-2:#6E6E73; --label-3:#8E8E93;
+  --sep:rgba(60,60,67,.16); --fill:rgba(118,118,128,.12); --fill-2:rgba(118,118,128,.08);
+  --red:#D92D20; --red-text:#B42318; --red-soft:#FCE9E7; --ring:rgba(217,45,32,.24);
+  --brand:#D92D20; --brand-soft:#FCE9E7;
+  --blue:#0062D6; --blue-text:#0062D6; --blue-soft:#E6F0FC;
+  --green:#1E8A3A; --green-text:#1E8A3A; --green-soft:#E3F5E8;
+  --orange:#B25000; --orange-text:#B25000; --orange-soft:#FFF1E0;
+}
+html body{
+  --v3-r-pill:999px; --v3-r-side:40px; --v3-r-card:24px; --v3-r-in:12px;
+  --v3-float:0 0 0 .5px rgba(28,28,30,.10),0 1px 2px rgba(28,28,30,.04);
+  --v3-side:0 0 0 .5px rgba(28,28,30,.10),0 2px 8px rgba(28,28,30,.05);
+  --v3-hair:inset 0 0 0 .5px var(--sep);
+  --v3-press:cubic-bezier(.2,0,0,1); --v3-spring:cubic-bezier(.32,.72,0,1);
+}
+
+/* ---------- 글꼴과 기본 ---------- */
+html body, html body button, html body input, html body select, html body textarea{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif !important;
+  font-synthesis:none;
+}
+html body{ background:var(--bg); color:var(--label); word-break:keep-all; overflow-wrap:break-word; -webkit-font-smoothing:antialiased; letter-spacing:0; }
+html body h1, html body h2, html body h3{ text-wrap:balance; }
+html body :where(button,a,summary,input,select,textarea):focus-visible{ outline:none !important; box-shadow:0 0 0 3px var(--ring) !important; }
+
+/* 누르는 순간 반응 */
+html body :where(button,a.report-action,a.primary,a.btn-primary,.role-card,.public-status-card,.secondary-hospital-row){
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .35s var(--v3-spring),background-color .2s ease,color .2s ease;
+}
+html body :where(button,a.report-action,a.primary,a.btn-primary,.role-card,.public-status-card,.secondary-hospital-row):active:not(:disabled){
+  transform:scale(.97); transition-duration:.08s; transition-timing-function:var(--v3-press);
+}
+
+/* ---------- 공통 버튼 ---------- */
+/* 주요: 빨간 캡슐 */
+html body :is(.public-primary,.btn-primary,.primary,.btn-confirm,.public-step-continue){
+  border:0 !important; border-radius:var(--v3-r-pill) !important;
+  background:var(--red) !important; color:#FFFFFF !important;
+  font-weight:700 !important; box-shadow:none !important; min-height:48px;
+}
+html body :is(.public-primary,.btn-primary,.primary,.btn-confirm,.public-step-continue):disabled{
+  background:var(--fill) !important; color:var(--label-2) !important;
+}
+/* 보조: 회색 채움 캡슐 */
+html body :is(.public-secondary,.mode-switch,.public-tool-button,.public-location-edit,.public-back,
+  .sidebar-back-button,.category-toggle-button,.clinical-edit-button,.btn-ghost,.btn-route,
+  .share-copy-button,.share-dialog-close,.aed-link,.public-location-secondary,.public-location-verify){
+  border:0 !important; border-radius:var(--v3-r-pill) !important;
+  background:var(--fill) !important; color:var(--label) !important;
+  font-weight:600 !important; box-shadow:none !important; min-height:36px;
+}
+
+/* ---------- 입력 ---------- */
+html body :is(input[type="text"],input[type="search"],input:not([type]),input[type="tel"],input[type="number"],textarea,select,.select){
+  border:0 !important; border-radius:var(--v3-r-in) !important;
+  background:var(--fill) !important; color:var(--label) !important; box-shadow:none !important;
+}
+html body :is(input[type="search"],#dxSearch,.public-speech-input input,.public-manual-location input){ border-radius:var(--v3-r-pill) !important; padding-inline:16px !important; }
+html body .select{ background:var(--fill) !important; }
+html body .select select{ background:transparent !important; }
+
+/* ---------- 카드 표면 ---------- */
+html body :is(.public-location-strip,.public-manual-location,.public-map-picker,.public-speech-panel,
+  .public-question-card,.public-urgent-card,.public-firstaid-card,.public-shared-report,
+  .public-handover-result,.public-care-summary,.share-code-dialog,.patient-input-card,
+  .clinical-overview,.compact-disclosure,.primary-hospital-card,.banner,.hospital-notice-tools,
+  .excluded,.public-option,.public-check){
+  border:0 !important; border-radius:var(--v3-r-card) !important;
+  background:var(--surface) !important; box-shadow:none !important;
+}
+
+/* ---------- 역할 선택 ---------- */
+html body .role-gate{ background:var(--bg) !important; }
+html body .gate-title{ font-size:34px !important; line-height:41px !important; font-weight:700 !important; letter-spacing:-.025em !important; }
+html body .gate-brand-name{ font-weight:800 !important; letter-spacing:.14em !important; color:var(--red-text) !important; font-size:13px !important; }
+html body .gate-brand-sub{ color:var(--label-2) !important; }
+html body .role-grid{ display:flex !important; flex-direction:column !important; gap:12px !important; }
+html body .role-card{
+  border:0 !important; border-radius:var(--v3-r-card) !important; box-shadow:none !important;
+  background:var(--surface) !important; color:var(--label) !important;
+  flex-direction:row !important; justify-content:flex-start !important; text-align:left !important;
+  gap:16px !important; min-height:92px !important; padding:0 20px !important;
+}
+html body .role-card.clinician{ order:-1; background:var(--red) !important; color:#FFFFFF !important; }
+html body .role-card .role-icon{ width:52px !important; height:52px !important; border-radius:var(--v3-r-in) !important; background:var(--red-soft) !important; color:var(--red) !important; flex:none; }
+html body .role-card.clinician .role-icon{ background:rgba(255,255,255,.2) !important; color:#FFFFFF !important; }
+html body .role-card .role-copy{ display:flex; flex-direction:column; align-items:flex-start; gap:2px; }
+html body .role-card .role-title{ font-size:20px !important; font-weight:800 !important; letter-spacing:-.015em !important; }
+html body .role-card .role-subtitle{ font-size:15px !important; color:var(--label-2) !important; }
+html body .role-card.clinician .role-subtitle{ color:rgba(255,255,255,.88) !important; }
+html body .gate-emergency{ display:inline-flex !important; align-items:center; justify-content:center; gap:8px; min-height:56px; padding:0 24px; border-radius:var(--v3-r-pill) !important; background:var(--surface) !important; box-shadow:var(--v3-float) !important; color:var(--red-text) !important; font-weight:700 !important; }
+
+/* ---------- 상단 바 ---------- */
+html body :is(.mode-bar,.bar){ background:var(--surface) !important; border:0 !important; box-shadow:0 .5px 0 var(--sep) !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+html body .mode-label{ font-weight:700 !important; color:var(--label) !important; }
+
+/* ---------- 일반인 공통 ---------- */
+html body .public-kicker{ color:var(--red-text) !important; font-weight:700 !important; letter-spacing:.02em !important; }
+html body .public-title{ font-size:28px !important; line-height:34px !important; font-weight:700 !important; letter-spacing:-.025em !important; }
+html body .public-intro,html body .public-home-note,html body .public-speech-note,html body .public-speech-status{ color:var(--label-2) !important; }
+html body .public-section-title{ font-size:20px !important; line-height:25px !important; font-weight:700 !important; letter-spacing:-.015em !important; }
+html body .public-location-strip{ border-radius:var(--v3-r-pill) !important; min-height:52px; }
+html body .public-location-icon{ border-radius:var(--v3-r-pill) !important; background:var(--red-soft) !important; color:var(--red) !important; }
+html body .public-speech-controls button{ border:0 !important; border-radius:var(--v3-r-pill) !important; min-height:48px; font-weight:700 !important; background:var(--fill) !important; color:var(--label) !important; }
+html body .public-speech-controls .public-speech-primary{ background:var(--blue) !important; color:#FFFFFF !important; }
+html body .public-speech-candidate{ border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; border:0 !important; }
+
+/* 증상 목록: 긴급 3개는 한 묶음 목록, 나머지는 2칸 타일 */
+html body .public-status-grid{ display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; column-gap:8px !important; row-gap:0 !important; }
+html body .public-status-card{
+  border:0 !important; box-shadow:none !important; background:var(--surface) !important; color:var(--label) !important;
+  border-radius:var(--v3-r-card) !important; min-height:88px !important; padding:16px !important;
+  flex-direction:column !important; align-items:flex-start !important; justify-content:space-between !important; text-align:left !important; gap:12px !important;
+  margin-top:8px;
+}
+html body .public-status-card.is-urgent{
+  grid-column:1/-1; flex-direction:row !important; align-items:center !important; justify-content:flex-start !important;
+  min-height:68px !important; padding:0 18px !important; gap:14px !important; border-radius:0 !important; margin-top:0;
+  box-shadow:inset 0 .5px 0 var(--sep) !important;
+}
+html body .public-status-card.is-urgent:first-child{ border-radius:var(--v3-r-card) var(--v3-r-card) 0 0 !important; box-shadow:none !important; }
+html body .public-status-card.is-urgent:nth-child(3){ border-radius:0 0 var(--v3-r-card) var(--v3-r-card) !important; }
+html body .public-status-card .public-status-icon{ width:40px !important; height:40px !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; color:var(--label) !important; flex:none; }
+html body .public-status-card.is-urgent .public-status-icon{ background:var(--red) !important; color:#FFFFFF !important; }
+html body .public-status-card .public-status-copy{ display:flex !important; flex-direction:column !important; align-items:flex-start !important; gap:2px !important; }
+html body .public-status-card strong{ font-size:17px !important; font-weight:700 !important; color:var(--label) !important; }
+html body #publicApp .public-status-card .public-status-copy small{ font-size:13px !important; color:var(--label-2) !important; }
+html body #publicApp .public-status-card.is-urgent .public-status-copy small{ color:var(--red-text) !important; font-weight:600 !important; }
+html body .urgent-badge{ position:absolute !important; width:1px !important; height:1px !important; overflow:hidden !important; clip:rect(0 0 0 0) !important; }
+
+/* 진행 표시와 질문 단계 */
+html body .public-progress{ height:4px !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; }
+html body .progress-dot{ border-radius:var(--v3-r-pill) !important; }
+html body .public-options{ gap:8px !important; }
+html body .public-option,html body .public-check{ border-radius:var(--v3-r-in) !important; background:var(--fill) !important; color:var(--label) !important; }
+html body :is(.public-option,.public-check)[aria-pressed="true"],
+html body :is(.public-option,.public-check):has(input:checked),
+html body :is(.public-option,.public-check).selected,
+html body :is(.public-option,.public-check).is-selected{ background:var(--red-soft) !important; color:var(--red-text) !important; box-shadow:inset 0 0 0 1.5px var(--red) !important; }
+html body .public-option-icon{ border-radius:var(--v3-r-pill) !important; }
+
+/* 긴급, 응급처치, 인계 */
+html body .public-urgent-card{ background:var(--red) !important; color:#FFFFFF !important; }
+html body .public-urgent-card :is(h2,h3,p,strong,span){ color:inherit !important; }
+html body .public-firstaid-steps li{ border-radius:0 !important; }
+html body :is(.public-summary-list,.public-summary-details) > *{ box-shadow:inset 0 .5px 0 var(--sep); }
+html body .share-code-value{ font-weight:800 !important; letter-spacing:.1em !important; font-variant-numeric:tabular-nums; }
+html body .share-code-dialog::backdrop{ background:rgba(0,0,0,.32) !important; }
+
+/* 하단 119 도크 */
+html body .public-call-dock{
+  left:12px !important; right:12px !important; bottom:calc(12px + env(safe-area-inset-bottom)) !important;
+  border:0 !important; border-radius:32px !important; background:var(--surface) !important;
+  box-shadow:var(--v3-float) !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+  padding:8px !important; grid-template-columns:1.6fr 1fr 1fr !important; gap:8px !important;
+  max-width:680px; margin-inline:auto;
+}
+html body .public-call-dock .report-action{ border:0 !important; border-radius:var(--v3-r-pill) !important; min-height:56px !important; font-weight:700 !important; box-shadow:none !important; }
+html body .public-call-dock .report-action.call{ background:var(--red) !important; color:#FFFFFF !important; font-size:19px !important; font-weight:800 !important; }
+html body .public-call-dock .report-action.sms{ background:var(--blue-soft) !important; color:var(--blue) !important; }
+html body .public-call-dock :is(.report-action.share,.report-action.copy){ background:var(--fill) !important; color:var(--label) !important; }
+html body .public-call-dock .report-disclaimer{ grid-column:1/-1; font-size:12px !important; color:var(--label-2) !important; padding:0 8px 4px; }
+html body .summary-report-action{ border:0 !important; border-radius:var(--v3-r-pill) !important; box-shadow:none !important; }
+
+/* ---------- 의료진: 사이드바 ---------- */
+html body .clinician-sidebar{
+  border:0 !important; border-radius:var(--v3-r-side) !important; background:var(--surface) !important;
+  box-shadow:var(--v3-side) !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+}
+html body .clinician-sidebar :is(.panel,.sidebar-pane,.patient-input-card){ background:transparent !important; box-shadow:none !important; border:0 !important; }
+html body .clinician-sidebar .panel-hd h2{ font-size:22px !important; line-height:28px !important; font-weight:700 !important; letter-spacing:-.015em !important; }
+html body .sheet-drag{ background:transparent !important; }
+html body .origin-summary,html body .origin-status{ color:var(--label-2) !important; }
+
+/* 질환 빠른 선택: 3칸 큰 캡슐 */
+html body .quick-dx{ display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:8px !important; }
+html body .quick-dx-chip{
+  min-height:44px !important; border:0 !important; border-radius:var(--v3-r-pill) !important;
+  background:var(--fill) !important; color:var(--label) !important; font-size:15px !important; font-weight:600 !important; box-shadow:none !important;
+}
+html body .quick-dx-chip:is([aria-pressed="true"],.active,.is-active,.selected,.on){ background:var(--label) !important; color:#FFFFFF !important; font-weight:700 !important; }
+
+/* 질환 카드 (KTAS, 골든타임) */
+html body .clinical-overview{ background:var(--surface) !important; box-shadow:var(--v3-hair) !important; }
+html body .ktas-tile{ border-radius:var(--v3-r-in) !important; background:var(--red) !important; color:#FFFFFF !important; box-shadow:none !important; }
+html body .dx-name{ font-size:17px !important; font-weight:700 !important; letter-spacing:-.01em !important; }
+html body .dx-meta{ color:var(--label-2) !important; }
+html body .dx-meta-severe{ color:var(--red-text) !important; }
+html body .dx-metric{ border:0 !important; border-radius:var(--v3-r-in) !important; background:var(--bg) !important; box-shadow:none !important; }
+html body .dx-metric span{ color:var(--label-2) !important; font-size:12px !important; font-weight:600 !important; }
+html body .dx-metric strong{ font-size:17px !important; font-weight:700 !important; }
+html body .dx-metric.urgent{ background:var(--red-soft) !important; }
+html body .dx-metric.urgent span,html body .dx-metric.urgent strong{ color:var(--red-text) !important; }
+html body .dx-metric.urgent strong{ font-size:28px !important; line-height:34px !important; font-weight:800 !important; letter-spacing:-.03em !important; font-variant-numeric:tabular-nums; }
+/* 세그먼트 컨트롤 (탭, KTAS) */
+html body :is(.dx-tabs,.seg){ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; padding:3px !important; box-shadow:none !important; }
+html body :is(.dx-tab,.seg button){ border:0 !important; border-radius:var(--v3-r-pill) !important; background:transparent !important; color:var(--label) !important; font-weight:600 !important; box-shadow:none !important; }
+html body :is(.dx-tab[aria-selected="true"],.dx-tab.active,.dx-tab.is-active,.seg button[aria-pressed="true"],.seg button.active,.seg button.on){ background:var(--surface) !important; font-weight:700 !important; }
+html body .seg-thumb{ border-radius:var(--v3-r-pill) !important; background:var(--surface) !important; box-shadow:none !important; }
+html body .dx-bullets li::marker{ color:var(--red); }
+
+/* 일반인 전달 기록 (사이드바 위) */
+html body .compact-disclosure{ background:var(--surface) !important; box-shadow:var(--v3-hair) !important; overflow:hidden; }
+html body .compact-disclosure > summary{ background:var(--red-soft) !important; color:var(--red-text) !important; font-weight:700 !important; border-radius:0 !important; }
+html body .handover-meta{ color:var(--label-2) !important; font-size:12px !important; }
+html body .handover-text{ white-space:pre-line !important; font-size:15px !important; line-height:1.5 !important; color:var(--label) !important; background:transparent !important; border:0 !important; }
+
+/* 하단 고정 버튼 */
+html body .sidebar-action-footer{ background:var(--surface) !important; box-shadow:0 -.5px 0 var(--sep) !important; border:0 !important; }
+html body .sidebar-action-footer :is(.btn-primary,.primary){ min-height:56px !important; font-size:17px !important; font-weight:800 !important; }
+html body .call-active-link{ background:var(--green-soft) !important; color:var(--green) !important; }
+
+/* ---------- 의료진: 병원 결과 ---------- */
+html body .search-range-status{ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; color:var(--label) !important; }
+html body .primary-hospital-card{ background:var(--surface) !important; box-shadow:inset 0 0 0 .5px var(--sep) !important; }
+html body .primary-hospital-card.confirmed{ box-shadow:inset 0 0 0 2px var(--blue) !important; }
+html body .primary-rank{ border-radius:var(--v3-r-pill) !important; background:var(--label) !important; color:#FFFFFF !important; font-weight:800 !important; }
+html body .primary-hospital-title h3{ font-size:17px !important; font-weight:700 !important; }
+html body .primary-score-chip,html body .secondary-score{ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--blue-soft) !important; color:var(--blue) !important; font-weight:800 !important; font-variant-numeric:tabular-nums; }
+html body .arrival-time strong{ font-size:34px !important; line-height:38px !important; font-weight:800 !important; letter-spacing:-.03em !important; font-variant-numeric:tabular-nums; }
+html body .arrival-time span,html body .arrival-meta{ color:var(--label-2) !important; }
+html body :is(.capacity-state,.dept-state,.severe-capability){ border:0 !important; border-radius:var(--v3-r-in) !important; background:var(--bg) !important; box-shadow:none !important; }
+html body .bed-overcrowded{ background:var(--red-soft) !important; color:var(--red-text) !important; }
+html body .bed-dot{ border-radius:var(--v3-r-pill) !important; }
+html body .btn-route{ min-height:48px !important; }
+html body .btn-confirm{ min-height:48px !important; }
+html body .hospital-details{ border:0 !important; border-radius:var(--v3-r-in) !important; background:var(--bg) !important; }
+html body .detail-score .meter,html body .card-score .meter{ height:6px !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; overflow:hidden; }
+html body .detail-score .meter i,html body .card-score .meter i{ display:block; height:100%; border-radius:var(--v3-r-pill) !important; background:var(--blue) !important; }
+html body .secondary-hospital-row{ border:0 !important; border-radius:var(--v3-r-in) !important; background:var(--fill-2) !important; box-shadow:none !important; min-height:52px; }
+html body .secondary-hospital-row[aria-pressed="true"]{ box-shadow:inset 0 0 0 2px var(--blue) !important; background:var(--surface) !important; }
+html body .secondary-rank{ color:var(--label-2) !important; font-weight:700 !important; }
+html body .secondary-eta{ font-weight:800 !important; font-variant-numeric:tabular-nums; }
+html body .banner{ background:var(--green-soft) !important; color:var(--label) !important; }
+html body .route-link{ border-radius:var(--v3-r-pill) !important; }
+
+/* 카드 본문 점수 (cardHTML에 추가한 블록) */
+html body .card-score{ display:flex; flex-direction:column; gap:8px; padding:12px 14px; border-radius:var(--v3-r-in); background:var(--blue-soft); }
+html body .card-score-head{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+html body .card-score-head span{ font-size:13px; font-weight:700; color:var(--blue); }
+html body .card-score-head strong{ font-size:28px; line-height:32px; font-weight:800; letter-spacing:-.03em; color:var(--blue); font-variant-numeric:tabular-nums; }
+html body .card-score-head strong small{ font-size:15px; font-weight:700; margin-left:2px; letter-spacing:0; }
+html body .card-score .meter{ background:rgba(0,98,214,.14) !important; }
+html body .card-score-parts{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+html body .card-score-parts span{ display:flex; flex-direction:column; padding:6px 8px; border-radius:8px; background:var(--surface); font-size:11px; line-height:14px; color:var(--label-2); }
+html body .card-score-parts b{ font-size:15px; line-height:20px; font-weight:800; color:var(--label); font-variant-numeric:tabular-nums; }
+html body .card-score.pending{ background:var(--fill-2); }
+html body .card-score.pending .card-score-head :is(span,strong){ color:var(--label-2); font-size:15px; }
+
+/* ---------- 지도 위 컨트롤 ---------- */
+html body .mat{ background:var(--surface) !important; border:0 !important; box-shadow:var(--v3-float) !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+html body .map-actions.mat,html body .map-zoom.mat{ border-radius:var(--v3-r-pill) !important; padding:4px !important; }
+html body :is(.map-action,.map-zoom button){ border:0 !important; border-radius:var(--v3-r-pill) !important; background:transparent !important; color:var(--label) !important; min-width:44px; min-height:44px; box-shadow:none !important; }
+html body .map-action:is([aria-pressed="true"],.active,.on){ background:var(--red) !important; color:#FFFFFF !important; }
+html body .map-hint.mat,html body .patient-report-legend{ border-radius:var(--v3-r-pill) !important; background:var(--surface) !important; box-shadow:var(--v3-float) !important; border:0 !important; color:var(--label) !important; }
+html body .patient-report-legend-dot{ box-shadow:0 0 0 2px #FFFFFF; }
+html body .severity-critical{ background:#D92D20 !important; }
+html body .severity-caution{ background:#B25000 !important; }
+html body .severity-reported{ background:#1E8A3A !important; }
+html body .severity-unknown{ background:#8E8E93 !important; }
+html body .kakao-patient-dot{ border:3px solid #FFFFFF !important; box-shadow:0 1px 2px rgba(28,28,30,.16) !important; }
+html body .kakao-cluster{ background:#1F5BD8 !important; color:#FFFFFF !important; border:3px solid #FFFFFF !important; box-shadow:0 1px 2px rgba(28,28,30,.16) !important; font-weight:800 !important; }
+html body .map-scope-actions .public-secondary{ background:var(--surface) !important; box-shadow:var(--v3-float) !important; }
+
+/* ---------- 기타 ---------- */
+html body #toastWrap > *{ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--label) !important; color:var(--surface) !important; box-shadow:none !important; font-weight:600 !important; }
+html body .foot-note{ color:var(--label-2) !important; }
+html body .excluded > summary{ color:var(--label-2) !important; font-weight:600 !important; }
+html body .empty{ color:var(--label-2) !important; }
+html body .tag{ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; color:var(--label) !important; }
+html body .tag.sim{ background:var(--orange-soft) !important; color:var(--orange) !important; }
+
+/* ---------- v3.1 보정 ---------- */
+html body .dx-search-wrap{ background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
+html body .dx-search-wrap input{ width:100%; }
+html body .public-status-icon svg{ width:20px !important; height:20px !important; }
+html body .mode-bar{ padding-inline:max(16px,calc((100% - 680px)/2)) !important; }
+html body .card-score .meter{ min-height:6px !important; max-height:none !important; flex:none !important; }
+html body .card-score .meter i{ min-height:6px !important; }
+html body .primary-hospital-card .primary-score-chip{ display:none !important; }
+
+/* ---------- 접근성 ---------- */
+@media (prefers-reduced-motion:reduce){
+  html body :where(button,a,.role-card,.public-status-card){ transition:none !important; }
+  html body :where(button,a,.role-card,.public-status-card):active{ transform:none !important; }
+}
+@media (prefers-contrast:more){
+  html body :is(.clinician-sidebar,.public-call-dock,.mat,.primary-hospital-card,.public-status-card,.role-card){ box-shadow:0 0 0 1px var(--label) !important; }
+}
+@media print{
+  html body .public-call-dock{ display:none !important; }
+}

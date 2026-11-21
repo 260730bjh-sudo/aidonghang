@@ -1,0 +1,8 @@
+{
+  "name": "savior-emergency-routing-demo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node --env-file=.env server.js"
+  }
+}

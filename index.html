@@ -325,6 +325,13 @@ b{font-weight:650}
 .banner p{margin:3px 0 0;font-size:12.5px;line-height:1.5;color:var(--label-2)}
 .route-link{display:inline-flex;align-items:center;gap:3px;margin-top:8px;font:600 13px/1.2 var(--font);color:var(--brand);text-decoration:none}
 .route-link:hover{text-decoration:underline}
+.hospital-notice-tools{display:grid;gap:8px;margin-top:12px;padding:11px;border-radius:12px;background:var(--surface);border:1px solid var(--sep)}
+.hospital-notice-tools p{margin:0;color:var(--label-2);font-size:.75rem;line-height:1.4}
+.hospital-notice-preview{margin:0;color:var(--label);font-size:.8125rem;line-height:1.5;white-space:pre-line}
+.hospital-notice-actions{display:flex;flex-wrap:wrap;gap:8px}
+.hospital-notice-actions a,.hospital-notice-actions button{min-height:42px;padding:0 12px;border:1px solid var(--sep);border-radius:10px;background:var(--surface);color:var(--label);font:600 .8125rem var(--font);text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.hospital-notice-actions a.primary{border-color:var(--brand);background:var(--brand);color:#fff}
+.hospital-notice-tools[hidden],.hospital-notice-actions [hidden]{display:none!important}
 
 .excluded{margin:0 16px 16px;border-radius:14px;background:var(--surface-2);overflow:hidden}
 .excluded summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;font:600 13px/1.35 var(--font);color:var(--label-2)}
@@ -652,6 +659,10 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .capacity-state,.dept-state{display:flex;align-items:center;gap:8px;min-width:0;min-height:27px;color:var(--label);font-size:.875rem}
 .capacity-state span,.dept-state span,.dept-state strong{min-width:0;overflow-wrap:anywhere}
 .capacity-state>b{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:650}
+.capacity-state.bed-overcrowded{color:var(--red-text);font-weight:750}
+.severe-capability{display:grid;gap:2px;padding-left:19px;font-size:.8125rem;font-weight:700}
+.severe-capability.yes{color:var(--green-text)}.severe-capability.no{color:var(--red-text)}.severe-capability.unknown{color:var(--label-2)}
+.severe-capability small{font-size:.6875rem;font-weight:500;color:var(--label-2)}
 .bed-dot{width:11px;height:11px;flex:none;border-radius:50%;background:var(--gray)}
 .bed-dot.s-free{background:var(--green)}.bed-dot.s-busy{background:var(--orange)}.bed-dot.s-full{background:var(--red)}.bed-dot.s-off{background:var(--gray)}
 .bed-dot.s-unknown{background:var(--gray)}
@@ -689,6 +700,8 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .secondary-meta{display:flex;align-items:center;gap:8px;white-space:nowrap}
 .secondary-eta{font-size:.8125rem;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
 .secondary-score{color:var(--blue-text);font-size:.6875rem;font-weight:700;white-space:nowrap}
+.secondary-capability{max-width:112px;font-size:.625rem;font-weight:700;line-height:1.15;text-align:right;white-space:normal}
+.secondary-capability.yes{color:var(--green-text)}.secondary-capability.no{color:var(--red-text)}.secondary-capability.unknown{color:var(--label-2)}
 .recommendation-skeleton{display:flex;align-items:center;gap:10px;height:68px;margin-bottom:8px;padding:12px;border:1px solid var(--sep);border-radius:14px;background:var(--surface)}
 .recommendation-skeleton>span{width:28px;height:28px;flex:none;border-radius:9px;background:var(--fill)}
 .recommendation-skeleton>div{display:grid;flex:1;gap:8px}
@@ -785,6 +798,10 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .capacity-summary{display:grid;gap:7px;margin-top:12px}
 .capacity-state,.dept-state{display:flex;align-items:center;gap:8px;min-height:27px;color:var(--label);font-size:.875rem}
 .capacity-state>b{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:650}
+.capacity-state.bed-overcrowded{color:var(--red-text);font-weight:750}
+.severe-capability{display:grid;gap:2px;padding-left:19px;font-size:.8125rem;font-weight:700}
+.severe-capability.yes{color:var(--green-text)}.severe-capability.no{color:var(--red-text)}.severe-capability.unknown{color:var(--label-2)}
+.severe-capability small{font-size:.6875rem;font-weight:500;color:var(--label-2)}
 .bed-dot{width:11px;height:11px;flex:none;border-radius:50%;background:var(--gray)}
 .bed-dot.s-free{background:var(--green)}.bed-dot.s-busy{background:var(--orange)}.bed-dot.s-full{background:var(--red)}.bed-dot.s-off{background:var(--gray)}
 .dept-state span{color:var(--label-2)}.dept-state strong{margin-left:auto;color:var(--green-text);font-size:.8125rem;font-weight:650}
@@ -902,6 +919,22 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .public-options{display:grid;gap:8px}
 .public-option{min-height:52px;padding:10px 13px;border:1px solid var(--sep);border-radius:12px;background:var(--surface);color:var(--label);text-align:left;font:600 .9375rem var(--font);cursor:pointer}
 .public-option[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft);color:var(--blue-text)}
+.public-speech-panel{display:grid;gap:9px;margin:0 0 16px;padding:14px;border:1px solid var(--sep);border-radius:14px;background:var(--surface)}
+.public-speech-panel h3{margin:0;color:var(--label);font-size:1rem}
+.public-speech-input{display:grid;gap:8px}
+.public-speech-input textarea{width:100%;min-height:72px;padding:11px 12px;border:2px solid var(--sep);border-radius:11px;background:var(--surface);color:var(--label);font:1rem/1.45 var(--font);resize:vertical}
+.public-speech-controls{display:flex;gap:8px}
+.public-speech-controls button{flex:1;min-height:48px;border:1px solid var(--sep);border-radius:10px;background:var(--surface);color:var(--label);font:650 .875rem var(--font)}
+.public-speech-controls .public-speech-primary{border-color:#174EA6;background:#174EA6;color:#fff}
+.public-speech-controls button:disabled{opacity:.55}
+.public-speech-note,.public-speech-status{margin:0;color:var(--label-2);font-size:.75rem;line-height:1.4}
+.public-speech-results{display:grid;gap:7px}
+.public-speech-results[hidden],.public-speech-status[hidden],.public-speech-selected[hidden]{display:none!important}
+.public-speech-results>p{margin:0;color:var(--label);font-size:.875rem;font-weight:650}
+.public-speech-candidate{display:grid;width:100%;gap:3px;padding:10px 12px;border:1px solid var(--sep);border-radius:10px;background:var(--surface);color:var(--label);text-align:left}
+.public-speech-candidate strong{font-size:.875rem}
+.public-speech-candidate small{color:var(--label-2);font-size:.75rem}
+.public-speech-selected{margin:0;padding:10px 12px;border-radius:10px;background:var(--blue-soft);color:var(--blue-text);font-size:.8125rem;line-height:1.4}
 .public-location-note{margin:0;color:var(--label-2);font-size:.75rem;line-height:1.4}
 .public-step-actions{display:grid;grid-template-columns:.8fr 1fr 1fr;gap:8px;margin-top:12px}
 .public-step-actions button{min-height:48px;padding:0 8px;font-size:.875rem}
@@ -1027,9 +1060,8 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #publicApp .public-head{display:grid;gap:14px;margin:0 0 14px}
 #publicApp .public-head>div:first-child{display:grid;gap:6px}
 #publicApp .public-access-tools{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
-.public-font-controls{display:flex;gap:4px;padding:4px;border:1px solid var(--sep);border-radius:12px;background:var(--surface)}
-.public-font-controls button,.public-tool-button{min-width:48px;min-height:48px;padding:0 10px;border:1px solid var(--sep);border-radius:9px;background:var(--surface);color:var(--label);font-weight:700;cursor:pointer}
-.public-font-controls button[aria-pressed="true"],#publicApp .public-tool-button[aria-pressed="true"]{outline:3px solid var(--blue);outline-offset:1px}
+#publicApp .public-tool-button{min-width:48px;min-height:48px;padding:0 10px;border:1px solid var(--sep);border-radius:9px;background:var(--surface);color:var(--label);font-weight:700;cursor:pointer}
+#publicApp .public-tool-button[aria-pressed="true"]{outline:3px solid var(--blue);outline-offset:1px}
 #publicApp .public-location-strip{display:flex;align-items:center;gap:10px;min-height:58px;margin:0 0 14px;padding:8px 12px;border:1px solid var(--sep);border-radius:14px;background:var(--surface);color:var(--label)}
 #publicApp .public-location-actions{display:flex;gap:6px;flex:none}
 .public-location-icon{font-size:22px!important}
@@ -1073,7 +1105,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 .progress-dot.done{background:var(--blue);border-color:var(--blue)}
 .progress-dot.current{outline:3px solid var(--blue-soft);outline-offset:2px;background:var(--blue)}
 #publicApp .public-question-card,#publicApp .public-firstaid-card,#publicApp .public-handover-result,#publicApp .public-shared-report{padding:18px;border:2px solid var(--sep);background:var(--surface);color:var(--label);box-shadow:none}
-#publicApp .public-question-card h2,#publicApp .public-firstaid-card h2,#publicApp .public-handover-result h2,#publicApp .public-shared-report h1,#publicApp .public-urgent-card h2,#publicApp .public-cpr-mode h2{margin:0 0 10px;font-size:max(28px,1.6em);line-height:1.12;color:var(--label)}
+#publicApp .public-question-card h2,#publicApp .public-firstaid-card h2,#publicApp .public-handover-result h2,#publicApp .public-shared-report h1,#publicApp .public-urgent-card h2{margin:0 0 10px;font-size:max(28px,1.6em);line-height:1.12;color:var(--label)}
 #publicApp .public-question-card>p{margin:0 0 16px;color:var(--label)}
 #publicApp .public-options{gap:10px}
 #publicApp .public-option{display:grid;grid-template-columns:56px minmax(0,1fr);align-items:center;gap:12px;min-height:76px;padding:12px;border:2px solid var(--sep);border-radius:13px;background:var(--surface);color:var(--label);font-weight:700;text-align:left}
@@ -1093,18 +1125,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #publicApp .public-urgent-card .public-firstaid-steps{gap:7px}
 .urgent-illustration{display:grid;place-items:center;width:76px;height:76px;border-radius:20px;background:#B42318;color:#fff}
 .urgent-illustration .ic{width:48px;height:48px}
-#publicApp .public-cpr-mode{position:fixed;inset:env(safe-area-inset-top) 0 calc(100px + env(safe-area-inset-bottom)) 0;z-index:85;display:grid;align-content:center;justify-items:center;gap:14px;min-height:0;padding:18px 14px 24px;border:0;border-top:4px solid #B42318;border-radius:0;background:var(--surface);color:var(--label);text-align:center;overflow:auto}
-#publicApp .public-cpr-mode[hidden]{display:none!important}
-#publicApp .public-cpr-mode h2{max-width:16ch;text-wrap:balance}
-#publicApp .cpr-tempo{margin:0;font-size:1.25em;color:var(--label)}
-#publicApp .cpr-count-card{display:grid;justify-items:center;gap:4px}
-#publicApp #cprCount{font-size:clamp(48px,15vw,72px);font-weight:850;line-height:1;font-variant-numeric:tabular-nums}
-#publicApp .cpr-aed-reminder{margin:0;padding:12px;border-radius:10px;background:var(--blue-soft);color:var(--label);font-weight:750}
-#publicApp .cpr-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
-#publicApp .cpr-controls button{min-height:60px;padding:8px 10px;border:2px solid var(--sep);border-radius:11px;background:var(--surface);color:var(--label);font-weight:750}
-#publicApp .cpr-controls .public-primary{border:0;background:#B42318;color:#fff}
-.cpr-flash-surface{position:fixed;inset:0;z-index:85;pointer-events:none;opacity:0;background:rgba(255,255,255,.28);transition:opacity .08s linear}
-#publicApp.cpr-flash .cpr-flash-surface{opacity:1}
 #publicApp .public-firstaid-steps{gap:8px}
 #publicApp .public-firstaid-steps li{min-height:60px;padding:12px 12px 12px 48px;background:var(--surface-2);color:var(--label)}
 #publicApp .public-firstaid-steps li::before{width:28px;height:28px;background:#174EA6;color:#fff;font-weight:800}
@@ -1127,7 +1147,7 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 #publicApp .public-shared-expiry{margin:0 0 12px;color:var(--label)}
 #publicApp .public-location-note{color:var(--label);line-height:1.4}
 #publicApp .public-summary-details>summary{min-height:56px;color:var(--label);font-weight:750}
-#publicApp .public-manual-location[hidden],#publicApp .public-location-edit[hidden],#publicApp .public-shared-report[hidden],#publicApp .public-cpr-mode[hidden]{display:none!important}
+#publicApp .public-manual-location[hidden],#publicApp .public-location-edit[hidden],#publicApp .public-shared-report[hidden]{display:none!important}
 #publicApp :where(p,li,small,label,summary,button,input,textarea,a,span,output){font-size:max(18px,1em)!important;line-height:1.35}
 #publicApp :where(button,a.report-action,.summary-report-action){font-size:max(20px,1.1em)!important}
 #publicApp :where(h1,h2){font-size:max(28px,1.55em)!important;line-height:1.12}
@@ -1158,7 +1178,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
   #publicApp .public-location-edit{flex:1}
 }
 @media(prefers-reduced-motion:reduce){
-  #publicApp .cpr-flash-surface{display:none!important;transition:none!important}
   #publicApp *,#publicApp *::before,#publicApp *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
 /* ── 추가 모션 (savior-animation-patch v2) ── */
@@ -1243,6 +1262,327 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 
 /* 동작 줄이기: 기존 전역 규칙이 재생시간을 0으로 만듦. 지연도 없애서 빈 화면 순간을 막음 */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-delay:0s!important}}
+</style><style id="savior-design-v3">/* =====================================================================
+   SAVIOR Design v3.2  (캔버스 리디자인 반영)
+   - 2D 평면, 그림자 최소, Pretendard
+   - 곡률 4단계: 캡슐 999 / 사이드바 40 / 카드 24 / 안쪽 12
+   - 레이아웃과 JS 동작은 건드리지 않고 겉모습만 바꿈
+   - 다크 모드는 기존 변수 체계를 그대로 따름
+   ===================================================================== */
+
+:root{
+  --bg:#F5F4EF; --surface:#FFFFFF; --surface-2:#F5F4EF;
+  --label:#1C1C1E; --label-2:#6E6E73; --label-3:#8E8E93;
+  --sep:rgba(60,60,67,.16); --fill:rgba(118,118,128,.12); --fill-2:rgba(118,118,128,.08);
+  --red:#D92D20; --red-text:#B42318; --red-soft:#FCE9E7; --ring:rgba(217,45,32,.24);
+  --brand:#D92D20; --brand-soft:#FCE9E7;
+  --blue:#0062D6; --blue-text:#0062D6; --blue-soft:#E6F0FC;
+  --green:#1E8A3A; --green-text:#1E8A3A; --green-soft:#E3F5E8;
+  --orange:#B25000; --orange-text:#B25000; --orange-soft:#FFF1E0;
+}
+html body{
+  --v3-r-pill:999px; --v3-r-side:40px; --v3-r-card:24px; --v3-r-in:12px;
+  --v3-float:0 0 0 .5px rgba(28,28,30,.10),0 1px 2px rgba(28,28,30,.04);
+  --v3-side:0 0 0 .5px rgba(28,28,30,.10),0 2px 8px rgba(28,28,30,.05);
+  --v3-hair:inset 0 0 0 .5px var(--sep);
+  --v3-press:cubic-bezier(.2,0,0,1); --v3-spring:cubic-bezier(.32,.72,0,1);
+}
+
+/* ---------- 글꼴과 기본 ---------- */
+html body, html body button, html body input, html body select, html body textarea{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif !important;
+  font-synthesis:none;
+}
+html body{ background:var(--bg); color:var(--label); word-break:keep-all; overflow-wrap:break-word; -webkit-font-smoothing:antialiased; letter-spacing:0; }
+html body h1, html body h2, html body h3{ text-wrap:balance; }
+html body :where(button,a,summary,input,select,textarea):focus-visible{ outline:none !important; box-shadow:0 0 0 3px var(--ring) !important; }
+
+/* 누르는 순간 반응 */
+html body :where(button,a.report-action,a.primary,a.btn-primary,.role-card,.public-status-card,.secondary-hospital-row){
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .35s var(--v3-spring),background-color .2s ease,color .2s ease;
+}
+html body :where(button,a.report-action,a.primary,a.btn-primary,.role-card,.public-status-card,.secondary-hospital-row):active:not(:disabled){
+  transform:scale(.97); transition-duration:.08s; transition-timing-function:var(--v3-press);
+}
+
+/* ---------- 공통 버튼 ---------- */
+/* 주요: 빨간 캡슐 */
+html body :is(.public-primary,.btn-primary,.primary,.btn-confirm,.public-step-continue){
+  border:0 !important; border-radius:var(--v3-r-pill) !important;
+  background:var(--red) !important; color:#FFFFFF !important;
+  font-weight:700 !important; box-shadow:none !important; min-height:48px;
+}
+html body :is(.public-primary,.btn-primary,.primary,.btn-confirm,.public-step-continue):disabled{
+  background:var(--fill) !important; color:var(--label-2) !important;
+}
+/* 보조: 회색 채움 캡슐 */
+html body :is(.public-secondary,.mode-switch,.public-tool-button,.public-location-edit,.public-back,
+  .sidebar-back-button,.category-toggle-button,.clinical-edit-button,.btn-ghost,.btn-route,
+  .share-copy-button,.share-dialog-close,.aed-link,.public-location-secondary,.public-location-verify){
+  border:0 !important; border-radius:var(--v3-r-pill) !important;
+  background:var(--fill) !important; color:var(--label) !important;
+  font-weight:600 !important; box-shadow:none !important; min-height:36px;
+}
+
+/* ---------- 입력 ---------- */
+html body :is(input[type="text"],input[type="search"],input:not([type]),input[type="tel"],input[type="number"],textarea,select,.select){
+  border:0 !important; border-radius:var(--v3-r-in) !important;
+  background:var(--fill) !important; color:var(--label) !important; box-shadow:none !important;
+}
+html body :is(input[type="search"],#dxSearch,.public-speech-input input,.public-manual-location input){ border-radius:var(--v3-r-pill) !important; padding-inline:16px !important; }
+html body .select{ background:var(--fill) !important; }
+html body .select select{ background:transparent !important; }
+
+/* ---------- 카드 표면 ---------- */
+html body :is(.public-location-strip,.public-manual-location,.public-map-picker,.public-speech-panel,
+  .public-question-card,.public-urgent-card,.public-firstaid-card,.public-shared-report,
+  .public-handover-result,.public-care-summary,.share-code-dialog,.patient-input-card,
+  .clinical-overview,.compact-disclosure,.primary-hospital-card,.banner,.hospital-notice-tools,
+  .excluded,.public-option,.public-check){
+  border:0 !important; border-radius:var(--v3-r-card) !important;
+  background:var(--surface) !important; box-shadow:none !important;
+}
+
+/* ---------- 역할 선택 ---------- */
+html body .role-gate{ background:var(--bg) !important; }
+html body .gate-title{ font-size:34px !important; line-height:41px !important; font-weight:700 !important; letter-spacing:-.025em !important; }
+html body .gate-brand-name{ font-weight:800 !important; letter-spacing:.14em !important; color:var(--red-text) !important; font-size:13px !important; }
+html body .gate-brand-sub{ color:var(--label-2) !important; }
+html body .role-grid{ display:flex !important; flex-direction:column !important; gap:12px !important; }
+html body .role-card{
+  border:0 !important; border-radius:var(--v3-r-card) !important; box-shadow:none !important;
+  background:var(--surface) !important; color:var(--label) !important;
+  flex-direction:row !important; justify-content:flex-start !important; text-align:left !important;
+  gap:16px !important; min-height:92px !important; padding:0 20px !important;
+}
+html body .role-card.clinician{ order:-1; background:var(--red) !important; color:#FFFFFF !important; }
+html body .role-card .role-icon{ width:52px !important; height:52px !important; border-radius:var(--v3-r-in) !important; background:var(--red-soft) !important; color:var(--red) !important; flex:none; }
+html body .role-card.clinician .role-icon{ background:rgba(255,255,255,.2) !important; color:#FFFFFF !important; }
+html body .role-card .role-copy{ display:flex; flex-direction:column; align-items:flex-start; gap:2px; }
+html body .role-card .role-title{ font-size:20px !important; font-weight:800 !important; letter-spacing:-.015em !important; }
+html body .role-card .role-subtitle{ font-size:15px !important; color:var(--label-2) !important; }
+html body .role-card.clinician .role-subtitle{ color:rgba(255,255,255,.88) !important; }
+html body .gate-emergency{ display:inline-flex !important; align-items:center; justify-content:center; gap:8px; min-height:56px; padding:0 24px; border-radius:var(--v3-r-pill) !important; background:var(--surface) !important; box-shadow:var(--v3-float) !important; color:var(--red-text) !important; font-weight:700 !important; }
+
+/* ---------- 상단 바 ---------- */
+html body :is(.mode-bar,.bar){ background:var(--surface) !important; border:0 !important; box-shadow:0 .5px 0 var(--sep) !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+html body .mode-label{ font-weight:700 !important; color:var(--label) !important; }
+
+/* ---------- 일반인 공통 ---------- */
+html body .public-kicker{ color:var(--red-text) !important; font-weight:700 !important; letter-spacing:.02em !important; }
+html body .public-title{ font-size:28px !important; line-height:34px !important; font-weight:700 !important; letter-spacing:-.025em !important; }
+html body .public-intro,html body .public-home-note,html body .public-speech-note,html body .public-speech-status{ color:var(--label-2) !important; }
+html body .public-section-title{ font-size:20px !important; line-height:25px !important; font-weight:700 !important; letter-spacing:-.015em !important; }
+html body .public-location-strip{ border-radius:var(--v3-r-pill) !important; min-height:52px; }
+html body .public-location-icon{ border-radius:var(--v3-r-pill) !important; background:var(--red-soft) !important; color:var(--red) !important; }
+html body .public-speech-controls button{ border:0 !important; border-radius:var(--v3-r-pill) !important; min-height:48px; font-weight:700 !important; background:var(--fill) !important; color:var(--label) !important; }
+html body .public-speech-controls .public-speech-primary{ background:var(--blue) !important; color:#FFFFFF !important; }
+html body .public-speech-candidate{ border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; border:0 !important; }
+
+/* 증상 목록: 긴급 3개는 한 묶음 목록, 나머지는 2칸 타일 */
+html body .public-status-grid{ display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; column-gap:8px !important; row-gap:0 !important; }
+html body .public-status-card{
+  border:0 !important; box-shadow:none !important; background:var(--surface) !important; color:var(--label) !important;
+  border-radius:var(--v3-r-card) !important; min-height:88px !important; padding:16px !important;
+  flex-direction:column !important; align-items:flex-start !important; justify-content:space-between !important; text-align:left !important; gap:12px !important;
+  margin-top:8px;
+}
+html body .public-status-card.is-urgent{
+  grid-column:1/-1; flex-direction:row !important; align-items:center !important; justify-content:flex-start !important;
+  min-height:68px !important; padding:0 18px !important; gap:14px !important; border-radius:0 !important; margin-top:0;
+  box-shadow:inset 0 .5px 0 var(--sep) !important;
+}
+html body .public-status-card.is-urgent:first-child{ border-radius:var(--v3-r-card) var(--v3-r-card) 0 0 !important; box-shadow:none !important; }
+html body .public-status-card.is-urgent:nth-child(3){ border-radius:0 0 var(--v3-r-card) var(--v3-r-card) !important; }
+html body .public-status-card .public-status-icon{ width:40px !important; height:40px !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; color:var(--label) !important; flex:none; }
+html body .public-status-card.is-urgent .public-status-icon{ background:var(--red) !important; color:#FFFFFF !important; }
+html body .public-status-card .public-status-copy{ display:flex !important; flex-direction:column !important; align-items:flex-start !important; gap:2px !important; }
+html body .public-status-card strong{ font-size:17px !important; font-weight:700 !important; color:var(--label) !important; }
+html body #publicApp .public-status-card .public-status-copy small{ font-size:13px !important; color:var(--label-2) !important; }
+html body #publicApp .public-status-card.is-urgent .public-status-copy small{ color:var(--red-text) !important; font-weight:600 !important; }
+html body .urgent-badge{ position:absolute !important; width:1px !important; height:1px !important; overflow:hidden !important; clip:rect(0 0 0 0) !important; }
+
+/* 진행 표시와 질문 단계 */
+html body .public-progress{ height:4px !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; }
+html body .progress-dot{ border-radius:var(--v3-r-pill) !important; }
+html body .public-options{ gap:8px !important; }
+html body .public-option,html body .public-check{ border-radius:var(--v3-r-in) !important; background:var(--fill) !important; color:var(--label) !important; }
+html body :is(.public-option,.public-check)[aria-pressed="true"],
+html body :is(.public-option,.public-check):has(input:checked),
+html body :is(.public-option,.public-check).selected,
+html body :is(.public-option,.public-check).is-selected{ background:var(--red-soft) !important; color:var(--red-text) !important; box-shadow:inset 0 0 0 1.5px var(--red) !important; }
+html body .public-option-icon{ border-radius:var(--v3-r-pill) !important; }
+
+/* 긴급, 응급처치, 인계 */
+html body .public-urgent-card{ background:var(--red) !important; color:#FFFFFF !important; }
+html body .public-urgent-card :is(h2,h3,p,strong,span){ color:inherit !important; }
+html body .public-firstaid-steps li{ border-radius:0 !important; }
+html body :is(.public-summary-list,.public-summary-details) > *{ box-shadow:inset 0 .5px 0 var(--sep); }
+html body .share-code-value{ font-weight:800 !important; letter-spacing:.1em !important; font-variant-numeric:tabular-nums; }
+html body .share-code-dialog::backdrop{ background:rgba(0,0,0,.32) !important; }
+
+/* 하단 119 도크 */
+html body .public-call-dock{
+  left:12px !important; right:12px !important; bottom:calc(12px + env(safe-area-inset-bottom)) !important;
+  border:0 !important; border-radius:32px !important; background:var(--surface) !important;
+  box-shadow:var(--v3-float) !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+  padding:8px !important; grid-template-columns:1.6fr 1fr 1fr !important; gap:8px !important;
+  max-width:680px; margin-inline:auto;
+}
+html body .public-call-dock .report-action{ border:0 !important; border-radius:var(--v3-r-pill) !important; min-height:56px !important; font-weight:700 !important; box-shadow:none !important; }
+html body .public-call-dock .report-action.call{ background:var(--red) !important; color:#FFFFFF !important; font-size:19px !important; font-weight:800 !important; }
+html body .public-call-dock .report-action.sms{ background:var(--blue-soft) !important; color:var(--blue) !important; }
+html body .public-call-dock :is(.report-action.share,.report-action.copy){ background:var(--fill) !important; color:var(--label) !important; }
+html body .public-call-dock .report-disclaimer{ grid-column:1/-1; font-size:12px !important; color:var(--label-2) !important; padding:0 8px 4px; }
+html body .summary-report-action{ border:0 !important; border-radius:var(--v3-r-pill) !important; box-shadow:none !important; }
+
+/* ---------- 의료진: 사이드바 ---------- */
+html body .clinician-sidebar{
+  border:0 !important; border-radius:var(--v3-r-side) !important; background:var(--surface) !important;
+  box-shadow:var(--v3-side) !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+}
+html body .clinician-sidebar :is(.panel,.sidebar-pane,.patient-input-card){ background:transparent !important; box-shadow:none !important; border:0 !important; }
+html body .clinician-sidebar .panel-hd h2{ font-size:22px !important; line-height:28px !important; font-weight:700 !important; letter-spacing:-.015em !important; }
+html body .sheet-drag{ background:transparent !important; }
+html body .origin-summary,html body .origin-status{ color:var(--label-2) !important; }
+
+/* 질환 빠른 선택: 3칸 큰 캡슐 */
+html body .quick-dx{ display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:8px !important; }
+html body .quick-dx-chip{
+  min-height:44px !important; border:0 !important; border-radius:var(--v3-r-pill) !important;
+  background:var(--fill) !important; color:var(--label) !important; font-size:15px !important; font-weight:600 !important; box-shadow:none !important;
+}
+html body .quick-dx-chip:is([aria-pressed="true"],.active,.is-active,.selected,.on){ background:var(--label) !important; color:#FFFFFF !important; font-weight:700 !important; }
+
+/* 질환 카드 (KTAS, 골든타임) */
+html body .clinical-overview{ background:var(--surface) !important; box-shadow:var(--v3-hair) !important; }
+html body .ktas-tile{ border-radius:var(--v3-r-in) !important; background:var(--red) !important; color:#FFFFFF !important; box-shadow:none !important; }
+html body .dx-name{ font-size:17px !important; font-weight:700 !important; letter-spacing:-.01em !important; }
+html body .dx-meta{ color:var(--label-2) !important; }
+html body .dx-meta-severe{ color:var(--red-text) !important; }
+html body .dx-metric{ border:0 !important; border-radius:var(--v3-r-in) !important; background:var(--bg) !important; box-shadow:none !important; }
+html body .dx-metric span{ color:var(--label-2) !important; font-size:12px !important; font-weight:600 !important; }
+html body .dx-metric strong{ font-size:17px !important; font-weight:700 !important; }
+html body .dx-metric.urgent{ background:var(--red-soft) !important; }
+html body .dx-metric.urgent span,html body .dx-metric.urgent strong{ color:var(--red-text) !important; }
+html body .dx-metric.urgent strong{ font-size:28px !important; line-height:34px !important; font-weight:800 !important; letter-spacing:-.03em !important; font-variant-numeric:tabular-nums; }
+/* 세그먼트 컨트롤 (탭, KTAS) */
+html body :is(.dx-tabs,.seg){ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; padding:3px !important; box-shadow:none !important; }
+html body :is(.dx-tab,.seg button){ border:0 !important; border-radius:var(--v3-r-pill) !important; background:transparent !important; color:var(--label) !important; font-weight:600 !important; box-shadow:none !important; }
+html body :is(.dx-tab[aria-selected="true"],.dx-tab.active,.dx-tab.is-active,.seg button[aria-pressed="true"],.seg button.active,.seg button.on){ background:var(--surface) !important; font-weight:700 !important; }
+html body .seg-thumb{ border-radius:var(--v3-r-pill) !important; background:var(--surface) !important; box-shadow:none !important; }
+html body .dx-bullets li::marker{ color:var(--red); }
+
+/* 일반인 전달 기록 (사이드바 위) */
+html body .compact-disclosure{ background:var(--surface) !important; box-shadow:var(--v3-hair) !important; overflow:hidden; }
+html body .compact-disclosure > summary{ background:var(--red-soft) !important; color:var(--red-text) !important; font-weight:700 !important; border-radius:0 !important; }
+html body .handover-meta{ color:var(--label-2) !important; font-size:12px !important; }
+html body .handover-text{ white-space:pre-line !important; font-size:15px !important; line-height:1.5 !important; color:var(--label) !important; background:transparent !important; border:0 !important; }
+
+/* 하단 고정 버튼 */
+html body .sidebar-action-footer{ background:var(--surface) !important; box-shadow:0 -.5px 0 var(--sep) !important; border:0 !important; }
+html body .sidebar-action-footer :is(.btn-primary,.primary){ min-height:56px !important; font-size:17px !important; font-weight:800 !important; }
+html body .call-active-link{ background:var(--green-soft) !important; color:var(--green) !important; }
+
+/* ---------- 의료진: 병원 결과 ---------- */
+html body .search-range-status{ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; color:var(--label) !important; }
+html body .primary-hospital-card{ background:var(--surface) !important; box-shadow:inset 0 0 0 .5px var(--sep) !important; }
+html body .primary-hospital-card.confirmed{ box-shadow:inset 0 0 0 2px var(--blue) !important; }
+html body .primary-rank{ border-radius:var(--v3-r-pill) !important; background:var(--label) !important; color:#FFFFFF !important; font-weight:800 !important; }
+html body .primary-hospital-title h3{ font-size:17px !important; font-weight:700 !important; }
+html body .primary-score-chip,html body .secondary-score{ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--blue-soft) !important; color:var(--blue) !important; font-weight:800 !important; font-variant-numeric:tabular-nums; }
+html body .arrival-time strong{ font-size:34px !important; line-height:38px !important; font-weight:800 !important; letter-spacing:-.03em !important; font-variant-numeric:tabular-nums; }
+html body .arrival-time span,html body .arrival-meta{ color:var(--label-2) !important; }
+html body :is(.capacity-state,.dept-state,.severe-capability){ border:0 !important; border-radius:var(--v3-r-in) !important; background:var(--bg) !important; box-shadow:none !important; }
+html body .bed-overcrowded{ background:var(--red-soft) !important; color:var(--red-text) !important; }
+html body .bed-dot{ border-radius:var(--v3-r-pill) !important; }
+html body .btn-route{ min-height:48px !important; }
+html body .btn-confirm{ min-height:48px !important; }
+html body .hospital-details{ border:0 !important; border-radius:var(--v3-r-in) !important; background:var(--bg) !important; }
+html body .detail-score .meter,html body .card-score .meter{ height:6px !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; overflow:hidden; }
+html body .detail-score .meter i,html body .card-score .meter i{ display:block; height:100%; border-radius:var(--v3-r-pill) !important; background:var(--blue) !important; }
+html body .secondary-hospital-row{ border:0 !important; border-radius:var(--v3-r-in) !important; background:var(--fill-2) !important; box-shadow:none !important; min-height:52px; }
+html body .secondary-hospital-row[aria-pressed="true"]{ box-shadow:inset 0 0 0 2px var(--blue) !important; background:var(--surface) !important; }
+html body .secondary-rank{ color:var(--label-2) !important; font-weight:700 !important; }
+html body .secondary-eta{ font-weight:800 !important; font-variant-numeric:tabular-nums; }
+html body .banner{ background:var(--green-soft) !important; color:var(--label) !important; }
+html body .route-link{ border-radius:var(--v3-r-pill) !important; }
+
+/* 카드 본문 점수 (cardHTML에 추가한 블록) */
+html body .card-score{ display:flex; flex-direction:column; gap:8px; padding:12px 14px; border-radius:var(--v3-r-in); background:var(--blue-soft); }
+html body .card-score-head{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+html body .card-score-head span{ font-size:13px; font-weight:700; color:var(--blue); }
+html body .card-score-head strong{ font-size:28px; line-height:32px; font-weight:800; letter-spacing:-.03em; color:var(--blue); font-variant-numeric:tabular-nums; }
+html body .card-score-head strong small{ font-size:15px; font-weight:700; margin-left:2px; letter-spacing:0; }
+html body .card-score .meter{ background:rgba(0,98,214,.14) !important; }
+html body .card-score-parts{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+html body .card-score-parts span{ display:flex; flex-direction:column; padding:6px 8px; border-radius:8px; background:var(--surface); font-size:11px; line-height:14px; color:var(--label-2); }
+html body .card-score-parts b{ font-size:15px; line-height:20px; font-weight:800; color:var(--label); font-variant-numeric:tabular-nums; }
+html body .card-score.pending{ background:var(--fill-2); }
+html body .card-score.pending .card-score-head :is(span,strong){ color:var(--label-2); font-size:15px; }
+
+/* ---------- 지도 위 컨트롤 ---------- */
+html body .mat{ background:var(--surface) !important; border:0 !important; box-shadow:var(--v3-float) !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+html body .map-actions.mat,html body .map-zoom.mat{ border-radius:var(--v3-r-pill) !important; padding:4px !important; }
+html body :is(.map-action,.map-zoom button){ border:0 !important; border-radius:var(--v3-r-pill) !important; background:transparent !important; color:var(--label) !important; min-width:44px; min-height:44px; box-shadow:none !important; }
+html body .map-action:is([aria-pressed="true"],.active,.on){ background:var(--red) !important; color:#FFFFFF !important; }
+html body .map-hint.mat,html body .patient-report-legend{ border-radius:var(--v3-r-pill) !important; background:var(--surface) !important; box-shadow:var(--v3-float) !important; border:0 !important; color:var(--label) !important; }
+html body .patient-report-legend-dot{ box-shadow:0 0 0 2px #FFFFFF; }
+html body .severity-critical{ background:#D92D20 !important; }
+html body .severity-caution{ background:#B25000 !important; }
+html body .severity-reported{ background:#1E8A3A !important; }
+html body .severity-unknown{ background:#8E8E93 !important; }
+html body .kakao-patient-dot{ border:3px solid #FFFFFF !important; box-shadow:0 1px 2px rgba(28,28,30,.16) !important; }
+html body .kakao-cluster{ background:#1F5BD8 !important; color:#FFFFFF !important; border:3px solid #FFFFFF !important; box-shadow:0 1px 2px rgba(28,28,30,.16) !important; font-weight:800 !important; }
+html body .map-scope-actions .public-secondary{ background:var(--surface) !important; box-shadow:var(--v3-float) !important; }
+
+/* ---------- 기타 ---------- */
+html body #toastWrap > *{ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--label) !important; color:var(--surface) !important; box-shadow:none !important; font-weight:600 !important; }
+html body .foot-note{ color:var(--label-2) !important; }
+html body .excluded > summary{ color:var(--label-2) !important; font-weight:600 !important; }
+html body .empty{ color:var(--label-2) !important; }
+html body .tag{ border:0 !important; border-radius:var(--v3-r-pill) !important; background:var(--fill) !important; color:var(--label) !important; }
+html body .tag.sim{ background:var(--orange-soft) !important; color:var(--orange) !important; }
+
+/* ---------- v3.1 보정 ---------- */
+html body .dx-search-wrap{ background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
+html body .dx-search-wrap input{ width:100%; }
+html body .public-status-icon svg{ width:20px !important; height:20px !important; }
+html body .mode-bar{ padding-inline:max(16px,calc((100% - 680px)/2)) !important; }
+html body .card-score .meter{ min-height:6px !important; max-height:none !important; flex:none !important; }
+html body .card-score .meter i{ min-height:6px !important; }
+html body .primary-hospital-card .primary-score-chip{ display:none !important; }
+
+/* ---------- v3.2 보정: 캔버스에 없던 화면 ---------- */
+/* 단계 안내 목록 (긴급, 응급처치 공통) */
+html body .public-firstaid-steps{ background:var(--surface) !important; border-radius:var(--v3-r-in) !important; overflow:hidden !important; padding:0 !important; margin-inline:0 !important; gap:0 !important; list-style:none !important; }
+html body .public-firstaid-steps li{ background:transparent !important; border:0 !important; border-radius:0 !important; box-shadow:inset 0 .5px 0 var(--sep) !important; color:var(--label) !important; }
+html body .public-firstaid-steps li:first-child{ box-shadow:none !important; }
+html body .public-firstaid-steps li strong{ color:var(--label) !important; font-size:17px !important; font-weight:700 !important; }
+html body .public-firstaid-steps li span{ color:var(--label-2) !important; }
+html body .public-firstaid-steps li::before{ background:var(--label) !important; color:#FFFFFF !important; border-radius:var(--v3-r-pill) !important; }
+/* 빨간 카드 안 보조 버튼 */
+html body .public-urgent-card :is(.public-secondary,button:not(.public-primary)){ background:#FFFFFF !important; color:var(--red-text) !important; }
+html body .public-urgent-card > :is(div,span):first-child{ border-radius:var(--v3-r-in) !important; }
+/* 단계 진행 점 */
+html body .progress-dot{ background:var(--fill) !important; }
+html body .progress-dot:is(.done,.current){ background:var(--red) !important; }
+/* 화면 전환 때 제목에 생기는 포커스 상자 제거 (키보드 포커스 링은 유지) */
+html body [tabindex="-1"]:focus{ outline:none !important; box-shadow:none !important; }
+
+/* ---------- 접근성 ---------- */
+@media (prefers-reduced-motion:reduce){
+  html body :where(button,a,.role-card,.public-status-card){ transition:none !important; }
+  html body :where(button,a,.role-card,.public-status-card):active{ transform:none !important; }
+}
+@media (prefers-contrast:more){
+  html body :is(.clinician-sidebar,.public-call-dock,.mat,.primary-hospital-card,.public-status-card,.role-card){ box-shadow:0 0 0 1px var(--label) !important; }
+}
+@media print{
+  html body .public-call-dock{ display:none !important; }
+}
+#clinicianSidebar,#clinicianSidebar[data-expanded="true"],#clinicianSidebar[data-sheet-state="collapsed"],#clinicianSidebar[data-sheet-state="half"],#clinicianSidebar[data-sheet-state="full"]{height:50dvh!important;min-height:50dvh!important;max-height:50dvh!important}
 </style>
 
 <section class="role-gate" id="roleGate" aria-labelledby="gateTitle">
@@ -1284,17 +1624,12 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
         <p class="public-intro">위급하면 아래 119 버튼을 누르세요.</p>
       </div>
       <div class="public-access-tools">
-        <div class="public-font-controls" role="group" aria-label="글자 크기">
-          <button type="button" data-font-level="normal" aria-label="글자 크기 보통">가</button>
-          <button type="button" data-font-level="large" aria-label="글자 크기 크게">가+</button>
-          <button type="button" data-font-level="larger" aria-label="글자 크기 아주 크게">가++</button>
-        </div>
         <button type="button" id="publicThemeToggle" class="public-tool-button" aria-pressed="false">다크 모드</button>
         <button type="button" id="publicReadAloud" class="public-tool-button">소리로 듣기</button>
       </div>
     </header>
 
-    <section class="public-location-strip" aria-label="환자 위치">
+    <section class="public-location-strip" id="publicLocationStrip" aria-label="환자 위치">
       <span class="public-location-icon" aria-hidden="true">📍</span>
       <p id="publicLocationStatus" aria-live="polite">현재 위치 확인 중…</p>
       <div class="public-location-actions">
@@ -1319,8 +1654,23 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
 
     <section class="public-home-view" id="publicHomeView">
       <h2 class="public-section-title" id="publicStatusLabel">환자 상태를 골라주세요</h2>
+      <section class="public-speech-panel" aria-labelledby="publicSpeechTitle">
+        <h3 id="publicSpeechTitle">증상을 말하거나 입력해 주세요</h3>
+        <div class="public-speech-input">
+          <textarea id="publicSpeechText" maxlength="160" spellcheck="false" placeholder="예: 가슴이 답답해요, 숨이 차요"></textarea>
+          <div class="public-speech-controls">
+            <button type="button" class="public-speech-primary" id="publicSpeechStart">마이크로 말하기</button>
+            <button type="button" id="publicSpeechStop" hidden>듣기 중지</button>
+            <button type="button" id="publicSpeechFind">증상 찾기</button>
+          </div>
+          <p class="public-speech-status" id="publicSpeechStatus" role="status" aria-live="polite" hidden></p>
+          <p class="public-speech-note" id="publicSpeechNote">사투리나 주변 소음이 크면 인식이 틀릴 수 있어요. 위급하면 바로 119에 전화하세요.</p>
+          <div class="public-speech-results" id="publicSpeechResults" aria-live="polite" hidden></div>
+          <p class="public-speech-selected" id="publicSpeechSelected" hidden></p>
+        </div>
+      </section>
       <div class="public-status-grid" id="publicStatusChoices" role="radiogroup" aria-labelledby="publicStatusLabel">
-        <button class="public-status-card is-urgent" type="button" role="radio" aria-checked="false" data-public-status="cardiac"><span class="public-status-icon" data-ic="heart" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><b class="urgent-badge">긴급</b><strong>반응 없음 · 심정지 의심</strong><small>누르자마자 CPR 안내</small></span></button>
+        <button class="public-status-card is-urgent" type="button" role="radio" aria-checked="false" data-public-status="cardiac"><span class="public-status-icon" data-ic="heart" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><b class="urgent-badge">긴급</b><strong>반응 없음 · 심정지 의심</strong><small>119에 먼저 연락하세요</small></span></button>
         <button class="public-status-card is-urgent" type="button" role="radio" aria-checked="false" data-public-status="breathing"><span class="public-status-icon" data-ic="lungs" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><b class="urgent-badge">긴급</b><strong>숨쉬기 어려움</strong><small>바로 호흡 안내</small></span></button>
         <button class="public-status-card is-urgent" type="button" role="radio" aria-checked="false" data-public-status="bleeding"><span class="public-status-icon" data-ic="drop" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><b class="urgent-badge">긴급</b><strong>심한 출혈</strong><small>바로 출혈 안내</small></span></button>
         <button class="public-status-card" type="button" role="radio" aria-checked="false" data-public-status="trauma"><span class="public-status-icon" data-ic="bandage" data-s="32" aria-hidden="true"></span><span class="public-status-copy"><strong>다치거나 외상</strong><small>짧게 상태 확인</small></span></button>
@@ -1358,21 +1708,6 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
       </article>
     </section>
 
-    <section class="public-cpr-mode" id="publicCPRMode" hidden aria-labelledby="cprTitle">
-      <span class="urgent-badge">긴급 · 심정지 의심</span>
-      <h2 id="cprTitle" tabindex="-1">가슴 가운데를 세게, 빠르게 누르세요</h2>
-      <p class="cpr-tempo">분당 <strong>110회</strong></p>
-      <div class="cpr-count-card"><strong id="cprCount" aria-live="off">0</strong><span>압박 박자</span></div>
-      <div class="cpr-flash-surface" id="cprFlashSurface" aria-hidden="true"></div>
-      <p class="cpr-aed-reminder">AED를 가져오도록 주변에 요청하세요.</p>
-      <div class="cpr-controls">
-        <button type="button" class="public-primary" id="cprRhythmToggle" aria-pressed="true">리듬 끄기</button>
-        <button type="button" class="public-secondary" id="cprSenseToggle" aria-pressed="true">소리·진동 켜짐</button>
-        <button type="button" class="public-secondary" id="cprFlashToggle" aria-pressed="true">화면 신호 켜짐</button>
-        <button type="button" class="public-secondary" id="cprMoreInfo">추가 정보 입력</button>
-      </div>
-    </section>
-
     <section class="public-shared-report" id="publicSharedReportView" hidden aria-labelledby="sharedReportTitle">
       <button type="button" class="public-back" id="sharedReportBack"><span aria-hidden="true">←</span> 처음</button>
       <h1 id="sharedReportTitle" tabindex="-1">환자 전달 정보</h1>
@@ -1407,9 +1742,9 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
         <h2 id="firstAidTitle" tabindex="-1">도움을 기다리는 동안</h2>
         <ol id="publicFirstAidSteps" class="public-firstaid-steps"></ol>
         <div class="public-aed-tools">
-          <h3>주변 AED 찾기</h3>
-          <button class="public-secondary" id="locateAedBtn" type="button">현재 위치 주변 AED 찾기</button>
-          <a class="aed-link" id="aedSearchLink" href="https://www.google.com/maps/search/?api=1&query=AED+near+me" target="_blank" rel="noopener noreferrer">AED 지도 열기</a>
+          <h3>주변 자동심장충격기 찾기</h3>
+          <button class="public-secondary" id="locateAedBtn" type="button">현재 위치 주변 자동심장충격기 찾기</button>
+          <a class="aed-link" id="aedSearchLink" href="https://www.google.com/maps/search/?api=1&query=AED+near+me" target="_blank" rel="noopener noreferrer">자동심장충격기 지도 열기</a>
         </div>
       </section>
     </section>
@@ -1587,6 +1922,16 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
           <strong id="cbTitle"></strong>
           <p id="cbSub"></p>
           <a id="cbRoute" class="route-link" target="_blank" rel="noopener noreferrer" hidden></a>
+          <section class="hospital-notice-tools" id="hospitalNoticeTools" hidden aria-label="선택 병원 사전 안내">
+            <p id="hospitalNoticePreview" class="hospital-notice-preview"></p>
+            <p>환자 이름·위치는 포함되지 않습니다. 전송 전 내용을 확인해 주세요.</p>
+            <div class="hospital-notice-actions">
+              <button id="hospitalNoticePrepare" class="primary" type="button">문자·링크 준비</button>
+              <a id="hospitalNoticeSms" class="primary" hidden>문자 앱에서 보내기</a>
+              <button id="hospitalNoticeCopy" type="button" disabled>안내 링크 복사</button>
+            </div>
+            <p id="hospitalNoticeExpiry"></p>
+          </section>
         </div>
       </div>
       <div id="resultList" aria-live="polite">
@@ -1599,13 +1944,13 @@ button:not([disabled]):active{transform:scale(.97);transition-duration:100ms}
     </section>
   </div>
 
-  <footer class="foot-note"><b>데이터 안내</b> · 전국 기관·진료과·가용 병상은 NEDIS 자료, 이동시간은 Kakao Mobility 실제 자동차 경로입니다. 부분 점수는 확인된 가용 병상 수와 이동시간만 반영하며, 전체 병상 비율·수용 이력은 자료가 없어 제외합니다. 병원 수용·필요 처치 가능 여부는 보장하지 않습니다. 직선거리는 검색 반경에만 쓰며 이동시간으로 표시하지 않습니다.</footer>
+  <footer class="foot-note"><b>데이터 안내</b> · 전국 기관·진료과·가용 병상은 NEDIS 자료, 이동시간은 Kakao Mobility 실제 자동차 경로입니다. 후보 점수는 S=(35D+30T+25B+10H)/확인된 가중치 합으로 계산합니다. D는 해당 질환의 NEDIS 중증질환 수용가능정보가 있으면 그 가능 여부, 없으면 확인된 요청 진료과를 반영합니다. T는 실제 경로시간, B는 상대 가용 병상입니다. 공개된 유사 환자 수용 이력 H는 자료가 없어 제외하고, 확인할 수 없는 항목도 점수에서 제외합니다. 이 점수는 의료진 판단 보조이며 병원 수용이나 처치 가능을 보장하지 않습니다.</footer>
 </main>
 
 <section class="report-print" id="reportPrint" aria-hidden="true" hidden></section>
 <div id="toastWrap" aria-live="polite"></div>
 
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=32d949ba0bef3187d13fa051599736fa"></script>
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=7bb9fa7cd51d53025265feae2428f3df"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════════════════
    [1] 질환 데이터 — 응급실_중증도별_질환_치료_정리.xlsx / '전체목록' 시트 132건
@@ -1766,6 +2111,33 @@ const DISEASES = DX_RAW.map(r => ({
   no:r[0], ktas:r[1], sys:r[2], name:r[3], sx:r[4], risk:r[5], tx:r[6],
   dept: r[8] || SYSTEM_DEPT[r[2]] || '기타 진료과', severe: r[9] || ''
 }));
+const PUBLIC_SPEECH_SYMPTOMS=[
+  {label:'흉통',terms:['흉통','가슴통증','가슴아파','가슴답답','가슴압박감'],diseaseNos:[19,20]},
+  {label:'호흡곤란',terms:['호흡곤란','숨참','숨차','숨가쁨','숨가빠','숨이차'],diseaseNos:[24,26,27]},
+  {label:'한쪽 마비 또는 말 어눌함',terms:['말어눌','말이어눌','말어눔','말이어눔','한쪽마비','한쪽이마비','편측마비','얼굴처짐','뇌졸중','뇌졸중의심'],diseaseNos:[21]},
+  {label:'심한 출혈',terms:['피많이나','피가많이나','피를많이흘려','심한출혈','출혈이심해'],diseaseNos:[6,28]},
+  {label:'의식 저하 또는 쓰러짐',terms:['쓰러졌','의식없','반응없','깨우기힘들','의식저하'],diseaseNos:[1,9,10]}
+];
+const SEVERE_CAPACITY_BY_DISEASE={
+  5:{field:'MKioskTy4',label:'복부손상 수술'},
+  14:{field:'MKioskTy11',label:'중증화상'},
+  16:{field:'MKioskTy7',label:'응급투석'},
+  17:{field:'MKioskTy10',label:'신생아 수용'},
+  19:{field:'MKioskTy3',label:'심근경색 재관류'},
+  20:{field:'MKioskTy3',label:'심근경색 재관류'},
+  21:{field:'MKioskTy2',label:'뇌경색 재관류'},
+  22:{field:'MKioskTy1',label:'뇌출혈 수술'},
+  28:{field:'MKioskTy6',label:'응급내시경'},
+  34:{field:'MKioskTy7',label:'응급투석'},
+  42:{field:'MKioskTy5',label:'사지접합 수술'},
+  46:{field:'MKioskTy9',label:'정신질환자 수용'},
+  56:{field:'MKioskTy6',label:'응급내시경'},
+  70:{field:'MKioskTy5',label:'사지접합 수술'},
+  77:{field:'MKioskTy7',label:'응급투석'},
+  79:{field:'MKioskTy6',label:'응급내시경'},
+  80:{field:'MKioskTy9',label:'정신질환자 수용'},
+  81:{field:'MKioskTy9',label:'정신질환자 수용'}
+};
 
 // Only show treatment windows that are tied to a cited guideline; never parse the workbook's free-text time column.
 const TIME_GUIDANCE = {
@@ -1851,31 +2223,28 @@ function distanceKm(a,b){
   const h=Math.sin(dLat/2)**2 + Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLng/2)**2;
   return 2*R*Math.asin(Math.sqrt(h));
 }
-/* ═══════════════════════════════════════════════════════════════════════════
-   [5] 확인정보 기반 부분 점수 — 실시간 가용 병상 수 · 실제 자동차 이동시간
-   기존 KTAS 가중치 중 확인 가능한 요소만 사용; 전체 병상 비율·수용 이력은 제외
-   ═══════════════════════════════════════════════════════════════════════════ */
-const WEIGHTS = {
-  1:{bed:.45,accept:.35,time:.20}, 2:{bed:.42,accept:.30,time:.28}, 3:{bed:.38,accept:.25,time:.37},
-  4:{bed:.33,accept:.20,time:.47}, 5:{bed:.30,accept:.17,time:.53}
-};
-// When totals or acceptance history are missing, keep bed/time proportions and renormalize only verified components.
+/* Candidate score: disease suitability, route time, available beds; acceptance history is unavailable. */
+const WEIGHTS = {disease:35,time:30,bed:25,history:10};
 const MAX_ETA = 35;
 function bedStatus(h){
   if(h.emergencyOpen===false) return 'off';
+  const rawBeds=Number(String(h.liveRawBeds??'').replace(/,/g,''));
+  if(Number.isInteger(rawBeds)&&rawBeds<0) return 'full';
   if(!Number.isInteger(h.liveAvailableBeds)) return 'unknown';
   if(h.liveAvailableBeds<=0) return 'full';
   if(h.liveAvailableBeds<=3) return 'busy';
   return 'free';
 }
-const STATUS_LABEL = {free:'가용 병상 있음',busy:'가용 병상 적음',full:'가용 병상 0',off:'운영 불가',unknown:'정보 미확인'};
+const STATUS_LABEL = {free:'가용 병상 있음',busy:'가용 병상 적음',full:'병상 없음',off:'운영 불가',unknown:'정보 부족'};
 
 function liveBedInfo(h){
   if(!state.liveBedsReady) return {count:null,status:'unknown',label:state.liveBedsStatus==='loading'?'조회 중':'정보 없음',matched:false,updatedAt:null};
-  if(!h.liveBedMatched||!Number.isInteger(h.liveAvailableBeds)) return {count:null,status:'unknown',label:'정보 미확인',matched:Boolean(h.liveBedMatched),updatedAt:h.liveBedUpdatedAt||null};
+  if(!h.liveBedMatched||!Number.isInteger(h.liveAvailableBeds)) return {count:null,status:'unknown',label:h.liveBedMatched?'정보 부족':'정보 미확인',matched:Boolean(h.liveBedMatched),updatedAt:h.liveBedUpdatedAt||null};
   const count=h.liveAvailableBeds;
   const updatedAt=h.liveBedUpdatedAt||null;
-  if(count===0) return {count,status:'full',label:'가용 0',matched:true,updatedAt};
+  const rawBeds=Number(String(h.liveRawBeds??'').replace(/,/g,''));
+  if(Number.isInteger(rawBeds)&&rawBeds<0) return {count,status:'full',label:`병상 없음 · 과밀(대기 ${Math.abs(rawBeds)}명 초과)`,matched:true,updatedAt};
+  if(count===0) return {count,status:'full',label:'병상 없음',matched:true,updatedAt};
   if(count<=3) return {count,status:'busy',label:'가용 적음',matched:true,updatedAt};
   return {count,status:'free',label:'가용',matched:true,updatedAt};
 }
@@ -1956,6 +2325,7 @@ async function syncLiveBeds({force=false}={}){
         const record=records.get(h.id)||null;
         h.liveBedMatched=Boolean(record);
         h.liveAvailableBeds=record&&Number.isInteger(record.availableBeds)?record.availableBeds:null;
+        h.liveRawBeds=record?.rawBeds??null;
         h.liveBedUpdatedAt=record?.updatedAt||'';
         h.availBeds=h.liveAvailableBeds;
         h.status=bedStatus(h);
@@ -1976,7 +2346,7 @@ async function syncLiveBeds({force=false}={}){
       if(error.name==='AbortError') return false;
       state.liveBedsStatus='error'; state.liveBedsError=error.message||'NEDIS 연결을 확인해 주세요.';
       updateBedSyncNote();
-      HOSPITALS.forEach(h=>{h.liveAvailableBeds=null;h.availBeds=null;h.liveBedMatched=false;h.status='unknown';h.liveBedLabel='정보 미확인';});
+       HOSPITALS.forEach(h=>{h.liveAvailableBeds=null;h.liveRawBeds=null;h.availBeds=null;h.liveBedMatched=false;h.status='unknown';h.liveBedLabel='정보 미확인';});
       refreshMarkers(state.ranked.slice(0,5).map(h=>h.id));
       if(state.ranked.length&&!state.searching&&!$('resultPanel').hidden) renderResults(false);
       return false;
@@ -2016,14 +2386,55 @@ function matchHospitalDepartment(hospital){
   if(related.some(department=>departments.some(item=>normalize(item)===normalize(department)))) return {matched:true,verified:false};
   return {matched:false,verified:false};
 }
+function selectedSevereCapacitySpec(){return SEVERE_CAPACITY_BY_DISEASE[state.dxNo]||null;}
+function severeCapacityValue(hospital){
+  const spec=selectedSevereCapacitySpec(),value=spec?hospital.severeCapacity?.[spec.field]:null;
+  return value==='Y'||value==='N'?value:null;
+}
+function severeCapacityDisplay(hospital){
+  const spec=selectedSevereCapacitySpec();
+  if(!spec) return null;
+  const value=severeCapacityValue(hospital),status=value==='Y'?'yes':value==='N'?'no':'unknown';
+  return {status,label:`${spec.label} ${value==='Y'?'가능':value==='N'?'불가':'정보 없음'}`};
+}
+function hospitalRegion(hospital){
+  const parts=String(hospital.address||'').trim().split(/\s+/).filter(Boolean);
+  if(parts.length<2) return null;
+  const stage2=/시$/.test(parts[1])&&/구$/.test(parts[2]||'')?`${parts[1]} ${parts[2]}`:parts[1];
+  return {stage1:parts[0],stage2};
+}
+async function syncSevereCapacity(hospitals,signal){
+  if(!selectedSevereCapacitySpec()) return;
+  const regions=new Map();
+  hospitals.forEach(hospital=>{
+    hospital.severeCapacity=null;
+    const region=hospitalRegion(hospital);
+    if(!region) return;
+    const key=`${region.stage1}|${region.stage2}`;
+    if(!regions.has(key)) regions.set(key,{...region,hospitals:[]});
+    regions.get(key).hospitals.push(hospital);
+  });
+  await Promise.all([...regions.values()].map(async region=>{
+    try{
+      const params=new URLSearchParams({STAGE1:region.stage1,STAGE2:region.stage2});
+      const response=await fetch(`/api/severe-capacity?${params}`,{cache:'no-store',signal});
+      const data=await response.json();
+      if(!response.ok||!Array.isArray(data.hospitals)) return;
+      const byCode=new Map(data.hospitals.map(item=>[item.hpid,item]));
+      region.hospitals.forEach(hospital=>{hospital.severeCapacity=byCode.get(hospital.id)||null;});
+    }catch{}
+  }));
+}
 function verifyTreatmentEligibility(hospital){
   if(hospital.emergencyOpen!==true) return {eligible:false,reason:hospital.emergencyOpen===false?'응급실 운영 불가':'응급실 운영 정보 미확인'};
-  if(!Array.isArray(hospital.departments)) return {eligible:false,reason:'진료과 정보 미확인'};
+  const severeValue=severeCapacityValue(hospital);
+  if(!Array.isArray(hospital.departments)&&severeValue===null) return {eligible:false,reason:'진료과 정보 미확인'};
   const department=matchHospitalDepartment(hospital);
-  if(!department.matched) return {eligible:false,reason:`필요 진료과 ${state.dept} 확인 안 됨`};
-  if(!hospital.liveBedMatched||!Number.isInteger(hospital.liveAvailableBeds)) return {eligible:false,reason:'실시간 병상 정보 미확인'};
-  if(hospital.liveAvailableBeds<=0) return {eligible:false,reason:'실시간 가용 병상 0'};
-  return {eligible:true,reason:'',departmentVerified:department.verified,warning:state.severe?`필요 처치 ${state.severe} 역량은 확인되지 않음`:''};
+  if(!department.matched&&severeValue===null) return {eligible:false,reason:`필요 진료과 ${state.dept} 확인 안 됨`};
+  if(!hospital.liveBedMatched) return {eligible:false,reason:'실시간 병상 정보 미확인'};
+  if(hospital.liveAvailableBeds===0) return {eligible:false,reason:'실시간 병상 없음'};
+  if(hospital.liveAvailableBeds!==null&&!Number.isInteger(hospital.liveAvailableBeds)) return {eligible:false,reason:'실시간 병상 정보 미확인'};
+  return {eligible:true,reason:'',departmentVerified:department.verified,warning:state.severe&&severeValue===null?`필요 처치 ${state.severe} 역량은 확인되지 않음`:''};
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -2618,6 +3029,67 @@ function emergencyPhoneNumber(hospital){
   const digits=raw.replace(/\D/g,'');
   return digits.length>=7?`${raw.startsWith('+')?'+':''}${digits}`:'';
 }
+function hospitalNoticeText(hospital){
+  const disease=DISEASES.find(item=>item.no===state.dxNo);
+  return `SAVIOR 병원 사전 전달 정보\n선택 병원: ${hospital.name}\n질환·상태: ${disease?.name||'미선택'}\n중증도: KTAS ${state.ktas} · ${KTAS_NAME[state.ktas]||'미확인'}\n예상 도착: 약 ${hospital.eta}분\n\n사전 참고 정보이며 병원 수용 확정이 아닙니다. 119 상황실 지시와 병원 확인을 우선해 주세요.`;
+}
+async function prepareHospitalNotice(hospital){
+  const tools=$('hospitalNoticeTools');
+  tools.hidden=false;
+  $('hospitalNoticePreview').textContent=hospitalNoticeText(hospital);
+  $('hospitalNoticeExpiry').textContent='공유 링크를 준비하고 있습니다…';
+  $('hospitalNoticeSms').hidden=true;
+  $('hospitalNoticeCopy').disabled=true;
+  try{
+    const response=await fetch('/api/hospital-notices',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
+      hospitalCode:hospital.id,hospitalName:hospital.name,disease:DISEASES.find(item=>item.no===state.dxNo)?.name||'미선택',
+      severity:`KTAS ${state.ktas} · ${KTAS_NAME[state.ktas]||'미확인'}`,etaMinutes:hospital.eta
+    })});
+    const data=await response.json();
+    if(!response.ok||!data.url) throw new Error(data.error||'공유 링크를 준비하지 못했습니다.');
+    if(state.confirmed!==hospital.id) return null;
+    const shareUrl=new URL(data.url,location.origin).href;
+    const sms=$('hospitalNoticeSms'),phone=emergencyPhoneNumber(hospital);
+    sms.href=`sms:${phone}?body=${encodeURIComponent(`${hospitalNoticeText(hospital)}\n상세 안내: ${shareUrl}`)}`;
+    sms.hidden=!phone;
+    $('hospitalNoticeCopy').dataset.url=shareUrl;
+    $('hospitalNoticeCopy').disabled=false;
+    $('hospitalNoticeCopy').hidden=false;
+    $('hospitalNoticeExpiry').textContent=`공유 링크는 ${new Date(data.expiresAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}까지 열립니다.`;
+    return shareUrl;
+  }catch(error){
+    if(state.confirmed!==hospital.id) return null;
+    const phone=emergencyPhoneNumber(hospital),sms=$('hospitalNoticeSms');
+    sms.href=`sms:${phone}?body=${encodeURIComponent(hospitalNoticeText(hospital))}`;
+    sms.hidden=!phone;
+    $('hospitalNoticeCopy').hidden=true;
+    $('hospitalNoticeExpiry').textContent=`${error.message||'공유 링크를 준비하지 못했습니다.'}${phone?' 문자 요약은 작성할 수 있습니다.':''}`;
+    return null;
+  }
+}
+async function prepareSelectedHospitalNotice(){
+  const hospital=state.ranked.find(item=>item.id===state.confirmed);
+  if(!hospital) return;
+  const button=$('hospitalNoticePrepare');button.disabled=true;
+  const link=await prepareHospitalNotice(hospital);
+  button.hidden=Boolean(link);button.disabled=false;
+  if(!link) button.textContent='다시 준비';
+  if(!link&&emergencyPhoneNumber(hospital)) $('hospitalNoticeSms').hidden=false;
+}
+async function copyHospitalNoticeLink(){
+  let link=$('hospitalNoticeCopy').dataset.url;
+  if(!link){
+    const hospital=state.ranked.find(item=>item.id===state.confirmed);
+    if(!hospital) return;
+    $('hospitalNoticePrepare').disabled=true;
+    link=await prepareHospitalNotice(hospital);
+    $('hospitalNoticePrepare').disabled=false;
+    if(link) $('hospitalNoticePrepare').hidden=true;
+  }
+  if(!link) return;
+  try{await navigator.clipboard.writeText(link);toast('병원 안내 링크를 복사했습니다.','ok');}
+  catch{toast('링크를 복사하지 못했습니다. 문자 작성 버튼을 이용해 주세요.','warn');}
+}
 function expandClinicianSidebar(){
   const sidebar=$('clinicianSidebar');
   if(innerWidth<768) sidebar.dataset.sheetState='half';
@@ -2719,8 +3191,133 @@ const PUBLIC_WIZARD_STEPS=[
 ];
 let publicWizardStep=0, publicSummaryVisible=false, publicFastMode=false;
 let publicUX2=true,publicUrgentReason=null, publicMapInstance=null, publicMapMarker=null, publicMapSelection=null,publicLocationRequested=false,publicLocationRequestId=0,publicLocationTimeout=null,publicLocationLabel='',sharedPublicReport=null,publicSharePending=null,publicAdvanceTimer=null,publicStepHistory=[],publicStepPlan=[],publicStepLocationTimeout=null;
-let cprTimer=null,cprAudioContext=null,cprCountValue=0,cprSensesEnabled=true,cprFlashEnabled=!matchMedia('(prefers-reduced-motion: reduce)').matches;
 const publicReportDraft={location:'',locationVerified:false,situation:'',situationKey:'',consciousness:'',breathing:'',bleeding:'',onset:'',onsetMode:'',onsetAt:'',onsetSelectedAt:'',other:'',actions:[],reportId:'',reportExpiresAt:''};
+let publicSpeechRecognition=null,publicSpeechCandidates=[],publicSpeechPendingSymptom='',publicSpeechUnavailable=false;
+const SPEECH_HANGUL_CHO=['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const SPEECH_HANGUL_JUNG=['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+const SPEECH_HANGUL_JONG=['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const SPEECH_SOUND_GROUPS=[['ㄱ','ㄲ','ㅋ'],['ㄷ','ㄸ','ㅌ'],['ㅂ','ㅃ','ㅍ'],['ㅈ','ㅉ','ㅊ'],['ㅐ','ㅔ']];
+function normalizeSpeechText(value){return String(value||'').toLocaleLowerCase('ko').replace(/[^가-힣ㄱ-ㅎㅏ-ㅣa-z0-9]/g,'');}
+function speechCoreVariants(value){
+  const raw=String(value||'').toLocaleLowerCase('ko').replace(/[.,!?，。！？]/g,' ').trim();
+  const endings=['했어요','졌어요','했어','졌어','합니다','이에요','예요','어요','아요','해요','돼요','네요','같아요','요'];
+  const fillers=new Set(['어','음','저기','저기요','지금','갑자기','환자분','환자분이','환자가','환자는','조금','좀','정말','너무']);
+  const words=raw.split(/\s+/).filter(Boolean).filter(word=>!fillers.has(word)).map(word=>{
+    for(const ending of endings) if(word.length>ending.length&&word.endsWith(ending)){word=word.slice(0,-ending.length);break;}
+    for(const particle of ['께서','에서','으로','에게','한테','이','가','은','는','을','를','에','도','만']){
+      if(word.length>particle.length+1&&word.endsWith(particle)){word=word.slice(0,-particle.length);break;}
+    }
+    return word;
+  });
+  return [...new Set([normalizeSpeechText(raw),normalizeSpeechText(words.join(' '))].filter(Boolean))];
+}
+function speechJamo(value){
+  const result=[];
+  for(const char of String(value)){
+    const code=char.charCodeAt(0)-0xac00;
+    if(code>=0&&code<=11171){
+      result.push(SPEECH_HANGUL_CHO[Math.floor(code/588)],SPEECH_HANGUL_JUNG[Math.floor(code%588/28)]);
+      const jong=code%28;if(jong) result.push(SPEECH_HANGUL_JONG[jong]);
+    }else result.push(char);
+  }
+  return result;
+}
+function speechEditCost(a,b){
+  if(a===b) return 0;
+  if(SPEECH_SOUND_GROUPS.some(group=>group.includes(a)&&group.includes(b))) return .22;
+  return 1;
+}
+function speechSimilarity(left,right){
+  const a=speechJamo(left),b=speechJamo(right),longer=Math.max(a.length,b.length);
+  if(!longer) return 0;
+  if(left.includes(right)||right.includes(left)) return Math.max(0,Math.min(1,Math.min(a.length,b.length)/longer+.12));
+  let previous=Array.from({length:b.length+1},(_,index)=>index),current=new Array(b.length+1);
+  for(let i=1;i<=a.length;i++){
+    current[0]=i;
+    for(let j=1;j<=b.length;j++) current[j]=Math.min(previous[j]+1,current[j-1]+1,previous[j-1]+speechEditCost(a[i-1],b[j-1]));
+    [previous,current]=[current,previous];
+  }
+  return Math.max(0,1-previous[b.length]/longer);
+}
+function matchPublicSpeech(alternatives){
+  const inputs=alternatives.flatMap(speechCoreVariants).filter(value=>speechJamo(value).length>=4);
+  if(!inputs.length) return [];
+  const records=[];
+  PUBLIC_SPEECH_SYMPTOMS.forEach(item=>{
+    const diseases=item.diseaseNos.map(no=>DISEASES.find(disease=>disease.no===no)).filter(Boolean);
+    records.push({label:item.label,terms:item.terms,context:diseases.map(disease=>disease.name),priority:1,score:0});
+  });
+  DISEASES.forEach(disease=>{
+    const symptomTerms=String(disease.sx||'').split(/[,，;；]/).map(term=>term.trim()).filter(Boolean);
+    records.push({label:disease.name,terms:[disease.name],context:[disease.name],priority:0,score:0});
+    symptomTerms.forEach(term=>records.push({label:term,terms:[term],context:[disease.name],priority:0,score:0}));
+  });
+  for(const record of records){
+    const terms=record.terms.flatMap(speechCoreVariants);
+    record.score=Math.max(...inputs.flatMap(input=>terms.map(term=>speechSimilarity(input,term))));
+  }
+  const bestByLabel=new Map();
+  records.filter(record=>record.score>=.58).forEach(record=>{
+    const key=normalizeSpeechText(record.label),previous=bestByLabel.get(key);
+    if(!previous||record.score>previous.score) bestByLabel.set(key,record);
+    else if(previous&&record.score>=previous.score-.04) previous.context=[...new Set([...previous.context,...record.context])];
+  });
+  return [...bestByLabel.values()].sort((a,b)=>b.score-a.score||(b.priority||0)-(a.priority||0)||a.label.localeCompare(b.label,'ko')).slice(0,3);
+}
+function showPublicSpeechMatches(alternatives,transcript,isVoice){
+  publicSpeechPendingSymptom='';
+  publicSpeechCandidates=matchPublicSpeech(alternatives);
+  const results=$('publicSpeechResults');results.hidden=false;
+  $('publicSpeechSelected').hidden=true;
+  if(!publicSpeechCandidates.length){
+    results.innerHTML=`<p>${isVoice?'이렇게 들었어요':'입력하신 증상'}: ${escapeHTML(transcript)}</p><p class="public-speech-status">가까운 증상 후보를 찾지 못했어요. 다시 말하거나 직접 입력해 주세요.</p>`;
+    $('publicSpeechStatus').textContent='';$('publicSpeechStatus').hidden=true;
+    return;
+  }
+  results.innerHTML=`<p>${isVoice?'이렇게 들었어요':'입력하신 증상'}: ${escapeHTML(transcript)}</p>${publicSpeechCandidates.map((item,index)=>`<button type="button" class="public-speech-candidate" data-speech-candidate="${index}"><strong>${escapeHTML(item.label)}</strong><small>가까운 앱 항목: ${escapeHTML(item.context.slice(0,2).join(' · '))}</small></button>`).join('')}`;
+  $('publicSpeechStatus').hidden=true;
+}
+function startPublicSpeechRecognition(){
+  const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!Recognition){$('publicSpeechStart').hidden=true;$('publicSpeechStatus').hidden=false;$('publicSpeechStatus').textContent='이 브라우저는 음성 입력을 지원하지 않아요. 증상을 직접 입력해 주세요.';return;}
+  if(publicSpeechUnavailable){$('publicSpeechStart').hidden=true;$('publicSpeechStatus').hidden=false;$('publicSpeechStatus').textContent='마이크 권한을 사용할 수 없어요. 증상을 직접 입력해 주세요.';return;}
+  publicSpeechPendingSymptom='';$('publicSpeechSelected').hidden=true;
+  if(publicSpeechRecognition){publicSpeechRecognition.abort();publicSpeechRecognition=null;}
+  const recognition=new Recognition();publicSpeechRecognition=recognition;
+  recognition.lang='ko-KR';recognition.maxAlternatives=5;recognition.continuous=false;recognition.interimResults=false;
+  $('publicSpeechResults').hidden=true;$('publicSpeechSelected').hidden=true;
+  $('publicSpeechStart').hidden=true;$('publicSpeechStop').hidden=false;
+  $('publicSpeechStatus').hidden=false;$('publicSpeechStatus').textContent='듣는 중… 말씀을 마치면 결과를 비교합니다.';
+  recognition.onresult=event=>{
+    const result=event.results?.[event.resultIndex||0],alternatives=Array.from(result||[],item=>item.transcript).filter(Boolean);
+    const original=alternatives[0]||'';
+    if(original){$('publicSpeechText').value=original;showPublicSpeechMatches(alternatives,original,true);}
+  };
+  recognition.onerror=event=>{
+    $('publicSpeechStatus').hidden=false;
+    if(event.error==='not-allowed'||event.error==='service-not-allowed'){
+      publicSpeechUnavailable=true;$('publicSpeechStart').hidden=true;$('publicSpeechStatus').textContent='마이크 권한을 사용할 수 없어요. 증상을 직접 입력해 주세요.';
+    }else $('publicSpeechStatus').textContent='음성을 인식하지 못했어요. 다시 말하거나 직접 입력해 주세요.';
+  };
+  recognition.onend=()=>{
+    if(publicSpeechRecognition!==recognition) return;
+    publicSpeechRecognition=null;$('publicSpeechStart').hidden=publicSpeechUnavailable;$('publicSpeechStop').hidden=true;
+    if($('publicSpeechStatus').textContent.startsWith('듣는 중')&&$('publicSpeechResults').hidden){$('publicSpeechStatus').hidden=false;$('publicSpeechStatus').textContent='음성을 듣지 못했어요. 다시 시도하거나 직접 입력해 주세요.';}
+  };
+  try{recognition.start();}catch{$('publicSpeechStart').hidden=false;$('publicSpeechStop').hidden=true;$('publicSpeechStatus').hidden=false;$('publicSpeechStatus').textContent='마이크를 시작할 수 없어요. 증상을 직접 입력해 주세요.';publicSpeechRecognition=null;}
+}
+function stopPublicSpeechRecognition(){
+  const recognition=publicSpeechRecognition;if(!recognition)return;
+  $('publicSpeechStatus').hidden=false;$('publicSpeechStatus').textContent='듣기를 중지했어요.';
+  recognition.stop();
+}
+function confirmPublicSpeechCandidate(index){
+  const candidate=publicSpeechCandidates[index];if(!candidate)return;
+  publicSpeechPendingSymptom=candidate.label;
+  $('publicSpeechSelected').textContent=`선택한 증상: ${candidate.label}. 아래에서 환자 상태를 골라 질문을 이어가세요.`;
+  $('publicSpeechSelected').hidden=false;
+  $('publicSpeechResults').hidden=true;
+}
 function legacyActivePublicSteps(){
   return PUBLIC_WIZARD_STEPS.filter(step=>!publicReportDraft[step.key]);
 }
@@ -2852,6 +3449,7 @@ function renderPublicStep(){
     $('publicStepContent').innerHTML=`<div class="public-onset-options">${relativeChoices.map(([value,label])=>`<button type="button" class="public-option public-onset-option" data-onset-choice="${value}" aria-pressed="${publicReportDraft.onsetMode===value||publicReportDraft.onsetMode==='relative'&&publicReportDraft.onset===label}"><span class="public-option-icon">${ic(value==='unknown'?'info':'clock',36,1.8)}</span><strong>${label}</strong></button>`).join('')}</div><button type="button" class="public-secondary public-onset-exact-toggle" id="showExactOnset">정확한 시각 입력</button><div class="public-field public-onset-exact" id="exactOnsetWrap"${publicReportDraft.onsetMode==='exact'?'':' hidden'}><label for="publicOnset">증상이 시작된 날짜와 시각</label><input id="publicOnset" data-report-field="onset" type="datetime-local"></div>`;
   }else{
     $('publicStepContent').innerHTML=`<div class="public-location-block"><button type="button" class="public-location-primary" id="publicUseLocation"><span class="location-pin" data-ic="pin" data-s="22"></span><span><strong>현재 위치로</strong><small id="publicLocationStatus">위치 권한은 선택 사항입니다.</small></span></button><div class="public-location-verify" id="publicLocationVerify" hidden><strong>환자가 있는 곳이 맞나요?</strong><button type="button" class="public-secondary" id="confirmPublicLocation">맞아요</button><button type="button" class="public-secondary" id="editPublicLocation">수정</button></div><div class="public-location-secondary"><button type="button" class="public-secondary" id="togglePublicAddress">주소 직접 입력</button><button type="button" class="public-secondary" id="openPublicMap">지도에서 선택</button></div><div class="public-address-form" id="publicAddressForm" hidden><div class="public-field"><label for="publicLocation">발생 위치 주소</label><input id="publicLocation" data-report-field="location" autocomplete="street-address" placeholder="주소, 건물명 또는 가까운 장소"></div><button type="button" class="public-secondary" id="savePublicAddress">위치 입력 완료</button></div><section class="public-map-picker" id="publicMapPicker" hidden><div class="public-map-toolbar"><strong>지도를 탭해 위치 선택</strong><span id="publicMapCoords">위치 미선택</span></div><div class="public-map-canvas" id="publicMapCanvas" role="application" aria-label="위치 선택 지도"></div><button type="button" class="public-secondary" id="usePublicMapLocation" disabled>선택 위치 사용</button></section></div><div class="public-field public-other-field"><label for="publicOtherInfo">추가 전달 정보 (선택)</label><textarea id="publicOtherInfo" data-report-field="other" maxlength="500" placeholder="복용 중인 약이나 알레르기 등"></textarea></div><div class="public-checks"><label class="public-check"><input type="checkbox" data-report-action value="가슴압박 시행 중"> 가슴압박 시행 중</label><label class="public-check"><input type="checkbox" data-report-action value="AED 사용 또는 준비"> AED 사용 또는 준비</label></div><p class="public-location-note">위치와 요약은 119에 자동 전송되지 않습니다.</p>`;
+    $('publicStepContent').querySelector('[data-report-action][value="가슴압박 시행 중"]')?.closest('label')?.remove();
     const location=$('publicLocation');
     location.value=publicReportDraft.location;
     $('publicOtherInfo').value=publicReportDraft.other;
@@ -2974,7 +3572,7 @@ function activePublicSteps(){
   return PUBLIC_WIZARD_STEPS.filter(step=>!publicReportDraft[step.key]);
 }
 function hidePublicViews(){
-  ['publicHomeView','publicHandoverWizard','publicUrgentView','publicCPRMode','publicResult','publicFirstAidView','publicSharedReportView'].forEach(id=>$(id).hidden=true);
+  ['publicHomeView','publicHandoverWizard','publicUrgentView','publicResult','publicFirstAidView','publicSharedReportView'].forEach(id=>$(id).hidden=true);
   $('publicManualLocation').hidden=true;
 }
 function publicHandover(){
@@ -3088,9 +3686,11 @@ function renderPublicStep(){
     const options=[['now','방금'],['10m','약 10분 전'],['30m','약 30분 전'],['unknown','모르겠어요']];
     $('publicStepContent').innerHTML=`<div class="public-onset-options" role="radiogroup" aria-labelledby="publicStepTitle">${options.map(([value,label])=>`<button type="button" class="public-option public-onset-option" role="radio" data-onset-choice="${value}" aria-checked="${publicReportDraft.onsetMode===value||publicReportDraft.onset===label}"><span class="public-option-icon" aria-hidden="true">${ic(value==='unknown'?'info':'clock',34,1.8)}</span><span><strong>${label}</strong></span></button>`).join('')}</div>`;
   }else{
-    $('publicStepContent').innerHTML=`<div class="public-field"><label for="publicOtherInfo">응급대에 알릴 내용 (선택)</label><textarea id="publicOtherInfo" data-report-field="other" maxlength="300" placeholder="없으면 비워 두세요">${escapeHTML(publicReportDraft.other)}</textarea></div><button type="button" class="public-secondary public-other-unknown" id="publicOtherUnknown">모르겠어요</button><button type="button" class="public-step-continue" id="publicStepFinish">요약 보기</button>`;
+    $('publicStepContent').innerHTML=`<div class="public-field"><label for="publicOtherInfo">응급대에 알릴 내용 (선택)</label><textarea id="publicOtherInfo" data-report-field="other" maxlength="300" placeholder="없으면 비워 두세요">${escapeHTML(publicReportDraft.other)}</textarea></div><button type="button" class="public-secondary public-other-unknown" id="publicOtherUnknown">건너뛰기</button><button type="button" class="public-step-continue" id="publicStepFinish">요약 보기</button>`;
   }
   $('publicStepContent').querySelectorAll('[data-report-field]').forEach(field=>{field.value=publicReportDraft[field.dataset.reportField]||'';});
+  const aedAction=$('publicStepContent').querySelector('[data-report-action][value="AED 사용 또는 준비"]');
+  if(aedAction){aedAction.value='자동심장충격기 사용 또는 준비';aedAction.closest('label').lastChild.textContent=' 자동심장충격기 사용 또는 준비';}
   $('publicStepContent').querySelectorAll('[role="radiogroup"]').forEach(initPublicRadioGroup);
   updatePublicSmsLinks();requestAnimationFrame(()=>$('publicStepTitle').focus());
   const qc=$('publicQuestionCard');
@@ -3131,7 +3731,7 @@ function handlePublicQuestionClick(event){
       button.setAttribute('aria-checked',String(button===choice));
       button.tabIndex=button===choice?0:-1;
     });
-    if(reportChoice==='consciousness'&&value==='no'){enterCPRMode();return;}
+    if(reportChoice==='consciousness'&&value==='no'){enterCardiacUrgentMode();return;}
     if(reportChoice==='consciousness'&&value==='unsure'){showPublicUrgent('unsure');return;}
     if(reportChoice==='breathing'&&value!=='normal'){showPublicUrgent(value==='abnormal'?'breathing':'unsure');return;}
     if(reportChoice==='bleeding'&&value!=='no'){showPublicUrgent(value==='yes'?'bleeding':'unsure');return;}
@@ -3150,7 +3750,7 @@ function handlePublicQuestionClick(event){
     updatePublicSmsLinks();schedulePublicAdvance();return;
   }
   if(event.target.closest('#showExactOnset')){$('exactOnsetWrap').hidden=false;$('publicOnset').focus();return;}
-  if(event.target.closest('#publicOtherUnknown')){publicReportDraft.other='';showPublicSummary();return;}
+  if(event.target.closest('#publicOtherUnknown')){capturePublicStep();showPublicSummary();return;}
   if(event.target.closest('#publicStepFinish')){capturePublicStep();showPublicSummary();}
 }
 function handleRadioArrowKeys(event){
@@ -3173,7 +3773,7 @@ function handlePublicQuestionClick(event){
     updatePublicSmsLinks();schedulePublicAdvance();return;
   }
   if(event.target.closest('#showExactOnset')){$('exactOnsetWrap').hidden=false;$('publicOnset').focus();return;}
-  if(event.target.closest('#publicOtherUnknown')){publicReportDraft.other='';showPublicSummary();return;}
+  if(event.target.closest('#publicOtherUnknown')){capturePublicStep();showPublicSummary();return;}
   if(event.target.closest('#publicStepFinish')){capturePublicStep();showPublicSummary();return;}
   const choice=event.target.closest('[data-report-choice]');
   if(!choice) return;
@@ -3182,11 +3782,52 @@ function handlePublicQuestionClick(event){
   $('publicStepContent').querySelectorAll(`[data-report-choice="${field}"]`).forEach(button=>{
     button.setAttribute('aria-checked',String(button===choice));button.tabIndex=button===choice?0:-1;
   });
-  if(field==='consciousness'&&value==='no'){enterCPRMode();return;}
+  if(field==='consciousness'&&value==='no'){enterCardiacUrgentMode();return;}
   if(field==='consciousness'&&value==='unsure'){showPublicUrgent('unsure');return;}
   if(field==='breathing'&&value!=='normal'){showPublicUrgent(value==='abnormal'?'breathing':'unsure');return;}
   if(field==='bleeding'&&value!=='no'){showPublicUrgent(value==='yes'?'bleeding':'unsure');return;}
   updatePublicSmsLinks();schedulePublicAdvance();
+}
+function careStepsForSituation(key){
+  const steps={
+    cardiac:[
+      {title:'119에 전화하세요',detail:'스피커폰으로 전환하고 상담원의 지시를 따르세요.'},
+      {title:'반응과 호흡 상태를 알리세요',detail:'환자의 상태를 설명하고 상담원의 안내를 따르세요.'},
+      {title:'곁에서 상태를 살피세요',detail:'상태가 달라지면 상담원에게 바로 알리세요.'}
+    ],
+    breathing:[
+      {title:'119에 전화하세요',detail:'호흡이 어렵다고 알리고 상담원의 지시를 따르세요.'},
+      {title:'편하게 숨 쉴 수 있도록 도와주세요',detail:'환자가 편한 자세를 유지하게 하고 음식이나 음료를 주지 마세요.'},
+      {title:'상태를 계속 살피세요',detail:'반응이나 호흡이 달라지면 119 상담원에게 알리세요.'}
+    ],
+    bleeding:[
+      {title:'119에 전화하세요',detail:'출혈 부위와 상태를 설명하고 상담원의 지시를 따르세요.'},
+      {title:'출혈 부위를 눌러주세요',detail:'안전하다면 깨끗한 천으로 상처를 눌러 지혈을 돕고, 박힌 물체는 빼지 마세요.'},
+      {title:'상태를 계속 살피세요',detail:'환자를 편안하고 따뜻하게 유지하고 변화를 알리세요.'}
+    ],
+    trauma:[
+      {title:'위험한 곳에서만 이동하세요',detail:'추가 위험이 없다면 환자를 함부로 움직이지 마세요.'},
+      {title:'심한 출혈을 살피세요',detail:'안전하다면 깨끗한 천으로 출혈 부위를 누르세요.'},
+      {title:'119에 연락하고 상태를 살피세요',detail:'다친 부위와 반응 변화를 알리고 상담원의 지시를 따르세요.'}
+    ],
+    other:[
+      {title:'위급하면 119에 전화하세요',detail:'증상과 위치를 알리고 상담원의 지시를 따르세요.'},
+      {title:'환자 곁에서 상태를 살피세요',detail:'반응이나 호흡이 달라지면 바로 알리세요.'},
+      {title:'환자를 편안하게 해주세요',detail:'불필요하게 움직이지 말고 음식이나 음료를 주지 마세요.'}
+    ]
+  };
+  return steps[key]||steps.other;
+}
+function renderCareSteps(container,steps){
+  const list=container.tagName==='OL'?container:document.createElement('ol');
+  list.className='public-firstaid-steps';
+  list.replaceChildren(...steps.map(step=>{
+    const item=document.createElement('li'),title=document.createElement('strong'),detail=document.createElement('span');
+    title.textContent=step.title;detail.textContent=step.detail;item.append(title,detail);return item;
+  }));
+  if(list!==container){
+    const heading=document.createElement('h3');heading.textContent='도움을 기다리는 동안';container.replaceChildren(heading,list);
+  }
 }
 function summaryCareSteps(key){return careStepsForSituation(key);}
 function showPublicSummary(){
@@ -3199,6 +3840,7 @@ function showPublicSummary(){
 }
 function showPublicUrgent(kind){
   const details={
+    cardiac:{title:'반응이 없어요',message:'지금 119에 전화하고 상담원의 안내를 따르세요.',key:'cardiac',icon:'heart'},
     breathing:{title:'숨쉬기 어려워요',message:'지금 119에 전화하고 상담원 안내를 따르세요.',key:'breathing',icon:'lungs'},
     bleeding:{title:'심한 출혈이 있어요',message:'지금 119에 전화해 출혈 부위를 알리세요.',key:'bleeding',icon:'drop'},
     unsure:{title:'상태를 판단하기 어려워요',message:'모르겠으면 지금 119에 전화해 안내를 받으세요.',key:publicReportDraft.situationKey||'other',icon:'info'}
@@ -3209,32 +3851,18 @@ function showPublicUrgent(kind){
   renderCareSteps($('publicUrgentGuidance'),summaryCareSteps(details.key));
   updatePublicSmsLinks();requestAnimationFrame(()=>$('publicUrgentTitle').focus());
 }
-function cprTick(){
-  cprCountValue++;$('cprCount').textContent=String(cprCountValue);
-  if(cprSensesEnabled){
-    try{
-      const AudioContextClass=window.AudioContext||window.webkitAudioContext;
-      if(AudioContextClass){cprAudioContext ||= new AudioContextClass();cprAudioContext.resume?.();const oscillator=cprAudioContext.createOscillator(),gain=cprAudioContext.createGain();oscillator.frequency.value=880;gain.gain.value=.06;oscillator.connect(gain);gain.connect(cprAudioContext.destination);oscillator.start();oscillator.stop(cprAudioContext.currentTime+.07);}
-    }catch{}
-    navigator.vibrate?.(35);
-  }
-  if(cprFlashEnabled&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
-    $('publicApp').classList.add('cpr-flash');setTimeout(()=>$('publicApp').classList.remove('cpr-flash'),100);
-  }
-}
-function startCPRMetronome(){
-  stopCPRMetronome();cprCountValue=0;$('cprCount').textContent='0';cprTick();cprTimer=setInterval(cprTick,60000/110);
-  $('cprRhythmToggle').textContent='리듬 끄기';$('cprRhythmToggle').setAttribute('aria-pressed','true');
-}
-function stopCPRMetronome(){if(cprTimer){clearInterval(cprTimer);cprTimer=null;}navigator.vibrate?.(0);$('publicApp')?.classList.remove('cpr-flash');}
-function enterCPRMode(){
+function enterCardiacUrgentMode(){
   resetPublicDraftForSituation('cardiac');publicReportDraft.consciousness='no';
   publicReportDraft.reportId='';publicReportDraft.reportExpiresAt='';sharedPublicReport=null;
-  hidePublicViews();$('publicCPRMode').hidden=false;updatePublicSmsLinks();startCPRMetronome();
-  requestAnimationFrame(()=>$('cprTitle').focus());
+  showPublicUrgent('cardiac');
 }
 function openPublicHome(){
-  stopCPRMetronome();hidePublicViews();$('publicHomeView').hidden=false;publicSummaryVisible=false;
+  if(publicSpeechRecognition){publicSpeechRecognition.abort();publicSpeechRecognition=null;}
+  publicSpeechPendingSymptom='';$('publicSpeechResults').hidden=true;$('publicSpeechSelected').hidden=true;
+  $('publicSpeechText').value='';
+  $('publicSpeechStart').hidden=false;$('publicSpeechStop').hidden=true;
+  if(!(window.SpeechRecognition||window.webkitSpeechRecognition)||publicSpeechUnavailable){$('publicSpeechStart').hidden=true;$('publicSpeechStatus').hidden=false;$('publicSpeechStatus').textContent=publicSpeechUnavailable?'마이크 권한을 사용할 수 없어요. 증상을 직접 입력해 주세요.':'이 브라우저는 음성 입력을 지원하지 않아요. 증상을 직접 입력해 주세요.';}
+  hidePublicViews();$('publicHomeView').hidden=false;publicSummaryVisible=false;
   $('publicLocationStrip').hidden=false;
   $('publicStatusChoices').querySelectorAll('[data-public-status]').forEach((button,index)=>{button.setAttribute('aria-checked','false');button.tabIndex=index===0?0:-1;});
   requestAnimationFrame(()=>$('publicStatusLabel').focus());
@@ -3250,25 +3878,31 @@ function resetPublicDraftForSituation(situationKey){
   if(situationKey==='bleeding') publicReportDraft.bleeding='yes';
 }
 function startPublicQuestions(situationKey='other'){
-  stopCPRMetronome();resetPublicDraftForSituation(situationKey);
+  resetPublicDraftForSituation(situationKey);
   publicStepPlan=activePublicSteps().map(step=>step.key);publicStepHistory=publicStepPlan.length?[publicStepPlan[0]]:[];
   publicWizardStep=0;publicSummaryVisible=false;
   delete $('publicQuestionCard').dataset.step;
   updatePublicSmsLinks();renderPublicStep();
 }
 function continuePublicQuestions(){
-  stopCPRMetronome();publicStepPlan=activePublicSteps().map(step=>step.key);publicStepHistory=publicStepPlan.length?[publicStepPlan[0]]:[];
+  publicStepPlan=activePublicSteps().map(step=>step.key);publicStepHistory=publicStepPlan.length?[publicStepPlan[0]]:[];
   publicWizardStep=0;renderPublicStep();
 }
 function selectPublicStatus(status){
+  const confirmedSymptom=publicSpeechPendingSymptom;publicSpeechPendingSymptom='';
   $('publicStatusChoices').querySelectorAll('[data-public-status]').forEach(button=>{const selected=button.dataset.publicStatus===status;button.setAttribute('aria-checked',String(selected));button.tabIndex=selected?0:-1;});
-  if(status==='cardiac'){enterCPRMode();return;}
+  if(status==='cardiac'){
+    enterCardiacUrgentMode();
+    if(confirmedSymptom){publicReportDraft.situation=confirmedSymptom;updatePublicSmsLinks();}
+    return;
+  }
   startPublicQuestions(status);
+  if(confirmedSymptom){publicReportDraft.situation=confirmedSymptom;updatePublicSmsLinks();}
   if(status==='breathing'||status==='bleeding') showPublicUrgent(status);
   else renderPublicStep();
 }
 function openPublicFirstAid(){
-  stopCPRMetronome();hidePublicViews();$('publicFirstAidView').hidden=false;
+  hidePublicViews();$('publicFirstAidView').hidden=false;
   const key=publicReportDraft.situationKey||'other';
   $('firstAidSeverityBadge').hidden=!['cardiac','breathing','bleeding'].includes(key);
   renderCareSteps($('publicFirstAidSteps'),summaryCareSteps(key));requestAnimationFrame(()=>$('firstAidTitle').focus());
@@ -3345,12 +3979,6 @@ async function openSharedReport(reportId){
 const PUBLIC_PREFERENCES_KEY='savior-public-preferences-v1';
 function savePublicPreferences(preferences){try{localStorage.setItem(PUBLIC_PREFERENCES_KEY,JSON.stringify(preferences));}catch{}}
 function readPublicPreferences(){try{return JSON.parse(localStorage.getItem(PUBLIC_PREFERENCES_KEY)||'{}')||{};}catch{return{};}}
-function setPublicFontSize(size,save=true){
-  if(!['normal','large','larger'].includes(size)) size='normal';
-  $('publicApp').dataset.fontSize=size;
-  document.querySelectorAll('[data-font-level]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.fontLevel===size)));
-  if(save) savePublicPreferences({...readPublicPreferences(),fontSize:size});
-}
 function setPublicTheme(theme,save=true){
   if(!['auto','light','dark'].includes(theme)) theme='auto';
   if(theme==='auto') document.documentElement.removeAttribute('data-theme');
@@ -3362,7 +3990,6 @@ function setPublicTheme(theme,save=true){
 }
 function applyPublicPreferences(){
   const preferences=readPublicPreferences();
-  setPublicFontSize(preferences.fontSize||'normal',false);
   setPublicTheme(preferences.theme||'auto',false);
 }
 function togglePublicTheme(){
@@ -3374,10 +4001,9 @@ function speakCurrentPublicScreen(){
   const button=$('publicReadAloud'),synth=window.speechSynthesis;
   if(!synth){toast('이 기기에서는 음성 읽기를 사용할 수 없습니다.','warn');return;}
   if(synth.speaking){synth.cancel();button.setAttribute('aria-pressed','false');button.textContent='소리로 듣기';return;}
-  const active=['cprTitle','publicUrgentTitle','publicStepTitle','handoverTitle','sharedReportTitle','firstAidTitle','publicStatusLabel'].map(id=>$(id)).find(element=>element&&!element.closest('[hidden]'));
+  const active=['publicUrgentTitle','publicStepTitle','handoverTitle','sharedReportTitle','firstAidTitle','publicStatusLabel'].map(id=>$(id)).find(element=>element&&!element.closest('[hidden]'));
   if(!active) return;
-  const extra=active.id==='cprTitle'?document.querySelector('.cpr-aed-reminder')?.textContent||'':'';
-  const utterance=new SpeechSynthesisUtterance(`${active.textContent}. ${extra}`);
+  const utterance=new SpeechSynthesisUtterance(active.textContent);
   utterance.lang='ko-KR';utterance.onend=()=>{button.setAttribute('aria-pressed','false');button.textContent='소리로 듣기';};
   button.setAttribute('aria-pressed','true');button.textContent='읽기 중지';synth.speak(utterance);
 }
@@ -3703,6 +4329,8 @@ function cardHTML(h){
   const disabled=state.confirmed&& !confirmed;
   const scoreAvailable=Number.isFinite(h.score)&&h.parts;
   const beds=liveBedInfo(h);
+  const rawBeds=Number(String(h.liveRawBeds??'').replace(/,/g,''));
+  const severeCapacity=severeCapacityDisplay(h);
   const hospitalPhone=emergencyPhoneNumber(h);
   return `<article class="primary-hospital-card${state.animateCards?' result-fade':''}${confirmed?' confirmed':''}" data-id="${h.id}">
     <div class="primary-hospital-title">
@@ -3714,9 +4342,20 @@ function cardHTML(h){
       <div class="arrival-time"><strong>${h.eta}</strong><span>분</span></div>
       <div class="arrival-meta"><span>예상 도착 · ${h.dist.toFixed(1)}km</span></div>
     </div>
+${scoreAvailable?`<div class="card-score" aria-label="가중 후보 점수 ${h.score.toFixed(1)}점">
+  <div class="card-score-head"><span>후보 점수</span><strong>${h.score.toFixed(1)}<small>점</small></strong></div>
+  <div class="meter"><i style="width:${Math.min(100,Math.max(0,h.score))}%"></i></div>
+  <div class="card-score-parts">
+    <span><b>${h.parts.disease==null?'제외':h.parts.disease.toFixed(0)}</b>D 진료 적합성</span>
+    <span><b>${h.parts.time==null?'제외':h.parts.time.toFixed(0)}</b>T 도달시간</span>
+    <span><b>${h.parts.bed==null?'제외':h.parts.bed.toFixed(0)}</b>B 가용 병상</span>
+  </div>
+</div>`:`<div class="card-score pending"><div class="card-score-head"><span>후보 점수</span><strong>산출 대기</strong></div></div>`}
     <div class="capacity-summary">
-      <div class="capacity-state"><i class="bed-dot s-${beds.status}"></i><span>${beds.label}</span><b>${beds.count===null?'—':`${beds.count}개`}</b></div>
+      <div class="capacity-state${rawBeds<0?' bed-overcrowded':''}"><i class="bed-dot s-${beds.status}"></i><span>${beds.label}</span><b>${beds.count===null?'병상 정보 없음':rawBeds<0?'':`${beds.count}개`}</b></div>
+      <div class="arrival-meta">병상 정보 기준 시각 · ${escapeHTML(formatNedisTime(beds.updatedAt)||'시간 미제공')}</div>
       <div class="dept-state"><span>${escapeHTML(state.dept)}</span><strong>${h.liveDeptVerified===false?'관련 진료과만 확인':'진료과 확인됨'}</strong></div>
+      ${severeCapacity?`<div class="severe-capability ${severeCapacity.status}">${escapeHTML(severeCapacity.label)}<small>출처: 국립중앙의료원 중증질환 수용가능정보</small></div>`:''}
     </div>
     <div class="primary-actions">
       <button type="button" class="btn-confirm" data-act="confirm" data-id="${h.id}" ${disabled||confirmed?'disabled':''}>${confirmed?ic('check',17,2.4)+'후보 선택됨':'선택하기'}</button>
@@ -3725,14 +4364,16 @@ function cardHTML(h){
     <details class="hospital-details">
       <summary>상세 정보</summary>
       <div class="hospital-detail-content">
-        <div class="detail-score"><span>확인정보 기반 부분 점수</span><strong>${scoreAvailable?`${h.score.toFixed(1)}점`:'산출 대기'}</strong>${scoreAvailable?`<div class="meter" role="img" aria-label="확인정보 기반 부분 점수 ${h.score.toFixed(1)}점"><i style="width:${Math.min(100,h.score)}%"></i></div><small class="score-scope">KTAS ${state.ktas} 가중치로 실시간 가용 병상 수와 실제 경로시간만 반영했습니다. 전체 병상 비율·수용 이력은 제외했습니다.</small>`:''}</div>
+        <div class="detail-score"><span>가중 후보 점수 · S=35D+30T+25B+10H</span><strong>${scoreAvailable?`${h.score.toFixed(1)}점`:'산출 대기'}</strong>${scoreAvailable?`<div class="meter" role="img" aria-label="가중 후보 점수 ${h.score.toFixed(1)}점"><i style="width:${Math.min(100,h.score)}%"></i></div><small class="score-scope">D 진료 적합성 · T 실제 경로시간 · B 가용 병상 · H 유사 환자 수용 이력. H 및 확인할 수 없는 항목은 점수에서 제외하고 나머지 가중치를 정규화합니다.</small>`:''}</div>
         <dl class="detail-grid">
-          <div><dt>가용 병상 반영</dt><dd>${scoreAvailable?`${h.parts.bed.toFixed(1)}점 · ${beds.count??'—'}개 / 전국 최대 ${h.parts.bedMax}개`:beds.count===null?'정보 없음':`${beds.count}개`}</dd></div>
-          <div><dt>이동시간 반영</dt><dd>${scoreAvailable?`${h.parts.time.toFixed(1)}점 · ${h.eta}분`:Number.isFinite(h.eta)?`${h.eta}분`: '정보 없음'}</dd></div>
-          <div><dt>최근 수용 이력</dt><dd>실제 정보 미제공 · 점수 제외</dd></div>
+          <div><dt>D · 질환 적합성</dt><dd>${scoreAvailable?(h.parts.disease===null?(h.liveDeptVerified===false?'관련 진료과만 확인 · 점수 제외':'요청 진료과 미확인 · 점수 제외'):`${h.parts.disease.toFixed(1)}점 · ${severeCapacityValue(h)!==null?severeCapacity.label:h.liveDeptVerified===true?'요청 진료과 기준':'진료과 미확인'}`):severeCapacity?.label|| (h.liveDeptVerified===false?'관련 진료과만 확인':h.liveDeptVerified===true?'요청 진료과 확인':'정보 미확인')}</dd></div>
+          ${severeCapacity?`<div><dt>중증질환 수용가능정보</dt><dd>${escapeHTML(severeCapacity.label)} · 국립중앙의료원</dd></div>`:''}
+          <div><dt>T · 교통 반영 도달시간</dt><dd>${scoreAvailable&&h.parts.time!==null?`${h.parts.time.toFixed(1)}점 · ${h.eta}분`:Number.isFinite(h.eta)?`${h.eta}분 · 점수 미산출`:'정보 없음'}</dd></div>
+          <div><dt>B · 가용 병상</dt><dd>${scoreAvailable?(h.parts.bed===null?'병상 정보 없음 · 점수 제외':`${h.parts.bed.toFixed(1)}점 · ${beds.count}개 / 최대 ${h.parts.bedMax}개`):beds.count===null?'병상 정보 없음':`${beds.count}개`}</dd></div>
+          <div><dt>H · 유사 환자 수용 이력</dt><dd>공개 자료 없음 · 점수 제외</dd></div>
           <div><dt>자동차 경로 평균속도</dt><dd>${Number.isFinite(h.speed)?`${h.speed.toFixed(1)} km/h`:'정보 없음'}</dd></div>
-          <div><dt>실시간 가용 병상</dt><dd>${beds.count===null?'정보 없음':`${beds.count}개`}</dd></div>
-          <div><dt>병상 출처 · 갱신</dt><dd>${beds.matched?`NEDIS · ${escapeHTML(formatNedisTime(beds.updatedAt)||'시간 미제공')}`:'NEDIS · 정보 미확인'}</dd></div>
+          <div><dt>실시간 가용 병상</dt><dd>${beds.count===null?'병상 정보 없음':`${beds.count}개`}</dd></div>
+          <div><dt>병상 정보 기준 시각</dt><dd>${beds.matched?`NEDIS · ${escapeHTML(formatNedisTime(beds.updatedAt)||'시간 미제공')}`:'NEDIS · 정보 미확인'}</dd></div>
           <div><dt>NEDIS 응급실 운영 필드</dt><dd>${h.emergencyOpen===true?'운영 신고 확인':h.emergencyOpen===false?'운영 불가로 확인':'정보 미확인'}</dd></div>
           <div><dt>진료과 상세 조회</dt><dd>${h.detailRetrievedAt?new Date(h.detailRetrievedAt).toLocaleString('ko-KR'):'조회 시각 없음'}</dd></div>
           <div><dt>전체 병상 기준</dt><dd>실제 정보 미제공 · 비율 산출 제외</dd></div>
@@ -3747,9 +4388,10 @@ function cardHTML(h){
 }
 function hospitalRowHTML(h){
   const rank=state.ranked.findIndex(item=>item.id===h.id)+1;
-  const score=Number.isFinite(h.score)?`<span class="secondary-score" aria-label="부분 점수 ${Math.round(h.score)}점">${Math.round(h.score)}점</span>`:'';
+  const score=Number.isFinite(h.score)?`<span class="secondary-score" aria-label="가중 후보 점수 ${Math.round(h.score)}점">${Math.round(h.score)}점</span>`:'';
+  const severeCapacity=severeCapacityDisplay(h);
   return `<button type="button" class="secondary-hospital-row" data-act="select" data-id="${h.id}" aria-pressed="${state.activeHospitalId===h.id}">
-    <span class="secondary-rank">${rank}${ic('chevron',14)}</span><strong>${escapeHTML(h.name)}</strong><span class="secondary-meta">${score}<span class="secondary-eta">${h.eta}분</span></span><i class="bed-dot s-${h.status}" aria-label="${STATUS_LABEL[h.status]}"></i>
+    <span class="secondary-rank">${rank}${ic('chevron',14)}</span><strong>${escapeHTML(h.name)}</strong><span class="secondary-meta">${score}${severeCapacity?`<span class="secondary-capability ${severeCapacity.status}" title="${escapeHTML(`${severeCapacity.label} · 출처: 국립중앙의료원 중증질환 수용가능정보`)}">${escapeHTML(severeCapacity.label)}</span>`:''}<span class="secondary-eta">${h.eta}분</span></span><i class="bed-dot s-${h.status}" aria-label="${STATUS_LABEL[h.status]}"></i>
   </button>`;
 }
 function noCandidateMessage(){
@@ -3802,17 +4444,25 @@ function renderResults(){
 }
 function applyAvailableScores(candidates){
   const maxLiveBeds=HOSPITALS.reduce((max,h)=>h.liveBedMatched&&Number.isInteger(h.liveAvailableBeds)?Math.max(max,h.liveAvailableBeds):max,0);
-  const weights=WEIGHTS[state.ktas],knownWeight=weights.bed+weights.time;
+  const weights=WEIGHTS;
   candidates.forEach(h=>{
-    const bedCount=Number.isInteger(h.liveAvailableBeds)?h.liveAvailableBeds:null;
+    const capacity=severeCapacityValue(h);
+    const disease=capacity==='Y'?100:capacity==='N'?0:h.liveDeptVerified===true?100:null;
+    const bedKnown=Number.isInteger(h.liveAvailableBeds);
+    const bedCount=bedKnown?h.liveAvailableBeds:null;
     const bedRatio=bedCount!==null&&maxLiveBeds>0?bedCount/maxLiveBeds:null;
     const travelMinutes=Number.isFinite(h.routeDurationSeconds)?h.routeDurationSeconds/60:h.eta;
     const timeRatio=Number.isFinite(travelMinutes)?Math.max(0,1-travelMinutes/MAX_ETA):null;
-    const bed=bedRatio===null?0:weights.bed/knownWeight*bedRatio*100;
-    const time=timeRatio===null?0:weights.time/knownWeight*timeRatio*100;
-    h.parts={bed:+bed.toFixed(1),accept:null,time:+time.toFixed(1),bedCount,bedMax:maxLiveBeds,travelMinutes,bedWeightPct:Math.round(weights.bed/knownWeight*100),timeWeightPct:Math.round(weights.time/knownWeight*100)};
-    h.score=+(bed+time).toFixed(1);
-    h.scoreScope='현재 NEDIS 가용 병상 수 + 실제 자동차 경로시간';
+    const bed=bedRatio===null?null:bedRatio*100;
+    const time=timeRatio===null?null:timeRatio*100;
+    const knownWeight=(disease===null?0:weights.disease)+(time===null?0:weights.time)+(bed===null?0:weights.bed);
+    const scale=knownWeight?100/knownWeight:0;
+    const diseasePart=disease===null?null:disease*weights.disease*scale/100;
+    const timePart=time===null?null:time*weights.time*scale/100;
+    const bedPart=bed===null?null:bed*weights.bed*scale/100;
+    h.parts={disease:diseasePart===null?null:+diseasePart.toFixed(1),time:timePart===null?null:+timePart.toFixed(1),bed:bedPart===null?null:+bedPart.toFixed(1),history:null,bedCount,bedMax:maxLiveBeds,travelMinutes,knownWeight};
+    h.score=+(diseasePart+timePart+bedPart||0).toFixed(1);
+    h.scoreScope='S=(35D+30T+25B)/확인된 가중치 합; H 공개 자료 없음';
   });
   candidates.sort((a,b)=>b.score-a.score||Number(b.liveDeptVerified===true)-Number(a.liveDeptVerified===true)||a.eta-b.eta);
 }
@@ -3952,11 +4602,14 @@ async function runSearch({radiusIndex=state.searchRadiusIndex,area=state.searchA
         group.forEach(h=>visited.add(h.id));
         const needingDetails=group.filter(h=>{
           const beds=liveBedInfo(h);
-          if(!beds.matched||!Number.isInteger(beds.count)){state.searchStats.bedUnknown++;return false;}
-          if(beds.count<=0){state.searchStats.bedZero++;return false;}
+          if(!beds.matched){state.searchStats.bedUnknown++;return false;}
+          if(beds.count===0){state.searchStats.bedZero++;return false;}
+          if(beds.count!==null&&!Number.isInteger(beds.count)){state.searchStats.bedUnknown++;return false;}
           return true;
         });
         const details=await Promise.allSettled(needingDetails.map(h=>getFacilityDetails(h,signal)));
+        if(searchSignal.aborted||searchId!==state.scoreRequestId) return;
+        await syncSevereCapacity(details.flatMap((result,index)=>result.status==='fulfilled'?[needingDetails[index]]:[]),signal);
         if(searchSignal.aborted||searchId!==state.scoreRequestId) return;
         details.forEach((result,index)=>{
           const hospital=needingDetails[index];state.searchStats.checked++;
@@ -4007,7 +4660,7 @@ async function runSearch({radiusIndex=state.searchRadiusIndex,area=state.searchA
       {showExpand:nextAvailable}
     );
     const bedStamp=formatNedisTime(state.liveBedsUpdatedAt)||new Date(state.liveBedsFetchedAt).toLocaleString('ko-KR');
-    $('recommendationMeta').textContent=`${state.severe?'진료과·병상 확인 기준 문의 후보':'확인된 치료 조건 후보'} · 가용 병상·실제 경로 부분 점수 · 정확 진료과 동점 우선 · 수용 이력 제외 · NEDIS 병상 갱신 ${bedStamp}`;
+    $('recommendationMeta').textContent=`${state.severe?'진료과·병상 확인 기준 문의 후보':'확인된 치료 조건 후보'} · S=35D+30T+25B+10H · H 및 미확인 항목은 제외·정규화 · NEDIS 병상 기준 ${bedStamp}`;
     selectClinicianPanel('results',{scroll:true});
     if(state.ranked.length) toast(`${state.ranked.length}곳의 실제 경로를 확인했습니다. 구급차 시간이나 병원 수용 확정은 아닙니다.`,'ok');
     else if(lastBatchError) toast(lastBatchError,'warn');
@@ -4029,6 +4682,9 @@ function restartLiveSearch(){
 function confirmHospital(id){
   const h=state.ranked.find(x=>x.id===id); if(!h) return;
   state.confirmed=id; state.activeHospitalId=id;
+  $('hospitalNoticeTools').hidden=true;$('hospitalNoticeCopy').dataset.url='';
+  $('hospitalNoticePrepare').hidden=false;$('hospitalNoticePrepare').disabled=false;
+  $('hospitalNoticeSms').hidden=true;$('hospitalNoticeCopy').hidden=false;$('hospitalNoticeCopy').disabled=true;
   const d=DISEASES.find(x=>x.no===state.dxNo), now=new Date();
   const hh=String(now.getHours()).padStart(2,'0'), mm=String(now.getMinutes()).padStart(2,'0');
   el.cbTitle.textContent=state.severe?`${h.name} 문의 후보 선택`:`${h.name} 이송 후보 선택`;
@@ -4041,6 +4697,13 @@ function confirmHospital(id){
   el.cbRoute.href=url.toString();
   el.cbRoute.innerHTML=`카카오맵 길찾기 · 출발 ${state.origin.lat.toFixed(4)}, ${state.origin.lng.toFixed(4)}${ic('arrowUpRight',15)}`;
   el.cbRoute.hidden=false; el.banner.hidden=false;
+  $('hospitalNoticeTools').hidden=false;
+  $('hospitalNoticePreview').textContent=hospitalNoticeText(h);
+  $('hospitalNoticeExpiry').textContent='문자·링크 버튼을 누르면 60분 동안 열리는 안내를 준비합니다.';
+  $('hospitalNoticeSms').hidden=true;
+  $('hospitalNoticeCopy').hidden=true;
+  $('hospitalNoticePrepare').hidden=false;
+  $('hospitalNoticePrepare').textContent=emergencyPhoneNumber(h)?'문자·링크 준비':'안내 링크 준비';
   renderResults(false);
   requestDirections(h);
   updateSidebarFooter();
@@ -4139,7 +4802,7 @@ $('quickDx').addEventListener('click',event=>{
 });
 function returnToRoleGate(){
   stopSharedReportPolling();
-  stopCPRMetronome();window.speechSynthesis?.cancel?.();
+  window.speechSynthesis?.cancel?.();
   if(originWatchId!==null){navigator.geolocation?.clearWatch(originWatchId);originWatchId=null;}
   $('publicApp').hidden=true; $('clinicianApp').hidden=true; $('bar').hidden=true;
   $('modeBar').hidden=true; $('roleGate').hidden=false; document.body.removeAttribute('data-mode');
@@ -4152,6 +4815,8 @@ $('transferActiveBtn').addEventListener('click',()=>{
   if(!state.routeScoreAvailable||!state.activeHospitalId) return;
   confirmHospital(state.activeHospitalId);
 });
+$('hospitalNoticeCopy').addEventListener('click',copyHospitalNoticeLink);
+$('hospitalNoticePrepare').addEventListener('click',prepareSelectedHospitalNotice);
 installSheetDrag();
 $('openFirstAidBtn').addEventListener('click',openPublicFirstAid);
 $('publicLocationRetry').addEventListener('click',requestPublicLocation);
@@ -4169,9 +4834,23 @@ $('publicStatusChoices').addEventListener('click',event=>{
   const button=event.target.closest('[data-public-status]');
   if(button) selectPublicStatus(button.dataset.publicStatus);
 });
+$('publicSpeechStart').addEventListener('click',startPublicSpeechRecognition);
+$('publicSpeechStop').addEventListener('click',stopPublicSpeechRecognition);
+$('publicSpeechFind').addEventListener('click',()=>{
+  const text=$('publicSpeechText').value.trim();
+  if(!text){$('publicSpeechText').focus();$('publicSpeechStatus').hidden=false;$('publicSpeechStatus').textContent='증상을 말하거나 입력해 주세요.';return;}
+  showPublicSpeechMatches([text],text,false);
+});
+$('publicSpeechText').addEventListener('input',()=>{
+  publicSpeechPendingSymptom='';$('publicSpeechSelected').hidden=true;$('publicSpeechResults').hidden=true;
+});
+$('publicSpeechResults').addEventListener('click',event=>{
+  const button=event.target.closest('[data-speech-candidate]');
+  if(button) confirmPublicSpeechCandidate(Number(button.dataset.speechCandidate));
+});
 $('publicStatusChoices').addEventListener('keydown',handleRadioArrowKeys);
 $('publicBackHome').addEventListener('click',openPublicHome);
-$('startNewPublicReport').addEventListener('click',()=>startPublicQuestions(publicReportDraft.situationKey||'other'));
+$('startNewPublicReport').addEventListener('click',openPublicHome);
 $('firstAidBackHome').addEventListener('click',openPublicHome);
 $('sharedReportBack').addEventListener('click',()=>{sharedPublicReport=null;openPublicHome();requestPublicLocation();});
 $('publicStepContent').addEventListener('input',event=>{
@@ -4305,22 +4984,7 @@ $('copyShareCode').addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText(code);$('shareCodeStatus').textContent='코드를 복사했습니다.';}
   catch{const input=document.createElement('textarea');input.value=code;input.setAttribute('readonly','');input.style.position='fixed';input.style.opacity='0';document.body.append(input);input.select();const copied=document.execCommand('copy');input.remove();$('shareCodeStatus').textContent=copied?'코드를 복사했습니다.':'코드를 길게 눌러 복사해 주세요.';}
 });
-$('cprRhythmToggle').addEventListener('click',()=>{
-  if(cprTimer){stopCPRMetronome();$('cprRhythmToggle').textContent='리듬 켜기';$('cprRhythmToggle').setAttribute('aria-pressed','false');}
-  else startCPRMetronome();
-});
-$('cprSenseToggle').addEventListener('click',()=>{
-  cprSensesEnabled=!cprSensesEnabled;$('cprSenseToggle').setAttribute('aria-pressed',String(cprSensesEnabled));
-  $('cprSenseToggle').textContent=cprSensesEnabled?'소리·진동 끄기':'소리·진동 켜기';if(!cprSensesEnabled) navigator.vibrate?.(0);
-});
-$('cprFlashToggle').addEventListener('click',()=>{
-  cprFlashEnabled=!cprFlashEnabled;$('cprFlashToggle').setAttribute('aria-pressed',String(cprFlashEnabled));
-  $('cprFlashToggle').textContent=cprFlashEnabled?'화면 신호 끄기':'화면 신호 켜기';
-});
-if(!cprFlashEnabled){$('cprFlashToggle').disabled=true;$('cprFlashToggle').setAttribute('aria-pressed','false');$('cprFlashToggle').textContent='화면 신호 꺼짐 (움직임 최소화)';}
-$('cprMoreInfo').addEventListener('click',()=>startPublicQuestions('cardiac'));
 $('urgentMoreInfo').addEventListener('click',()=>continuePublicQuestions());
-document.querySelectorAll('[data-font-level]').forEach(button=>button.addEventListener('click',()=>setPublicFontSize(button.dataset.fontLevel)));
 $('publicThemeToggle').addEventListener('click',togglePublicTheme);
 $('publicReadAloud').addEventListener('click',speakCurrentPublicScreen);
 $('usePublicMapLocation').addEventListener('click',async()=>{
@@ -4342,11 +5006,10 @@ function speakCurrentPublicScreen(){
   const synth=window.speechSynthesis,button=$('publicReadAloud');
   if(!synth){toast('이 기기에서는 음성 읽기를 사용할 수 없습니다.','warn');return;}
   if(synth.speaking){synth.cancel();button.setAttribute('aria-pressed','false');button.textContent='소리로 듣기';return;}
-  const heading=['cprTitle','publicUrgentTitle','sharedReportTitle','handoverTitle','publicStepTitle','firstAidTitle','publicStatusLabel','publicTitle']
+  const heading=['publicUrgentTitle','sharedReportTitle','handoverTitle','publicStepTitle','firstAidTitle','publicStatusLabel','publicTitle']
     .map(id=>$(id)).find(item=>item&&!item.closest('[hidden]'));
   if(!heading) return;
-  const extra=document.querySelector('#publicCPRMode:not([hidden]) .cpr-aed-reminder')?.textContent||'';
-  const utterance=new SpeechSynthesisUtterance(`${heading.textContent}. ${extra}`);utterance.lang='ko-KR';
+  const utterance=new SpeechSynthesisUtterance(heading.textContent);utterance.lang='ko-KR';
   utterance.onend=()=>{button.setAttribute('aria-pressed','false');button.textContent='소리로 듣기';};
   button.setAttribute('aria-pressed','true');button.textContent='읽기 중지';synth.speak(utterance);
 }
@@ -4383,7 +5046,7 @@ $('locateAedBtn').addEventListener('click',()=>{
     const {latitude,longitude}=pos.coords;
     const url=new URL('https://www.google.com/maps/search/');
     url.searchParams.set('api','1'); url.searchParams.set('query',`AED near ${latitude},${longitude}`);
-    $('aedSearchLink').href=url.toString(); $('aedSearchLink').textContent='현재 위치 주변 AED 지도 열기';
+    $('aedSearchLink').href=url.toString(); $('aedSearchLink').textContent='현재 위치 주변 자동심장충격기 지도 열기';
     $('locateAedBtn').disabled=false; $('locateAedBtn').textContent='현재 위치 확인됨';
     $('aedLocationNote').textContent='위치는 지도 검색 링크에만 사용되며 119에 자동 전송되지 않습니다.';
   },()=>{

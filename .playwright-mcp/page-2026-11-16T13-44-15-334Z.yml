@@ -1,0 +1,70 @@
+- generic [active] [ref=e1]:
+  - navigation "이용 모드" [ref=e34]:
+    - generic [ref=e35]: SAVIOR · 일반인용 안내
+    - button "홈 화면으로 돌아가기" [ref=e36] [cursor=pointer]
+  - main [ref=e37]:
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - paragraph [ref=e41]: SAVIOR · 일반인용
+          - heading "어떤 도움이 필요하세요?" [level=1] [ref=e42]
+          - paragraph [ref=e43]: 위급하면 아래 119 버튼을 누르세요.
+        - generic [ref=e44]:
+          - group "글자 크기" [ref=e45]:
+            - button "글자 크기 보통" [pressed] [ref=e46] [cursor=pointer]: 가
+            - button "글자 크기 크게" [ref=e47] [cursor=pointer]: 가+
+            - button "글자 크기 아주 크게" [ref=e48] [cursor=pointer]: 가++
+          - button "다크 모드" [ref=e49] [cursor=pointer]
+          - button "소리로 듣기" [ref=e50] [cursor=pointer]
+      - region "환자 위치" [ref=e51]:
+        - generic [ref=e52]: 📍
+        - paragraph [ref=e53]: 현재 위치 확인 중…
+        - generic [ref=e54]:
+          - button "위치 다시 확인" [ref=e55] [cursor=pointer]
+          - button "위치 직접 입력" [ref=e56] [cursor=pointer]
+      - generic [ref=e57]:
+        - heading "환자 상태를 골라주세요" [level=2] [ref=e58]
+        - radiogroup "환자 상태를 골라주세요" [ref=e59]:
+          - radio "긴급 반응 없음 · 심정지 의심 누르자마자 CPR 안내" [ref=e60] [cursor=pointer]:
+            - img [ref=e62]
+            - generic [ref=e65]:
+              - generic [ref=e66]: 긴급
+              - strong [ref=e67]: 반응 없음 · 심정지 의심
+              - generic [ref=e68]: 누르자마자 CPR 안내
+          - radio "긴급 숨쉬기 어려움 바로 호흡 안내" [ref=e69] [cursor=pointer]:
+            - img [ref=e71]
+            - generic [ref=e74]:
+              - generic [ref=e75]: 긴급
+              - strong [ref=e76]: 숨쉬기 어려움
+              - generic [ref=e77]: 바로 호흡 안내
+          - radio "긴급 심한 출혈 바로 출혈 안내" [ref=e78] [cursor=pointer]:
+            - img [ref=e80]
+            - generic [ref=e83]:
+              - generic [ref=e84]: 긴급
+              - strong [ref=e85]: 심한 출혈
+              - generic [ref=e86]: 바로 출혈 안내
+          - radio "다치거나 외상 짧게 상태 확인" [ref=e87] [cursor=pointer]:
+            - img [ref=e89]
+            - generic [ref=e92]:
+              - strong [ref=e93]: 다치거나 외상
+              - generic [ref=e94]: 짧게 상태 확인
+          - radio "그 외 증상 짧게 상태 확인" [ref=e95] [cursor=pointer]:
+            - img [ref=e97]
+            - generic [ref=e100]:
+              - strong [ref=e101]: 그 외 증상
+              - generic [ref=e102]: 짧게 상태 확인
+        - button "도움 기다리는 동안" [ref=e104] [cursor=pointer]
+        - paragraph [ref=e105]: 진단이나 119 신고를 대신하지 않습니다.
+      - text: ›
+    - navigation "긴급 신고" [ref=e106]:
+      - link "119 전화" [ref=e107] [cursor=pointer]:
+        - /url: tel:119
+        - strong [ref=e108]: 119 전화
+      - link "119 문자신고" [ref=e109] [cursor=pointer]:
+        - /url: sms:119?body=%EC%9D%91%EA%B8%89%ED%99%98%EC%9E%90%20%EC%A0%95%EB%B3%B4%0A%EC%9C%84%EC%B9%98%3A%20%EB%AF%B8%EC%9E%85%EB%A0%A5%0A%EC%A2%8C%ED%91%9C%3A%20%EB%AF%B8%ED%99%95%EC%9D%B8%0A%EC%83%81%ED%99%A9%3A%20%EB%AF%B8%EC%9E%85%EB%A0%A5%0A%EB%B0%98%EC%9D%91%3A%20%EB%AF%B8%EC%9E%85%EB%A0%A5%0A%ED%98%B8%ED%9D%A1%3A%20%EB%AF%B8%EC%9E%85%EB%A0%A5%0A%EC%B6%9C%ED%98%88%3A%20%EB%AF%B8%EC%9E%85%EB%A0%A5%0A%EC%8B%9C%EC%9E%91%3A%20%EB%AF%B8%EC%9E%85%EB%A0%A5%0A%EC%A1%B0%EC%B9%98%3A%20%EB%AF%B8%EC%9E%85%EB%A0%A5
+        - strong [ref=e110]: 119 문자신고
+      - button "신고 완료하기" [ref=e111] [cursor=pointer]:
+        - strong [ref=e112]: 신고 완료하기
+      - group [ref=e113]:
+        - generic "신고·위치 공유 안내 보기" [ref=e114] [cursor=pointer]: ⓘ
+  - text: ›

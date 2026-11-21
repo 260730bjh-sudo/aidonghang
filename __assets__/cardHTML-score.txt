@@ -1,0 +1,15 @@
+[cardHTML 함수 수정 위치]
+cardHTML(h) 가 반환하는 템플릿에서
+  <div class="arrival-summary"> ... </div>
+블록이 끝난 바로 다음 줄에 아래 내용을 그대로 추가합니다. 기존 줄은 지우지 않습니다.
+scoreAvailable, h.score, h.parts 는 이미 함수 안에 있는 값을 그대로 씁니다.
+
+${scoreAvailable?`<div class="card-score" aria-label="가중 후보 점수 ${h.score.toFixed(1)}점">
+  <div class="card-score-head"><span>후보 점수</span><strong>${h.score.toFixed(1)}<small>점</small></strong></div>
+  <div class="meter"><i style="width:${Math.min(100,Math.max(0,h.score))}%"></i></div>
+  <div class="card-score-parts">
+    <span><b>${h.parts.disease==null?'제외':h.parts.disease.toFixed(0)}</b>D 진료 적합성</span>
+    <span><b>${h.parts.time==null?'제외':h.parts.time.toFixed(0)}</b>T 도달시간</span>
+    <span><b>${h.parts.bed==null?'제외':h.parts.bed.toFixed(0)}</b>B 가용 병상</span>
+  </div>
+</div>`:`<div class="card-score pending"><div class="card-score-head"><span>후보 점수</span><strong>산출 대기</strong></div></div>`}

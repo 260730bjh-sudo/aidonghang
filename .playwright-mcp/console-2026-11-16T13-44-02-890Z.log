@@ -1,0 +1,6 @@
+[     524ms] [INFO] [preview-bridge] v1.1.0 @ https://vojtuh31mlr52sef.jitda.io/__preview-bridge.js:1
+[     891ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://vojtuh31mlr52sef.jitda.io/favicon.ico:0
+[   11408ms] TypeError: Cannot set properties of null (setting 'hidden')
+    at openPublicHome (https://vojtuh31mlr52sef.jitda.io/:3238:34)
+    at selectRole (https://vojtuh31mlr52sef.jitda.io/:2695:5)
+    at HTMLButtonElement.<anonymous> (https://vojtuh31mlr52sef.jitda.io/:4074:77)
